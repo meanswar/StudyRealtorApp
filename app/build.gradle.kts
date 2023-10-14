@@ -9,6 +9,10 @@ android {
     namespace = "com.nikitosii.studyrealtorapp"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.nikitosii.studyrealtorapp"
         minSdk = 29
@@ -17,11 +21,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -38,6 +52,12 @@ android {
 }
 
 dependencies {
+    val dagger = "2.44.2"
+    val hawk = "2.0.1"
+    val timber = "4.7.1"
+    val retrofit = "2.9.0"
+    val okhttp = "4.7.0"
+    val chunk = "3.5.0"
 
     implementation("androidx.core:core-ktx:1.0.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,15 +71,26 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
 
     //Dagger
-    val dagger = "2.44.2"
+
     implementation("com.google.dagger:dagger:$dagger")
     kapt("com.google.dagger:dagger-compiler:$dagger")
     implementation("com.google.dagger:dagger-android:$dagger")
     implementation("com.google.dagger:dagger-android-support:$dagger")
     kapt("com.google.dagger:dagger-android-processor:$dagger")
 
-    //Okhttps + Retrofit
-    implementation("com.squareup.okhttp:okhttp:2.7.4")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    //Okhttp + Retrofit
+    implementation("com.squareup.okhttp3:okhttp:$okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
+    implementation("com.squareup.retrofit2:retrofit:$retrofit")
+
+    //Chunk
+    debugImplementation("com.github.chuckerteam.chucker:library:$chunk")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chunk")
+
+    //Hawk
+    implementation("com.orhanobut:hawk:$hawk")
+
+    //Timber
+    implementation("com.jakewharton.timber:timber:$timber")
 
 }

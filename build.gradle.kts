@@ -4,3 +4,13 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.7.0" apply false
     id("com.google.gms.google-services") version "4.4.0" apply false
 }
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+        maven { url = uri("https://jitpack.io") }
+        mavenCentral()
+    }
+}
