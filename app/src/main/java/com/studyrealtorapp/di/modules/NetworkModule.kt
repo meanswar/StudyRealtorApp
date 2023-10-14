@@ -5,11 +5,13 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.nikitosii.studyrealtorapp.BuildConfig
 import com.studyrealtorapp.core.source.local.LocalStorage
 import com.studyrealtorapp.core.source.net.TokenInterceptor
+import com.studyrealtorapp.core.source.net.api.PropertiesApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -94,7 +96,13 @@ class NetworkModule {
     internal fun providesRetrofit(client: OkHttpClient) = Retrofit.Builder()
         .client(client)
         .baseUrl(BuildConfig.BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    @Provides
+    @Singleton
+    internal fun providesPropertiesApi(retrofit: Retrofit) =
+        retrofit.create(PropertiesApi::class.java)
 
     companion object {
         private const val OKHTTP_TAG = "OkHttp"

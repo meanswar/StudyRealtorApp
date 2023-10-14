@@ -58,6 +58,8 @@ dependencies {
     val retrofit = "2.9.0"
     val okhttp = "4.7.0"
     val chunk = "3.5.0"
+    val gson = "2.10.1"
+    val gsonConverterFactory = "2.9.0"
 
     implementation("androidx.core:core-ktx:1.0.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -92,5 +94,9 @@ dependencies {
 
     //Timber
     implementation("com.jakewharton.timber:timber:$timber")
+
+    //Gson
+    implementation("com.google.code.gson:gson:$gson")
+    implementation("com.squareup.retrofit2:converter-gson:$gsonConverterFactory")
 
 }
