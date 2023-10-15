@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "517257075630",
+    "project_id": "studyrealtorapp",
+    "storage_bucket": "studyrealtorapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517257075630:android:1a84ef34107d8c972e463f",
+        "android_client_info": {
+          "package_name": "com.nikitosii.studyrealtorapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkFeXuRau6Klw1I7_ucs9SOtaQu46VY50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
