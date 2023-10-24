@@ -2,7 +2,7 @@ package com.studyrealtorapp.core.source.net.model.description
 
 import com.google.gson.annotations.SerializedName
 
-data class DescriptionApi(
+data class DescriptionResponseApi(
     val baths: Int? = null,
     @SerializedName(value = "baths_1qtr")
     val bathsGtr1: Int? = null,

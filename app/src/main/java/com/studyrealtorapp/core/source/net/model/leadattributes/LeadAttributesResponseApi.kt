@@ -2,7 +2,7 @@ package com.studyrealtorapp.core.source.net.model.leadattributes
 
 import com.google.gson.annotations.SerializedName
 
-data class LeadAttributesApi(
+data class LeadAttributesResponseApi(
     @SerializedName("lead_type")
     val leadType: String? = null,
     @SerializedName("opcity_lead_attributes")

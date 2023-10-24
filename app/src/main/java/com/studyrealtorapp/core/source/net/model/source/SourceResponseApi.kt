@@ -2,7 +2,7 @@ package com.studyrealtorapp.core.source.net.model.source
 
 import com.google.gson.annotations.SerializedName
 
-data class SourceApi(
+data class SourceResponseApi(
     val agents: List<AgentApi>? = null,
     val id: String? = null,
     @SerializedName("plan_id")

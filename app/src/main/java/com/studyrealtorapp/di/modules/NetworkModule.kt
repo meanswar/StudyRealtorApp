@@ -3,6 +3,7 @@ package com.studyrealtorapp.di.modules
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.nikitosii.studyrealtorapp.BuildConfig
+import com.squareup.moshi.Moshi
 import com.studyrealtorapp.core.source.local.LocalStorage
 import com.studyrealtorapp.core.source.net.TokenInterceptor
 import com.studyrealtorapp.core.source.net.api.PropertiesApi
@@ -11,7 +12,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -93,10 +94,10 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun providesRetrofit(client: OkHttpClient) = Retrofit.Builder()
+    internal fun providesRetrofit(client: OkHttpClient, moshi: Moshi) = Retrofit.Builder()
         .client(client)
         .baseUrl(BuildConfig.BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
     @Provides

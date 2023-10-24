@@ -43,11 +43,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -55,13 +55,18 @@ dependencies {
     val dagger = "2.44.2"
     val hawk = "2.0.1"
     val timber = "4.7.1"
+    val kotlin = "1.6.20"
     val retrofit = "2.9.0"
     val okhttp = "4.7.0"
     val chunk = "3.5.0"
-    val gson = "2.10.1"
-    val gsonConverterFactory = "2.9.0"
+    val coroutine = "1.6.4"
+    val coroutineAndroid = "1.6.4"
+    val lifecycle = "2.6.2"
+    val lifecycleExtension = "2.2.0"
+    val moshi = "1.15.0"
+    val moshiConverter = "2.6.2"
 
-    implementation("androidx.core:core-ktx:1.0.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
@@ -73,7 +78,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
 
     //Dagger
-
     implementation("com.google.dagger:dagger:$dagger")
     kapt("com.google.dagger:dagger-compiler:$dagger")
     implementation("com.google.dagger:dagger-android:$dagger")
@@ -95,8 +99,31 @@ dependencies {
     //Timber
     implementation("com.jakewharton.timber:timber:$timber")
 
-    //Gson
-    implementation("com.google.code.gson:gson:$gson")
-    implementation("com.squareup.retrofit2:converter-gson:$gsonConverterFactory")
+    //Moshi
+    implementation("com.squareup.moshi:moshi-kotlin:$moshi")
+    implementation("com.squareup.moshi:moshi-adapters:$moshi")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshi")
+    implementation("com.squareup.retrofit2:converter-moshi:$moshiConverter")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+
+
+    //Coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineAndroid")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin")
+
+    //livedata
+    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleExtension")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
+
+    //Firebase crashlytics
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
 }

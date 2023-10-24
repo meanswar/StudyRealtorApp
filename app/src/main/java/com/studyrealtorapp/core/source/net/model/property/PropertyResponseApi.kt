@@ -1,54 +1,51 @@
 package com.studyrealtorapp.core.source.net.model.property
 
 import com.google.gson.annotations.SerializedName
-import com.studyrealtorapp.core.source.net.model.data.DataApi
-import com.studyrealtorapp.core.source.net.model.description.DescriptionApi
+import com.studyrealtorapp.core.source.net.model.data.DataResponseApi
+import com.studyrealtorapp.core.source.net.model.description.DescriptionResponseApi
 import com.studyrealtorapp.core.source.net.model.flags.FlagsApi
-import com.studyrealtorapp.core.source.net.model.leadattributes.LeadAttributesApi
-import com.studyrealtorapp.core.source.net.model.location.LocationApi
-import com.studyrealtorapp.core.source.net.model.photo.Photo
-import com.studyrealtorapp.core.source.net.model.product.ProductApi
-import com.studyrealtorapp.core.source.net.model.source.SourceApi
-import java.util.Objects
+import com.studyrealtorapp.core.source.net.model.leadattributes.LeadAttributesResponseApi
+import com.studyrealtorapp.core.source.net.model.location.LocationResponseApi
+import com.studyrealtorapp.core.source.net.model.photo.PhotoResponseApi
+import com.studyrealtorapp.core.source.net.model.product.ProductResponseApi
+import com.studyrealtorapp.core.source.net.model.source.SourceResponseApi
 
-data class PropertyApi(
-    val branding: List<DataApi>? = null,
+data class PropertyResponseApi(
+    val branding: List<DataResponseApi>? = null,
     @SerializedName(value = "coming_soon_date")
     val comingSoonDate: String? = null,
     val community: String? = null,
-    val description: DescriptionApi? = null,
+    val description: DescriptionResponseApi? = null,
     val flags: FlagsApi? = null,
     @SerializedName(value = "last_update_date")
     val lastUpdateDate: String? = null,
     @SerializedName(value = "lead_attributes")
-    val leadAttributes: LeadAttributesApi? = null,
+    val leadAttributes: LeadAttributesResponseApi? = null,
     @SerializedName("list_date")
     val listDate: String? = null,
     @SerializedName("list_price")
     val listPrice: Int? = null,
     @SerializedName("listing_id")
     val listingId: String? = null,
-    val location: LocationApi? = null,
+    val location: LocationResponseApi? = null,
     val matterport: Boolean? = null,
     @SerializedName("open_houses")
     val openHouses: Boolean? = null,
-    val rdc: List<Other>? = null,
+    val rdc: List<OtherResponseApi>? = null,
     val permalink: String? = null,
-    val photos: List<Photo>? = null,
+    val photoResponseApis: List<PhotoResponseApi>? = null,
     @SerializedName("price_reduced_amount")
     val priceReducedAmount: String? = null,
     @SerializedName("primary_photo")
-    val primaryPhoto: Photo,
-    val products: ProductApi? = null,
+    val primaryPhotoResponseApi: PhotoResponseApi,
+    val products: ProductResponseApi? = null,
     @SerializedName("property_id")
     val propertyId: String? = null,
-    val source: SourceApi? = null,
+    val source: SourceResponseApi? = null,
     val status: String? = null,
     val tags: List<String>? = null,
     @SerializedName("tax_record")
-    val taRecord: TaxRecordApi? = null,
+    val taRecord: TaxRecordResponseApi? = null,
     @SerializedName("virtual_tours")
     val virtualTours: List<Object>? = null
-
-    ) {
-}
+)
