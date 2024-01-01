@@ -26,7 +26,6 @@ class NetworkErrorHandler(
 
     fun parseNetworkError(e: HttpException): Exception {
         if (e.code() == 500) return ServerErrorException.createDefError(resources)
-        if (e is SocketTimeoutException) return TimeoutErrorException.createDefError(resources)
         val errorJson = e.response()?.errorBody()?.string() ?: return e
         val adapter = ErrorResponseJsonAdapter(moshi)
         val response = adapter.nullSafe().fromJson(errorJson) ?: return e

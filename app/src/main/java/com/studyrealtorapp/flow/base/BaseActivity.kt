@@ -3,12 +3,9 @@ package com.studyrealtorapp.flow.base
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
 import androidx.viewbinding.ViewBinding
 import com.studyrealtorapp.util.annotation.AnnotationUtil
 import dagger.android.AndroidInjection
