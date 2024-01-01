@@ -17,7 +17,9 @@ import javax.inject.Singleton
 @Module(
     includes = [
         NetworkModule::class,
-        NetworkErrorModule::class
+        NetworkErrorModule::class,
+        ActivityModule::class,
+        ViewModelModule::class
     ]
 )
 class AppModule {

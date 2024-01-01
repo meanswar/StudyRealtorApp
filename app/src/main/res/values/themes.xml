@@ -11,6 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="windowSplashScreenBackground">@color/splash_screen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/realtor_logo_svg_vector</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

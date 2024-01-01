@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.net.SocketTimeoutException
 
-class BaseViewModel(
+open class BaseViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {

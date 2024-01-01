@@ -126,4 +126,6 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
 
+    //SplashScreen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }
