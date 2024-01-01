@@ -1,8 +1,11 @@
+import com.android.build.api.variant.SigningConfig
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("kotlin-kapt")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -24,6 +27,15 @@ android {
         buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "studyRealtorApp"
+            keyPassword = "ifatur23"
+            storeFile = file("../keys/release_keys.jks")
+            storePassword = "ifatur23"
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
@@ -36,6 +48,7 @@ android {
         release {
             isMinifyEnabled = false
             isDebuggable = false
+            signingConfig = signingConfigs["release"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -49,6 +62,7 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
