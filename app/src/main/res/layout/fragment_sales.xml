@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingHorizontal="@dimen/size_20dp"
+    android:paddingTop="@dimen/size_20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSearch"
+            style="@style/AppTheme.Text.Paragraph3.Grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:hint="@string/search_field_hint"
+            android:textColorHint="@color/gandalf_the_grey"
+            app:boxCornerRadiusBottomEnd="@dimen/size_15dp"
+            app:boxCornerRadiusTopStart="@dimen/size_15dp"
+            app:boxStrokeColor="@android:color/transparent"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintTextColor="@color/peach"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_search">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                style="@style/AppTheme.Text.Paragraph3.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvRecentSearchesTitle"
+            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:text="Recent searches"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilSearch" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/tvRecentSearchesTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvRecentSearchesTitle" />
+
+        <FrameLayout
+            android:id="@+id/flRecentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRecentSearchesTitle">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_recent_search" />
+        </FrameLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPopularPlacesTitle"
+            style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:text="@string/popular_places_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flRecentContainer" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/ivFirstPopularPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10dp"
+            app:cardCornerRadius="@dimen/size_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPopularPlacesTitle">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_100dp"
+                android:alpha="0.6f"
+                android:scaleType="centerCrop"
+                android:src="@drawable/NewYork" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/AppTheme.Text.Bold.Headline1.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="New York"
+            app:layout_constraintBottom_toBottomOf="@id/ivFirstPopularPlace"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivFirstPopularPlace" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivSecPopularPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10dp"
+            app:cardCornerRadius="@dimen/size_15dp"
+            app:layout_constraintTop_toBottomOf="@id/ivFirstPopularPlace">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_100dp"
+                android:alpha="0.6"
+                android:scaleType="centerCrop"
+                android:src="@drawable/london" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/AppTheme.Text.Bold.Headline1.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="London"
+            app:layout_constraintBottom_toBottomOf="@id/ivSecPopularPlace"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivSecPopularPlace" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/ivThirdPopularPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10dp"
+            app:cardCornerRadius="@dimen/size_15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivSecPopularPlace">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_100dp"
+                android:alpha="0.6"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tokyo" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/AppTheme.Text.Bold.Headline1.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="Tokyo"
+            app:layout_constraintBottom_toBottomOf="@id/ivThirdPopularPlace"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivThirdPopularPlace" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvFavoritesTitle"
+            style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:text="Favorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivThirdPopularPlace" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_20dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFavoritesTitle"
+            tools:listitem="@layout/item_recent_search" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
