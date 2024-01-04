@@ -3,7 +3,7 @@ package com.studyrealtorapp.core.source.net.model.property
 import com.google.gson.annotations.SerializedName
 import com.studyrealtorapp.core.source.net.model.data.DataResponseApi
 import com.studyrealtorapp.core.source.net.model.description.DescriptionResponseApi
-import com.studyrealtorapp.core.source.net.model.flags.FlagsApi
+import com.studyrealtorapp.core.source.net.model.flags.FlagsResponseApi
 import com.studyrealtorapp.core.source.net.model.leadattributes.LeadAttributesResponseApi
 import com.studyrealtorapp.core.source.net.model.location.LocationResponseApi
 import com.studyrealtorapp.core.source.net.model.photo.PhotoResponseApi
@@ -16,7 +16,7 @@ data class PropertyResponseApi(
     val comingSoonDate: String? = null,
     val community: String? = null,
     val description: DescriptionResponseApi? = null,
-    val flags: FlagsApi? = null,
+    val flags: FlagsResponseApi? = null,
     @SerializedName(value = "last_update_date")
     val lastUpdateDate: String? = null,
     @SerializedName(value = "lead_attributes")
@@ -45,7 +45,7 @@ data class PropertyResponseApi(
     val status: String? = null,
     val tags: List<String>? = null,
     @SerializedName("tax_record")
-    val taRecord: TaxRecordResponseApi? = null,
+    val taxRecord: TaxRecordResponseApi? = null,
     @SerializedName("virtual_tours")
     val virtualTours: List<Object>? = null
 )

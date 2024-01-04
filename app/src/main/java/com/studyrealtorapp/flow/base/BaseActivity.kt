@@ -13,8 +13,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 abstract class BaseActivity<VM : ViewModel>(
-    private val actionBind: (LayoutInflater) -> ViewBinding,
-    @LayoutRes private val layoutRes: Int
+    private val actionBind: (LayoutInflater) -> ViewBinding
 ): DaggerAppCompatActivity() {
     lateinit var binding: ViewBinding
     private var viewModel: VM? = null
@@ -38,8 +37,8 @@ abstract class BaseActivity<VM : ViewModel>(
     }
 
     private fun initContentView() {
-        setContentView(layoutRes)
         binding = actionBind(layoutInflater)
+        setContentView(binding.root)
     }
 
     @Suppress("UNCHECKED_CAST")

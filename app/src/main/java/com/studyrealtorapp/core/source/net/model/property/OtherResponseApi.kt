@@ -9,4 +9,4 @@ data class OtherResponseApi(
     val listingKey: String? = null,
     val primary: Boolean? = null,
     val status: String? = null
-    )
+)

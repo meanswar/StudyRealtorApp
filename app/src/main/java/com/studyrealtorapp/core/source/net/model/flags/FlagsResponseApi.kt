@@ -2,7 +2,7 @@ package com.studyrealtorapp.core.source.net.model.flags
 
 import com.google.gson.annotations.SerializedName
 
-data class FlagsApi(
+data class FlagsResponseApi(
     @SerializedName("is_coming_soon")
     val isComingSoon: Boolean? = null,
     @SerializedName("is_contingent")

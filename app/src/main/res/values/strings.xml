@@ -3,4 +3,8 @@
     <string name="server_error">Unexpected server error</string>
     <string name="timeout_error">Timeout</string>
     <string name="interrupt_error">Interrupt</string>
+    
+    <string name="bm_for_sale">For Sale</string>
+    <string name="bm_for_rent">For Rent</string>
+    <string name="bm_agents">Agents</string>
 </resources>

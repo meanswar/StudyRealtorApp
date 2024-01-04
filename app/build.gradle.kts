@@ -79,6 +79,7 @@ dependencies {
     val lifecycleExtension = "2.2.0"
     val moshi = "1.15.0"
     val moshiConverter = "2.6.2"
+    val navVersion = "2.3.3"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -142,4 +143,10 @@ dependencies {
 
     //SplashScreen
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    //Navigation
+
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation("androidx.fragment:fragment:1.2.5")
 }

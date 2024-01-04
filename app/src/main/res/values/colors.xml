@@ -11,5 +11,14 @@
 
     <color name="splash_screen">#422222</color>
 
+    <color name="gandalf_the_grey">#979197</color>
+    <color name="teflon">#423C43</color>
+    <color name="peach">#EE6723</color>
+
+    <color name="colorPrimary">#C6C2C0</color>
+    <color name="colorPrimaryDark">#3A3939</color>
+    <color name="colorAccent">#9F7979</color>
+    <color name="textColorLink">#206BAE</color>
+
 
 </resources>

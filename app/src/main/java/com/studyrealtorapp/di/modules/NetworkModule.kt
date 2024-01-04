@@ -71,10 +71,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun providesTokenInterceptor(
-        context: Context,
-        localStorage: LocalStorage
-    ) = TokenInterceptor(context, localStorage)
+    internal fun providesTokenInterceptor(localStorage: LocalStorage) = TokenInterceptor(localStorage)
 
     @Provides
     @Singleton

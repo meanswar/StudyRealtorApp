@@ -6,9 +6,9 @@ data class LeadAttributesResponseApi(
     @SerializedName("lead_type")
     val leadType: String? = null,
     @SerializedName("opcity_lead_attributes")
-    val opcity_parameters: OpcityLeadParametersApi? = null,
+    val opcityParameters: OpcityLeadParametersResponseApi? = null,
     @SerializedName("ready_connect_mortgage")
-    val readyConnectMortgage: ReadyConnectMortgageApi? = null,
+    val readyConnectMortgage: ReadyConnectMortgageResponseApi? = null,
     @SerializedName("show_contact_an_agent")
     val showContactAgent: Boolean? = null
 )
