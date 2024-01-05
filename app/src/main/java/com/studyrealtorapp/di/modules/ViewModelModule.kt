@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.studyrealtorapp.di.ViewModelKey
 import com.studyrealtorapp.di.ViewModelProviderFactory
 import com.studyrealtorapp.flow.main.MainViewModel
+import com.studyrealtorapp.flow.rents.RentsViewModel
 import com.studyrealtorapp.flow.sales.SalesViewModel
 import dagger.Binds
 import dagger.Module
@@ -24,4 +25,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SalesViewModel::class)
     fun bindSalesViewModel(viewModel: SalesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RentsViewModel::class)
+    fun bindRentsViewModel(viewModel: RentsViewModel): ViewModel
 }

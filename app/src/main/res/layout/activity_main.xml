@@ -9,10 +9,11 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:navGraph="@navigation/main_nav_graph"
+        android:layout_weight="1"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/main_nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -20,8 +21,10 @@
         android:layout_height="wrap_content"
         android:elevation="@dimen/size_20dp"
         app:itemIconSize="25dp"
+        app:itemIconTint="@color/bottom_navigation_color"
         app:itemTextAppearanceActive="@style/AppTheme.Text.Paragraph3.Teflon"
         app:itemTextAppearanceInactive="@style/AppTheme.Text.Paragraph3.Teflon"
+        app:itemTextColor="@color/bottom_navigation_color"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu" />

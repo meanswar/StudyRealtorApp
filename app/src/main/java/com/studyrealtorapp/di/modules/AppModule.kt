@@ -19,7 +19,9 @@ import javax.inject.Singleton
         NetworkModule::class,
         NetworkErrorModule::class,
         ActivityModule::class,
-        ViewModelModule::class
+        FragmentModule::class,
+        ViewModelModule::class,
+        RepoModule::class,
     ]
 )
 class AppModule {

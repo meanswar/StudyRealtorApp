@@ -66,7 +66,7 @@ android {
 }
 
 dependencies {
-    val dagger = "2.44.2"
+    val dagger = "2.50"
     val hawk = "2.0.1"
     val timber = "4.7.1"
     val kotlin = "1.6.20"

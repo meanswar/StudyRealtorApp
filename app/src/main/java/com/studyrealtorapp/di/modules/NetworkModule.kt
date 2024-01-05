@@ -5,6 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.nikitosii.studyrealtorapp.BuildConfig
 import com.squareup.moshi.Moshi
 import com.studyrealtorapp.core.source.local.LocalStorage
+import com.studyrealtorapp.core.source.local.impl.LocalStorageImpl
 import com.studyrealtorapp.core.source.net.TokenInterceptor
 import com.studyrealtorapp.core.source.net.api.PropertiesApi
 import dagger.Module
@@ -68,6 +69,10 @@ class NetworkModule {
         ChuckerInterceptor.Builder(context)
             .alwaysReadResponseBody(true)
             .build()
+
+    @Provides
+    @Singleton
+    internal fun providesLocalStorage(): LocalStorage = LocalStorageImpl()
 
     @Provides
     @Singleton

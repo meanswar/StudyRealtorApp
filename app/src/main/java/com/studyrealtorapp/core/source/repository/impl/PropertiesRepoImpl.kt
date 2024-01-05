@@ -5,8 +5,9 @@ import com.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.studyrealtorapp.core.source.repository.base.BaseRepo
+import javax.inject.Inject
 
-class PropertiesRepoImpl(
+class PropertiesRepoImpl @Inject constructor(
     private val api: PropertiesApi,
     networkErrorHandler: NetworkErrorHandler
 ): BaseRepo(networkErrorHandler), PropertiesRepo {

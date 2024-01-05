@@ -8,6 +8,15 @@
     <fragment
         android:id="@+id/salesFragment"
         android:name="com.studyrealtorapp.flow.sales.SalesFragment"
-        tools:layout="@layout/fragment_sales"
-        android:label="SalesFragment" />
+        android:label="SalesFragment"
+        tools:layout="@layout/fragment_sales" />
+    <navigation
+        android:id="@+id/rents_nav_graph"
+        app:startDestination="@id/rentsFragment">
+        <fragment
+            android:id="@+id/rentsFragment"
+            android:name="com.studyrealtorapp.flow.rents.RentsFragment"
+            android:label="RentsFragment"
+            tools:layout="@layout/fragment_sales" />
+    </navigation>
 </navigation>

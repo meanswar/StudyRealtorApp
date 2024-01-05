@@ -7,14 +7,15 @@ import com.nikitosii.studyrealtorapp.databinding.FragmentSalesBinding
 import com.studyrealtorapp.flow.base.BaseFragment
 import com.studyrealtorapp.util.annotation.RequiresViewModel
 import com.studyrealtorapp.util.ext.dividerHorizontal
+import timber.log.Timber
 
 @RequiresViewModel(SalesViewModel::class)
 class SalesFragment :
-    BaseFragment<FragmentSalesBinding, SalesViewModel>({ FragmentSalesBinding.bind(it) }) {
+    BaseFragment<FragmentSalesBinding, SalesViewModel>({ FragmentSalesBinding.bind(it) }, R.layout.fragment_sales) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        doasdasd()
     }
 
     override fun initViews() {
@@ -28,5 +29,9 @@ class SalesFragment :
         with(getViewModel()) {
 
         }
+    }
+
+    fun doasdasd() {
+        Timber.i("dasd")
     }
 }
