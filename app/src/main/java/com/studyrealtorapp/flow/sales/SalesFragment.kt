@@ -22,7 +22,6 @@ class SalesFragment :
     }
 
     override fun initViews() {
-        BuildConfig.APPLICATION_ID
         with(binding){
             rvRecent.dividerHorizontal(R.drawable.divider_horizontal)
             rvFavorites.dividerHorizontal(R.drawable.divider_horizontal)
