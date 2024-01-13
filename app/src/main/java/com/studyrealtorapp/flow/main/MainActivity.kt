@@ -7,6 +7,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.android.installreferrer.api.InstallReferrerClient
 import com.android.installreferrer.api.InstallReferrerStateListener
 import com.android.installreferrer.api.ReferrerDetails
+import com.google.android.gms.tasks.Task
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
@@ -16,6 +20,7 @@ import com.studyrealtorapp.util.ext.hide
 import com.studyrealtorapp.util.ext.show
 import com.studyrealtorapp.util.ext.toast
 import com.studyrealtorapp.util.link.DynamicLink
+import timber.log.Timber
 
 @RequiresViewModel(MainViewModel::class)
 class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
@@ -32,8 +37,10 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
                 tryHideBottomBar(destinationId)
             }
         }
+        handleDeepLinkIfAvailable()
         processDeepLink()
     }
+
 
     private fun tryHideBottomBar(destinationId: Int) {
         binding.run {
@@ -44,6 +51,15 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
 
                 else -> bottomNavigation.hide()
             }
+        }
+    }
+
+    private fun handleDeepLinkIfAvailable() {
+        intent?.let {
+            parseDataFromDynamicLink(
+                Firebase.dynamicLinks.getDynamicLink(intent),
+                it.data ?: return@let
+            )
         }
     }
 
@@ -58,9 +74,11 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
                         val referrerUrl: String = response.installReferrer
                         parseDataFromInstallReferredLink(referrerUrl)
                     }
+
                     InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
                         // API not available on the current Play Store app.
                     }
+
                     InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
                         // Connection couldn't be established.
                     }
@@ -73,6 +91,23 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
             }
         })
     }
+
+    private fun parseDataFromDynamicLink(pendingLink: Task<PendingDynamicLinkData>, uri: Uri) {
+        pendingLink.addOnSuccessListener {
+            try {
+                it.link?.let { link ->
+                    DynamicLink.deepLinkNavigation.arguments = bundleOf(
+                        INVITE_CODE to link.getQueryParameter(INVITE_CODE)
+                    )
+                    val inviteCode = link.getQueryParameter(INVITE_CODE)
+                    toast("invite code: $inviteCode")
+                }
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        }.addOnFailureListener { Timber.e(it) }
+    }
+
 
     private fun parseDataFromInstallReferredLink(linkString: String) {
         val link = Uri.parse(linkString)

@@ -3,6 +3,7 @@ package com.studyrealtorapp.flow.sales
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.FragmentSalesBinding
 import com.studyrealtorapp.flow.base.BaseFragment
@@ -21,6 +22,7 @@ class SalesFragment :
     }
 
     override fun initViews() {
+        BuildConfig.APPLICATION_ID
         with(binding){
             rvRecent.dividerHorizontal(R.drawable.divider_horizontal)
             rvFavorites.dividerHorizontal(R.drawable.divider_horizontal)
