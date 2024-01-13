@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_recent_search"
+        app:layout_constraintBottom_toBottomOf="@id/tvSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvSearch" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSearch"
+        style="@style/AppTheme.Text.Paragraph3.Grey"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_10dp"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivSearch"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="New York" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/lineIV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/ic_line"
+        app:layout_constraintTop_toBottomOf="@id/tvSearch" />
+</androidx.constraintlayout.widget.ConstraintLayout>

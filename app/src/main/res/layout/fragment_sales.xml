@@ -12,31 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilSearch"
-            style="@style/AppTheme.Text.Paragraph3.Grey"
+        <com.skydoves.expandablelayout.ExpandableLayout
+            android:id="@+id/elSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_20dp"
-            android:hint="@string/search_field_hint"
-            android:textColorHint="@color/gandalf_the_grey"
-            app:boxCornerRadiusBottomEnd="@dimen/size_15dp"
-            app:boxCornerRadiusTopStart="@dimen/size_15dp"
-            app:boxStrokeColor="@android:color/transparent"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:hintTextColor="@color/peach"
-            app:layout_constraintStart_toStartOf="parent"
+            app:expandable_duration="300"
+            app:expandable_isExpanded="false"
+            app:expandable_showSpinner="true"
+            app:expandable_spinner="@drawable/ic_arrow_down"
+            app:expandable_spinner_animate="true"
+            app:expandable_parentLayout="@layout/view_search"
+            app:expandable_secondLayout="@layout/layout_search"
             app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/ic_search">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etSearch"
-                style="@style/AppTheme.Text.Paragraph3.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:expandable_spinner_margin="14dp"
+            app:expandable_spinner_gravity="start"
+            app:expandable_spinner_size="32dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvRecentSearchesTitle"
@@ -46,7 +37,7 @@
             android:layout_marginTop="@dimen/size_20dp"
             android:text="Recent searches"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilSearch" />
+            app:layout_constraintTop_toBottomOf="@id/elSearch" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"

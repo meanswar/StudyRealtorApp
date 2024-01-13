@@ -20,8 +20,8 @@ android {
         applicationId = "com.nikitosii.studyrealtorapp"
         minSdk = 29
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
@@ -150,4 +150,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.fragment:fragment:1.2.5")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // Expandable Layout
+    implementation("com.github.skydoves:expandablelayout:1.0.7")
+    implementation("com.android.installreferrer:installreferrer:2.2")
+    implementation("com.google.firebase:firebase-dynamic-links-ktx:20.1.1")
 }

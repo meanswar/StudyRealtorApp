@@ -21,6 +21,21 @@ fun RecyclerView.dividerHorizontal(
     )
 }
 
+fun RecyclerView.dividerVertical(
+    @DrawableRes dividerRes: Int,
+    ignoreFirstItem: Boolean = false,
+    ignoreLastItem: Boolean = false,
+    divideByNearby: Boolean = false
+) {
+    divider(
+        dividerRes,
+        DividerItemDecoration.VERTICAL,
+        ignoreFirstItem,
+        ignoreLastItem,
+        divideByNearby
+    )
+}
+
 fun RecyclerView.divider(
     @DrawableRes dividerRes: Int,
     orientation: Int,
@@ -75,3 +90,4 @@ fun RecyclerView.divider(
         setDrawable(divider)
     })
 }
+

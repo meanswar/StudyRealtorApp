@@ -9,4 +9,6 @@
     <string name="bm_agents">Agents</string>
     <string name="search_field_hint">search</string>
     <string name="popular_places_title">Top 3 popular places</string>
+    <string name="recent_searches_title">Recent searches</string>
+    <string name="layout_search_favorite_list_title">Suggested</string>
 </resources>
