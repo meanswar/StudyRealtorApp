@@ -56,10 +56,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
 
     private fun handleDeepLinkIfAvailable() {
         intent?.let {
-            parseDataFromDynamicLink(
-                Firebase.dynamicLinks.getDynamicLink(intent),
-                it.data ?: return@let
-            )
+            parseDataFromDynamicLink(Firebase.dynamicLinks.getDynamicLink(intent))
         }
     }
 
@@ -92,7 +89,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
         })
     }
 
-    private fun parseDataFromDynamicLink(pendingLink: Task<PendingDynamicLinkData>, uri: Uri) {
+    private fun parseDataFromDynamicLink(pendingLink: Task<PendingDynamicLinkData>) {
         pendingLink.addOnSuccessListener {
             try {
                 it.link?.let { link ->
@@ -111,12 +108,12 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
 
     private fun parseDataFromInstallReferredLink(linkString: String) {
         val link = Uri.parse(linkString)
-        BuildConfig.APPLICATION_ID
+        toast("play invite link: $link")
         DynamicLink.deepLinkNavigation.arguments = bundleOf(
             INVITE_CODE to link.getQueryParameter(INVITE_CODE)
         )
         val inviteCode = link.getQueryParameter(INVITE_CODE)
-        toast("invite code: $inviteCode")
+        toast("play invite code: $inviteCode")
     }
 
     companion object {
