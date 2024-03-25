@@ -155,4 +155,7 @@ dependencies {
     implementation("com.github.skydoves:expandablelayout:1.0.7")
     implementation("com.android.installreferrer:installreferrer:2.2")
     implementation("com.google.firebase:firebase-dynamic-links-ktx:20.1.1")
+
+    // Bottom Nav Bar
+    implementation("np.com.susanthapa:curved_bottom_navigation:0.6.5")
 }

@@ -20,6 +20,7 @@ import com.studyrealtorapp.util.ext.hide
 import com.studyrealtorapp.util.ext.show
 import com.studyrealtorapp.util.ext.toast
 import com.studyrealtorapp.util.link.DynamicLink
+import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 import timber.log.Timber
 
 @RequiresViewModel(MainViewModel::class)
@@ -30,15 +31,41 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navController?.let {
-            binding.bottomNavigation.setupWithNavController(it)
-            it.addOnDestinationChangedListener { _, destination, _ ->
-                val destinationId = destination.id
-                tryHideBottomBar(destinationId)
+        initViews()
+    }
+
+    private fun initViews() {
+        with(binding) {
+            bottomNavigation.setMenuItems(getMenuItems())
+
+            navController?.let {
+                bottomNavigation.setupWithNavController(it)
+                it.addOnDestinationChangedListener { _, destination, _ ->
+                    val destinationId = destination.id
+                    tryHideBottomBar(destinationId)
+                }
             }
         }
-        handleDeepLinkIfAvailable()
-        processDeepLink()
+    }
+
+    private fun getMenuItems(): Array<CbnMenuItem> {
+        return arrayOf(
+            CbnMenuItem(
+                R.drawable.ic_menu_sale_black,
+                R.drawable.avd_ic_menu_sales_peach,
+                R.id.salesFragment
+            ),
+            CbnMenuItem(
+                R.drawable.ic_menu_rent_black,
+                R.drawable.avd_menu_rent_peach,
+                R.id.rents_nav_graph
+            ),
+            CbnMenuItem(
+                R.drawable.ic_menu_agent_black,
+                R.drawable.avd_menu_agent_peach,
+                R.id.agentsFragment
+            )
+        )
     }
 
 
@@ -52,71 +79,5 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
                 else -> bottomNavigation.hide()
             }
         }
-    }
-
-    private fun handleDeepLinkIfAvailable() {
-        intent?.let {
-            parseDataFromDynamicLink(Firebase.dynamicLinks.getDynamicLink(intent))
-        }
-    }
-
-    private fun processDeepLink() {
-        val referrerClient: InstallReferrerClient = InstallReferrerClient.newBuilder(this).build()
-        referrerClient.startConnection(object : InstallReferrerStateListener {
-
-            override fun onInstallReferrerSetupFinished(responseCode: Int) {
-                when (responseCode) {
-                    InstallReferrerClient.InstallReferrerResponse.OK -> {
-                        val response: ReferrerDetails = referrerClient.installReferrer
-                        val referrerUrl: String = response.installReferrer
-                        parseDataFromInstallReferredLink(referrerUrl)
-                    }
-
-                    InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
-                        // API not available on the current Play Store app.
-                    }
-
-                    InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
-                        // Connection couldn't be established.
-                    }
-                }
-            }
-
-            override fun onInstallReferrerServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-            }
-        })
-    }
-
-    private fun parseDataFromDynamicLink(pendingLink: Task<PendingDynamicLinkData>) {
-        pendingLink.addOnSuccessListener {
-            try {
-                it.link?.let { link ->
-                    DynamicLink.deepLinkNavigation.arguments = bundleOf(
-                        INVITE_CODE to link.getQueryParameter(INVITE_CODE)
-                    )
-                    val inviteCode = link.getQueryParameter(INVITE_CODE)
-                    toast("invite code: $inviteCode")
-                }
-            } catch (e: Exception) {
-                Timber.e(e)
-            }
-        }.addOnFailureListener { Timber.e(it) }
-    }
-
-
-    private fun parseDataFromInstallReferredLink(linkString: String) {
-        val link = Uri.parse(linkString)
-        toast("play invite link: $link")
-        DynamicLink.deepLinkNavigation.arguments = bundleOf(
-            INVITE_CODE to link.getQueryParameter(INVITE_CODE)
-        )
-        val inviteCode = link.getQueryParameter(INVITE_CODE)
-        toast("play invite code: $inviteCode")
-    }
-
-    companion object {
-        private const val INVITE_CODE = "inviteCode"
     }
 }
