@@ -22,7 +22,7 @@
         app:itemIconSize="25dp"
         app:labelVisibilityMode="labeled"
         app:cbn_animDuration="500"
+        app:cbn_elevation="@dimen/size_20dp"
         app:cbn_selectedColor="@color/peach"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

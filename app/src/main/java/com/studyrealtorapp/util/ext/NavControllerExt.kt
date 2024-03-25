@@ -15,12 +15,6 @@ fun NavController.safeNavigation(navDirections: NavDirections) {
         val action = currentDestination?.getAction(navDirections.actionId)
         val options by lazy {
             navOptions {
-                anim {
-                    enter = R.anim.nav_default_enter_anim
-                    exit = R.anim.nav_default_exit_anim
-                    popEnter = R.anim.nav_default_pop_enter_anim
-                    popExit = R.anim.nav_default_pop_exit_anim
-                }
                 launchSingleTop = action?.navOptions?.shouldLaunchSingleTop() ?: false
                 popUpTo(action?.navOptions?.popUpTo ?: -1) {
                     inclusive = action?.navOptions?.isPopUpToInclusive ?: false

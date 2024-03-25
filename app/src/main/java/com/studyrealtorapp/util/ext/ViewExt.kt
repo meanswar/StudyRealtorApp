@@ -9,3 +9,7 @@ fun View.show(show: Boolean = true, useGone: Boolean = true) {
 fun View.hide() {
     this.visibility = View.GONE
 }
+
+inline fun View.onClick(crossinline action: () -> Unit) {
+    this.setOnClickListener { action() }
+}

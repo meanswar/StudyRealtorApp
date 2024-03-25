@@ -1,27 +1,13 @@
 package com.studyrealtorapp.flow.main
 
-import android.net.Uri
 import android.os.Bundle
-import androidx.core.os.bundleOf
-import androidx.navigation.ui.setupWithNavController
-import com.android.installreferrer.api.InstallReferrerClient
-import com.android.installreferrer.api.InstallReferrerStateListener
-import com.android.installreferrer.api.ReferrerDetails
-import com.google.android.gms.tasks.Task
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.ktx.Firebase
-import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
 import com.studyrealtorapp.flow.base.InjectableActivity
 import com.studyrealtorapp.util.annotation.RequiresViewModel
 import com.studyrealtorapp.util.ext.hide
 import com.studyrealtorapp.util.ext.show
-import com.studyrealtorapp.util.ext.toast
-import com.studyrealtorapp.util.link.DynamicLink
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
-import timber.log.Timber
 
 @RequiresViewModel(MainViewModel::class)
 class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(

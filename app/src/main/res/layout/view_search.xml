@@ -8,7 +8,6 @@
         style="@style/AppTheme.Text.Paragraph3.Grey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_20dp"
         android:hint="@string/search_field_hint"
         android:textColorHint="@color/gandalf_the_grey"
         app:boxCornerRadiusBottomEnd="@dimen/size_15dp"

@@ -2,10 +2,12 @@ import com.android.build.api.variant.SigningConfig
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("kotlin-kapt")
     id("com.google.firebase.crashlytics")
+    id("androidx.navigation.safeargs")
+    kotlin("android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -158,4 +160,7 @@ dependencies {
 
     // Bottom Nav Bar
     implementation("np.com.susanthapa:curved_bottom_navigation:0.6.5")
+
+    // lottie
+    implementation("com.airbnb.android:lottie:3.5.0")
 }

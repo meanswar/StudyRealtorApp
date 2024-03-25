@@ -7,6 +7,7 @@ import com.studyrealtorapp.di.ViewModelProviderFactory
 import com.studyrealtorapp.flow.main.MainViewModel
 import com.studyrealtorapp.flow.rents.RentsViewModel
 import com.studyrealtorapp.flow.sales.SalesViewModel
+import com.studyrealtorapp.flow.sales.filter.FilterSalesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -25,6 +26,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SalesViewModel::class)
     fun bindSalesViewModel(viewModel: SalesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FilterSalesViewModel::class)
+    fun bindFilterSalesViewModel(viewModel: FilterSalesViewModel): ViewModel
 
     @Binds
     @IntoMap

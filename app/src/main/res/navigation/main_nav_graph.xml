@@ -9,7 +9,16 @@
         android:id="@+id/salesFragment"
         android:name="com.studyrealtorapp.flow.sales.SalesFragment"
         android:label="SalesFragment"
-        tools:layout="@layout/fragment_sales" />
+        tools:layout="@layout/fragment_sales">
+        <action
+            android:id="@+id/openFilters"
+            app:destination="@id/filterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.studyrealtorapp.flow.sales.filter.FilterSalesFragment"
+        android:label="Filter Fragment"
+        tools:layout="@layout/fragment_filter" />
     <navigation
         android:id="@+id/rents_nav_graph"
         app:startDestination="@id/rentsFragment">

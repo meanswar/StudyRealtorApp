@@ -6,9 +6,11 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.studyrealtorapp.util.annotation.AnnotationUtil
+import com.studyrealtorapp.util.ext.safeNavigation
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -46,6 +48,10 @@ abstract class BaseFragment<B: ViewBinding, VM : ViewModel>(
 
     fun getViewModel(): VM {
         return viewModel
+    }
+
+    fun NavDirections.navigate() {
+        navController.safeNavigation(this)
     }
 
     abstract fun initViews()
