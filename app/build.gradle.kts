@@ -82,6 +82,7 @@ dependencies {
     val moshi = "1.15.0"
     val moshiConverter = "2.6.2"
     val navVersion = "2.3.3"
+    val room = "2.3.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -163,4 +164,17 @@ dependencies {
 
     // lottie
     implementation("com.airbnb.android:lottie:3.5.0")
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.14.2")
+    kapt("com.github.bumptech.glide:compiler:4.14.2")
+    //Room
+    implementation("androidx.room:room-runtime:$room")
+    kapt("androidx.room:room-compiler:$room")
+    implementation("androidx.room:room-ktx:$room")
+    //Picasso
+    implementation("com.squareup.picasso:picasso:2.71828")
+    //Swipe Refresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    // Expandable Layout
+    implementation("com.github.skydoves:expandablelayout:1.0.7")
 }

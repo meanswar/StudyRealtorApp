@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:clipToPadding="false"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -46,6 +47,48 @@
                 android:transitionName="tvFilter"
                 layout="@layout/view_search" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glHorizontal50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glHorizontal30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glHorizontal75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvHouses"
+                app:layout_constraintTop_toBottomOf="@id/lFilter"
+                android:layout_marginTop="@dimen/size_4dp"
+                style="@style/AppTheme.Text.Bold.Headline4.Grey"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Property type" />
+
+            <include
+                layout="@layout/view_filter"
+                android:id="@+id/vFilter"
+                app:layout_constraintTop_toBottomOf="@id/tvHouses"
+                android:layout_marginTop="@dimen/size_2dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:visibility="visible"/>
+
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvRecentTitle"
                 style="@style/AppTheme.Text.Bold.Headline2.Teflon"
@@ -54,7 +97,7 @@
                 android:layout_marginTop="@dimen/size_8dp"
                 android:text="@string/recent_searches_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lFilter" />
+                app:layout_constraintTop_toBottomOf="@id/vFilter" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRecentSearches"
