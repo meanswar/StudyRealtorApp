@@ -1,6 +1,8 @@
 package com.nikitosii.studyrealtorapp.util.ext
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
@@ -35,8 +37,19 @@ fun View.hide() {
     this.visibility = View.GONE
 }
 
+fun View.hideWithAnim(animRes: Int) {
+    val animation = AnimationUtils.loadAnimation(context, animRes)
+    startAnimation(animation)
+    onAnimCompleted { hide() }
+}
+
 inline fun View.onClick(crossinline action: () -> Unit) {
     this.setOnClickListener { action() }
+}
+
+fun View.onAnimCompleted(action: () -> Unit) {
+    val handler = Handler(Looper.getMainLooper())
+    handler.postAtTime({ action() }, 500L)
 }
 
 fun EditText.openKeyboard() {

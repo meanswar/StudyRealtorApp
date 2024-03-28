@@ -3,15 +3,15 @@ package com.nikitosii.studyrealtorapp.flow.sales.filter
 import android.transition.TransitionInflater
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.FragmentFilterBinding
-import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
+import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
 import com.nikitosii.studyrealtorapp.util.ext.isHidden
 import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.openKeyboard
-import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import java.lang.ref.WeakReference
 
@@ -54,7 +54,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     private fun toggleHouseFilters() {
         with(binding.vFilter.clContent) {
-            if (isHidden()) showWithAnimation(R.anim.layout_anim) else hide()
+            if (isHidden()) showWithAnimation(R.anim.item_fall_down_animation) else hideWithAnim(R.anim.item_dissappear_up_anim)
         }
     }
 }
