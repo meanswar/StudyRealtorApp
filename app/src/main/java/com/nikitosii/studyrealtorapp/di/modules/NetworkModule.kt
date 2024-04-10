@@ -2,17 +2,21 @@ package com.nikitosii.studyrealtorapp.di.modules
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.google.gson.Gson
 import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.nikitosii.studyrealtorapp.core.source.local.impl.LocalStorageImpl
 import com.nikitosii.studyrealtorapp.core.source.net.TokenInterceptor
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 import java.security.cert.X509Certificate
@@ -65,10 +69,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun providesChunkInterceptor(context: Context) =
-        ChuckerInterceptor.Builder(context)
-            .alwaysReadResponseBody(true)
-            .build()
+    internal fun providesChuckInterceptor(context: Context) = ChuckerInterceptor.Builder(context).build()
 
     @Provides
     @Singleton
@@ -83,11 +84,11 @@ class NetworkModule {
     internal fun providesClient(
         loggingInterceptor: HttpLoggingInterceptor,
         tokenInterceptor: TokenInterceptor,
-        chuckerInterceptor: ChuckerInterceptor
+        chuckInterceptor: ChuckerInterceptor
     ) = OkHttpClient().newBuilder()
         .addInterceptor(tokenInterceptor)
         .addInterceptor(loggingInterceptor)
-        .addInterceptor(chuckerInterceptor)
+        .addInterceptor(chuckInterceptor)
         .callTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)

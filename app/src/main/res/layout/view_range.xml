@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_corners_almost_white_15dp"
+    android:orientation="horizontal"
+    android:padding="@dimen/size_10dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
+        android:textColor="@color/peach"
+        android:gravity="center"
+        android:text="@string/view_range_from"
+        android:layout_weight="2" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etFrom"
+            style="@style/AppTheme.EditTextRange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            tools:text="1110" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
+        android:textColor="@color/peach"
+        android:gravity="center"
+        android:text="@string/view_range_to"
+        android:layout_weight="2" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etTo"
+        style="@style/AppTheme.EditTextRange"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:drawableEnd="@drawable/ic_money" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2" />
+
+</LinearLayout>

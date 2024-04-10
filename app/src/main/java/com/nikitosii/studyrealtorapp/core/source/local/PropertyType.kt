@@ -1,8 +1,8 @@
 package com.nikitosii.studyrealtorapp.core.source.local
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 enum class PropertyType {
-    @SerializedName("Office")
+    @Json(name= "Office")
     OFFICE
 }

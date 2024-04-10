@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_error_corner_15dp"
+    android:paddingHorizontal="@dimen/size_20dp"
+    android:paddingVertical="@dimen/size_24dp">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lavError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/size_5dp"
+        android:padding="@dimen/size_15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="error.json"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_loop="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDescription"
+        style="@style/AppTheme.Text.Paragraph3.Teflon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_24dp"
+        android:autoLink="all"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lavError"
+        tools:text="@string/description_error" />
+
+    <Button
+        android:id="@+id/btnAccept"
+        style="@style/AppTheme.Button.Primary"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_25dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        app:layout_constraintWidth_percent="1"
+        app:layout_goneMarginBottom="@dimen/size_24dp"
+        tools:text="@string/ok"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        style="@style/AppTheme.Button.Regular"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAccept"
+        app:layout_constraintWidth_percent="1"
+        tools:text="@string/cancel"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,26 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.flags
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class FlagsResponseApi(
-    @SerializedName("is_coming_soon")
+    @Json(name = "is_coming_soon")
     val isComingSoon: Boolean? = null,
-    @SerializedName("is_contingent")
+    @Json(name = "is_contingent")
     val isContingent: Boolean? = null,
-    @SerializedName("is_foreclosure")
+    @Json(name = "is_foreclosure")
     val isForeclosure: Boolean? = null,
-    @SerializedName("is_new_construction")
+    @Json(name = "is_new_construction")
     val isNewConstruction: Boolean? = null,
-    @SerializedName("is_new_listing")
+    @Json(name = "is_new_listing")
     val isNewListing: Boolean? = true,
-    @SerializedName("is_pending")
+    @Json(name = "is_pending")
     val isPending: Boolean? = null,
-    @SerializedName("is_plan")
+    @Json(name = "is_plan")
     val isPlan: Boolean? = null,
-    @SerializedName("is_price_reduced")
+    @Json(name = "is_price_reduced")
     val isPriceReduced: Boolean? = null,
-    @SerializedName("is_subdivision")
+    @Json(name = "is_subdivision")
     val isSubdivision: Boolean? = null
 )

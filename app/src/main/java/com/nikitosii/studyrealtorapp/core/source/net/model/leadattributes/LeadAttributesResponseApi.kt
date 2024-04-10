@@ -1,14 +1,17 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.leadattributes
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+
+@JsonClass(generateAdapter = true)
 data class LeadAttributesResponseApi(
-    @SerializedName("lead_type")
+    @Json(name = "lead_type")
     val leadType: String? = null,
-    @SerializedName("opcity_lead_attributes")
+    @Json(name = "opcity_lead_attributes")
     val opcityParameters: OpcityLeadParametersResponseApi? = null,
-    @SerializedName("ready_connect_mortgage")
+    @Json(name = "ready_connect_mortgage")
     val readyConnectMortgage: ReadyConnectMortgageResponseApi? = null,
-    @SerializedName("show_contact_an_agent")
+    @Json(name = "show_contact_an_agent")
     val showContactAgent: Boolean? = null
 )

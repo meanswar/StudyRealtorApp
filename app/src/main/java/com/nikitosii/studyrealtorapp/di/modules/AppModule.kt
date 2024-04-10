@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.di.modules
 import android.app.Application
 import android.content.Context
 import android.content.res.Resources
+import com.google.gson.Gson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.studyrealtorapp.di.modules.RepoModule
@@ -17,12 +18,13 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        NetworkModule::class,
-        NetworkErrorModule::class,
+        InitializerModule::class,
         ActivityModule::class,
         FragmentModule::class,
         ViewModelModule::class,
         RepoModule::class,
+        NetworkModule::class,
+        NetworkErrorModule::class,
     ]
 )
 class AppModule {
@@ -49,14 +51,9 @@ class AppModule {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-//    @Provides
-//    @Singleton
-//    internal fun providesChannelRecreateObserver() = ChannelRecreateObserver()
-//
-//    @Provides
-//    @Singleton
-//    internal fun connectivityProvider(context: Context) =
-//        ConnectivityProvider.createProvider(context)
+    @Provides
+    @Singleton
+    internal fun provideGson() = Gson().newBuilder().create()
 
     @Provides
     @Singleton

@@ -35,4 +35,6 @@
     <dimen name="text_size_10sp">10sp</dimen>
     <dimen name="size_2dp">2dp</dimen>
     <dimen name="size_0dp">0dp</dimen>
+    <dimen name="size_32dp">32dp</dimen>
+    <dimen name="size_25dp">25dp</dimen>
 </resources>

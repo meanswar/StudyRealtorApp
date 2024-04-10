@@ -20,6 +20,8 @@
             style="@style/AppTheme.Text.Paragraph3.Teflon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="marquee"
             android:padding="@dimen/size_8dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"

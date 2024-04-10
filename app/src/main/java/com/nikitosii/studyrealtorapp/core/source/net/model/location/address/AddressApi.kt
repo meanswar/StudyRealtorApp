@@ -1,18 +1,21 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.location.address
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+
+@JsonClass(generateAdapter = true)
 data class AddressApi(
-    @SerializedName("city")
+    @Json(name = "city")
     val city: String? = null,
-    @SerializedName("coordinate")
+    @Json(name = "coordinate")
     val coordinate: CoordinateApi? = null,
-    @SerializedName("line")
+    @Json(name = "line")
     val line: String? = null,
-    @SerializedName("postal_code")
+    @Json(name = "postal_code")
     val postalCode: String? = null,
-    @SerializedName("state")
+    @Json(name = "state")
     val state: String? = null,
-    @SerializedName("state_code")
+    @Json(name = "state_code")
     val stateCode: String? = null
 )

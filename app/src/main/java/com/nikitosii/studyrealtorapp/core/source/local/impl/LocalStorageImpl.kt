@@ -2,9 +2,8 @@ package com.nikitosii.studyrealtorapp.core.source.local.impl
 
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.orhanobut.hawk.Hawk
-import javax.inject.Inject
 
-class LocalStorageImpl @Inject constructor(): LocalStorage {
+class LocalStorageImpl : LocalStorage {
     override fun clear() {
         Hawk.delete(KEY_TOKEN)
     }

@@ -8,7 +8,7 @@ enum class HouseType(val type: String) {
     DUPLEX("Duplex/Triplex"),
     MOBILE("Mobile"),
     CONDOS("Condos"),
-    CONDO_TOWNHOME_ROWHOME_COOP("Condo/Townhome/Rowhome/Co-op"),
+    CONDO_TOWNHOME_ROWHOME_COOP("Con/Rowhome/Co-op"),
     CONDO_TOWNHOME("Condo/Townhome"),
     FARM("Farm")
 }

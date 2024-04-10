@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavHostController
+import androidx.navigation.Navigator.Extras
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 
@@ -26,6 +27,14 @@ fun NavController.safeNavigation(navDirections: NavDirections) {
 }
 
 fun NavController.safeNavigation(actionId: Int) {
+    if (hasAction(actionId)) navigate(actionId)
+}
+
+fun NavController.safeNavigation(navDirections: NavDirections, extras: Extras) {
+    if (hasAction(navDirections)) navigate(navDirections, extras)
+}
+
+fun NavController.safeNavigations(actionId: Int) {
     if (hasAction(actionId)) navigate(actionId)
 }
 

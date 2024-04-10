@@ -1,8 +1,10 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.property
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class TaxRecordResponseApi(
-    @SerializedName("public_record_id")
+    @Json(name = "public_record_id")
     val publicRecordId: String? = null
 )

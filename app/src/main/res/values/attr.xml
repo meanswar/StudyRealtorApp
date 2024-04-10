@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandableTextView">
+        <attr name="title" format="string" />
+        <attr name="style" format="reference" />
+        <attr name="viewTarget" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="RangeView">
+        <attr name="endDrawable" format="reference" />
+    </declare-styleable>
+</resources>

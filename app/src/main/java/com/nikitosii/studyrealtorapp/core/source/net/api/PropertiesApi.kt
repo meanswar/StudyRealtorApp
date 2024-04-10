@@ -1,11 +1,25 @@
 package com.nikitosii.studyrealtorapp.core.source.net.api
 
-import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponseApi
-import com.nikitosii.studyrealtorapp.core.source.net.model.property.PropertyResponseApi
-import retrofit2.http.Body
+import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponse
 import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.Query
 
 interface PropertiesApi {
-    @GET
-    fun getPropertiesForSale(@Body data: String): BaseResponseApi<PropertyResponseApi>
+
+    @GET("/forsale")
+    suspend fun getPropertiesForSale(
+        @Query("location") location: String? = null,
+        @Query("type") house: String? = null,
+        @Query("list_price-min") priceMin: Int? = null,
+        @Query("list_price-max") priceMax: Int? = null,
+        @Query("beds-min") bedsMin: Int? = null,
+        @Query("beds-max") bedsMax: Int? = null,
+        @Query("baths-min") bathsMin: Int? = null,
+        @Query("baths-max") bathsMax: Int? = null,
+        @Query("sqft-min") sqftMin: Int? = null,
+        @Query("sqft-max") sqftMax: Int? = null,
+        @Query("page") page: Int? = null,
+        @Query("sort") sort: String? = null
+    ): BaseResponse
 }

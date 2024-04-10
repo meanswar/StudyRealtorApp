@@ -1,8 +1,11 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.photo
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+
+@JsonClass(generateAdapter = true)
 data class PhotoResponseApi(
-    @SerializedName("href")
+    @Json(name = "href")
     val url: String? = null
 )

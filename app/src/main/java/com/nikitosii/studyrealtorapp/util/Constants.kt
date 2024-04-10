@@ -19,4 +19,10 @@ object Constants {
         CONDO_TOWNHOME,
         FARM
     )
+    val tokensList = listOf(
+        "f637db3d56msh5acef294d57040ep1c51a6jsn44a9d2611afe",
+        "30f60d7805mshbdcf3d7600b490bp18d006jsnb4dc8994134e",
+        "e35661dae9msh3864476f9185d76p1241b4jsnec9b7dc7f32f"
+    )
+
 }

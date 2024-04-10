@@ -93,7 +93,13 @@ dependencies {
 
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.6.1")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.3")
+    implementation("com.google.firebase:firebase-dynamic-links-ktx:21.2.0")
+
+
+
 
     //Dagger
     implementation("com.google.dagger:dagger:$dagger")
@@ -106,6 +112,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:$okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit")
+
 
     //Chunk
     debugImplementation("com.github.chuckerteam.chucker:library:$chunk")
@@ -163,7 +171,7 @@ dependencies {
     implementation("np.com.susanthapa:curved_bottom_navigation:0.6.5")
 
     // lottie
-    implementation("com.airbnb.android:lottie:3.5.0")
+    implementation("com.airbnb.android:lottie:5.0.3")
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
     kapt("com.github.bumptech.glide:compiler:4.14.2")
@@ -177,4 +185,15 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // Expandable Layout
     implementation("com.github.skydoves:expandablelayout:1.0.7")
+
+    //Chunk
+    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2") {
+        exclude("com.google.android.material", "material")
+    }
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2") {
+        exclude("com.google.android.material", "material")
+    }
+
+    //Gson
+    implementation("com.google.code.gson:gson:2.10.1")
 }

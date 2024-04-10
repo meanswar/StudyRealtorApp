@@ -1,8 +1,8 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.source
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class AgentResponseApi(
-    @SerializedName("office_name")
+    @Json(name = "office_name")
     val officeName: String? = null
 )

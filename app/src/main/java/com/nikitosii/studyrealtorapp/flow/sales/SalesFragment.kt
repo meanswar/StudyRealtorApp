@@ -1,7 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.sales
 
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.FragmentSalesBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
@@ -37,7 +36,6 @@ class SalesFragment :
         val extras = FragmentNavigatorExtras(
             binding.tvFilter to "tvFilter"
         )
-        findNavController().navigate(R.id.filterFragment, null, null, extras)
-        SalesFragmentDirections.openFilters().navigate()
+        SalesFragmentDirections.openFilters().navigate(extras)
     }
 }

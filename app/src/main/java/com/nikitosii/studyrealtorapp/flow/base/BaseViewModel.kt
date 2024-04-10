@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.source.useCase.token.GenerateNewTokenUseCase
 import com.nikitosii.studyrealtorapp.util.ext.add
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -18,11 +20,25 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 
 open class BaseViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main
+    private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main,
 ): ViewModel() {
+
+    @Inject
+    lateinit var generateNewTokenUseCase: GenerateNewTokenUseCase
+
+    private val _token: MutableLiveData<Unit> = MutableLiveData<Unit>()
+    val token: LiveData<Unit>
+        get() = _token
+
+
+    fun generateNewToken() = ioToUi(
+        io = { generateNewTokenUseCase.execute() },
+        ui = {  _token.postValue(it) }
+    )
 
     fun ioToUnit(io: suspend () -> Unit) = ioToUi(io, {})
 

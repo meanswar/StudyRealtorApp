@@ -1,31 +1,33 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.description
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class DescriptionResponseApi(
     val baths: Int? = null,
-    @SerializedName(value = "baths_1qtr")
+    @Json(name = "baths_1qtr")
     val bathsGtr1: Int? = null,
-    @SerializedName(value = "baths_3qtr")
+    @Json(name = "baths_3qtr")
     val bathsGtr3: Int? = null,
-    @SerializedName(value = "baths_full")
+    @Json(name = "baths_full")
     val bathsFull: Int? = null,
-    @SerializedName(value = "baths_half")
+    @Json(name = "baths_half")
     val bathsHalf: Int? = null,
     val beds: Int? = null,
     val garage: Int? = null,
-    @SerializedName(value = "lot_sqft")
+    @Json(name = "lot_sqft")
     val lotSqft: Int? = null,
     val name: String? = null,
-    @SerializedName(value = "sold_date")
+    @Json(name = "sold_date")
     val soldDate: String? = null,
-    @SerializedName(value = "sold_price")
+    @Json(name = "sold_price")
     val soldPrice: Int? = null,
     val sqft: Int? = null,
     val stories: Int? = null,
-    @SerializedName(value = "sub_type")
+    @Json(name = "sub_type")
     val subType: String? = null,
     val type: String? = null,
-    @SerializedName(value = "year_built")
+    @Json(name = "year_built")
     val yearBuilt: Int? = null
 )

@@ -1,7 +1,5 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model
 
-import com.nikitosii.studyrealtorapp.core.source.local.model.Source
-import com.nikitosii.studyrealtorapp.core.source.local.model.TaxRecord
 import com.nikitosii.studyrealtorapp.core.source.net.model.data.DataResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.property.PropertyResponseApi
 
@@ -18,7 +16,7 @@ data class Property(
     val listingId: String? = null,
     val location: Location? = null,
     val matterPort: Boolean? = null,
-    val openHouses: Boolean? = null,
+    val openHouses: List<HouseDescription>? = null,
     val rdc: List<Other>? = null,
     val permalink: String? = null,
     val photoResponseApis: List<Photo>? = null,
@@ -46,7 +44,7 @@ data class Property(
             data.listingId,
             Location.from(data.location),
             data.matterport,
-            data.openHouses,
+            data.openHouses?.map { HouseDescription.from(it) },
             data.rdc?.map { Other.from(it) },
             data.permalink,
             data.photoResponseApis?.map { Photo.from(it) },

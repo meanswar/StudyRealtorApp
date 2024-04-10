@@ -11,3 +11,7 @@ fun Fragment.toast(message: String) =
 
 fun Activity.toast(message: String) =
     run { Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show() }
+
+fun Fragment.string(id: Int) = resources.getString(id)
+
+fun Activity.string(id: Int) = resources.getString(id)

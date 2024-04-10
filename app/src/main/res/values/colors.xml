@@ -7,6 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="silver">#cbcbcb</color>
+    <color name="gray">#878786</color>
+
+    <color name="primary_white">#C4FFFFFF</color>
 
 
     <color name="splash_screen">#422222</color>
@@ -21,6 +26,16 @@
     <color name="colorPrimaryDark">#3A3939</color>
     <color name="colorAccent">#9F7979</color>
     <color name="textColorLink">#206BAE</color>
+
+    <color name="bg_regular_hover">#f5f5f5</color>
+    <color name="bg_regular_preset">#e4e4e4</color>
+    <color name="bg_regular_enable">@color/white</color>
+    <color name="border_regular_preset">#d2d2d2</color>
+
+    <color name="bg_primary_hover">#CCEE6723</color>
+    <color name="bg_primary_preset">#EE6723</color>
+    <color name="bg_primary_enable">#FF7129</color>
+    <color name="border_primary_preset">#EE6723</color>
 
 
 </resources>

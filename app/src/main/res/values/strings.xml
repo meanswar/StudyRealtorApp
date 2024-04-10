@@ -3,7 +3,8 @@
     <string name="server_error">Unexpected server error</string>
     <string name="timeout_error">Timeout</string>
     <string name="interrupt_error">Interrupt</string>
-    
+    <string name="wrong_token_error">Wrong token</string>
+
     <string name="bm_for_sale">For Sale</string>
     <string name="bm_for_rent">For Rent</string>
     <string name="bm_agents">Agents</string>
@@ -11,4 +12,15 @@
     <string name="popular_places_title">Top 3 popular places</string>
     <string name="recent_searches_title">Recent searches</string>
     <string name="layout_search_favorite_list_title">Suggested</string>
+    <string name="view_range_from">From</string>
+    <string name="view_range_to">To</string>
+    <string name="view_filter_title_beds">Beds</string>
+    <string name="view_filter_title_prices">Prices</string>
+    <string name="view_filter_title_square">Square</string>
+    <string name="view_filter_title_baths">Baths</string>
+    <string name="btn_filter_title">Find</string>
+    <string name="title_ups">Oops</string>
+    <string name="description_error">something went wrong\nWe are trying to fix it\nCheck for updates!</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 </resources>

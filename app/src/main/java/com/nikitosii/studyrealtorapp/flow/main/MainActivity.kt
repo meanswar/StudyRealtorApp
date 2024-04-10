@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.main
 
+import android.os.Build
 import android.os.Bundle
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
@@ -8,6 +9,8 @@ import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
+import com.nikitosii.studyrealtorapp.util.ext.hasPushNotificationPermission
+import com.nikitosii.studyrealtorapp.util.ext.requestNotificationPermission
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 @RequiresViewModel(MainViewModel::class)
@@ -19,6 +22,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
+        checkNotificationPermission()
     }
 
     private fun initViews() {
@@ -66,5 +70,11 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
                 else -> bottomNavigation.hide()
             }
         }
+    }
+
+    private fun checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            if (!hasPushNotificationPermission())
+                requestNotificationPermission()
     }
 }

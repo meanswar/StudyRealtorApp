@@ -1,10 +1,13 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.leadattributes
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+
+@JsonClass(generateAdapter = true)
 data class OpcityLeadParametersResponseApi(
-    @SerializedName("cashback_enbaled")
+    @Json(name = "cashback_enbaled")
     val cashbackEnabled: Boolean? = null,
-    @SerializedName("flip_the_market_enabled")
+    @Json(name = "flip_the_market_enabled")
     val flipMarketEnabled: Boolean? = null
 )

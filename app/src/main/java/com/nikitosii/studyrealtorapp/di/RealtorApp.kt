@@ -1,6 +1,8 @@
 package com.nikitosii.studyrealtorapp.di
 
 import android.app.Application
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.nikitosii.studyrealtorapp.core.initializer.Initializer
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
@@ -9,8 +11,8 @@ class RealtorApp: Application(), HasAndroidInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
-//    @Inject
-//    lateinit var initializerSet: Set<@JvmSuppressWildcards Initializer>
+    @Inject
+    lateinit var initializerSet: Set<@JvmSuppressWildcards Initializer>
 
     private lateinit var component: AppComponent
 
@@ -22,10 +24,7 @@ class RealtorApp: Application(), HasAndroidInjector {
             .build()
         component.inject(this)
 
-//        initializerSet.forEach { it.perform() }
-//        RxJavaPlugins.setErrorHandler {
-//            FirebaseCrashlytics.getInstance().recordException(it)
-//        }
+        initializerSet.forEach { it.perform() }
 
     }
 

@@ -1,6 +1,10 @@
 package com.nikitosii.studyrealtorapp.util.ext
 
 import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import com.airbnb.lottie.LottieAnimationView
 
 fun LottieAnimationView.onAnimCompleted(onCompleted: () -> Unit) {

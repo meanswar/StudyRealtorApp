@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewBinding, VM : ViewModel>(
     private val actionBind: (LayoutInflater) -> B
-) : DaggerAppCompatActivity() {
+) : AbsActivity() {
     lateinit var binding: B
     private var viewModel: VM? = null
 
@@ -47,6 +47,5 @@ abstract class BaseActivity<B : ViewBinding, VM : ViewModel>(
             throw IllegalStateException("ViewModel not found")
         return viewModel as VM
     }
-
 
 }
