@@ -2,9 +2,7 @@ package com.nikitosii.studyrealtorapp.flow.sales.filter
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
@@ -14,12 +12,14 @@ import com.nikitosii.studyrealtorapp.databinding.FragmentFilterBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
+import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
 import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
 import com.nikitosii.studyrealtorapp.util.ext.openKeyboard
 import com.nikitosii.studyrealtorapp.util.ext.show
+import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.view.ExpandableTextView
 import timber.log.Timber
 import java.lang.ref.WeakReference
@@ -34,6 +34,8 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
     private val adapter: FilterAdapter?
         get() = _adapter.get()
 
+    private val salesPropertiesAdapter by lazy { SalesAdapter { openPropertyDetails(it) } }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onClick()
@@ -42,7 +44,8 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
     }
 
     private fun initAnimation() {
@@ -63,13 +66,18 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
             adapter?.submitList(Constants.housesList.map { it.type })
             rvContent.adapter = adapter
             lFilter.etSearch.openKeyboard()
+            rvSaleProperties.adapter = salesPropertiesAdapter
+            rvSaleProperties.dividerVertical(R.drawable.divider_vertical_10dp)
         }
     }
 
     private fun onClick() {
         with(binding) {
             btnBack.onClick { btnBack.playAnimation() }
-            btnAccept.onClick { viewModel.findProperties() }
+            btnAccept.onClick {
+                lastOpenedFilter?.hideIfExpanded()
+                viewModel.findProperties()
+            }
             btnBack.onAnimCompleted { navController.navigateUp() }
             tvFilterHouses.onArrowClick { checkOnClick(tvFilterHouses) }
             tvFilterPrices.onArrowClick { checkOnClick(tvFilterPrices) }
@@ -112,16 +120,35 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
     private fun onHouseFilterClick(house: String): Boolean = viewModel.setFilterHouse(house)
 
     private fun observeProperties(data: List<Property>?) {
-
+        with(binding) {
+            lavLoading.hideWithAnim(R.anim.scale_out)
+            salesPropertiesAdapter.submitList(data)
+            rvSaleProperties.notifyDataSetChanged()
+            rvSaleProperties.show()
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
         with(binding) {
-            gMainContent.show(!isLoading)
-            lavLoading.show(isLoading)
+            if (isLoading) {
+                gMainContent.hideWithAnim(R.anim.scale_out)
+                lavLoading.showWithAnimation(R.anim.scale_in)
+            }
             btnAccept.isEnabled = !isLoading
             if (isLoading) lavLoading.playAnimation() else lavLoading.pauseAnimation()
         }
+    }
+
+    override fun openError(errorText: String, isHiding: Boolean) {
+        super.openError(errorText, isHiding)
+        with(binding) {
+            lavLoading.hideWithAnim(R.anim.scale_out)
+            gMainContent.showWithAnimation(R.anim.scale_in)
+        }
+    }
+
+    fun openPropertyDetails(property: Property) {
+
     }
 
 }

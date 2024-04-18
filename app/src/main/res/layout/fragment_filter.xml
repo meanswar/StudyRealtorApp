@@ -40,7 +40,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingVertical="@dimen/size_20dp">
+            android:paddingTop="@dimen/size_20dp">
 
 
             <androidx.constraintlayout.widget.Group
@@ -227,6 +227,23 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_favorite_searches" />
 
+            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                android:id="@+id/rvSaleProperties"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/size_20dp"
+                app:animationDuration="1500"
+                android:visibility="invisible"
+                android:layout_marginTop="@dimen/size_10dp"
+                app:layout_constraintBottom_toTopOf="@id/cvAccept"
+                app:layout_constraintTop_toBottomOf="@+id/clFilters"
+                tools:listitem="@layout/item_sales"
+                app:layoutAnimation="@anim/recycle_view_anim"
+                app:layoutManagerOrientation="vertical"
+                app:layoutManagerReverse="false"
+                app:layoutManagerType="linear"
+                tools:itemCount="10" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvAccept"
                 style="@style/AppTheme.Button.Primary"
@@ -249,13 +266,13 @@
                 android:id="@+id/lavLoading"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:elevation="3dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="false"
-                android:elevation="3dp"
                 app:lottie_fileName="loading.json"
                 app:lottie_loop="true"
                 tools:visibility="visible" />

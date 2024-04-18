@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tbFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Sales Filter"
+        app:titleCentered="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/size_8dp"
+        android:layout_marginStart="@dimen/size_8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/tbFilter"
+        app:layout_constraintDimensionRatio="V,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tbFilter"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="arrow_back.json" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

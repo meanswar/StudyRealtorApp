@@ -16,3 +16,18 @@ fun SalesRequest.request(): String {
     sqftMax?.let { request.append("&sqft_max=$it") }
     return request.toString()
 }
+
+fun SalesRequest.getFiltersCount(): Int {
+    var count = 0
+    address?.let { count++ }
+    houses?.let { count++ }
+    priceMin?.let { count++ }
+    priceMax?.let { count++ }
+    bedsMin?.let { count++ }
+    bedsMax?.let { count++ }
+    bathsMin?.let { count++ }
+    bathsMax?.let { count++ }
+    sqftMin?.let { count++ }
+    sqftMax?.let { count++ }
+    return count
+}

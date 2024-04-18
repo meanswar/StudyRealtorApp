@@ -29,6 +29,22 @@ fun TextView.showText(text: String?) {
     }
 }
 
+fun TextView.showText(text: String?, resString: Int) {
+    if (text.isNullOrEmpty()) hide()
+    else {
+        this.text = context.getString(resString, text)
+        show()
+    }
+}
+
+fun TextView.showText(number: Int?, resString: Int) {
+    if (!number.isNotNull()) hide()
+    else {
+        this.text = context.getString(resString, number)
+        show()
+    }
+}
+
 fun View.showWithAnimation(animRes: Int) {
     val animation = AnimationUtils.loadAnimation(context, animRes)
     this.visibility = View.VISIBLE

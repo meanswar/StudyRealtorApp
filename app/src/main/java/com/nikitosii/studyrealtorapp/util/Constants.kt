@@ -1,6 +1,8 @@
 package com.nikitosii.studyrealtorapp.util
 
+import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType.*
+import kotlinx.coroutines.flow.SharedFlow
 
 object Constants {
 
@@ -26,3 +28,5 @@ object Constants {
     )
 
 }
+
+typealias Flow<T> = SharedFlow<Status<T>>

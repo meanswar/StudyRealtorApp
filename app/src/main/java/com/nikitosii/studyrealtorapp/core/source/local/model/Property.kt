@@ -1,12 +1,12 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model
 
-import com.nikitosii.studyrealtorapp.core.source.net.model.data.DataResponseApi
+import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.net.model.property.PropertyResponseApi
 
 data class Property(
-    val branding: List<DataResponseApi>? = null,
+    val branding: List<Branding>? = null,
     val comingSoonDate: String? = null,
-    val community: String? = null,
+    val community: Community? = null,
     val description: Description? = null,
     val flags: Flags? = null,
     val lastUpdateDate: String? = null,
@@ -19,22 +19,22 @@ data class Property(
     val openHouses: List<HouseDescription>? = null,
     val rdc: List<Other>? = null,
     val permalink: String? = null,
-    val photoResponseApis: List<Photo>? = null,
+    val photos: List<Photo>? = null,
     val priceReducedAmount: String? = null,
-    val primaryPhotoResponseApi: Photo,
+    val primaryPhoto: Photo,
     val products: Product? = null,
     val propertyId: String? = null,
     val source: Source? = null,
     val status: String? = null,
     val tags: List<String>? = null,
     val taxRecord: TaxRecord? = null,
-    val virtualTours: List<Object>? = null
+    val virtualTours: List<Any>? = null
 ) {
     companion object {
         fun from(data: PropertyResponseApi): Property = Property(
-            data.branding,
+            data.branding?.map { Branding.from(it) },
             data.comingSoonDate,
-            data.community,
+            Community.from(data.community),
             Description.from(data.description),
             Flags.from(data.flags),
             data.lastUpdateDate,
@@ -57,6 +57,34 @@ data class Property(
             data.tags,
             TaxRecord.from(data.taxRecord),
             data.virtualTours
+        )
+
+        fun from(entity: PropertyEntity): Property = Property(
+            entity.branding,
+            entity.comingSoonDate,
+            entity.community,
+            entity.description,
+            entity.flags,
+            entity.lastUpdateDate,
+            entity.leadAttributes,
+            entity.listDate,
+            entity.listPrice,
+            entity.listingId,
+            entity.location,
+            entity.matterPort,
+            entity.openHouses,
+            entity.rdc,
+            entity.permalink,
+            entity.photos,
+            entity.priceReducedAmount,
+            entity.primaryPhoto,
+            entity.products,
+            entity.propertyId,
+            entity.source,
+            entity.status,
+            entity.tags,
+            entity.taxRecord,
+            entity.virtualTours
         )
     }
 }

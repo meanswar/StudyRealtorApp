@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.property
 
-import com.nikitosii.studyrealtorapp.core.source.net.model.data.DataResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.commnunity.CommunityResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.data.BrandingResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.description.DescriptionResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.flags.FlagsResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.house.HouseDescriptionResponseAPI
@@ -15,10 +16,10 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class PropertyResponseApi(
-    val branding: List<DataResponseApi>? = null,
+    val branding: List<BrandingResponseApi>? = null,
     @Json(name = "coming_soon_date")
     val comingSoonDate: String? = null,
-    val community: String? = null,
+    val community: CommunityResponseApi? = null,
     val description: DescriptionResponseApi? = null,
     val flags: FlagsResponseApi? = null,
     @Json(name = "last_update_date")
@@ -51,5 +52,5 @@ data class PropertyResponseApi(
     @Json(name = "tax_record")
     val taxRecord: TaxRecordResponseApi? = null,
     @Json(name = "virtual_tours")
-    val virtualTours: List<Object>? = null
+    val virtualTours: List<Any>? = null
 )

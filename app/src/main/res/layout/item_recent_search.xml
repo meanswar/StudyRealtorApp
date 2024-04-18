@@ -2,50 +2,59 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/size_10dp"
-    app:cardCornerRadius="@dimen/size_10dp">
+    android:elevation="@dimen/size_2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/size_10dp"
+    app:cardElevation="@dimen/size_0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/almost_white"
+        android:padding="@dimen/size_10dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivFirstHouse"
-            android:layout_width="@dimen/size_40dp"
-            android:layout_height="@dimen/size_40dp"
+        <TextView
+            android:id="@+id/tvSearchPlace"
+            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/peach" />
+            tools:text="London" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivSecHouse"
-            android:layout_width="@dimen/size_40dp"
-            android:layout_height="@dimen/size_40dp"
-            android:layout_marginStart="@dimen/size_5dp"
-            app:layout_constraintStart_toEndOf="@id/ivFirstHouse"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/peach" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivThirdHouse"
-            android:layout_width="@dimen/size_40dp"
-            android:layout_height="@dimen/size_40dp"
-            android:layout_marginTop="@dimen/size_5dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            style="@style/AppTheme.Text.Paragraph4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_4dp"
+            android:drawableEnd="@drawable/ic_money"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivFirstHouse"
-            tools:background="@color/peach" />
+            app:layout_constraintTop_toBottomOf="@id/tvSearchPlace"
+            tools:text="max 1000" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivFourthHouse"
-            android:layout_width="@dimen/size_40dp"
-            android:layout_height="@dimen/size_40dp"
-            android:layout_marginStart="@dimen/size_5dp"
-            android:layout_marginTop="@dimen/size_5dp"
-            app:layout_constraintStart_toEndOf="@id/ivFirstHouse"
-            app:layout_constraintTop_toBottomOf="@id/ivFirstHouse"
-            tools:background="@color/peach" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBeds"
+            style="@style/AppTheme.Text.Paragraph4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_6dp"
+            android:drawableEnd="@drawable/ic_bed_24dp"
+            app:layout_constraintStart_toEndOf="@id/tvPrice"
+            app:layout_constraintTop_toTopOf="@id/tvPrice"
+            tools:text="beds ( 3min)" />
+
+        <TextView
+            android:id="@+id/tvMoreFilters"
+            style="@style/AppTheme.Text.Paragraph5.Grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_6dp"
+            app:layout_constraintStart_toEndOf="@id/tvBeds"
+            app:layout_constraintTop_toTopOf="@id/tvBeds"
+            tools:text="(+3 Filters)" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

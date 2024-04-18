@@ -21,6 +21,8 @@
     <color name="almost_white">#FCE8E3E8</color>
     <color name="teflon">#423C43</color>
     <color name="peach">#EE6723</color>
+    <color name="almost_peach">#EA8856</color>
+    <color name="on_primary">#E4A686</color>
 
     <color name="colorPrimary">#C6C2C0</color>
     <color name="colorPrimaryDark">#3A3939</color>

@@ -16,6 +16,7 @@ import com.nikitosii.studyrealtorapp.util.ext.safeNavigation
 import com.nikitosii.studyrealtorapp.util.ext.string
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
+import timber.log.Timber
 import java.io.EOFException
 import java.io.InterruptedIOException
 import java.net.UnknownHostException
@@ -63,7 +64,7 @@ abstract class BaseFragment<B: ViewBinding, VM : BaseViewModel>(
         navController.safeNavigation(this, extras)
     }
 
-    fun openError(errorText: String = string(R.string.description_error), isHiding: Boolean = true) {
+    open fun openError(errorText: String = string(R.string.description_error), isHiding: Boolean = true) {
         (requireActivity() as? AbsActivity)?.openError(errorText, isHiding)
     }
 
@@ -82,6 +83,9 @@ abstract class BaseFragment<B: ViewBinding, VM : BaseViewModel>(
     }
 
     fun showDialogNoConnection() = (requireActivity() as? AbsActivity)?.openDialogNoConnection()
+
+    fun logi(text: String) { Timber.i(text) }
+    fun loge(text: String) { Timber.e(text) }
 
     abstract fun initViews()
 

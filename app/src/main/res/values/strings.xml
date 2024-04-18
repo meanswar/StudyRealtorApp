@@ -23,4 +23,9 @@
     <string name="description_error">something went wrong\nWe are trying to fix it\nCheck for updates!</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+
+    <string name="item_filter_price_max">Max %d</string>
+    <string name="item_filter_beds_min">Beds (%d min)</string>
+    <string name="item_filter_more_count">(+%d filters)</string>
+    <string name="item_filter_objects_count">(+%d objects)</string>
 </resources>

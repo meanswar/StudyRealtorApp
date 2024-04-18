@@ -1,12 +1,10 @@
 package com.nikitosii.studyrealtorapp.core.source.net
 
 import androidx.lifecycle.MutableLiveData
-import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import timber.log.Timber
 
 class TokenInterceptor(
     private val storage: LocalStorage
@@ -30,29 +28,12 @@ class TokenInterceptor(
         return response
     }
 
-//    private fun Interceptor.Chain.requestWithToken(token: String = KEY_TOKEN): Request = request()
-//        .newBuilder()
-//        .get()
-//        .addHeader(TOKEN_HEADER, token)
-//        .addHeader(HOST_HEADER, KEY_HOST)
-//        .build()
-
-    private fun Interceptor.Chain.requestWithToken(token: String = KEY_TOKEN): Request {
-        val oldRequest = request().newBuilder()
+    private fun Interceptor.Chain.requestWithToken(token: String = KEY_TOKEN): Request = request()
+        .newBuilder()
         .get()
         .addHeader(TOKEN_HEADER, token)
         .addHeader(HOST_HEADER, KEY_HOST)
         .build()
-        Timber.i("1request is: $oldRequest")
-        val newRequest = Request.Builder()
-            .url("${BuildConfig.BASE_URL}forsale?location=santa%20monica&type=single_family%2Ccondos")
-            .get()
-            .addHeader(TOKEN_HEADER, token)
-            .addHeader(HOST_HEADER, KEY_HOST)
-            .build()
-        Timber.i("2request is: ${newRequest.body.toString()}")
-        return newRequest
-    }
 
     companion object {
         private const val KEY_TOKEN = "e35661dae9msh3864476f9185d76p1241b4jsnec9b7dc7f32f"

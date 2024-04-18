@@ -1,5 +1,9 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model.request
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class SalesRequest(
     val address: String? = null,
     val houses: List<String>? = null,
@@ -11,7 +15,7 @@ data class SalesRequest(
     val bathsMax: Int? = null,
     val sqftMin: Int? = null,
     val sqftMax: Int? = null
-) {
+): Parcelable {
     companion object {
         fun create(
             address: String?,

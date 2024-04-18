@@ -50,12 +50,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvRecentSearchesTitle">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
                 android:id="@+id/rvRecent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:orientation="horizontal"
+                app:layoutAnimation="@anim/recycle_view_anim"
+                app:layoutManagerOrientation="vertical"
+                app:layoutManagerReverse="false"
+                app:layoutManagerType="linear"
+                app:animationDuration="1500"
+                tools:itemCount="3"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_recent_search" />
         </FrameLayout>
