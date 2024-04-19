@@ -17,10 +17,9 @@ fun SalesRequest.request(): String {
     return request.toString()
 }
 
-fun SalesRequest.getFiltersCount(): Int {
+fun SalesRequest.getFiltersCount(): Int? {
     var count = 0
-    address?.let { count++ }
-    houses?.let { count++ }
+    houses?.let { if (it.size > 0) count++ }
     priceMin?.let { count++ }
     priceMax?.let { count++ }
     bedsMin?.let { count++ }
@@ -29,5 +28,5 @@ fun SalesRequest.getFiltersCount(): Int {
     bathsMax?.let { count++ }
     sqftMin?.let { count++ }
     sqftMax?.let { count++ }
-    return count
+    return if (count > 0) count else null
 }

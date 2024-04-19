@@ -12,7 +12,10 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.dividerHorizontal
 import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
+import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 
 @RequiresViewModel(SalesViewModel::class)
 class SalesFragment :
@@ -21,7 +24,7 @@ class SalesFragment :
         R.layout.fragment_sales
     ) {
 
-        private val adapter = SaleRequestAdapter { onSaleRequestClick(it) }
+    private val adapter = SaleRequestAdapter { onSaleRequestClick(it) }
 
     override fun initViews() {
         with(binding) {
@@ -54,8 +57,14 @@ class SalesFragment :
     }
 
     private fun processRecentRequests(data: List<SalesRequest>?) {
-        adapter.submitList(data)
-        binding.rvRecent.notifyDataSetChanged()
+        with(binding) {
+            if (data.isNullOrEmpty()) clRecentContainer.hideWithAnim(R.anim.scale_out)
+             else {
+                clRecentContainer.showWithAnimation(R.anim.scale_in)
+                adapter.submitList(data)
+                rvRecent.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun onSaleRequestClick(filter: SalesRequest) {

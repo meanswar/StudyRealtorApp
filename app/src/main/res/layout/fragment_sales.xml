@@ -25,15 +25,29 @@
             android:text="@string/search_field_hint"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/clRecentContainer"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:paddingHorizontal="@dimen/size_10dp"
+            android:paddingVertical="@dimen/size_5dp"
+            android:visibility="gone"
+            android:background="@drawable/bg_content_corners_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFilter"
+            tools:visibility="visible">
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvRecentSearchesTitle"
             style="@style/AppTheme.Text.Bold.Headline2.Teflon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_6dp"
             android:text="Recent searches"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFilter" />
+          />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -43,28 +57,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvRecentSearchesTitle" />
 
-        <FrameLayout
-            android:id="@+id/flRecentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRecentSearchesTitle">
-
             <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
                 android:id="@+id/rvRecent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentSearchesTitle"
                 app:layoutAnimation="@anim/recycle_view_anim"
                 app:layoutManagerOrientation="vertical"
                 app:layoutManagerReverse="false"
                 app:layoutManagerType="linear"
-                app:animationDuration="1500"
+                app:animationDuration="500"
                 tools:itemCount="3"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_recent_search" />
-        </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPopularPlacesTitle"
@@ -74,7 +84,7 @@
             android:layout_marginTop="@dimen/size_20dp"
             android:text="@string/popular_places_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/flRecentContainer" />
+            app:layout_constraintTop_toBottomOf="@id/clRecentContainer" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/ivFirstPopularPlace"

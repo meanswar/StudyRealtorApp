@@ -22,7 +22,7 @@ interface SalePropertiesSearchDao {
     @Query("SELECT * FROM sale_properties_search WHERE id = :id")
     fun getById(id: Int): SalePropertiesSearchEntity
 
-    @Query("SELECT `query` FROM sale_properties_search LIMIT 3")
+    @Query("SELECT `query` FROM sale_properties_search ORDER BY id Desc LIMIT 3")
     fun getSaleRequests(): List<SalesRequest>
 
     @Query("DELETE FROM sale_properties_search WHERE id = :id")
