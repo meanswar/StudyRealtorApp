@@ -1,9 +1,12 @@
 package com.nikitosii.studyrealtorapp.flow.sales.filter
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.transition.TransitionInflater
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -14,12 +17,15 @@ import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
 import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
+import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
 import com.nikitosii.studyrealtorapp.util.ext.openKeyboard
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
+import com.nikitosii.studyrealtorapp.util.ext.showWithScaleIn
+import com.nikitosii.studyrealtorapp.util.ext.toInteger
 import com.nikitosii.studyrealtorapp.view.ExpandableTextView
 import timber.log.Timber
 import java.lang.ref.WeakReference
@@ -30,6 +36,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 ) {
 
     private val _adapter = WeakReference(FilterAdapter { onHouseFilterClick(it) })
+    private val args: FilterSalesFragmentArgs by navArgs()
     private var lastOpenedFilter: ExpandableTextView? = null
     private val adapter: FilterAdapter?
         get() = _adapter.get()
@@ -44,8 +51,9 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+        if (args.filter == null)
+            sharedElementEnterTransition =
+                TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
     }
 
     private fun initAnimation() {
@@ -65,10 +73,11 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
         with(binding) {
             adapter?.submitList(Constants.housesList.map { it.type })
             rvContent.adapter = adapter
-            lFilter.etSearch.openKeyboard()
+            if (args.filter == null) lFilter.etSearch.openKeyboard()
             rvSaleProperties.adapter = salesPropertiesAdapter
             rvSaleProperties.dividerVertical(R.drawable.divider_vertical_10dp)
         }
+        args.filter?.let { viewModel.getLocalProperties(it) }
     }
 
     private fun onClick() {
@@ -85,21 +94,60 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
             tvFilterSquare.onArrowClick { checkOnClick(tvFilterSquare) }
             tvFilterBaths.onArrowClick { checkOnClick(tvFilterBaths) }
 
-            lFilter.etSearch.onTextChanged { viewModel.addressFilter.postValue(it) }
-            rvFilterPrices.binding.etFrom.onTextChanged { viewModel.priceMinFilter.postValue(it.toInt()) }
-            rvFilterPrices.binding.etTo.onTextChanged { viewModel.priceMaxFilter.postValue(it.toInt()) }
-            rvFilterBaths.binding.etFrom.onTextChanged { viewModel.bathsMinFilter.postValue(it.toInt()) }
-            rvFilterBaths.binding.etTo.onTextChanged { viewModel.bathsMaxFilter.postValue(it.toInt()) }
-            rvFilterBeds.binding.etFrom.onTextChanged { viewModel.bedsMinFilter.postValue(it.toInt()) }
-            rvFilterBeds.binding.etTo.onTextChanged { viewModel.bedsMaxFilter.postValue(it.toInt()) }
-            rvFilterSquare.binding.etFrom.onTextChanged { viewModel.sqftMinFilter.postValue(it.toInt()) }
-            rvFilterSquare.binding.etTo.onTextChanged { viewModel.sqftMaxFilter.postValue(it.toInt()) }
+            lFilter.etSearch.onTextChanged { checkFilters(); viewModel.addressFilter.postValue(it) }
+            rvFilterPrices.binding.etFrom.onTextChanged {
+                checkFilters(); viewModel.priceMinFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterPrices.binding.etTo.onTextChanged {
+                checkFilters(); viewModel.priceMaxFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterBaths.binding.etFrom.onTextChanged {
+                checkFilters(); viewModel.bathsMinFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterBaths.binding.etTo.onTextChanged {
+                checkFilters(); viewModel.bathsMaxFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterBeds.binding.etFrom.onTextChanged {
+                checkFilters(); viewModel.bedsMinFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterBeds.binding.etTo.onTextChanged {
+                checkFilters(); viewModel.bedsMaxFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterSquare.binding.etFrom.onTextChanged {
+                checkFilters(); viewModel.sqftMinFilter.postValue(
+                it.toInteger()
+            )
+            }
+            rvFilterSquare.binding.etTo.onTextChanged {
+                checkFilters(); viewModel.sqftMaxFilter.postValue(
+                it.toInteger()
+            )
+            }
         }
     }
 
     private fun checkOnClick(view: ExpandableTextView) {
         if (lastOpenedFilter != view) lastOpenedFilter?.hideIfExpanded()
         lastOpenedFilter = view
+    }
+
+    private fun checkFilters() {
+        with(binding.cvAccept) {
+            if (viewModel.checkFilters()) showWithScaleIn()
+            else hideWithScaleOut()
+        }
     }
 
     override fun subscribe() {
@@ -121,7 +169,8 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     private fun observeProperties(data: List<Property>?) {
         with(binding) {
-            lavLoading.hideWithAnim(R.anim.scale_out)
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({ lavLoading.hideWithScaleOut() }, 1500)
             salesPropertiesAdapter.submitList(data)
             rvSaleProperties.notifyDataSetChanged()
             rvSaleProperties.show()
@@ -135,7 +184,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
                 lavLoading.showWithAnimation(R.anim.scale_in)
             }
             btnAccept.isEnabled = !isLoading
-            if (isLoading) lavLoading.playAnimation() else lavLoading.pauseAnimation()
+            if (isLoading) lavLoading.playAnimation()
         }
     }
 

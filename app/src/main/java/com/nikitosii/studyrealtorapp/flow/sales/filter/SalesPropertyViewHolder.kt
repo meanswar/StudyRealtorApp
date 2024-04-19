@@ -1,5 +1,7 @@
 package com.nikitosii.studyrealtorapp.flow.sales.filter
 
+import android.os.Handler
+import android.os.Looper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy

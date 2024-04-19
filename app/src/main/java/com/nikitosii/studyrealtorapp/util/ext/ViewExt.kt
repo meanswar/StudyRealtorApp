@@ -51,6 +51,12 @@ fun View.showWithAnimation(animRes: Int) {
     startAnimation(animation)
 }
 
+fun View.showWithScaleIn() {
+    val animation = AnimationUtils.loadAnimation(context, R.anim.scale_in)
+    this.visibility = View.VISIBLE
+    startAnimation(animation)
+}
+
 
 fun ConstraintLayout.showWithLayoutAnim(animRes: Int) {
     val animation = AnimationUtils.loadLayoutAnimation(context, animRes)
@@ -67,6 +73,12 @@ fun View.hide() {
 
 fun View.hideWithAnim(animRes: Int) {
     val animation = AnimationUtils.loadAnimation(context, animRes)
+    startAnimation(animation)
+    onAnimCompleted { hide() }
+}
+
+fun View.hideWithScaleOut() {
+    val animation = AnimationUtils.loadAnimation(context, R.anim.scale_out)
     startAnimation(animation)
     onAnimCompleted { hide() }
 }

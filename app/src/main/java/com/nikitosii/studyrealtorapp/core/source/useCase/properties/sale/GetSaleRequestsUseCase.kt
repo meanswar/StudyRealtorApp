@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.core.source.useCase.properties
+package com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale
 
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.core.source.repository.SalePropertiesRepo

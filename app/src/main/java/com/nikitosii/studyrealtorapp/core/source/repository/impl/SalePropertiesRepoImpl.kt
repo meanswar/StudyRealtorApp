@@ -22,7 +22,6 @@ import javax.inject.Inject
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SalePropertiesRepoImpl @Inject constructor(
     private val api: PropertiesApi,
-    private val dao: SalePropertyDao,
     private val salePropertiesDao: SalePropertiesSearchDao,
     io: CoroutineDispatcher,
     channelRecreateObserver: ChannelRecreateObserver,
@@ -74,5 +73,9 @@ class SalePropertiesRepoImpl @Inject constructor(
 
     override suspend fun updateRequestHistory() = runWithErrorHandler {
         channel.value.refresh()
+    }
+
+    override suspend fun getByQuery(query: SalesRequest): List<Property>  = runWithErrorHandler {
+        salePropertiesDao.getByQuery(query).result.map { Property.from(it) }
     }
 }

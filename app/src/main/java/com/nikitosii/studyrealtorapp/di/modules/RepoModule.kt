@@ -25,14 +25,14 @@ object RepoModule {
     @Singleton
     internal fun providePropertiesRepo(
         api: PropertiesApi,
-        dao: SalePropertyDao,
-        salePropertiesDao: SalePropertiesSearchDao,
+        dao: SalePropertiesSearchDao,
         networkErrorHandler: NetworkErrorHandler,
         @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
         channelRecreateObserver: ChannelRecreateObserver,
         connectivityProvider: ConnectivityProvider,
     ): SalePropertiesRepo = SalePropertiesRepoImpl(
-        api, dao, salePropertiesDao,
+        api,
+        dao,
         io,
         channelRecreateObserver,
         connectivityProvider,

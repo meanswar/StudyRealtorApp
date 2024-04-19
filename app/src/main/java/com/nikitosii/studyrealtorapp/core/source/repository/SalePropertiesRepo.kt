@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.core.source.repository
 
+import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.util.Flow
@@ -27,4 +28,6 @@ interface SalePropertiesRepo {
     fun getSaleRequestsHistory(): Flow<List<SalesRequest>>
 
     suspend fun updateRequestHistory()
+
+    suspend fun getByQuery(query: SalesRequest): List<Property>
 }

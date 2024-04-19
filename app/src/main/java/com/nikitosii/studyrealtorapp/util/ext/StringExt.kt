@@ -8,4 +8,6 @@ fun String.getStringOrNull(): String? = if (this.isNotNull()) this else null
 fun TypedArray.getStringOrNull(@StyleableRes index: Int) =
     if (hasValue(index)) getString(index) else null
 
+fun String.toInteger(): Int? = if (this.isEmpty()) null else this.toInt()
+
 

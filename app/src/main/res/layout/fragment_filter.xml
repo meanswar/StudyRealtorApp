@@ -39,7 +39,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="@dimen/size_20dp">
 
 
@@ -231,18 +231,20 @@
                 android:id="@+id/rvSaleProperties"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="@dimen/size_20dp"
-                app:animationDuration="1500"
-                android:visibility="invisible"
                 android:layout_marginTop="@dimen/size_10dp"
-                app:layout_constraintBottom_toTopOf="@id/cvAccept"
-                app:layout_constraintTop_toBottomOf="@+id/clFilters"
-                tools:listitem="@layout/item_sales"
+                android:layout_marginBottom="@dimen/size_20dp"
+                android:background="@drawable/bg_content_corners_10dp"
+                android:padding="@dimen/size_10dp"
+                android:visibility="invisible"
+                app:animationDuration="1500"
                 app:layoutAnimation="@anim/recycle_view_anim"
                 app:layoutManagerOrientation="vertical"
                 app:layoutManagerReverse="false"
                 app:layoutManagerType="linear"
-                tools:itemCount="10" />
+                app:layout_constraintBottom_toTopOf="@id/cvAccept"
+                app:layout_constraintTop_toBottomOf="@+id/clFilters"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_sales" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvAccept"
@@ -250,6 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size_4dp"
+                android:visibility="gone"
                 app:cardCornerRadius="@dimen/size_24dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
@@ -258,6 +261,7 @@
                     style="@style/AppTheme.Button.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:text="@string/btn_filter_title"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.cardview.widget.CardView>
