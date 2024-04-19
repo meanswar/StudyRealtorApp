@@ -27,6 +27,9 @@ interface SalePropertiesSearchDao {
     fun getByQuery(query: SalesRequest): SalePropertiesSearchEntity
 
     @Query("SELECT `query` FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH ORDER BY id Desc LIMIT 3")
+    fun getLastSaleRequests(): List<SalesRequest>
+
+    @Query("SELECT `query` FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH ORDER BY id Desc")
     fun getSaleRequests(): List<SalesRequest>
 
     @Query("DELETE FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH WHERE id = :id")

@@ -8,13 +8,14 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.databinding.ItemFilterHouseBinding
 
 
 class FilterAdapter(
-    selectedList: List<String> = listOf(),
-    private val onClick: (String) -> Boolean
-): ListAdapter<String, FilterViewHolder>(FilterDiffCallback) {
+    selectedList: List<HouseType> = listOf(),
+    private val onClick: (HouseType) -> Boolean
+): ListAdapter<HouseType, FilterViewHolder>(FilterDiffCallback) {
 
    private val selectedList = selectedList.toMutableList()
 
@@ -30,7 +31,7 @@ class FilterAdapter(
         setScaleAnimation(holder.itemView)
     }
 
-    private fun setFilterHouse(filter: String) {
+    private fun setFilterHouse(filter: HouseType) {
         if (selectedList.contains(filter)) selectedList.remove(filter)
          else selectedList.add(filter)
 
@@ -51,14 +52,14 @@ class FilterAdapter(
         view.startAnimation(anim)
     }
 
-    object FilterDiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    object FilterDiffCallback : DiffUtil.ItemCallback<HouseType>() {
+        override fun areItemsTheSame(oldItem: HouseType, newItem: HouseType): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItem: HouseType, newItem: HouseType): Boolean {
+            return oldItem.type == newItem.type && oldItem.apiType == newItem.apiType
         }
     }
 

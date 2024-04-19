@@ -63,6 +63,12 @@
         <item name="android:gravity">right</item>
     </style>
 
+    <style name="AnimatedRecycleView">
+        <item name="android:background">@drawable/bg_content_corners_10dp</item>
+        <item name="android:padding">@dimen/size_10dp</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>

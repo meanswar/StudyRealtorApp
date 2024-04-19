@@ -53,6 +53,7 @@ class SalesFragment :
     private fun onClick() {
         with(binding) {
             tvFilter.onClick { openFilters() }
+            ivSearchHistory.onClick { openSaleSearchHistory() }
         }
     }
 
@@ -79,6 +80,10 @@ class SalesFragment :
             binding.tvFilter to "tvFilter"
         )
         SalesFragmentDirections.openFilters(FILTER_NULLABLE).navigate(extras)
+    }
+
+    private fun openSaleSearchHistory() {
+        SalesFragmentDirections.openSaleSearchHistory().navigate()
     }
 
     companion object {

@@ -2,6 +2,8 @@ package com.nikitosii.studyrealtorapp.flow.base
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
@@ -86,6 +88,11 @@ abstract class BaseFragment<B: ViewBinding, VM : BaseViewModel>(
 
     fun logi(text: String) { Timber.i(text) }
     fun loge(text: String) { Timber.e(text) }
+
+    fun postDelay(delay: Long = 500L, action: () -> Unit) {
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(action, delay)
+    }
 
     abstract fun initViews()
 

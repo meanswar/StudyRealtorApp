@@ -18,7 +18,7 @@ class SaleRequestViewHolder(
             root.setOnClickListener { onClick(saleRequest) }
             tvSearchPlace.text = saleRequest.address
             tvPrice.showText(saleRequest.priceMax, R.string.item_filter_price_max)
-            tvBeds.showText(saleRequest.priceMax, R.string.item_filter_beds_min)
+            tvBeds.showText(saleRequest.bedsMin, R.string.item_filter_beds_min)
             tvMoreFilters.showText(saleRequest.getFiltersCount(), R.string.item_filter_more_count)
         }
     }

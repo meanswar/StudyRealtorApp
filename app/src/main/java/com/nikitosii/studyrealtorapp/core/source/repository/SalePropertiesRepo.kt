@@ -1,6 +1,5 @@
 package com.nikitosii.studyrealtorapp.core.source.repository
 
-import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.util.Flow
@@ -20,14 +19,32 @@ interface SalePropertiesRepo {
     ): List<Property>
 
     /**
-     * Retrieves the search history for sale properties.
+     * Retrieves the last 3 search history requests for sale properties.
      *
      * @return A list of [SalesRequest] objects representing the search history for sale properties.
      */
 
-    fun getSaleRequestsHistory(): Flow<List<SalesRequest>>
+    fun getLastSaleRequestsHistory(): Flow<List<SalesRequest>>
 
+    /**
+     * Retrieves all search history requests for sale properties.
+     *
+     * @return A list of [SalesRequest] objects representing all search history for sale properties.
+     */
+
+    suspend fun getSaleRequestsHistory(): List<SalesRequest>
+
+    /**
+     * Refreshers search history requests for sale properties.
+     *
+     */
     suspend fun updateRequestHistory()
+
+    /**
+     * Retrieves list of properties based on the provided [SalesRequest] model.
+     *
+     * @return A list of [Property] objects representing all sale properties.
+     */
 
     suspend fun getByQuery(query: SalesRequest): List<Property>
 }

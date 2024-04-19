@@ -21,6 +21,7 @@
         android:layout_marginVertical="@dimen/size_8dp"
         android:layout_marginStart="@dimen/size_8dp"
         android:scaleType="centerCrop"
+        app:lottie_speed="2.5"
         app:layout_constraintBottom_toBottomOf="@id/tbFilter"
         app:layout_constraintDimensionRatio="V,1:1"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +73,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:style="@style/AppTheme.Text.Paragraph3.Teflon"
                     app:title="Houses"
-                    app:viewTarget="@id/rvContent" />
+                    app:viewTarget="@id/rvHouseTypes" />
 
                 <com.nikitosii.studyrealtorapp.view.ExpandableTextView
                     android:id="@+id/tvFilterPrices"
@@ -118,16 +119,22 @@
                     app:title="@string/view_filter_title_square"
                     app:viewTarget="@id/rvFilterSquare" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvContent"
+                <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                    android:id="@+id/rvHouseTypes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/bg_bottom_corners_almost_white_15dp"
                     android:elevation="@dimen/size_2dp"
+                    app:gridLayoutManagerColumns="3"
+                    app:layoutAnimation="@anim/recycle_view_anim"
+                    app:animationDuration="500"
+                    app:layoutManagerOrientation="vertical"
+                    app:layoutManagerReverse="false"
                     android:orientation="vertical"
                     android:paddingVertical="@dimen/size_10dp"
                     android:visibility="gone"
+                    app:layoutManagerType="1"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvFilterHouses"
@@ -191,7 +198,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/clFilters" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
                 android:id="@+id/rvRecentSearches"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,10 +240,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginBottom="@dimen/size_20dp"
-                android:background="@drawable/bg_content_corners_10dp"
-                android:padding="@dimen/size_10dp"
-                android:visibility="invisible"
-                app:animationDuration="1500"
+                style="@style/AnimatedRecycleView"
+                app:animationDuration="500"
                 app:layoutAnimation="@anim/recycle_view_anim"
                 app:layoutManagerOrientation="vertical"
                 app:layoutManagerReverse="false"

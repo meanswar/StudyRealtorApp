@@ -2,7 +2,6 @@ package com.nikitosii.studyrealtorapp.core.source.repository.impl
 
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
@@ -22,7 +21,7 @@ import javax.inject.Inject
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SalePropertiesRepoImpl @Inject constructor(
     private val api: PropertiesApi,
-    private val salePropertiesDao: SalePropertiesSearchDao,
+    private val dao: SalePropertiesSearchDao,
     io: CoroutineDispatcher,
     channelRecreateObserver: ChannelRecreateObserver,
     connectivityProvider: ConnectivityProvider,
@@ -35,7 +34,7 @@ class SalePropertiesRepoImpl @Inject constructor(
         channelRecreateObserver
     ) {
         storageConfig {
-            get = { salePropertiesDao.getSaleRequests() }
+            get = { dao.getLastSaleRequests() }
         }
     }
 
@@ -64,18 +63,20 @@ class SalePropertiesRepoImpl @Inject constructor(
             .map { Property.from(it) }
         val salesData =
             SalePropertiesSearchEntity.from(data, result.map { PropertyEntity.from(it) })
-        salePropertiesDao.insert(salesData)
+        dao.insert(salesData)
         result
     }
 
 
-    override fun getSaleRequestsHistory(): Flow<List<SalesRequest>> = channel.value.flow
+    override fun getLastSaleRequestsHistory(): Flow<List<SalesRequest>> = channel.value.flow
 
-    override suspend fun updateRequestHistory() = runWithErrorHandler {
-        channel.value.refresh()
+    override suspend fun getSaleRequestsHistory(): List<SalesRequest> = runWithErrorHandler {
+        dao.getSaleRequests()
     }
 
+    override suspend fun updateRequestHistory() = runWithErrorHandler { channel.value.refresh() }
+
     override suspend fun getByQuery(query: SalesRequest): List<Property>  = runWithErrorHandler {
-        salePropertiesDao.getByQuery(query).result.map { Property.from(it) }
+        dao.getByQuery(query).result.map { Property.from(it) }
     }
 }

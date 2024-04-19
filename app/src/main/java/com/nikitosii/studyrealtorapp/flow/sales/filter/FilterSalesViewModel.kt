@@ -6,6 +6,7 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetRecentSaleRequestsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesForSaleUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetSearchHistoryByQueryUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class FilterSalesViewModel @Inject constructor(
     private val getPropertiesForSaleUseCase: GetPropertiesForSaleUseCase,
-    private val getSearchHistoryByQueryUseCase: GetSearchHistoryByQueryUseCase
+    private val getSearchHistoryByQueryUseCase: GetSearchHistoryByQueryUseCase,
+    private val getRecentSaleRequestsUseCase: GetRecentSaleRequestsUseCase
 ) : BaseViewModel() {
     private val filterHouses = mutableListOf<String>()
 
@@ -30,6 +32,8 @@ class FilterSalesViewModel @Inject constructor(
     private val _properties = WorkLiveData<List<Property>>()
     val properties: LiveData<WorkResult<List<Property>>>
         get() = _properties
+
+    val recentSearches = getRecentSaleRequestsUseCase.execute().toLiveData()
 
     fun setFilterHouse(house: String): Boolean {
         return if (filterHouses.contains(house)) {

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/openFilters"
             app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/openSaleSearchHistory"
+            app:destination="@id/searchSaleHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/filterFragment"
@@ -21,10 +24,21 @@
         tools:layout="@layout/fragment_filter">
         <argument
             android:name="filter"
-            app:nullable="true"
-            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest" />
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest"
+            app:nullable="true" />
 
     </fragment>
+    <fragment
+        android:id="@+id/searchSaleHistoryFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.sales.history.SearchSalesHistoryFragment"
+        android:label="Sale History Fragment"
+        tools:layout="@layout/fragment_search_sales_history">
+        <action
+            android:id="@id/openFilters"
+            app:destination="@id/filterFragment" />
+    </fragment>
+
+
     <navigation
         android:id="@+id/rents_nav_graph"
         app:startDestination="@id/rentsFragment">

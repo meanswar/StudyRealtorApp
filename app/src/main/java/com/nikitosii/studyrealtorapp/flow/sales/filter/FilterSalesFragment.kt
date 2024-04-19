@@ -10,14 +10,19 @@ import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentFilterBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
+import com.nikitosii.studyrealtorapp.flow.sales.SaleRequestAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
+import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
+import com.nikitosii.studyrealtorapp.util.ext.invisible
 import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
@@ -36,6 +41,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 ) {
 
     private val _adapter = WeakReference(FilterAdapter { onHouseFilterClick(it) })
+    private val recentSearchesAdapter = SaleRequestAdapter { viewModel.getLocalProperties(it) }
     private val args: FilterSalesFragmentArgs by navArgs()
     private var lastOpenedFilter: ExpandableTextView? = null
     private val adapter: FilterAdapter?
@@ -51,14 +57,15 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (args.filter == null)
+        if (args.filter == null) {
             sharedElementEnterTransition =
                 TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+        }
     }
 
     private fun initAnimation() {
         with(binding) {
-            tvFilterHouses.initAnimation(rvContent)
+            tvFilterHouses.initAnimation(rvHouseTypes)
             tvFilterPrices.initAnimation(rvFilterPrices)
             tvFilterSquare.initAnimation(rvFilterSquare)
             tvFilterBaths.initAnimation(rvFilterBaths)
@@ -71,11 +78,12 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
 
         with(binding) {
-            adapter?.submitList(Constants.housesList.map { it.type })
-            rvContent.adapter = adapter
+            adapter?.submitList(Constants.housesList)
+            rvHouseTypes.adapter = adapter
             if (args.filter == null) lFilter.etSearch.openKeyboard()
             rvSaleProperties.adapter = salesPropertiesAdapter
             rvSaleProperties.dividerVertical(R.drawable.divider_vertical_10dp)
+            rvRecentSearches.adapter = recentSearchesAdapter
         }
         args.filter?.let { viewModel.getLocalProperties(it) }
     }
@@ -153,6 +161,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
     override fun subscribe() {
         with(viewModel) {
             properties.observe(viewLifecycleOwner, propertiesObserver)
+            recentSearches.observe(viewLifecycleOwner, recentSearchesObserver)
         }
     }
 
@@ -165,7 +174,15 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
         }
     }
 
-    private fun onHouseFilterClick(house: String): Boolean = viewModel.setFilterHouse(house)
+    private val recentSearchesObserver: Observer<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SalesRequest>>> =
+        Observer {
+            recentSearchesAdapter.submitList(it.obj)
+            binding.rvRecentSearches.showWithScaleIn()
+            binding.rvRecentSearches.notifyDataSetChanged()
+        }
+
+    private fun onHouseFilterClick(house: HouseType): Boolean =
+        viewModel.setFilterHouse(house.apiType)
 
     private fun observeProperties(data: List<Property>?) {
         with(binding) {

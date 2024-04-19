@@ -21,8 +21,6 @@ fun SalesRequest.getFiltersCount(): Int? {
     var count = 0
     houses?.let { if (it.size > 0) count++ }
     priceMin?.let { count++ }
-    priceMax?.let { count++ }
-    bedsMin?.let { count++ }
     bedsMax?.let { count++ }
     bathsMin?.let { count++ }
     bathsMax?.let { count++ }
