@@ -15,7 +15,7 @@ import javax.inject.Inject
 class FilterSalesViewModel @Inject constructor(
     private val getPropertiesForSaleUseCase: GetPropertiesForSaleUseCase,
     private val getSearchHistoryByQueryUseCase: GetSearchHistoryByQueryUseCase,
-    private val getRecentSaleRequestsUseCase: GetRecentSaleRequestsUseCase
+    getRecentSaleRequestsUseCase: GetRecentSaleRequestsUseCase
 ) : BaseViewModel() {
     private val filterHouses = mutableListOf<String>()
 
@@ -33,7 +33,7 @@ class FilterSalesViewModel @Inject constructor(
     val properties: LiveData<WorkResult<List<Property>>>
         get() = _properties
 
-    val recentSearches = getRecentSaleRequestsUseCase.execute().toLiveData()
+    val recentSearches = getRecentSaleRequestsUseCase.execute().toWorkLiveData()
 
     fun setFilterHouse(house: String): Boolean {
         return if (filterHouses.contains(house)) {

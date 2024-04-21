@@ -33,6 +33,7 @@
             android:paddingHorizontal="@dimen/size_10dp"
             android:paddingVertical="@dimen/size_5dp"
             android:visibility="gone"
+            android:elevation="@dimen/size_2dp"
             android:background="@drawable/bg_content_corners_10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFilter"

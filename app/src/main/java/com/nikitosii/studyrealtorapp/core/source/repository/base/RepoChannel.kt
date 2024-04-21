@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -21,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-fun <T: Any> repoChannel(
+fun <T : Any> repoChannel(
     io: CoroutineDispatcher,
     connectivityProvider: ConnectivityProvider,
     recreateObserver: ChannelRecreateObserver? = null,
@@ -56,7 +57,11 @@ class RepoChannel<T : Any>(
 
     override val coroutineContext: CoroutineContext = io
 
-    private var channel = MutableSharedFlow<Status<T>>()
+    private var channel = MutableSharedFlow<Status<T>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        extraBufferCapacity = 1
+    )
 
     private var isRefreshing: AtomicBoolean = AtomicBoolean(false)
 

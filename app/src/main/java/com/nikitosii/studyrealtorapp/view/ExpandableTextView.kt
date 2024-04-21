@@ -58,6 +58,8 @@ class ExpandableTextView @JvmOverloads constructor(
         onArrowClick {}
     }
 
+    fun isExpanded() = expanded
+
     fun onArrowClick(onClick: () -> Unit) {
         binding.clContent.onClick {
             onRotatedClick()

@@ -10,6 +10,10 @@
         <item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
     </style>
 
+    <style name="AppTheme.ClickableView">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:insetTop">@dimen/size_0dp</item>
         <item name="android:paddingBottom">5dp</item>

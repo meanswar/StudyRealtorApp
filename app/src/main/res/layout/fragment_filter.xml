@@ -21,20 +21,19 @@
         android:layout_marginVertical="@dimen/size_8dp"
         android:layout_marginStart="@dimen/size_8dp"
         android:scaleType="centerCrop"
-        app:lottie_speed="2.5"
         app:layout_constraintBottom_toBottomOf="@id/tbFilter"
         app:layout_constraintDimensionRatio="V,1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tbFilter"
         app:lottie_autoPlay="false"
-        app:lottie_fileName="arrow_back.json" />
+        app:lottie_fileName="arrow_back.json"
+        app:lottie_speed="2.5" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         android:paddingHorizontal="@dimen/size_20dp"
-        android:paddingBottom="@dimen/size_20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tbFilter">
 
@@ -48,7 +47,7 @@
                 android:id="@+id/gMainContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tvRecentTitle, rvRecentSearches, tvSuggestedTitle, rvFavorites" />
+                app:constraint_referenced_ids="clRecentContainer, tvSuggestedTitle, rvFavorites" />
 
             <include
                 android:id="@+id/lFilter"
@@ -126,16 +125,16 @@
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/bg_bottom_corners_almost_white_15dp"
                     android:elevation="@dimen/size_2dp"
-                    app:gridLayoutManagerColumns="3"
-                    app:layoutAnimation="@anim/recycle_view_anim"
-                    app:animationDuration="500"
-                    app:layoutManagerOrientation="vertical"
-                    app:layoutManagerReverse="false"
                     android:orientation="vertical"
                     android:paddingVertical="@dimen/size_10dp"
                     android:visibility="gone"
-                    app:layoutManagerType="1"
+                    app:animationDuration="500"
+                    app:gridLayoutManagerColumns="3"
+                    app:layoutAnimation="@anim/recycle_view_anim"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layoutManagerOrientation="vertical"
+                    app:layoutManagerReverse="false"
+                    app:layoutManagerType="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvFilterHouses"
                     app:spanCount="3"
@@ -188,27 +187,40 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvRecentTitle"
-                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clRecentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="@dimen/size_2dp"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/size_8dp"
-                android:text="@string/recent_searches_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clFilters" />
+                android:background="@drawable/bg_content_corners_10dp"
+                android:padding="@dimen/size_10dp"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/clFilters">
 
-            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
-                android:id="@+id/rvRecentSearches"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_10dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvRecentTitle"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_searches" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvRecentTitle"
+                    style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recent_searches_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                    android:id="@+id/rvRecentSearches"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvRecentTitle"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_searches" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvSuggestedTitle"
@@ -218,7 +230,7 @@
                 android:layout_marginTop="@dimen/size_20dp"
                 android:text="@string/layout_search_favorite_list_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvRecentSearches" />
+                app:layout_constraintTop_toBottomOf="@id/clRecentContainer" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFavorites"
@@ -236,11 +248,13 @@
 
             <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
                 android:id="@+id/rvSaleProperties"
+                style="@style/AnimatedRecycleView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginBottom="@dimen/size_20dp"
-                style="@style/AnimatedRecycleView"
+                android:background="@drawable/bg_content_corners_10dp"
+                android:elevation="@dimen/size_2dp"
                 app:animationDuration="500"
                 app:layoutAnimation="@anim/recycle_view_anim"
                 app:layoutManagerOrientation="vertical"

@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.transition.TransitionInflater
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
@@ -44,6 +45,8 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
     private val recentSearchesAdapter = SaleRequestAdapter { viewModel.getLocalProperties(it) }
     private val args: FilterSalesFragmentArgs by navArgs()
     private var lastOpenedFilter: ExpandableTextView? = null
+    private val isPropertiesLoaded = MutableLiveData(false)
+
     private val adapter: FilterAdapter?
         get() = _adapter.get()
 
@@ -84,6 +87,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
             rvSaleProperties.adapter = salesPropertiesAdapter
             rvSaleProperties.dividerVertical(R.drawable.divider_vertical_10dp)
             rvRecentSearches.adapter = recentSearchesAdapter
+            rvRecentSearches.dividerVertical(R.drawable.divider_vertical_10dp)
         }
         args.filter?.let { viewModel.getLocalProperties(it) }
     }
@@ -174,18 +178,32 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
         }
     }
 
-    private val recentSearchesObserver: Observer<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SalesRequest>>> =
+    private val recentSearchesObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SalesRequest>>>> =
         Observer {
-            recentSearchesAdapter.submitList(it.obj)
-            binding.rvRecentSearches.showWithScaleIn()
-            binding.rvRecentSearches.notifyDataSetChanged()
+            when (it.status) {
+                Status.LOADING -> Timber.i("loading recent searches")
+                Status.SUCCESS -> processRecentSearches(it.data?.obj)
+                Status.ERROR -> handleException(it.exception) { openError() }
+            }
         }
+
+    private fun processRecentSearches(data: List<SalesRequest>?) {
+        with(binding) {
+            if (data?.isNotEmpty() == true && isPropertiesLoaded.value == false) {
+                clRecentContainer.showWithScaleIn()
+                recentSearchesAdapter.submitList(data)
+                rvRecentSearches.showWithScaleIn()
+                rvRecentSearches.notifyDataSetChanged()
+            }
+        }
+    }
 
     private fun onHouseFilterClick(house: HouseType): Boolean =
         viewModel.setFilterHouse(house.apiType)
 
     private fun observeProperties(data: List<Property>?) {
         with(binding) {
+            isPropertiesLoaded.postValue(true)
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed({ lavLoading.hideWithScaleOut() }, 1500)
             salesPropertiesAdapter.submitList(data)
