@@ -196,4 +196,6 @@ dependencies {
 
     //Gson
     implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation("com.viceboy.library:triangularshadeimageview:1.0.1")
 }

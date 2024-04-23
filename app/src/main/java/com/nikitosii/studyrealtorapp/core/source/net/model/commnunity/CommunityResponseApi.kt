@@ -5,8 +5,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CommunityResponseApi(
-    @Json(name = "advertisers")
-    val advertises: List<Any>? = null,
     @Json(name = "description")
     val description: CommunityDescriptionResponseApi? = null,
     @Json(name = "property_id")

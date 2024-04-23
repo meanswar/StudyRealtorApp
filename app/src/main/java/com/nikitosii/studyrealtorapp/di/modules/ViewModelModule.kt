@@ -7,6 +7,7 @@ import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
 import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
 import com.nikitosii.studyrealtorapp.flow.sales.SalesViewModel
+import com.nikitosii.studyrealtorapp.flow.sales.details.SalePropertyDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.sales.filter.FilterSalesViewModel
 import com.nikitosii.studyrealtorapp.flow.sales.history.SearchSalesHistoryViewModel
 import dagger.Binds
@@ -42,4 +43,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchSalesHistoryViewModel::class)
     fun bindSearchSalesViewModel(viewModel: SearchSalesHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SalePropertyDetailsViewModel::class)
+    fun bindSalePropertyDetailsViewModel(viewModel: SalePropertyDetailsViewModel): ViewModel
 }

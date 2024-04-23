@@ -28,4 +28,10 @@
     <string name="item_filter_beds_min">Beds (%d min)</string>
     <string name="item_filter_more_count">(+%d filters)</string>
     <string name="item_filter_objects_count">(+%d objects)</string>
+
+    <string name="view_sale_property_description_price">AMV: $%d</string>
+    <string name="view_sale_property_description_beds">Beds: %d</string>
+    <string name="view_sale_property_description_bed">Bed: %d</string>
+    <string name="view_sale_property_description_baths">Baths: %d</string>
+    <string name="view_sale_property_description_bath">Bath: %d</string>
 </resources>

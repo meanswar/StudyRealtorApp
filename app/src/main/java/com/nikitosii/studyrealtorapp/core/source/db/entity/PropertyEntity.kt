@@ -32,6 +32,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Product
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.Source
 import com.nikitosii.studyrealtorapp.core.source.local.model.TaxRecord
+import com.nikitosii.studyrealtorapp.core.source.local.model.VrTour
 
 @Entity(tableName = "property")
 class PropertyEntity(
@@ -59,7 +60,7 @@ class PropertyEntity(
     val status: String?,
     val tags: List<String>?,
     val taxRecord: TaxRecord?,
-    val virtualTours: List<Any>?
+    val virtualTours: List<VrTour>?
 
 ) {
     companion object {

@@ -6,28 +6,13 @@
     android:layout_height="match_parent"
     android:clipToPadding="false">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/tbFilter"
+    <com.nikitosii.studyrealtorapp.view.RealtorToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Sales Filter"
-        app:titleCentered="true" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/btnBack"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/size_8dp"
-        android:layout_marginStart="@dimen/size_8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@id/tbFilter"
-        app:layout_constraintDimensionRatio="V,1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tbFilter"
-        app:lottie_autoPlay="false"
-        app:lottie_fileName="arrow_back.json"
-        app:lottie_speed="2.5" />
+        app:toolbar_title="Sales Search"
+        app:startAnimationSpeed="2.5"
+        android:id="@+id/toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -35,7 +20,7 @@
         android:fillViewport="true"
         android:paddingHorizontal="@dimen/size_20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tbFilter">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -250,7 +235,7 @@
                 android:id="@+id/rvSaleProperties"
                 style="@style/AnimatedRecycleView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginBottom="@dimen/size_20dp"
                 android:background="@drawable/bg_content_corners_10dp"

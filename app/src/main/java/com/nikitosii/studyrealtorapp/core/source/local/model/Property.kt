@@ -1,8 +1,11 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model
 
+import android.os.Parcelable
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.net.model.property.PropertyResponseApi
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Property(
     val branding: List<Branding>? = null,
     val comingSoonDate: String? = null,
@@ -28,8 +31,8 @@ data class Property(
     val status: String? = null,
     val tags: List<String>? = null,
     val taxRecord: TaxRecord? = null,
-    val virtualTours: List<Any>? = null
-) {
+    val virtualTours: List<VrTour>? = null
+): Parcelable {
     companion object {
         fun from(data: PropertyResponseApi): Property = Property(
             data.branding?.map { Branding.from(it) },
@@ -56,7 +59,7 @@ data class Property(
             data.status,
             data.tags,
             TaxRecord.from(data.taxRecord),
-            data.virtualTours
+            data.virtualTours?.map { VrTour.from(it) }
         )
 
         fun from(entity: PropertyEntity): Property = Property(

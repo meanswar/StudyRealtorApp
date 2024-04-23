@@ -1,7 +1,10 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model
 
+import android.os.Parcelable
 import com.nikitosii.studyrealtorapp.core.source.net.model.description.DescriptionResponseApi
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Description(
     val baths: Int? = null,
     val bathsGtr1: Int? = null,
@@ -19,7 +22,7 @@ data class Description(
     val subType: String? = null,
     val type: String? = null,
     val yearBuilt: Int? = null
-) {
+): Parcelable {
     companion object {
         fun from(data: DescriptionResponseApi?): Description = Description(
             baths = data?.baths,

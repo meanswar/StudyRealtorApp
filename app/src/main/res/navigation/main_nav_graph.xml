@@ -16,6 +16,8 @@
         <action
             android:id="@+id/openSaleSearchHistory"
             app:destination="@id/searchSaleHistoryFragment" />
+        <action android:id="@+id/openPropertyDetails"
+            app:destination="@id/salePropertyDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/filterFragment"
@@ -26,6 +28,8 @@
             android:name="filter"
             app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest"
             app:nullable="true" />
+        <action android:id="@+id/openPropertyDetails"
+            app:destination="@id/salePropertyDetailsFragment" />
 
     </fragment>
     <fragment
@@ -37,7 +41,16 @@
             android:id="@id/openFilters"
             app:destination="@id/filterFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/salePropertyDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.sales.details.SalePropertyDetailsFragment"
+        android:label="Sale Property Details Fragment"
+        tools:layout="@layout/fragment_sale_properties_details">
+        <argument
+            android:name="property"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.Property"
+            app:nullable="false" />
+    </fragment>
 
     <navigation
         android:id="@+id/rents_nav_graph"

@@ -23,4 +23,9 @@
         </attr>
         <attr name="gridLayoutManagerColumns" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="RealtorToolbar">
+        <attr name="startAnimationSpeed" format="float" default="1.0" />
+        <attr name="toolbar_title" format="string" />
+    </declare-styleable>
 </resources>

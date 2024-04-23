@@ -8,14 +8,22 @@ plugins {
 
 buildscript {
     repositories {
+        jcenter()
+        maven { url = uri("https://maven.google.com") }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
+    }
+}
+
+allprojects {
+    repositories {
         google()
         maven { url = uri("https://plugins.gradle.org/m2/") }
         maven { url = uri("https://jitpack.io") }
         maven { url = uri("https://maven.aliyun.com/repository/jcenter") }
         mavenCentral()
         jcenter()
-    }
-    dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
     }
 }

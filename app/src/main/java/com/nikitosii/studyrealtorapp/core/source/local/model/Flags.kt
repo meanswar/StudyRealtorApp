@@ -1,7 +1,10 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model
 
+import android.os.Parcelable
 import com.nikitosii.studyrealtorapp.core.source.net.model.flags.FlagsResponseApi
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Flags(
     val isComingSoon: Boolean? = null,
     val isContingent: Boolean? = null,
@@ -12,7 +15,7 @@ data class Flags(
     val isPlan: Boolean? = null,
     val isPriceReduced: Boolean? = null,
     val isSubdivision: Boolean? = null
-) {
+): Parcelable {
     companion object {
         fun from(data: FlagsResponseApi?): Flags = Flags(
             isComingSoon = data?.isComingSoon,

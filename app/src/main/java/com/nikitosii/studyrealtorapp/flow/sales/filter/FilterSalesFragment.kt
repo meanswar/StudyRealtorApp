@@ -7,6 +7,7 @@ import android.transition.TransitionInflater
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
@@ -50,7 +51,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
     private val adapter: FilterAdapter?
         get() = _adapter.get()
 
-    private val salesPropertiesAdapter by lazy { SalesAdapter { openPropertyDetails(it) } }
+    private val salesPropertiesAdapter by lazy { SalesAdapter { data, view -> openPropertyDetails(data, view) } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,12 +95,10 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     private fun onClick() {
         with(binding) {
-            btnBack.onClick { btnBack.playAnimation() }
             btnAccept.onClick {
                 lastOpenedFilter?.hideIfExpanded()
                 viewModel.findProperties()
             }
-            btnBack.onAnimCompleted { navController.navigateUp() }
             tvFilterHouses.onArrowClick { checkOnClick(tvFilterHouses) }
             tvFilterPrices.onArrowClick { checkOnClick(tvFilterPrices) }
             tvFilterBeds.onArrowClick { checkOnClick(tvFilterBeds) }
@@ -231,8 +230,11 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
         }
     }
 
-    fun openPropertyDetails(property: Property) {
-
+    fun openPropertyDetails(property: Property, view: View) {
+        val extras = FragmentNavigatorExtras(
+            view to "properties_photo"
+        )
+        FilterSalesFragmentDirections.openPropertyDetails(property).navigate()
     }
 
 }

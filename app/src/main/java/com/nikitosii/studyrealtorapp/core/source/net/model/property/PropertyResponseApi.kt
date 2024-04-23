@@ -10,6 +10,7 @@ import com.nikitosii.studyrealtorapp.core.source.net.model.location.LocationResp
 import com.nikitosii.studyrealtorapp.core.source.net.model.photo.PhotoResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.product.ProductResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.source.SourceResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.vrtour.VrTourResponseApi
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -52,5 +53,5 @@ data class PropertyResponseApi(
     @Json(name = "tax_record")
     val taxRecord: TaxRecordResponseApi? = null,
     @Json(name = "virtual_tours")
-    val virtualTours: List<Any>? = null
+    val virtualTours: List<VrTourResponseApi>? = null
 )

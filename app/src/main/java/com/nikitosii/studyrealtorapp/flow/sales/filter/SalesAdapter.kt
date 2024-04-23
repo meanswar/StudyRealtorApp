@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
 
-class SalesAdapter(private val onItemClick: (Property) -> Unit) :
+class SalesAdapter(private val onItemClick: (Property, View) -> Unit) :
     ListAdapter<Property, SalesPropertyViewHolder>(PropertyDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesPropertyViewHolder {

@@ -11,24 +11,56 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/almost_white"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/almost_white">
 
-        <ImageView
-            android:id="@+id/ivSales"
+        <com.viceboy.widget.TriangularShadeImageView
+            android:id="@+id/ivSoldProperty"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
+            android:transitionName="properties_photo"
+            app:layout_constraintDimensionRatio="H,3:1.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:firstTriangleAnimDelay="80"
+            app:firstTriangleAnimDuration="200"
+            app:firstTriangleDrawDir="BOTTOM_RIGHT"
+            app:secondTriangleAnimDelay="50"
+            android:visibility="invisible"
+            app:secondTriangleAnimDuration="500"
+            app:secondTriangleDrawDir="BOTTOM_RIGHT"
+            app:secondTriangleSize="150dp"
+            tools:src="@drawable/london" />
+
+        <ImageView
+            android:id="@+id/ivNotSoldProperty"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:transitionName="properties_photo"
             app:layout_constraintDimensionRatio="H,3:1.25"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/london" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/lavSoldStatus"
+            app:layout_constraintDimensionRatio="H,2:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            android:visibility="gone"
+            app:lottie_loop="true"
+            app:lottie_fileName="anim_sold.json"
+            tools:visibility="visible"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/size_10dp"
             android:paddingBottom="@dimen/size_10dp"
-            app:layout_constraintTop_toBottomOf="@id/ivSales">
+            app:layout_constraintTop_toBottomOf="@id/ivSoldProperty">
 
             <TextView
                 android:id="@+id/tvHouseTitle"
