@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.main
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import com.nikitosii.studyrealtorapp.R
@@ -11,6 +12,7 @@ import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hasPushNotificationPermission
 import com.nikitosii.studyrealtorapp.util.ext.requestNotificationPermission
+import com.nikitosii.studyrealtorapp.util.ext.start
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 @RequiresViewModel(MainViewModel::class)
@@ -76,5 +78,11 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
             if (!hasPushNotificationPermission())
                 requestNotificationPermission()
+    }
+
+    companion object {
+        fun start(context: Context?, clearTop: Boolean = true) {
+            context.start(MainActivity::class, clearTop)
+        }
     }
 }
