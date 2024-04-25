@@ -14,4 +14,10 @@ fun Activity.toast(message: String) =
 
 fun Fragment.string(id: Int) = resources.getString(id)
 
+fun Fragment.string(id: Int, vararg args: Int) = resources.getString(id, args)
+
+fun Fragment.string(id: Int, vararg args: Float) = resources.getString(id, args)
+
+fun Fragment.string(id: Int, vararg args: String) = resources.getString(id, args)
+
 fun Activity.string(id: Int) = resources.getString(id)

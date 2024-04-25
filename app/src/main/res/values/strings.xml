@@ -34,4 +34,25 @@
     <string name="view_sale_property_description_bed">Bed: %d</string>
     <string name="view_sale_property_description_baths">Baths: %d</string>
     <string name="view_sale_property_description_bath">Bath: %d</string>
+
+    <string name="screen_sale_property_details_property_description_title">Property Description</string>
+    <string name="screen_sale_property_details_property_description_last_update_title">Last Update Time: %s</string>
+
+    <string name="screen_sale_property_details_property_description_baths">%d baths</string>
+    <string name="screen_sale_property_details_property_description_bath">%d bath</string>
+    <string name="screen_sale_property_details_property_description_full_baths">%d full baths</string>
+    <string name="screen_sale_property_details_property_description_full_bath">%d full bath</string>
+    <string name="screen_sale_property_details_property_description_half_baths">and %d half baths</string>
+    <string name="screen_sale_property_details_property_description_only_half_baths">%d half baths</string>
+    <string name="screen_sale_property_details_property_description_only_half_bath">%d half bath</string>
+    <string name="screen_sale_property_details_property_description_half_bath">and %d half bath</string>
+
+    <string name="screen_sale_property_details_property_description_sqft">Sqft of object is %d</string>
+    <string name="screen_sale_property_details_property_description_build_type">Type of building is %s</string>
+    <string name="screen_sale_property_details_property_description_build_year">was built in %d.</string>
+    <string name="screen_sale_property_details_property_description_lot_history_price">This object was sold at first time in %1d for %2d.</string>
+    <string name="screen_sale_property_details_property_description_lot_size">Lot size is %d.</string>
+
+    <string name="screen_sale_property_details_property_description_beds">Has %d beds</string>
+    <string name="screen_sale_property_details_property_description_bed">Has %d bed</string>
 </resources>
