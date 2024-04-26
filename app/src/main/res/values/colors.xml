@@ -22,9 +22,18 @@
     <color name="content_container">#FCECECEC</color>
     <color name="teflon">#423C43</color>
     <color name="peach">#EE6723</color>
-    <color name="almost_peach">#EA8856</color>
-    <color name="on_primary">#E4A686</color>
+    <color name="blue_top">#E8EEFA</color>
+    <color name="blue_center">#9AB7F3</color>
+    <color name="blue_end">#4A83F6</color>
 
+    <color name="almost_peach">#EA8856</color>
+    <color name="peach_light">#F6CCB7</color>
+
+    <color name="bottom_content_top">#CAF4F1</color>
+    <color name="bottom_content_center">#93F4EA</color>
+    <color name="bottom_content_bottom">#498876</color>
+
+    <color name="on_primary">#E4A686</color>
     <color name="colorPrimary">#C6C2C0</color>
     <color name="colorPrimaryDark">#3A3939</color>
     <color name="colorAccent">#9F7979</color>

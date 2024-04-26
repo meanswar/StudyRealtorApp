@@ -56,14 +56,11 @@ class AnimatedRecyclerView : RecyclerView {
             typedArray.getInt(R.styleable.AnimatedRecyclerView_layoutManagerType, layoutManagerType)
         columns =
             typedArray.getInt(R.styleable.AnimatedRecyclerView_gridLayoutManagerColumns, columns)
-        animation = typedArray.getResourceId(R.styleable.AnimatedRecyclerView_layoutAnimation, -1)
+        animation = typedArray.getResourceId(R.styleable.AnimatedRecyclerView_layoutAnimation, R.anim.recycle_view_anim)
         if (animationController == null) animationController =
-            if (animation != -1) AnimationUtils.loadLayoutAnimation(
+            AnimationUtils.loadLayoutAnimation(
                 getContext(),
                 animation
-            ) else AnimationUtils.loadLayoutAnimation(
-                getContext(),
-                R.anim.recycle_view_anim
             )
         animationController!!.animation.setDuration(animationDuration.toLong())
         setLayoutAnimation(animationController)

@@ -1,36 +1,33 @@
 package com.nikitosii.studyrealtorapp.flow.sales
 
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status.*
+import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
+import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
+import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
-import com.nikitosii.studyrealtorapp.databinding.FragmentSalesBinding
+import com.nikitosii.studyrealtorapp.databinding.FragmentDashboardBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.dividerHorizontal
-import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
 import com.nikitosii.studyrealtorapp.util.ext.hide
-import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
-import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
+import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
+import com.nikitosii.studyrealtorapp.util.ext.show
+import com.nikitosii.studyrealtorapp.util.ext.showWithScaleIn
 
-@RequiresViewModel(SalesViewModel::class)
-class SalesFragment :
-    BaseFragment<FragmentSalesBinding, SalesViewModel>(
-        { FragmentSalesBinding.bind(it) },
-        R.layout.fragment_sales
+@RequiresViewModel(DashboardViewModel::class)
+class DashboardFragment :
+    BaseFragment<FragmentDashboardBinding, DashboardViewModel>(
+        { FragmentDashboardBinding.bind(it) },
+        R.layout.fragment_dashboard
     ) {
 
     private val adapter = SaleRequestAdapter { onSaleRequestClick(it) }
 
     override fun initViews() {
         with(binding) {
-            rvRecent.dividerVertical(R.drawable.divider_vertical)
-            rvFavorites.dividerHorizontal(R.drawable.divider_horizontal)
-            rvRecent.adapter = adapter
+            rvRecentSearches.adapter = adapter
         }
         onClick()
     }
@@ -52,38 +49,37 @@ class SalesFragment :
 
     private fun onClick() {
         with(binding) {
-            tvFilter.onClick { openFilters() }
-            ivSearchHistory.onClick { openSaleSearchHistory() }
+
         }
     }
 
     private fun processRecentRequests(data: List<SalesRequest>?) {
         with(binding) {
-            if (data.isNullOrEmpty()) clRecentContainer.hideWithAnim(R.anim.scale_out)
-             else {
-                clRecentContainer.showWithAnimation(R.anim.scale_in)
+            if (data?.isNotEmpty() == true) {
                 adapter.submitList(data)
-                rvRecent.notifyDataSetChanged()
+                rvRecentSearches.show()
+                rvRecentSearches.notifyDataSetChanged()
             }
+            else grRecentContent.hideWithScaleOut()
         }
     }
 
     private fun onSaleRequestClick(filter: SalesRequest) {
-        val extras = FragmentNavigatorExtras(
-            binding.tvFilter to "tvFilter"
-        )
-        SalesFragmentDirections.openFilters(filter).navigate(extras)
+//        val extras = FragmentNavigatorExtras(
+//            binding.tvFilter to "tvFilter"
+//        )
+//        DashboardFragmentDirections.openFilters(filter).navigate(extras)
     }
 
     private fun openFilters() {
-        val extras = FragmentNavigatorExtras(
-            binding.tvFilter to "tvFilter"
-        )
-        SalesFragmentDirections.openFilters(FILTER_NULLABLE).navigate(extras)
+//        val extras = FragmentNavigatorExtras(
+//            binding.tvFilter to "tvFilter"
+//        )
+//        DashboardFragmentDirections.openFilters(FILTER_NULLABLE).navigate(extras)
     }
 
     private fun openSaleSearchHistory() {
-        SalesFragmentDirections.openSaleSearchHistory().navigate()
+        DashboardFragmentDirections.openSaleSearchHistory().navigate()
     }
 
     companion object {

@@ -9,6 +9,8 @@ interface SalePropertiesRepo {
     /**
      * Retrieves properties available for sale based on the provided [SalesRequest] model.
      *
+     * Saves results and requests to local storage.
+     *
      * @param data The [SalesRequest] containing criteria for property search.
      * @return A list of [Property] objects representing properties available for sale.
      */

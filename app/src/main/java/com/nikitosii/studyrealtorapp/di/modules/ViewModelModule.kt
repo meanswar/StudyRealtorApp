@@ -6,7 +6,7 @@ import com.nikitosii.studyrealtorapp.di.ViewModelKey
 import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
 import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
-import com.nikitosii.studyrealtorapp.flow.sales.SalesViewModel
+import com.nikitosii.studyrealtorapp.flow.sales.DashboardViewModel
 import com.nikitosii.studyrealtorapp.flow.sales.details.SalePropertyDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.sales.filter.FilterSalesViewModel
 import com.nikitosii.studyrealtorapp.flow.sales.history.SearchSalesHistoryViewModel
@@ -26,8 +26,8 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SalesViewModel::class)
-    fun bindSalesViewModel(viewModel: SalesViewModel): ViewModel
+    @ViewModelKey(DashboardViewModel::class)
+    fun bindSalesViewModel(viewModel: DashboardViewModel): ViewModel
 
     @Binds
     @IntoMap

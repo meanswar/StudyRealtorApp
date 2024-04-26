@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import com.nikitosii.studyrealtorapp.R
+import timber.log.Timber
 
 fun View.show(show: Boolean = true, useGone: Boolean = true) {
     this.visibility = if (show) View.VISIBLE else if (useGone) View.GONE else View.INVISIBLE
@@ -95,9 +96,9 @@ inline fun EditText.onTextChanged(crossinline action: (String) -> Unit) {
     this.doOnTextChanged { text, _, _, _ -> action(text.toString()) }
 }
 
-fun View.onAnimCompleted(action: () -> Unit) {
+fun View.onAnimCompleted(time: Long = 500L, action: () -> Unit) {
     val handler = Handler(Looper.getMainLooper())
-    handler.postAtTime({ action() }, 500L)
+    handler.postAtTime({ action() }, time)
 }
 
 fun EditText.openKeyboard() {
@@ -124,4 +125,14 @@ fun ViewGroup.measureWrapContentHeight(): Int {
             .makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
     )
     return measuredHeight
+}
+
+fun ViewGroup.measureWrapContentWidth(): Int {
+    this.measure(
+        View.MeasureSpec
+            .makeMeasureSpec((this as View).measuredWidth, View.MeasureSpec.UNSPECIFIED),
+        View.MeasureSpec
+            .makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+    )
+    return measuredWidth
 }

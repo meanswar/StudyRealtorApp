@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingHorizontal="@dimen/size_20dp"
+    tools:background="@drawable/bg_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/size_20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTopContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/anim_top_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layoutAnimation="null">
+
+            <TextView
+                android:id="@+id/tvUserWelcome"
+                style="@style/AppTheme.Text.Paragraph3.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/screen_dashboard_welcome_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDashboardTitle"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:text="@string/screen_dashboard_description_title"
+                app:layout_constraintStart_toStartOf="@id/tvUserWelcome"
+                app:layout_constraintTop_toBottomOf="@id/tvUserWelcome" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvProfileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/peach"
+                app:cardCornerRadius="@dimen/size_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvUserWelcome">
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user_profile" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.nikitosii.studyrealtorapp.view.SearchView
+                android:id="@+id/svSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_30dp"
+                android:background="@drawable/bg_content_corners_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDashboardTitle" />
+
+            <LinearLayout
+                android:id="@+id/llTypeOfSearching"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/size_4dp"
+                app:layout_constraintTop_toBottomOf="@id/svSearch">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBuy"
+                    style="@style/AppTheme.Button.Regular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:elevation="@dimen/size_2dp"
+                    android:text="@string/screen_dashboard_btn_buy_title" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRent"
+                    style="@style/AppTheme.Button.Regular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:elevation="@dimen/size_2dp"
+                    android:text="@string/screen_dashboard_btn_rent_title" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBottomContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/size_40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clTopContent">
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/grRecentContent"
+                app:constraint_referenced_ids="tvRecentSearches, rvRecentSearches" />
+
+            <TextView
+                android:id="@+id/tvRecentSearches"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recent_searches_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                android:id="@+id/rvRecentSearches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:animationDuration="500"
+                app:layoutManagerOrientation="horizontal"
+                app:layoutManagerReverse="false"
+                app:layoutManagerType="linear"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentSearches"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_photo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

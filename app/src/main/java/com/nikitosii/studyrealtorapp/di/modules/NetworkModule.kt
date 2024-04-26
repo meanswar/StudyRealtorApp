@@ -8,6 +8,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.nikitosii.studyrealtorapp.core.source.local.impl.LocalStorageImpl
 import com.nikitosii.studyrealtorapp.core.source.net.TokenInterceptor
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
+import com.nikitosii.studyrealtorapp.core.source.net.api.image.ImageApi
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
@@ -21,6 +22,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocketFactory
@@ -80,6 +82,7 @@ class NetworkModule {
     internal fun providesTokenInterceptor(localStorage: LocalStorage) = TokenInterceptor(localStorage)
 
     @Provides
+    @Named("RealtorClient")
     @Singleton
     internal fun providesClient(
         loggingInterceptor: HttpLoggingInterceptor,
@@ -96,17 +99,49 @@ class NetworkModule {
         .build()
 
     @Provides
+    @Named("ImageClient")
     @Singleton
-    internal fun providesRetrofit(client: OkHttpClient, moshi: Moshi) = Retrofit.Builder()
+    internal fun providesImageClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        tokenInterceptor: TokenInterceptor,
+        chuckInterceptor: ChuckerInterceptor
+    ) = OkHttpClient().newBuilder()
+        .addInterceptor(tokenInterceptor)
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(chuckInterceptor)
+        .callTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .build()
+
+    @Provides
+    @Named("RealtorRetrofit")
+    @Singleton
+    internal fun providesRetrofit(@Named("RealtorClient") client: OkHttpClient, moshi: Moshi) = Retrofit.Builder()
         .client(client)
         .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
     @Provides
+    @Named("ImageRetrofit")
     @Singleton
-    internal fun providesPropertiesApi(retrofit: Retrofit) =
+    internal fun providesImageRetrofit(@Named("ImageClient") client: OkHttpClient, moshi: Moshi) = Retrofit.Builder()
+        .client(client)
+        .baseUrl(BuildConfig.Image_URL)
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .build()
+
+    @Provides
+    @Singleton
+    internal fun providesPropertiesApi(@Named("RealtorRetrofit") retrofit: Retrofit) =
         retrofit.create(PropertiesApi::class.java)
+
+    @Provides
+    @Singleton
+    internal fun providesImageApi(@Named("ImageRetrofit") retrofit: Retrofit) =
+        retrofit.create(ImageApi::class.java)
 
     companion object {
         private const val OKHTTP_TAG = "OkHttp"

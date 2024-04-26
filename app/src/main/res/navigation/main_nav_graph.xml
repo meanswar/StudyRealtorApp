@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/salesFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.sales.SalesFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.sales.DashboardFragment"
         android:label="SalesFragment"
-        tools:layout="@layout/fragment_sales">
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/openFilters"
             app:destination="@id/filterFragment" />
@@ -59,6 +59,6 @@
             android:id="@+id/rentsFragment"
             android:name="com.nikitosii.studyrealtorapp.flow.rents.RentsFragment"
             android:label="RentsFragment"
-            tools:layout="@layout/fragment_sales" />
+            tools:layout="@layout/fragment_dashboard" />
     </navigation>
 </navigation>

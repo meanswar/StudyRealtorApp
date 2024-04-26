@@ -2,13 +2,15 @@ package com.studyrealtorapp.di.modules
 
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertyDao
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
+import com.nikitosii.studyrealtorapp.core.source.net.api.image.ImageApi
+import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.SalePropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.TokenRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
+import com.nikitosii.studyrealtorapp.core.source.repository.impl.ImageRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.SalePropertiesRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.TokenRepoImpl
 import com.nikitosii.studyrealtorapp.di.modules.AppModule
@@ -44,4 +46,11 @@ object RepoModule {
     internal fun provideTokenRepo(
         localStorage: LocalStorage
     ): TokenRepo = TokenRepoImpl(localStorage)
+
+    @Provides
+    @Singleton
+    internal fun provideImageRepo(
+        api: ImageApi,
+        networkErrorHandler: NetworkErrorHandler
+    ): ImageRepo = ImageRepoImpl(api, networkErrorHandler)
 }

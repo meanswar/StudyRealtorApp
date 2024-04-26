@@ -1,4 +1,4 @@
-import com.android.build.api.variant.SigningConfig
+
 
 plugins {
     id("com.android.application")
@@ -27,6 +27,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
+        buildConfigField("String", "Image_URL", "\"https://api.unsplash.com/\"")
     }
 
     signingConfigs {
@@ -49,7 +50,7 @@ android {
         }
         release {
             isMinifyEnabled = false
-            isDebuggable = false
+            isDebuggable = true
             signingConfig = signingConfigs["release"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

@@ -55,4 +55,10 @@
 
     <string name="screen_sale_property_details_property_description_beds">Has %d beds</string>
     <string name="screen_sale_property_details_property_description_bed">Has %d bed</string>
+
+    <string name="screen_dashboard_welcome_title">Welcome user!</string>
+    <string name="screen_dashboard_welcome_user">Welcome %s!</string>
+    <string name="screen_dashboard_description_title">Find Your\nDream Home</string>
+    <string name="screen_dashboard_btn_buy_title">Buy</string>
+    <string name="screen_dashboard_btn_rent_title">Rent</string>
 </resources>

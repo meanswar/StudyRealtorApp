@@ -4,7 +4,7 @@ import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetRece
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
-class SalesViewModel @Inject constructor(
+class DashboardViewModel @Inject constructor(
     getRequestHistoryUseCase: GetRecentSaleRequestsUseCase
 ): BaseViewModel() {
 

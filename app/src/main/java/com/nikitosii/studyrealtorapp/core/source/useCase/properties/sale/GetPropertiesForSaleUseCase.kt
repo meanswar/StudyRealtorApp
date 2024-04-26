@@ -2,11 +2,15 @@ package com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale
 
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.SalePropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.useCase.base.UseCaseParams
 import javax.inject.Inject
 
-class GetPropertiesForSaleUseCase @Inject constructor(private val repo: SalePropertiesRepo) :
+class GetPropertiesForSaleUseCase @Inject constructor(
+    private val repo: SalePropertiesRepo,
+    private val imageRepo: ImageRepo
+) :
     UseCaseParams<List<Property>, GetPropertiesForSaleUseCase.Params>() {
     class Params private constructor(val request: SalesRequest) {
         companion object {
@@ -15,9 +19,10 @@ class GetPropertiesForSaleUseCase @Inject constructor(private val repo: SaleProp
     }
 
     override suspend fun execute(data: Params): List<Property> {
-        val result = repo.getPropertiesForSale(data.request)
+        val image = data.request.address?.let { imageRepo.getImage(it) }
+        val salesRequest = data.request.copy(imageUrl = image)
+        val result = repo.getPropertiesForSale(salesRequest)
         repo.updateRequestHistory()
-
         return result
     }
 }

@@ -28,4 +28,8 @@
         <attr name="startAnimationSpeed" format="float" default="1.0" />
         <attr name="toolbar_title" format="string" />
     </declare-styleable>
+    <declare-styleable name="SearchView">
+        <attr name="drawableStart" format="reference" />
+        <attr name="drawableEnd" format="reference" />
+    </declare-styleable>
 </resources>
