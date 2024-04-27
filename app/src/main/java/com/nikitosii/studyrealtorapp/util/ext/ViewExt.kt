@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.util.ext
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -88,6 +89,13 @@ fun View.hideWithScaleOut() {
     onAnimCompleted { hide() }
 }
 
+fun ConstraintLayout.hideWithLayoutAnim(animRes: Int) {
+    val animation = AnimationUtils.loadLayoutAnimation(context, animRes)
+    layoutAnimation = animation
+    startLayoutAnimation()
+    onAnimCompleted { hide() }
+}
+
 inline fun View.onClick(crossinline action: () -> Unit) {
     this.setOnClickListener { action() }
 }
@@ -107,15 +115,18 @@ fun EditText.openKeyboard() {
     imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
+@SuppressLint("UseCompatLoadingForDrawables")
 fun TextView.selectedItem() {
     setTextColor(context.getColor(R.color.almost_white))
     background = context.getDrawable(R.drawable.bg_selected)
 }
 
+@SuppressLint("UseCompatLoadingForDrawables")
 fun TextView.unselectedItem() {
     setTextColor(context.getColor(R.color.teflon))
-    background = context.getDrawable(R.drawable.bg_not_selected)
+    setBackgroundColor(context.getColor(R.color.transparent))
 }
+
 
 fun ViewGroup.measureWrapContentHeight(): Int {
     this.measure(

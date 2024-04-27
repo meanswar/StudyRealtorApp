@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikitosii.studyrealtorapp.R
 
 
-class AnimatedRecyclerView : RecyclerView {
-    private var orientation = LinearLayoutManager.VERTICAL
+class AnimatedRecyclerView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : RecyclerView(context, attrs) {
+    private var orientation = VERTICAL
     private var reverse = false
     private var animationDuration = 600
     private var layoutManagerType = LayoutManagerType.LINEAR
@@ -24,24 +27,7 @@ class AnimatedRecyclerView : RecyclerView {
     private var animation: Int = R.anim.recycle_view_anim
     private var animationController: LayoutAnimationController? = null
 
-    constructor(context: Context) : super(context) {
-        init(context, null)
-    }
-
-    constructor(context: Context, @Nullable attrs: AttributeSet?) : super(context, attrs) {
-        init(context, attrs)
-    }
-
-    constructor(context: Context, @Nullable attrs: AttributeSet?, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
-    ) {
-        init(context, attrs)
-    }
-
-    @SuppressLint("Recycle", "WrongConstant")
-    private fun init(context: Context, @Nullable attrs: AttributeSet?) {
+   init {
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.AnimatedRecyclerView, 0, 0)
         orientation = typedArray.getInt(
@@ -56,7 +42,10 @@ class AnimatedRecyclerView : RecyclerView {
             typedArray.getInt(R.styleable.AnimatedRecyclerView_layoutManagerType, layoutManagerType)
         columns =
             typedArray.getInt(R.styleable.AnimatedRecyclerView_gridLayoutManagerColumns, columns)
-        animation = typedArray.getResourceId(R.styleable.AnimatedRecyclerView_layoutAnimation, R.anim.recycle_view_anim)
+        animation = typedArray.getResourceId(
+            R.styleable.AnimatedRecyclerView_layoutAnimation,
+            R.anim.recycle_view_anim
+        )
         if (animationController == null) animationController =
             AnimationUtils.loadLayoutAnimation(
                 getContext(),

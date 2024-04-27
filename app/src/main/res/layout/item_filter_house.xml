@@ -10,22 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_8dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="@dimen/size_10dp"
         app:cardElevation="@dimen/size_0dp"
-        android:background="@drawable/bg_grey_diag_corners"
-        app:cardCornerRadius="@dimen/size_15dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvHouse"
-            style="@style/AppTheme.Text.Paragraph3.Teflon"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="marquee"
-            android:padding="@dimen/size_8dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="apartment" />
+            android:id="@+id/clContent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvHouse"
+                style="@style/AppTheme.Text.Paragraph3.Teflon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="@dimen/size_8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="apartment" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

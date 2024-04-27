@@ -199,4 +199,5 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     implementation("com.viceboy.library:triangularshadeimageview:1.0.1")
+    implementation("it.sephiroth.android.library.rangeseekbar:rangeseekbar:1.1.0")
 }

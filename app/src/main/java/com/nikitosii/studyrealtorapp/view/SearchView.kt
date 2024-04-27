@@ -5,22 +5,19 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Outline
-import android.graphics.Rect
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.animation.doOnRepeat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ViewSearchBinding
 import com.nikitosii.studyrealtorapp.util.ext.measureWrapContentWidth
+import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onFocus
-import com.nikitosii.studyrealtorapp.util.ext.scale
 import com.nikitosii.studyrealtorapp.util.ext.show
 
 class SearchView @JvmOverloads constructor(
@@ -28,7 +25,8 @@ class SearchView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs) {
 
     private var animating = false
-    private lateinit var animator: ValueAnimator
+    private lateinit var animatorStart: ValueAnimator
+    private lateinit var animatorEnd: ValueAnimator
 
     private val binding =
         ViewSearchBinding.inflate(LayoutInflater.from(context), this, true)
@@ -42,8 +40,10 @@ class SearchView @JvmOverloads constructor(
                 setDrawableEnd(this)
             }
         }
-        initAnimation()
-        binding.etSearch.onFocus { onFocus() }
+        initStartAnimation()
+        with(binding) {
+            etSearch.onFocus { onFocus() }
+        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -52,19 +52,28 @@ class SearchView @JvmOverloads constructor(
         binding.ivStart.setImageDrawable(drawable)
     }
 
+    fun setOnEndClick(action: () -> Unit) {
+        binding.ivEnd.setOnClick {
+            action()
+        }
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setDrawableEnd(resInt: Int) {
         val drawable = context.getDrawable(resInt)
         binding.ivEnd.setImageDrawable(drawable)
     }
 
-    private fun setAnimator(animator: ValueAnimator) {
-        this.animator = animator
+    private fun setStartAnimator(animator: ValueAnimator) {
+        animatorStart = animator
+    }
+
+    private fun setEndAnimator(animator: ValueAnimator) {
+        animatorEnd = animator
     }
 
     private fun onFocus() {
-        animator.start()
-//        animator.reverse()
+        animatorStart.start()
     }
 
     fun onFocusChanged(isFocused: Boolean, action: ((Boolean) -> Unit)? = null) {
@@ -74,7 +83,7 @@ class SearchView @JvmOverloads constructor(
         }
     }
 
-    fun initAnimation(targetView: ViewGroup = binding.flStartImage) {
+    private fun initStartAnimation(targetView: ViewGroup = binding.flStartImage) {
         val animation = ValueAnimator.ofFloat(1000f, 0f).apply {
             duration = 100
             addUpdateListener {
@@ -98,35 +107,10 @@ class SearchView @JvmOverloads constructor(
                 }
             })
         }
-        setAnimator(animation)
+        setStartAnimator(animation)
     }
 
-    fun initOutline(rect: Rect, scaleX: Float, scaleY: Float, yShift: Int): OutlineProvider {
-        binding.root.getGlobalVisibleRect(rect)
-        return OutlineProvider(
-            rect,
-            scaleX,
-            scaleY, yShift)
-    }
-
-
-    inner class OutlineProvider(
-        private val rect: Rect = Rect(),
-        var scaleX: Float,
-        var scaleY: Float,
-        var yShift: Int
-    ) : ViewOutlineProvider() {
-
-        override fun getOutline(view: View?, outline: Outline?) {
-            view?.background?.copyBounds(rect)
-            rect.scale(scaleX, scaleY)
-
-            rect.offset(0, yShift)
-
-            val cornerRadius =
-                resources.getDimensionPixelSize(R.dimen.size_10dp).toFloat()
-
-            outline?.setRoundRect(rect, cornerRadius)
-        }
+    fun initEndAnimation(targetView: ViewGroup) {
+        binding.ivEnd.initAnimation(targetView)
     }
 }

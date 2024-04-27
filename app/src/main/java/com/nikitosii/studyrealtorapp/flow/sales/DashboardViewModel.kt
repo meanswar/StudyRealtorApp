@@ -8,5 +8,17 @@ class DashboardViewModel @Inject constructor(
     getRequestHistoryUseCase: GetRecentSaleRequestsUseCase
 ): BaseViewModel() {
 
+    private val filterHouses = mutableListOf<String>()
+
     val saleRequestsHistory = getRequestHistoryUseCase.execute().toWorkLiveData()
+
+    fun setFilterHouse(house: String): Boolean {
+        return if (filterHouses.contains(house)) {
+            filterHouses.remove(house)
+            false
+        } else {
+            filterHouses.add(house)
+            true
+        }
+    }
 }

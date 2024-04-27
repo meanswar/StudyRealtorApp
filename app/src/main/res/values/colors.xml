@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="white_transparent">#28FFFFFF</color>
     <color name="silver">#cbcbcb</color>
     <color name="gray">#878786</color>
 
@@ -43,6 +44,10 @@
     <color name="bg_regular_preset">#e4e4e4</color>
     <color name="bg_regular_enable">@color/white</color>
     <color name="border_regular_preset">#d2d2d2</color>
+
+    <color name="ic_color_gray">#C1BEC1</color>
+    <color name="ic_color_black">#000000</color>
+    <color name="ic_color_red">#FF0000</color>
 
     <color name="bg_primary_hover">#CCEE6723</color>
     <color name="bg_primary_preset">#EE6723</color>

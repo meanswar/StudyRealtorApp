@@ -8,6 +8,9 @@
 
     <declare-styleable name="RangeView">
         <attr name="endDrawable" format="reference" />
+        <attr name="minValue" format="integer" />
+        <attr name="maxValue" format="integer" />
+        <attr name="stepValue" format="integer" />
     </declare-styleable>
     <declare-styleable name="AnimatedRecyclerView">
         <attr name="layoutAnimation" format="reference" />
@@ -31,5 +34,13 @@
     <declare-styleable name="SearchView">
         <attr name="drawableStart" format="reference" />
         <attr name="drawableEnd" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="AnimatedImageView">
+        <attr name="colorFrom" format="reference" />
+        <attr name="colorTo" format="reference" />
+        <attr name="colorFilled" format="reference" />
+        <attr name="isRotated" format="boolean" />
+        <attr name="isActive" format="boolean" />
+        <attr name="animDuration" format="integer" />
     </declare-styleable>
 </resources>
