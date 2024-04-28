@@ -29,7 +29,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:thumbColor="@color/peach"
         app:thumbStrokeColor="@color/peach"
-        app:tickColor="@color/peach"
         app:trackColorActive="@color/peach" />
 
     <TextView
@@ -78,7 +77,6 @@
         android:layout_weight="2"
         android:layout_marginStart="@dimen/size_4dp"
         android:background="@drawable/bg_content_almost_transparent_corners_10dp"
-        android:drawableEnd="@drawable/ic_money"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvTo"
         app:layout_constraintTop_toTopOf="@id/tvTo" />

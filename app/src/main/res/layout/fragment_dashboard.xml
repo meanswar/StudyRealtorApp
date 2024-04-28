@@ -98,6 +98,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            app:isRotated="true"
                             android:paddingVertical="@dimen/size_10dp"
                             android:src="@drawable/ic_house_24dp"
                             app:animDuration="300" />
@@ -112,6 +113,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            app:isRotated="true"
                             android:paddingVertical="@dimen/size_10dp"
                             android:src="@drawable/ic_price_24dp"
                             app:animDuration="200" />
@@ -126,7 +128,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:foreground="?android:attr/selectableItemBackground"
+                            app:isRotated="true"
                             android:paddingVertical="@dimen/size_10dp"
                             android:src="@drawable/ic_bed_24dp"
                             app:animDuration="200" />
@@ -141,7 +143,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:foreground="?android:attr/selectableItemBackground"
+                            app:isRotated="true"
                             android:paddingVertical="@dimen/size_10dp"
                             android:src="@drawable/ic_bath_24dp"
                             app:animDuration="200" />
@@ -156,7 +158,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:foreground="?android:attr/selectableItemBackground"
+                            app:isRotated="true"
                             android:paddingVertical="@dimen/size_10dp"
                             android:src="@drawable/ic_sqft"
                             app:animDuration="200" />
@@ -187,6 +189,7 @@
                     tools:visibility="visible">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cvFilterHouses"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardBackgroundColor="@color/white_transparent"

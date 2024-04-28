@@ -7,8 +7,6 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +15,6 @@ import com.nikitosii.studyrealtorapp.util.ext.getProgress
 import com.nikitosii.studyrealtorapp.util.ext.measureWrapContentHeight
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
-import timber.log.Timber
 
 class AnimatedFilterImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

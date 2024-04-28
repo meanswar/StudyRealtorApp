@@ -15,7 +15,6 @@ import com.nikitosii.studyrealtorapp.flow.sales.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.dividerHorizontal
-import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
