@@ -48,9 +48,9 @@
     </fragment>
     <fragment
         android:id="@+id/salePropertyDetailsFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.details.SalePropertyDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.details.PropertyDetailsFragment"
         android:label="Sale Property Details Fragment"
-        tools:layout="@layout/fragment_sale_properties_details">
+        tools:layout="@layout/fragment_property_details">
         <argument
             android:name="property"
             app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.Property"

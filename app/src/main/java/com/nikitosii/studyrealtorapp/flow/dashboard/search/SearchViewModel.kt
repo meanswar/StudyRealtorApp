@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.search
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
@@ -15,6 +16,8 @@ class SearchViewModel @Inject constructor(
     private val getLocalPropertiesForSaleUseCase: GetLocalPropertiesForSaleUseCase
 ) : BaseViewModel() {
     private val _saleProperties = WorkLiveData<List<Property>>()
+
+    val isDataAlreadyUploaded = MutableLiveData(false)
 
     val saleProperties: LiveData<WorkResult<List<Property>>>
         get() = _saleProperties

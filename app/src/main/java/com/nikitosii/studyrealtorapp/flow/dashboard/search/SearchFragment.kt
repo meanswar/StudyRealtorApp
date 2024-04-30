@@ -1,7 +1,5 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.search
 
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -15,7 +13,7 @@ import com.nikitosii.studyrealtorapp.databinding.FragmentSearchBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.SalesAdapter
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
+import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import timber.log.Timber
@@ -38,12 +36,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     override fun initViews() {
         with(binding) {
             rvSaleProperties.adapter = salesPropertiesAdapter
+            rvSaleProperties.setItemViewCacheSize(5)
+            rvSaleProperties.recycledViewPool.setMaxRecycledViews(R.layout.item_sales, 5)
             isPropertiesLoaded.observe(viewLifecycleOwner) {
                 if (it) rvSaleProperties.show()
             }
         }
-        if (args.localRequest) viewModel.getLocalSaleProperties(args.saleRequest)
-        else viewModel.getSaleProperties(args.saleRequest)
+        getStartingData()
+    }
+
+    private fun getStartingData() {
+        if (viewModel.isDataAlreadyUploaded.value == false) {
+            if (args.localRequest) viewModel.getLocalSaleProperties(args.saleRequest)
+            else viewModel.getSaleProperties(args.saleRequest)
+            viewModel.isDataAlreadyUploaded.postValue(true)
+        }
     }
 
     override fun subscribe() {
@@ -72,11 +79,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     private fun observeProperties(data: List<Property>?) {
         with(binding) {
             isPropertiesLoaded.postValue(true)
-            val handler = Handler(Looper.getMainLooper())
-            handler.postDelayed({ lavLoading.hideWithScaleOut() }, 1500)
+            lavLoading.hide()
             salesPropertiesAdapter.submitList(data)
             rvSaleProperties.notifyDataSetChanged()
-            rvSaleProperties.show()
         }
     }
 

@@ -22,4 +22,9 @@ interface PropertiesApi {
         @Query("page") page: Int? = null,
         @Query("sort") sort: String? = null
     ): BaseResponse
+
+    @GET("/property")
+    suspend fun getPropertyDetails(
+        @Query("id") id: Int
+    ): BaseResponse
 }
