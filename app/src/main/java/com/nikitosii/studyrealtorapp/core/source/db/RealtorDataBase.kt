@@ -24,7 +24,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.converters.SourceTypeConvert
 import com.nikitosii.studyrealtorapp.core.source.db.converters.TaxRecordTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.VrTourTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertyDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
 import com.nikitosii.studyrealtorapp.util.annotation.GenerateRoomMigrations
@@ -61,7 +61,7 @@ import com.nikitosii.studyrealtorapp.util.annotation.GenerateRoomMigrations
 )
 abstract class RealtorDataBase : RoomDatabase() {
 
-    abstract fun propertyDao(): SalePropertyDao
+    abstract fun propertyDao(): PropertyDao
     abstract fun salePropertiesSearchDao(): SalePropertiesSearchDao
 
     companion object {
@@ -73,5 +73,5 @@ abstract class RealtorDataBase : RoomDatabase() {
 
 object DbConfig {
 
-    const val VERSION = 5
+    const val VERSION = 6
 }

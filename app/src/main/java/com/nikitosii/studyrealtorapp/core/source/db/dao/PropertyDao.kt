@@ -7,7 +7,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 
 @Dao
-interface SalePropertyDao {
+interface PropertyDao {
 
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     fun insertProperty(property: PropertyEntity)

@@ -7,11 +7,11 @@ import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.nikitosii.studyrealtorapp.core.source.net.api.image.ImageApi
 import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
-import com.nikitosii.studyrealtorapp.core.source.repository.SalePropertiesRepo
+import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.TokenRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.ImageRepoImpl
-import com.nikitosii.studyrealtorapp.core.source.repository.impl.SalePropertiesRepoImpl
+import com.nikitosii.studyrealtorapp.core.source.repository.impl.PropertiesRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.TokenRepoImpl
 import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import dagger.Module
@@ -32,7 +32,7 @@ object RepoModule {
         @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
         channelRecreateObserver: ChannelRecreateObserver,
         connectivityProvider: ConnectivityProvider,
-    ): SalePropertiesRepo = SalePropertiesRepoImpl(
+    ): PropertiesRepo = PropertiesRepoImpl(
         api,
         dao,
         io,

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertyDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -24,7 +24,7 @@ object DataBaseModule {
 
     @Provides
     @Singleton
-    internal fun providesPropertyDao(db: RealtorDataBase): SalePropertyDao = db.propertyDao()
+    internal fun providesPropertyDao(db: RealtorDataBase): PropertyDao = db.propertyDao()
 
     @Provides
     @Singleton

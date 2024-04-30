@@ -1,6 +1,8 @@
 package com.nikitosii.studyrealtorapp.core.source.net.api
 
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponse
+import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseSinglePropertyResponseApi
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -25,6 +27,6 @@ interface PropertiesApi {
 
     @GET("/property")
     suspend fun getPropertyDetails(
-        @Query("id") id: Int
-    ): BaseResponse
+        @Query("property_id") id: String
+    ): BaseSinglePropertyResponseApi
 }

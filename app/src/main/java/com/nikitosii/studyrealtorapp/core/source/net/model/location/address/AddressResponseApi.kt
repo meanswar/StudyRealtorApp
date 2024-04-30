@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 
 
 @JsonClass(generateAdapter = true)
-data class AddressApi(
+data class AddressResponseApi(
     @Json(name = "city")
     val city: String? = null,
     @Json(name = "coordinate")

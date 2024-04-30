@@ -3,12 +3,12 @@ package com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
-import com.nikitosii.studyrealtorapp.core.source.repository.SalePropertiesRepo
+import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.useCase.base.UseCaseParams
 import javax.inject.Inject
 
 class GetPropertiesForSaleUseCase @Inject constructor(
-    private val repo: SalePropertiesRepo,
+    private val repo: PropertiesRepo,
     private val imageRepo: ImageRepo
 ) :
     UseCaseParams<List<Property>, GetPropertiesForSaleUseCase.Params>() {

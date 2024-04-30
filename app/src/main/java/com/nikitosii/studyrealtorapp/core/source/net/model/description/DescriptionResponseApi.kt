@@ -19,15 +19,9 @@ data class DescriptionResponseApi(
     @Json(name = "lot_sqft")
     val lotSqft: Int? = null,
     val name: String? = null,
-    @Json(name = "sold_date")
-    val soldDate: String? = null,
-    @Json(name = "sold_price")
-    val soldPrice: Int? = null,
     val sqft: Int? = null,
-    val stories: Int? = null,
-    @Json(name = "sub_type")
-    val subType: String? = null,
+    val pool: String? = null,
+    val text: String? = null,
     val type: String? = null,
-    @Json(name = "year_built")
-    val yearBuilt: Int? = null
+    val rooms: String? = null
 )

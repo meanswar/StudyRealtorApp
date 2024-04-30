@@ -2,7 +2,6 @@ package com.nikitosii.studyrealtorapp.core.source.local.model
 
 import android.os.Parcelable
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.LocationResponseApi
-import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.AddressApi
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

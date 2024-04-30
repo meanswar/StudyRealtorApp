@@ -2,10 +2,15 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.details
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
+import com.nikitosii.studyrealtorapp.core.domain.Status
+import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.Branding
 import com.nikitosii.studyrealtorapp.core.source.local.model.Description
+import com.nikitosii.studyrealtorapp.core.source.local.model.Property
+import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
 import com.nikitosii.studyrealtorapp.databinding.FragmentPropertyDetailsBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.details.adapter.PropertyImageAdapter
@@ -18,6 +23,7 @@ import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
 import com.nikitosii.studyrealtorapp.util.ext.showWithScaleIn
 import com.nikitosii.studyrealtorapp.util.ext.toUiTime
+import timber.log.Timber
 
 @RequiresViewModel(PropertyDetailsViewModel::class)
 class PropertyDetailsFragment :
@@ -53,11 +59,8 @@ class PropertyDetailsFragment :
                 )
                 tvSalePropertyTime.show()
             }
-
-            if (args.property.branding?.isEmpty() == false) {
-                tvBranding.text = args.property.branding?.first()?.name
-            }
         }
+//        args.property.propertyId?.let { viewModel.getPropertyDetails(it) }
     }
 
     private fun setPropertyDescriptionFilters(data: Description?) {
@@ -77,5 +80,22 @@ class PropertyDetailsFragment :
     }
 
     override fun subscribe() {
+        with(viewModel) {
+            property.observe(viewLifecycleOwner, propertyObserver)
+        }
+    }
+
+    private val propertyObserver: Observer<WorkResult<PropertyDetails>> = Observer {
+        when (it.status) {
+            Status.SUCCESS -> setPropertyDetailsData(it.data)
+            Status.LOADING -> Timber.i("loading property details")
+            Status.ERROR -> handleException(it.exception) { openError() }
+        }
+    }
+
+    private fun setPropertyDetailsData(property: PropertyDetails?) {
+        with(binding) {
+
+        }
     }
 }
