@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales
+package com.nikitosii.studyrealtorapp.flow.dashboard
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
-import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
 
 class SaleRequestAdapter(private val onClick: (SalesRequest) -> Unit) :
     ListAdapter<SalesRequest, SaleRequestViewHolder>(SaleRequestDiffCallback) {
@@ -15,7 +14,6 @@ class SaleRequestAdapter(private val onClick: (SalesRequest) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleRequestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemRecentSearchBinding.inflate(inflater, parent, false)
-
         return SaleRequestViewHolder(binding, onClick)
     }
 

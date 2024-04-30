@@ -73,5 +73,5 @@ abstract class RealtorDataBase : RoomDatabase() {
 
 object DbConfig {
 
-    const val VERSION = 4
+    const val VERSION = 5
 }

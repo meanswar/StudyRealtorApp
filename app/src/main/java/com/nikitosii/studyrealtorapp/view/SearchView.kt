@@ -5,19 +5,17 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.animation.doOnRepeat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ViewSearchBinding
 import com.nikitosii.studyrealtorapp.util.ext.measureWrapContentWidth
-import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onFocus
+import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
 import com.nikitosii.studyrealtorapp.util.ext.show
 
 class SearchView @JvmOverloads constructor(
@@ -57,6 +55,16 @@ class SearchView @JvmOverloads constructor(
             action()
         }
     }
+
+    fun setIsFilled(isFilled: Boolean) {
+        binding.ivEnd.setIsFilled(isFilled)
+    }
+
+    fun setOnTextChanged(action: (String) -> Unit) {
+        binding.etSearch.onTextChanged { action(it) }
+    }
+
+    fun isExpanded() = binding.ivEnd.isExpanded()
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setDrawableEnd(resInt: Int) {

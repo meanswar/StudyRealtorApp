@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.filter
+package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.view.View
 import android.widget.ImageView
@@ -12,6 +12,7 @@ import com.nikitosii.studyrealtorapp.util.ext.invisible
 import com.nikitosii.studyrealtorapp.util.ext.model.getName
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
+import com.nikitosii.studyrealtorapp.util.ext.showText
 
 class SalesPropertyViewHolder(
     private val binding: ItemSalesBinding,
@@ -31,10 +32,22 @@ class SalesPropertyViewHolder(
                 ivSoldProperty.invisible()
                 setImage(property.primaryPhoto.url, ivNotSoldProperty)
             }
+            tvBrandingName.showText(property.branding?.first()?.name)
             tvHouseTitle.text = property.getName()
             tvSalesPrice.text = property.listPrice?.toString()
             tvRooms.text = property.description?.baths?.toString()
             root.onClick { onItemClick(property, ivSoldProperty) }
+
+            if ((property.photos?.size ?: 0) >= 3) {
+                setImage(property.photos?.get(0)?.url!!, ivImageStart)
+                setImage(property.photos[1].url, ivImageMiddle)
+                setImage(property.photos[2].url, ivImageEnd)
+            }
+            else {
+                ivImageStart.hide()
+                ivImageMiddle.hide()
+                ivImageEnd.hide()
+            }
         }
 
     }

@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import com.nikitosii.studyrealtorapp.R
-import timber.log.Timber
 
 fun View.show(show: Boolean = true, useGone: Boolean = true) {
     this.visibility = if (show) View.VISIBLE else if (useGone) View.GONE else View.INVISIBLE
@@ -39,8 +38,8 @@ fun TextView.showText(text: String?, resString: Int) {
     }
 }
 
-fun TextView.showText(number: Int?, resString: Int) {
-    if (!number.isNotNull()) hide()
+fun TextView.showText(number: Int?, resString: Int, isHidden: Boolean = true) {
+    if (!number.isNotNull())  if (isHidden) hide() else invisible()
     else {
         this.text = context.getString(resString, number)
         show()

@@ -9,7 +9,6 @@ import com.nikitosii.studyrealtorapp.flow.base.InjectableActivity
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.show
-import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hasPushNotificationPermission
 import com.nikitosii.studyrealtorapp.util.ext.requestNotificationPermission
 import com.nikitosii.studyrealtorapp.util.ext.start
@@ -46,7 +45,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
             CbnMenuItem(
                 R.drawable.ic_menu_sale_black,
                 R.drawable.avd_ic_menu_sales_peach,
-                R.id.salesFragment
+                R.id.dashboardFragment
             ),
             CbnMenuItem(
                 R.drawable.ic_menu_rent_black,
@@ -65,7 +64,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
     private fun tryHideBottomBar(destinationId: Int) {
         binding.run {
             when (destinationId) {
-                R.id.salesFragment,
+                R.id.dashboardFragment,
                 R.id.rentsFragment,
                 R.id.agentsFragment -> bottomNavigation.show(true)
 

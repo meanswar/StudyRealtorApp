@@ -3,47 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/salesFragment">
+    app:startDestination="@id/dashboardFragment">
 
     <fragment
-        android:id="@+id/salesFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.sales.DashboardFragment"
+        android:id="@+id/dashboardFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.DashboardFragment"
         android:label="SalesFragment"
         tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/openFilters"
-            app:destination="@id/filterFragment" />
+            android:id="@+id/openSearchScreen"
+            app:destination="@id/searchFragment" />
         <action
             android:id="@+id/openSaleSearchHistory"
             app:destination="@id/searchSaleHistoryFragment" />
-        <action android:id="@+id/openPropertyDetails"
+        <action
+            android:id="@+id/openPropertyDetails"
             app:destination="@id/salePropertyDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/filterFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.sales.filter.FilterSalesFragment"
-        android:label="Filter Fragment"
-        tools:layout="@layout/fragment_filter">
+        android:id="@+id/searchFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchFragment"
+        android:label="Search Fragment"
+        tools:layout="@layout/fragment_search">
         <argument
-            android:name="filter"
+            android:name="saleRequest"
             app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest"
-            app:nullable="true" />
-        <action android:id="@+id/openPropertyDetails"
+            app:nullable="false" />
+        <argument
+            android:name="localRequest"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/openPropertyDetails"
             app:destination="@id/salePropertyDetailsFragment" />
 
     </fragment>
     <fragment
         android:id="@+id/searchSaleHistoryFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.sales.history.SearchSalesHistoryFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryFragment"
         android:label="Sale History Fragment"
         tools:layout="@layout/fragment_search_sales_history">
         <action
-            android:id="@id/openFilters"
-            app:destination="@id/filterFragment" />
+            android:id="@id/openSearchScreen"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/salePropertyDetailsFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.sales.details.SalePropertyDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.details.SalePropertyDetailsFragment"
         android:label="Sale Property Details Fragment"
         tools:layout="@layout/fragment_sale_properties_details">
         <argument

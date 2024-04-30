@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingBottom="@dimen/size_10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/size_10dp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glVertical03"
@@ -52,6 +52,7 @@
         android:layout_marginStart="@dimen/size_4dp"
         android:layout_weight="2"
         android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:drawablePadding="@dimen/size_10dp"
         app:layout_constraintEnd_toStartOf="@id/glVertical03"
         app:layout_constraintStart_toEndOf="@id/tvFrom"
         app:layout_constraintTop_toTopOf="@id/tvFrom"
@@ -74,9 +75,10 @@
         style="@style/AppTheme.EditTextRange"
         android:layout_width="@dimen/size_0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
         android:layout_marginStart="@dimen/size_4dp"
+        android:layout_weight="2"
         android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:drawablePadding="@dimen/size_10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvTo"
         app:layout_constraintTop_toTopOf="@id/tvTo" />

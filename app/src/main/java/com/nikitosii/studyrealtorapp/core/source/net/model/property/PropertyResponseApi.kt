@@ -20,13 +20,10 @@ data class PropertyResponseApi(
     val branding: List<BrandingResponseApi>? = null,
     @Json(name = "coming_soon_date")
     val comingSoonDate: String? = null,
-    val community: CommunityResponseApi? = null,
     val description: DescriptionResponseApi? = null,
     val flags: FlagsResponseApi? = null,
     @Json(name = "last_update_date")
     val lastUpdateDate: String? = null,
-    @Json(name = "lead_attributes")
-    val leadAttributes: LeadAttributesResponseApi? = null,
     @Json(name = "list_date")
     val listDate: String? = null,
     @Json(name = "list_price")
@@ -34,20 +31,12 @@ data class PropertyResponseApi(
     @Json(name = "listing_id")
     val listingId: String? = null,
     val location: LocationResponseApi? = null,
-    val matterport: Boolean? = null,
-    @Json(name = "open_houses")
-    val openHouses: List<HouseDescriptionResponseAPI>? = null,
-    val rdc: List<OtherResponseApi>? = null,
-    val permalink: String? = null,
     val photoResponseApis: List<PhotoResponseApi>? = null,
     @Json(name = "price_reduced_amount")
     val priceReducedAmount: String? = null,
     @Json(name = "primary_photo")
     val primaryPhotoResponseApi: PhotoResponseApi,
-    val products: ProductResponseApi? = null,
-    @Json(name = "property_id")
     val propertyId: String? = null,
-    val source: SourceResponseApi? = null,
     val status: String? = null,
     val tags: List<String>? = null,
     @Json(name = "tax_record")

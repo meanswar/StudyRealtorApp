@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.details
+package com.nikitosii.studyrealtorapp.flow.dashboard.details
 
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -6,7 +6,7 @@ import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.FragmentSalePropertiesDetailsBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
-import com.nikitosii.studyrealtorapp.flow.sales.details.adapter.PropertyImageAdapter
+import com.nikitosii.studyrealtorapp.flow.dashboard.details.adapter.PropertyImageAdapter
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.DateExt.SERVER_YEAR_MONTH_DAY_TIME_PATTERN
 import com.nikitosii.studyrealtorapp.util.ext.DateExt.UI_DATE_PATTERN_WITH_TIME_AND_SPACE

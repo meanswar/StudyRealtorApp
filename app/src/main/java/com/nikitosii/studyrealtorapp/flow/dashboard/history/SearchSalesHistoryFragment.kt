@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.history
+package com.nikitosii.studyrealtorapp.flow.dashboard.history
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentSearchSalesHistoryBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
-import com.nikitosii.studyrealtorapp.flow.sales.SaleRequestAdapter
+import com.nikitosii.studyrealtorapp.flow.dashboard.SaleRequestAdapter
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
 import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
@@ -51,6 +51,6 @@ class SearchSalesHistoryFragment :
     }
 
     private fun openFilterDetails(property: SalesRequest) {
-        SearchSalesHistoryFragmentDirections.openFilters(property).navigate()
+//        SearchSalesHistoryFragmentDirections.openFilters(property).navigate()
     }
 }

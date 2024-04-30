@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.filter
+package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.os.Bundle
 import android.os.Handler
@@ -17,15 +17,12 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentFilterBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
-import com.nikitosii.studyrealtorapp.flow.sales.SaleRequestAdapter
+import com.nikitosii.studyrealtorapp.flow.dashboard.SaleRequestAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.dividerVertical
-import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
-import com.nikitosii.studyrealtorapp.util.ext.invisible
-import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
 import com.nikitosii.studyrealtorapp.util.ext.openKeyboard
@@ -44,7 +41,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     private val _adapter = WeakReference(FilterAdapter { onHouseFilterClick(it) })
     private val recentSearchesAdapter = SaleRequestAdapter { viewModel.getLocalProperties(it) }
-    private val args: FilterSalesFragmentArgs by navArgs()
+//    private val args: FilterSalesFragmentArgs by navArgs()
     private var lastOpenedFilter: ExpandableTextView? = null
     private val isPropertiesLoaded = MutableLiveData(false)
 
@@ -61,10 +58,10 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (args.filter == null) {
-            sharedElementEnterTransition =
-                TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
-        }
+//        if (args.filter == null) {
+//            sharedElementEnterTransition =
+//                TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+//        }
     }
 
     private fun initAnimation() {
@@ -84,13 +81,13 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
         with(binding) {
             adapter?.submitList(Constants.housesList)
             rvHouseTypes.adapter = adapter
-            if (args.filter == null) lFilter.etSearch.openKeyboard()
+//            if (args.filter == null) lFilter.etSearch.openKeyboard()
             rvSaleProperties.adapter = salesPropertiesAdapter
             rvSaleProperties.dividerVertical(R.drawable.divider_vertical_10dp)
             rvRecentSearches.adapter = recentSearchesAdapter
             rvRecentSearches.dividerVertical(R.drawable.divider_vertical_10dp)
         }
-        args.filter?.let { viewModel.getLocalProperties(it) }
+//        args.filter?.let { viewModel.getLocalProperties(it) }
     }
 
     private fun onClick() {
@@ -234,7 +231,7 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
         val extras = FragmentNavigatorExtras(
             view to "properties_photo"
         )
-        FilterSalesFragmentDirections.openPropertyDetails(property).navigate()
+//        FilterSalesFragmentDirections.openPropertyDetails(property).navigate()
     }
 
 }

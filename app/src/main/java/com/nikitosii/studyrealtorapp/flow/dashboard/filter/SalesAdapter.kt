@@ -1,11 +1,9 @@
-package com.nikitosii.studyrealtorapp.flow.sales.filter
+package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
-import com.nikitosii.studyrealtorapp.R
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property

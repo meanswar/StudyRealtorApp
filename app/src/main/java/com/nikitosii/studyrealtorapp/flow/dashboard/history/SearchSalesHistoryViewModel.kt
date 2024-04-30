@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.history
+package com.nikitosii.studyrealtorapp.flow.dashboard.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

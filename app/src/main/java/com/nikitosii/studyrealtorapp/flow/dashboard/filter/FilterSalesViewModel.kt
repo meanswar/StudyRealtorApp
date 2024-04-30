@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.filter
+package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,13 +8,13 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetRecentSaleRequestsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesForSaleUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetSearchHistoryByQueryUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetLocalPropertiesForSaleUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class FilterSalesViewModel @Inject constructor(
     private val getPropertiesForSaleUseCase: GetPropertiesForSaleUseCase,
-    private val getSearchHistoryByQueryUseCase: GetSearchHistoryByQueryUseCase,
+    private val getLocalPropertiesForSaleUseCase: GetLocalPropertiesForSaleUseCase,
     getRecentSaleRequestsUseCase: GetRecentSaleRequestsUseCase
 ) : BaseViewModel() {
     private val filterHouses = mutableListOf<String>()
@@ -82,9 +82,9 @@ class FilterSalesViewModel @Inject constructor(
     }
 
     fun getLocalProperties(query: SalesRequest) {
-        val params = GetSearchHistoryByQueryUseCase.Params.create(query)
+        val params = GetLocalPropertiesForSaleUseCase.Params.create(query)
         ioToUiWorkData(
-            io = { getSearchHistoryByQueryUseCase.execute(params) },
+            io = { getLocalPropertiesForSaleUseCase.execute(params) },
             ui = { _properties.postValue(it) }
         )
     }

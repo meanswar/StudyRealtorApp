@@ -15,6 +15,7 @@ import com.nikitosii.studyrealtorapp.util.ext.getProgress
 import com.nikitosii.studyrealtorapp.util.ext.measureWrapContentHeight
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
+import timber.log.Timber
 
 class AnimatedFilterImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -54,7 +55,7 @@ class AnimatedFilterImageView @JvmOverloads constructor(
             getResourceId(R.styleable.AnimatedImageView_colorTo, R.color.peach).let {
                 _colorActiveFilter.postValue(resources.getColor(it, resources.newTheme()))
             }
-            getResourceId(R.styleable.AnimatedImageView_colorFilled, R.color.peach).let {
+            getResourceId(R.styleable.AnimatedImageView_colorFilled, R.color.blue_end).let {
                 _colorFilledFilter.postValue(resources.getColor(it, resources.newTheme()))
             }
             getBoolean(R.styleable.AnimatedImageView_isRotated, false).let {
@@ -67,11 +68,16 @@ class AnimatedFilterImageView @JvmOverloads constructor(
         setOnClick {}
     }
 
-    fun setIsActive(isFilled: Boolean) {
+    fun setIsFilled(isFilled: Boolean) {
         _isFilled.postValue(isFilled)
+        Timber.i("isFilled: $isFilled")
     }
 
     fun hideIfExpanded() { if (isExpanded) onEndClick() }
+
+    fun toggle() { onEndClick() }
+
+    fun isExpanded() = isExpanded
 
 
     fun initAnimation(targetView: ViewGroup) {
@@ -116,6 +122,11 @@ class AnimatedFilterImageView @JvmOverloads constructor(
     private fun onSettingsAnimationEnd() {
         isAnimating = false
         isExpanded = !isExpanded
+    }
+
+    private fun onSettingsAnimationStart() {
+        isAnimating = true
+        Timber.i("isExpanded: $isExpanded isFilled: $isFilled")
         val colorFrom = when {
             isExpanded && !isFilled -> colorActiveFilter
             isFilled -> colorFilledFilter
@@ -127,10 +138,6 @@ class AnimatedFilterImageView @JvmOverloads constructor(
             else -> colorActiveFilter
         }
         animator.value?.setIntValues(colorFrom, colorTo)
-    }
-
-    private fun onSettingsAnimationStart() {
-        isAnimating = true
         if (isRotated) rotate()
     }
 

@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.filter
+package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView.ViewHolder

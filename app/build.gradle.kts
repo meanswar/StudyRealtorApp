@@ -99,9 +99,6 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.3")
     implementation("com.google.firebase:firebase-dynamic-links-ktx:21.2.0")
 
-
-
-
     //Dagger
     implementation("com.google.dagger:dagger:$dagger")
     kapt("com.google.dagger:dagger-compiler:$dagger")
@@ -114,7 +111,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit")
-
 
     //Chunk
     debugImplementation("com.github.chuckerteam.chucker:library:$chunk")

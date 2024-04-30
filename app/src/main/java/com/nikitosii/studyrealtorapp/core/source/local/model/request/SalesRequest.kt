@@ -15,7 +15,8 @@ data class SalesRequest(
     val bathsMax: Int? = null,
     val sqftMin: Int? = null,
     val sqftMax: Int? = null,
-    val imageUrl: String? = null
+    val imageUrl: String? = null,
+    val requestType: String = "buy"
 ): Parcelable {
     companion object {
         fun create(

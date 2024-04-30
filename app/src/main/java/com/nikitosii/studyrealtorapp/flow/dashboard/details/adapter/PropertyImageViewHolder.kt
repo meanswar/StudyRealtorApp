@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.sales.details.adapter
+package com.nikitosii.studyrealtorapp.flow.dashboard.details.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

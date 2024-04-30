@@ -76,4 +76,9 @@ class RangeView @JvmOverloads constructor(
     private fun setValues(from: Float, to: Float) {
         binding.rsEditor.values = mutableListOf(from, to)
     }
+
+    fun onTextChanged(action: (String, String) -> Unit) {
+        binding.etFrom.onTextChanged { action(it, binding.etTo.text.toString()); calculateValues() }
+        binding.etTo.onTextChanged { action(binding.etFrom.text.toString(), it); calculateValues() }
+    }
 }
