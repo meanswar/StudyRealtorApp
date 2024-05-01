@@ -1,6 +1,9 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.search
 
+import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -23,6 +26,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     FragmentSearchBinding.bind(it)
 }, R.layout.fragment_search) {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+    }
+
     val args: SearchFragmentArgs by navArgs()
     private val salesPropertiesAdapter by lazy {
         SalesAdapter { data, view ->
@@ -33,6 +42,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         }
     }
     private val isPropertiesLoaded = MutableLiveData(true)
+
     override fun initViews() {
         with(binding) {
             rvSaleProperties.adapter = salesPropertiesAdapter
@@ -85,10 +95,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         }
     }
 
-    fun openPropertyDetails(property: Property, view: View) {
+    fun openPropertyDetails(property: Property, view: ImageView) {
+        view.transitionName = TRANSITION_NAME + "result"
         val extras = FragmentNavigatorExtras(
-            view to "properties_photo"
+            view to TRANSITION_NAME
         )
-        SearchFragmentDirections.openPropertyDetails(property).navigate()
+        SearchFragmentDirections.openPropertyDetails(property).navigate(extras)
+    }
+
+    companion object {
+        private const val TRANSITION_NAME = "image_view"
     }
 }

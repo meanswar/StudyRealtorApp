@@ -23,5 +23,5 @@ data class DescriptionResponseApi(
     val pool: String? = null,
     val text: String? = null,
     val type: String? = null,
-    val rooms: String? = null
+    val rooms: Int? = null
 )

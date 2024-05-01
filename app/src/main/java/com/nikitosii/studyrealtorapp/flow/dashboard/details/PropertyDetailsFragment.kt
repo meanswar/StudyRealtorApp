@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.details
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
@@ -39,6 +40,12 @@ class PropertyDetailsFragment :
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+//        enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+//        exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun initViews() {
@@ -69,6 +76,7 @@ class PropertyDetailsFragment :
             tvGarage.showText(data?.garage.toString())
             tvFilterSqft.showText(data?.sqft.toString())
             tvBeds.showText(data?.beds.toString())
+            tvRooms.showText(data?.rooms.toString())
         }
     }
 
@@ -95,7 +103,9 @@ class PropertyDetailsFragment :
 
     private fun setPropertyDetailsData(property: PropertyDetails?) {
         with(binding) {
-
+            setPropertyDescriptionFilters(property?.description)
+            tvPropertyDescription.text = property?.description?.text
+            tvPropertyStatus.text = property?.status
         }
     }
 }

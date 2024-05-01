@@ -2,14 +2,14 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
 
-class SalesAdapter(private val onItemClick: (Property, View) -> Unit) :
+class SalesAdapter(private val onItemClick: (Property, ImageView) -> Unit) :
     ListAdapter<Property, SalesPropertyViewHolder>(PropertyDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesPropertyViewHolder {

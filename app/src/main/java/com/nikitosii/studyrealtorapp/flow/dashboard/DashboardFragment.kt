@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
@@ -142,8 +143,11 @@ class DashboardFragment :
     }
 
     private fun openSearchScreen() {
+        val extras = FragmentNavigatorExtras(
+            binding.svSearch to "svSearch"
+        )
         if(viewModel.checkFilters())
-        DashboardFragmentDirections.openSearchScreen(viewModel.buildSaleRequest(), false).navigate()
+        DashboardFragmentDirections.openSearchScreen(viewModel.buildSaleRequest(), false).navigate(extras)
     }
 
     companion object {

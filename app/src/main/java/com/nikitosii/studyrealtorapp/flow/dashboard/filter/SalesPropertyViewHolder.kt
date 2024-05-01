@@ -1,6 +1,5 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
-import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,7 +15,7 @@ import com.nikitosii.studyrealtorapp.util.ext.showText
 
 class SalesPropertyViewHolder(
     private val binding: ItemSalesBinding,
-    private val onItemClick: (Property, view: View) -> Unit
+    private val onItemClick: (Property, view: ImageView) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(property: Property) {
         with(binding) {
@@ -47,7 +46,7 @@ class SalesPropertyViewHolder(
 
     private fun setPropertyImage(data: Property) {
         with(binding) {
-            lavSoldProperty.show(data.description?.soldDate == null || data.description.soldPrice == null)
+//            lavSoldProperty.show(data.description?.soldDate == null || data.description.soldPrice == null)
             setImage(data.primaryPhoto.url, ivProperty)
         }
     }

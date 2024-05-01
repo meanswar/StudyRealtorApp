@@ -17,6 +17,9 @@ data class Description(
     val name: String? = null,
     val sqft: Int? = null,
     val type: String? = null,
+    val rooms: Int? = null,
+    val pool: String? = null,
+    val text: String? = null,
 ): Parcelable {
     companion object {
         fun from(data: DescriptionResponseApi?): Description = Description(
@@ -31,6 +34,9 @@ data class Description(
             name = data?.name,
             sqft = data?.sqft,
             type = data?.type,
+            text = data?.text,
+            pool = data?.pool,
+            rooms = data?.rooms
         )
     }
 }
