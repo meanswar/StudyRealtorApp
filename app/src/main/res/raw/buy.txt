@@ -1,0 +1,1407 @@
+{
+  "home": {
+    "advertisers": [
+      {
+        "builder": null,
+        "office": {
+          "phones": [
+            {
+              "ext": null,
+              "number": "(617) 731-2447",
+              "primary": true,
+              "trackable": null,
+              "type": "Office"
+            }
+          ]
+        },
+        "state_license": "",
+        "team": null,
+        "team_name": null,
+        "type": "seller"
+      }
+    ],
+    "branding": [
+      {
+        "accent_color": null,
+        "name": "Luan White",
+        "phone": null,
+        "photo": null,
+        "slogan": null,
+        "type": "Agent"
+      },
+      {
+        "accent_color": null,
+        "name": "Coldwell Banker Realty - Brookline",
+        "phone": null,
+        "photo": null,
+        "slogan": null,
+        "type": "Office"
+      }
+    ],
+    "builder": null,
+    "coming_soon_date": null,
+    "community": null,
+    "consumer_advertisers": [
+      {
+        "address": null,
+        "advertiser_id": "71380",
+        "agent_id": "71380",
+        "broker_id": null,
+        "contact_name": null,
+        "hours": null,
+        "href": "/realestateagents/Luan-White_Boston_MA_71380_684294055",
+        "name": "Luan White",
+        "phone": null,
+        "photo": {
+          "description": null,
+          "href": null,
+          "type": null
+        },
+        "show_realtor_logo": true,
+        "slogan": null,
+        "type": "Agent"
+      },
+      {
+        "address": {
+          "city": "BROOKLINE",
+          "state_code": "MA"
+        },
+        "advertiser_id": "71380",
+        "agent_id": "71380",
+        "broker_id": null,
+        "contact_name": null,
+        "hours": null,
+        "href": "https://www.coldwellbanker.com/ma/boston/70-mount-vernon-st-unit-4a/lid-P00800000GYVLRW4w9AljHiJPpLYs5wgutyTJBxf",
+        "name": "Coldwell Banker Realty - Brookline",
+        "phone": "(617) 731-2447",
+        "photo": {
+          "description": null,
+          "href": null,
+          "type": null
+        },
+        "show_realtor_logo": false,
+        "slogan": null,
+        "type": "Office"
+      }
+    ],
+    "description": {
+      "baths": 2,
+      "baths_1qtr": null,
+      "baths_3qtr": null,
+      "baths_consolidated": "2",
+      "baths_full": 2,
+      "baths_half": null,
+      "baths_max": null,
+      "baths_min": null,
+      "beds": 2,
+      "beds_max": null,
+      "beds_min": null,
+      "garage": null,
+      "lot_sqft": null,
+      "name": null,
+      "pool": null,
+      "rooms": null,
+      "sqft": 1805,
+      "sqft_max": null,
+      "sqft_min": null,
+      "stories": 1,
+      "sub_type": "condo",
+      "text": "Exquisite and elegant large 2 bedroom, 2 bath unit in historic Beacon Hill. This professionally managed elevator building offers a beautiful renovated lobby with a live-in superintendent. Steps away from Louisberg Square, Charles and Beacon Streets. The unit offers over-sized windows, crown moldings and a large south facing living room. Formal diningroom, large master bedroom and very spacious second bedroom. In unit washer/dryer and abundance of closet space. The updated kitchen offers quartz counters and stainless steel appliances. The association has high owner occupancy, bike storage, central AC, common roof deck with amazing views of downtown, courtyard, fitness room and is pet friendly. Conveniently located minutes from the Boston Garden, Boston Common, Mass General Hospital, public transportation and all the fantastic shops and restaurants that Beacon Hill and Back Bay have to offer.",
+      "type": "condos",
+      "unit_type": null,
+      "units": 30,
+      "year_built": 1850
+    },
+    "details": [
+      {
+        "category": "Bedrooms",
+        "parent_category": "Interior",
+        "text": [
+          "Bedrooms: 2",
+          "Bedrooms On Main Level: 2",
+          "Primary Bedroom Level: Main, First",
+          "Bedroom 2 Level: Main, First",
+          "Primary Bedroom Features: Bathroom - Full, Closet, Remodeled",
+          "Bedroom 2 Features: Bathroom - Full, Closet, Dressing Room, Recessed Lighting, Remodeled"
+        ]
+      },
+      {
+        "category": "Other Rooms",
+        "parent_category": "Interior",
+        "text": [
+          "Total Rooms: 5",
+          "Entry Foyer Level: 4",
+          "Living Room Level: Main, First",
+          "Living Room Features: Open Floorplan, Recessed Lighting, Remodeled, Crown Molding",
+          "Basement Description: Y",
+          "Exercise Room: Yes"
+        ]
+      },
+      {
+        "category": "Bathrooms",
+        "parent_category": "Interior",
+        "text": [
+          "Total Bathrooms: 2",
+          "Full Bathrooms: 2",
+          "Bathrooms On Main Level: 2",
+          "Bathroom 1 Level: Main, First",
+          "Bathroom 2 Level: Main, First",
+          "Primary Bathroom Features: Yes",
+          "Bathroom 1 Features: Bathroom - Full, Bathroom - Tiled With Tub & Shower, Recessed Lighting",
+          "Bathroom 2 Features: Bathroom - Full, Bathroom - With Shower Stall, Flooring - Stone/Ceramic Tile, Recessed Lighting"
+        ]
+      },
+      {
+        "category": "Interior Features",
+        "parent_category": "Interior",
+        "text": [
+          "Elevator",
+          "Window Features: Insulated Windows"
+        ]
+      },
+      {
+        "category": "Appliances",
+        "parent_category": "Interior",
+        "text": [
+          "Range",
+          "Dishwasher",
+          "Disposal",
+          "Microwave",
+          "Refrigerator",
+          "Washer",
+          "Dryer",
+          "Laundry Features: Main Level, Electric Dryer Hookup, Washer Hookup, First Floor, In Building, In Unit"
+        ]
+      },
+      {
+        "category": "Heating and Cooling",
+        "parent_category": "Interior",
+        "text": [
+          "Cooling Features: Central Air, Unit Control",
+          "Heating Features: Central, Natural Gas, Unit Control",
+          "Heating: Yes"
+        ]
+      },
+      {
+        "category": "Kitchen and Dining",
+        "parent_category": "Interior",
+        "text": [
+          "Dining Room Features: Coffered Ceiling(s), Remodeled",
+          "Dining Room Level: Main, First",
+          "Kitchen Features: Flooring - Stone/Ceramic Tile, Countertops - Stone/Granite/Solid, Countertops - Upgraded, Recessed Lighting, Remodeled",
+          "Kitchen Level: Main, First"
+        ]
+      },
+      {
+        "category": "Exterior and Lot Features",
+        "parent_category": "Exterior",
+        "text": [
+          "Deck - Roof + Access Rights",
+          "City View(s)",
+          "Garden",
+          "Professional Landscaping",
+          "Patio And Porch Features: Deck - Roof + Access Rights"
+        ]
+      },
+      {
+        "category": "Garage and Parking",
+        "parent_category": "Exterior",
+        "text": [
+          "Open Parking: Yes",
+          "Parking Features: On Street"
+        ]
+      },
+      {
+        "category": "Home Features",
+        "parent_category": "Exterior",
+        "text": [
+          "View: City",
+          "Other Equipment: Intercom",
+          "Security Features: Intercom"
+        ]
+      },
+      {
+        "category": "Homeowners Association",
+        "parent_category": "Community",
+        "text": [
+          "Association: Yes",
+          "Association Amenities: Hot Water, Laundry, Elevator(s), Fitness Center, Storage, Garden Area",
+          "Association Fee: 1362",
+          "Association Fee Frequency: Monthly",
+          "Association Fee Includes: Heat, Gas, Water, Sewer, Insurance, Security, Maintenance Structure, Maintenance Grounds, Snow Removal, Trash, Reserve Funds",
+          "Calculated Total Monthly Association Fees: 1362",
+          "Pets Allowed: Yes w/ Restrictions"
+        ]
+      },
+      {
+        "category": "Multi-Unit Info",
+        "parent_category": "Community",
+        "text": [
+          "Number of Units: 30"
+        ]
+      },
+      {
+        "category": "Amenities and Community Features",
+        "parent_category": "Community",
+        "text": [
+          "Community Features: Public Transportation, Shopping, Park, Walk/Jog Trails, Medical Facility, Laundromat, Conservation Area, Highway Access, House of Worship, Private School, Public School, T-Station, University"
+        ]
+      },
+      {
+        "category": "Other Property Info",
+        "parent_category": "Listing",
+        "text": [
+          "Annual Tax Amount: 22305",
+          "City Region: Beacon Hill",
+          "Source Listing Status: New",
+          "County: Suffolk",
+          "Directions: Charles Street to Mt. Vernon St.",
+          "Tax Year: 2024",
+          "Source Property Type: Residential",
+          "Property Subtype: condo",
+          "Zoning: CD",
+          "Property Subtype: Condominium",
+          "Source System Name: C2C"
+        ]
+      },
+      {
+        "category": "Building and Construction",
+        "parent_category": "Features",
+        "text": [
+          "Year Built: 1850",
+          "Building Area Total: 1805",
+          "Building Area Units: Square Feet",
+          "Building Name: The Hill",
+          "Construction Materials: Stone",
+          "Entry Location: Unit Placement(Upper)",
+          "Property Age: 174",
+          "Property Attached: Yes",
+          "Levels or Stories: 1",
+          "Structure Type: Mid-Rise",
+          "Year Built Details: Approximate",
+          "Year Built Source: Public Records"
+        ]
+      },
+      {
+        "category": "Accessibility Features",
+        "parent_category": "Features",
+        "text": [
+          "Accessibility  Features: Accessible Entrance"
+        ]
+      },
+      {
+        "category": "Utilities",
+        "parent_category": "Features",
+        "text": [
+          "Sewer: Public Sewer",
+          "for Electric Range",
+          "for Electric Dryer",
+          "Washer Hookup",
+          "Water Source: Public"
+        ]
+      }
+    ],
+    "flags": {
+      "is_coming_soon": null,
+      "is_contingent": null,
+      "is_deal_available": null,
+      "is_foreclosure": null,
+      "is_new_construction": null,
+      "is_new_listing": true,
+      "is_pending": null,
+      "is_price_excludes_land": null,
+      "is_price_reduced": null,
+      "is_senior_community": null,
+      "is_short_sale": null,
+      "is_subdivision": null
+    },
+    "floorplans": {
+      "floorplan_2d": [],
+      "floorplan_3d": [],
+      "floorplan_interactive": []
+    },
+    "hoa": {
+      "fee": 1362
+    },
+    "home_tours": {
+      "virtual_tours": []
+    },
+    "href": "https://www.realtor.com/realestateandhomes-detail/70-Mount-Vernon-St-Unit-4_Boston_MA_02108_M38327-46224",
+    "last_price_change_amount": null,
+    "lead_attributes": {
+      "disclaimer_text": null,
+      "is_tcpa_message_enabled": null,
+      "lead_type": "co_broke",
+      "opcity_lead_attributes": {
+        "cashback_enabled": false,
+        "flip_the_market_enabled": true,
+        "phones": [
+          {
+            "category": "comm_console",
+            "number": "(857)226-8473"
+          },
+          {
+            "category": "schedule_tour",
+            "number": "(857)226-8473"
+          }
+        ],
+        "smarthome_enabled": false
+      },
+      "ready_connect_mortgage": {
+        "show_contact_a_lender": false,
+        "show_veterans_united": false
+      },
+      "show_contact_an_agent": true,
+      "show_lead_form": true,
+      "show_text_leads": true
+    },
+    "list_date": "2024-05-01T19:40:21Z",
+    "list_price": 2349000,
+    "list_price_max": null,
+    "list_price_min": null,
+    "listing_id": "2966837113",
+    "local": {
+      "flood": {
+        "fema_zone": [
+          "X (unshaded)"
+        ],
+        "flood_factor_score": 1
+      }
+    },
+    "location": {
+      "address": {
+        "city": "Boston",
+        "coordinate": {
+          "lat": 42.357991,
+          "lon": -71.067671
+        },
+        "country": "USA",
+        "line": "70 Mount Vernon St Unit 4",
+        "postal_code": "02108",
+        "state": "Massachusetts",
+        "state_code": "MA",
+        "street_direction": null,
+        "street_name": "Mount Vernon",
+        "street_number": "70",
+        "street_post_direction": null,
+        "street_suffix": "St",
+        "unit": "Unit 4",
+        "validation_code": "111"
+      },
+      "city": {
+        "county": "Suffolk",
+        "county_needed_for_uniq": false,
+        "slug_id": "Boston_MA"
+      },
+      "county": {
+        "fips_code": "25025",
+        "name": "Suffolk"
+      },
+      "cross_street": null,
+      "driving_directions": null,
+      "neighborhoods": [
+        {
+          "geo_statistics": {
+            "housing_market": {
+              "by_prop_type": [
+                {
+                  "attributes": {
+                    "median_days_on_market": 34,
+                    "median_listing_price": 1837000,
+                    "median_lot_size": 1262,
+                    "median_price_per_sqft": 1336,
+                    "median_sold_price": 999000
+                  },
+                  "type": "home"
+                }
+              ],
+              "hot_market_badge": null,
+              "local_hotness_score": null,
+              "median_days_on_market": 34,
+              "median_listing_price": 1899000,
+              "median_price_per_sqft": 1320,
+              "median_sold_price": 999000,
+              "national_hotness_score": null
+            }
+          },
+          "level": "macro_neighborhood",
+          "name": "Fenway - Kenmore",
+          "recommended": {
+            "geos": [
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 1300000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 1317450
+                  }
+                },
+                "name": "South End",
+                "slug_id": "South-End_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 2497500
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 2500000
+                  }
+                },
+                "name": "Back Bay",
+                "slug_id": "Back-Bay_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 2537500
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 2537500
+                  }
+                },
+                "name": "Downtown Boston",
+                "slug_id": "Downtown-Boston_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 1125000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 1145000
+                  }
+                },
+                "name": "North End",
+                "slug_id": "North-End_Boston_MA"
+              }
+            ]
+          },
+          "slug_id": "Fenway-Kenmore_Boston_MA"
+        },
+        {
+          "geo_statistics": {
+            "housing_market": {
+              "by_prop_type": [
+                {
+                  "attributes": {
+                    "median_days_on_market": 38,
+                    "median_listing_price": 5222500,
+                    "median_lot_size": 1425,
+                    "median_price_per_sqft": 1586,
+                    "median_sold_price": null
+                  },
+                  "type": "home"
+                }
+              ],
+              "hot_market_badge": "Other",
+              "local_hotness_score": 37.121212121,
+              "median_days_on_market": 36,
+              "median_listing_price": 5450000,
+              "median_price_per_sqft": 1527,
+              "median_sold_price": null,
+              "national_hotness_score": 55.062175204
+            }
+          },
+          "level": "sub_neighborhood",
+          "name": "South Slope",
+          "recommended": {
+            "geos": [
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 1300000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 1317450
+                  }
+                },
+                "name": "South End",
+                "slug_id": "South-End_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 2497500
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 2500000
+                  }
+                },
+                "name": "Back Bay",
+                "slug_id": "Back-Bay_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 1450000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 1474750
+                  }
+                },
+                "name": "South Boston Waterfront",
+                "slug_id": "South-Boston-Waterfront_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 2537500
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 2537500
+                  }
+                },
+                "name": "Downtown Boston",
+                "slug_id": "Downtown-Boston_Boston_MA"
+              }
+            ]
+          },
+          "slug_id": "South-Slope_Boston_MA"
+        },
+        {
+          "geo_statistics": {
+            "housing_market": {
+              "by_prop_type": [
+                {
+                  "attributes": {
+                    "median_days_on_market": 37,
+                    "median_listing_price": 3274500,
+                    "median_lot_size": 1262,
+                    "median_price_per_sqft": 1425,
+                    "median_sold_price": 800000
+                  },
+                  "type": "home"
+                }
+              ],
+              "hot_market_badge": "Other",
+              "local_hotness_score": 8.333333333,
+              "median_days_on_market": 36,
+              "median_listing_price": 3299000,
+              "median_price_per_sqft": 1377,
+              "median_sold_price": 800000,
+              "national_hotness_score": 41.030994803
+            }
+          },
+          "level": "neighborhood",
+          "name": "Beacon Hill",
+          "recommended": {
+            "geos": [
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 2497500
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 2500000
+                  }
+                },
+                "name": "Back Bay",
+                "slug_id": "Back-Bay_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 1300000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 1317450
+                  }
+                },
+                "name": "South End",
+                "slug_id": "South-End_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 2537500
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 2537500
+                  }
+                },
+                "name": "Downtown Boston",
+                "slug_id": "Downtown-Boston_Boston_MA"
+              },
+              {
+                "city": "Boston",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 1125000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 1145000
+                  }
+                },
+                "name": "North End",
+                "slug_id": "North-End_Boston_MA"
+              }
+            ]
+          },
+          "slug_id": "Beacon-Hill_Boston_MA"
+        }
+      ],
+      "postal_code": {
+        "geo_statistics": {
+          "housing_market": {
+            "hot_market_badge": "Other"
+          }
+        },
+        "slug_id": "02108"
+      },
+      "street_view_metadata_url": "https://maps.googleapis.com/maps/api/streetview/metadata?channel=rdc-streetview&client=gme-movesalesinc&location=70%20Mount%20Vernon%20St%20Unit%204%2C%20Boston%2C%20MA%2002108&size=640x480&source=outdoor&signature=6luDtQoh7LAHocwli-3-wp9BCxE=",
+      "street_view_url": "https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=70%20Mount%20Vernon%20St%20Unit%204%2C%20Boston%2C%20MA%2002108&size=640x480&source=outdoor&signature=o8kKh7G_6p0updv_XB_fBmFXzbE="
+    },
+    "matterport": null,
+    "move_in_date": null,
+    "open_houses": null,
+    "other_listings": {
+      "rdc": [
+        {
+          "listing_id": "2966837113",
+          "status": "for_sale"
+        },
+        {
+          "listing_id": "2963001404",
+          "status": "off_market"
+        },
+        {
+          "listing_id": "597291309",
+          "status": "sold"
+        },
+        {
+          "listing_id": "550294265",
+          "status": "sold"
+        },
+        {
+          "listing_id": "547169445",
+          "status": "off_market"
+        }
+      ]
+    },
+    "permalink": "70-Mount-Vernon-St-Unit-4_Boston_MA_02108_M38327-46224",
+    "photo_count": 31,
+    "photos": [
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b169829023s.jpg",
+        "tags": [
+          {
+            "label": "door",
+            "probability": 0.6635209918022156
+          },
+          {
+            "label": "porch",
+            "probability": 0.9957973957061768
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b378949230s.jpg",
+        "tags": [
+          {
+            "label": "door",
+            "probability": 0.9153147339820862
+          },
+          {
+            "label": "porch",
+            "probability": 0.9560779929161072
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1505456896s.jpg",
+        "tags": [
+          {
+            "label": "condo",
+            "probability": 0.9724410176277161
+          },
+          {
+            "label": "road",
+            "probability": 0.8932609558105469
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1717058253s.jpg",
+        "tags": [
+          {
+            "label": "other_interiors",
+            "probability": 0.9561368227005005
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2133294573s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.999306321144104
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2752859766s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 1
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b3596072291s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.9900998473167419
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1977712609s.jpg",
+        "tags": [
+          {
+            "label": "dining_room",
+            "probability": 0.9301438331604004
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1460821146s.jpg",
+        "tags": [
+          {
+            "label": "dining_room",
+            "probability": 0.9999885559082031
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b701193719s.jpg",
+        "tags": [
+          {
+            "label": "kitchen",
+            "probability": 0.9999978542327881
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1866891493s.jpg",
+        "tags": [
+          {
+            "label": "kitchen",
+            "probability": 0.9877540469169617
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1750250132s.jpg",
+        "tags": [
+          {
+            "label": "kitchen",
+            "probability": 0.9999991655349731
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1272041100s.jpg",
+        "tags": [
+          {
+            "label": "bedroom",
+            "probability": 0.9658676385879517
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b757945118s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.9999524354934692
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b3635251441s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.7580363750457764
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2399101678s.jpg",
+        "tags": [
+          {
+            "label": "bathroom",
+            "probability": 0.9999977350234985
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2982889667s.jpg",
+        "tags": [
+          {
+            "label": "bedroom",
+            "probability": 0.9999992847442627
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1675856957s.jpg",
+        "tags": [
+          {
+            "label": "bedroom",
+            "probability": 0.9988905787467957
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2239239302s.jpg",
+        "tags": [
+          {
+            "label": "utility_room",
+            "probability": 0.9999997615814209
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1874204180s.jpg",
+        "tags": [
+          {
+            "label": "bathroom",
+            "probability": 0.9999994039535522
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2074367728s.jpg",
+        "tags": [
+          {
+            "label": "other_exterior",
+            "probability": 0
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1647660627s.jpg",
+        "tags": [
+          {
+            "label": "other_exterior",
+            "probability": 0
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b240570211s.jpg",
+        "tags": [
+          {
+            "label": "condo",
+            "probability": 0.6542126536369324
+          },
+          {
+            "label": "patio",
+            "probability": 0.9917902946472168
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b2704686683s.jpg",
+        "tags": [
+          {
+            "label": "kitchen",
+            "probability": 0.9997608065605164
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b271571677s.jpg",
+        "tags": [
+          {
+            "label": "bedroom",
+            "probability": 0.9999983310699463
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b3133778748s.jpg",
+        "tags": [
+          {
+            "label": "other_interiors",
+            "probability": 0.8799047470092773
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1064686088s.jpg",
+        "tags": [
+          {
+            "label": "balcony",
+            "probability": 0.9368593692779541
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b4012092472s.jpg",
+        "tags": [
+          {
+            "label": "aerial_view",
+            "probability": 0.9896203279495239
+          },
+          {
+            "label": "condo",
+            "probability": 0.46741190552711487
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1673368203s.jpg",
+        "tags": [
+          {
+            "label": "aerial_view",
+            "probability": 0.5355877876281738
+          },
+          {
+            "label": "condo",
+            "probability": 0.5813016891479492
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b321348556s.jpg",
+        "tags": [
+          {
+            "label": "balcony",
+            "probability": 0.765746533870697
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ap.rdcpix.com/8b47d6f4d70a3b443f4872ddafe12324l-b1123179688s.jpg",
+        "tags": [
+          {
+            "label": "aerial_view",
+            "probability": 0.8825977444648743
+          }
+        ],
+        "title": null,
+        "type": null
+      }
+    ],
+    "price_per_sqft": 1301,
+    "products": {
+      "brand_name": "basic_opt_in",
+      "products": [
+        "core.agent",
+        "co_broke"
+      ]
+    },
+    "property_history": [
+      {
+        "date": "2024-05-01",
+        "event_name": "Listed",
+        "price": 2349000,
+        "price_sqft": 1301.3850415512466,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2024-04-17",
+        "event_name": "Listing removed",
+        "price": 7500,
+        "price_sqft": 4.1551246537396125,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2024-03-16",
+        "event_name": "Price Changed for rent",
+        "price": 7500,
+        "price_sqft": 4.1551246537396125,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2024-02-19",
+        "event_name": "Price Changed for rent",
+        "price": 8000,
+        "price_sqft": 4.43213296398892,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2024-01-07",
+        "event_name": "Listed for rent",
+        "price": 8600,
+        "price_sqft": 4.7645429362880884,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2017-07-11",
+        "event_name": "Sold",
+        "price": 1850000,
+        "price_sqft": 1024.9307479224376,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2017-05-02",
+        "event_name": "Price Changed",
+        "price": 1895000,
+        "price_sqft": 1049.8614958448754,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2017-03-06",
+        "event_name": "Listed",
+        "price": 2100000,
+        "price_sqft": 1163.4349030470914,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2013-08-28",
+        "event_name": "Sold",
+        "price": 1675000,
+        "price_sqft": 927.9778393351801,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2013-02-12",
+        "event_name": "Listed",
+        "price": 1695000,
+        "price_sqft": 939.0581717451523,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2012-10-22",
+        "event_name": "Listing removed",
+        "price": 1649000,
+        "price_sqft": 974.5862884160756,
+        "source_name": "MLSPIN"
+      },
+      {
+        "date": "2012-10-09",
+        "event_name": "Listed",
+        "price": 1649000,
+        "price_sqft": 974.5862884160756,
+        "source_name": "MLSPIN"
+      }
+    ],
+    "property_id": "3832746224",
+    "provider_url": {
+      "href": "https://www.coldwellbanker.com/ma/boston/70-mount-vernon-st-unit-4a/lid-P00800000GYVLRW4w9AljHiJPpLYs5wgutyTJBxf"
+    },
+    "schools": {
+      "schools": [
+        {
+          "assigned": null,
+          "distance_in_miles": 0.2,
+          "education_levels": [
+            "elementary"
+          ],
+          "funding_type": "private",
+          "grades": [
+            "PK",
+            "K",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "id": "0735805741",
+          "name": "Park Street School",
+          "parent_rating": null,
+          "rating": null,
+          "review_count": 0,
+          "slug": "Park-Street-School-0735805741",
+          "slug_id": "Park-Street-School-0735805741",
+          "student_count": 309,
+          "student_teacher_ratio": null
+        },
+        {
+          "assigned": null,
+          "distance_in_miles": 0.6,
+          "education_levels": [
+            "high"
+          ],
+          "funding_type": "public",
+          "grades": [
+            "11",
+            "12"
+          ],
+          "id": "0735751651",
+          "name": "Boston Adult Academy",
+          "parent_rating": null,
+          "rating": 1,
+          "review_count": 0,
+          "slug": "Boston-Adult-Academy-0735751651",
+          "slug_id": "Boston-Adult-Academy-0735751651",
+          "student_count": 133,
+          "student_teacher_ratio": 9.3
+        },
+        {
+          "assigned": null,
+          "distance_in_miles": 0.7,
+          "education_levels": [
+            "middle",
+            "high"
+          ],
+          "funding_type": "public",
+          "grades": [
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "id": "0735751031",
+          "name": "Quincy Upper School",
+          "parent_rating": 3,
+          "rating": 3,
+          "review_count": 2,
+          "slug": "Quincy-Upper-School-0735751031",
+          "slug_id": "Quincy-Upper-School-0735751031",
+          "student_count": 535,
+          "student_teacher_ratio": 11.2
+        },
+        {
+          "assigned": null,
+          "distance_in_miles": 0.7,
+          "education_levels": [
+            "elementary"
+          ],
+          "funding_type": "public",
+          "grades": [
+            "K",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "id": "0735718341",
+          "name": "Josiah Quincy Elementary School",
+          "parent_rating": 4,
+          "rating": 6,
+          "review_count": 9,
+          "slug": "Josiah-Quincy-Elementary-School-0735718341",
+          "slug_id": "Josiah-Quincy-Elementary-School-0735718341",
+          "student_count": 742,
+          "student_teacher_ratio": 12.3
+        }
+      ],
+      "total": 4
+    },
+    "source": {
+      "disclaimer": {
+        "href": null,
+        "text": "©2024  MLS Property Information Network (MLS PIN). All rights reserved."
+      },
+      "id": "BSMA",
+      "listing_id": "73231549",
+      "name": "MLSPIN",
+      "plan_id": null,
+      "raw": {
+        "style": null,
+        "tax_amount": 22305
+      },
+      "spec_id": null,
+      "type": "mls"
+    },
+    "status": "for_sale",
+    "suppression_flags": {
+      "has_suppress_foreclosure": true,
+      "has_suppress_on_move_dot_com": true
+    },
+    "tags": [
+      "central_air",
+      "central_heat",
+      "city_view",
+      "community_gym",
+      "community_outdoor_space",
+      "community_security_features",
+      "dining_room",
+      "dishwasher",
+      "laundry_room",
+      "pets_allowed",
+      "recreation_facilities",
+      "view",
+      "washer_dryer",
+      "basement",
+      "single_story",
+      "updated_kitchen",
+      "master_bedroom",
+      "elevator",
+      "views",
+      "medicalcare",
+      "shopping"
+    ],
+    "tax_history": null,
+    "unit_count": null,
+    "units": null,
+    "videos": null,
+    "virtual_tours": null
+  }
+}
