@@ -18,7 +18,7 @@
             app:destination="@id/searchSaleHistoryFragment" />
         <action
             android:id="@+id/openPropertyDetails"
-            app:destination="@id/salePropertyDetailsFragment" />
+            app:destination="@id/propertyDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -34,7 +34,7 @@
             app:argType="boolean" />
         <action
             android:id="@+id/openPropertyDetails"
-            app:destination="@id/salePropertyDetailsFragment" />
+            app:destination="@id/propertyDetailsFragment" />
 
     </fragment>
     <fragment
@@ -47,13 +47,27 @@
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/salePropertyDetailsFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.details.PropertyDetailsFragment"
+        android:id="@+id/propertyDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsFragment"
         android:label="Sale Property Details Fragment"
         tools:layout="@layout/fragment_property_details">
         <argument
             android:name="property"
             app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.Property"
+            app:nullable="false" />
+        <action
+            android:id="@+id/openPropertyPhotosScreen"
+            app:destination="@id/propertyPhotosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/propertyPhotosFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.property_photos.PropertyPhotosFragment"
+        android:label="Property Photos Fragment"
+        tools:layout="@layout/fragment_property_photos">
+        <argument
+            android:name="container"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.parcelize.PhotoContainer"
             app:nullable="false" />
     </fragment>
 

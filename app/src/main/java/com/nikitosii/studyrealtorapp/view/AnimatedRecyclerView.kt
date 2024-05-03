@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitosii.studyrealtorapp.R
+import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
 
 
 class AnimatedRecyclerView @JvmOverloads constructor(
@@ -33,6 +34,7 @@ class AnimatedRecyclerView @JvmOverloads constructor(
             R.styleable.AnimatedRecyclerView_layoutManagerOrientation,
             orientation
         )
+       typedArray.getBoolean(R.styleable.AnimatedRecyclerView_pagerSnap, false).let { if (it) attachPagerSnap() }
         reverse =
             typedArray.getBoolean(R.styleable.AnimatedRecyclerView_layoutManagerReverse, reverse)
         animationDuration =

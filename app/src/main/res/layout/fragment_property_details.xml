@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_content">
 
     <com.nikitosii.studyrealtorapp.view.RealtorToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/size_1dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startAnimationSpeed="2.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
@@ -42,14 +42,27 @@
                 app:layout_constraintGuide_percent="0.95" />
 
             <ImageView
-                android:id="@+id/ivPropertyImage"
+                android:id="@+id/ivProperty"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_0dp"
                 android:scaleType="centerCrop"
-                android:transitionName="image_viewresult"
                 app:layout_constraintDimensionRatio="H,1.2:1"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/london" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPropertyImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_0dp"
+                android:clipToPadding="false"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintDimensionRatio="H,1.2:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:reverseLayout="false"
+                tools:listitem="@layout/item_photo" />
 
             <TextView
                 android:id="@+id/tvBranding"
@@ -83,18 +96,16 @@
                 android:id="@+id/sToImage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="H,1.3:1"
+                app:layout_constraintDimensionRatio="H,1.4:1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clContent"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_white_corners_top_20dp"
-                android:layoutAnimation="@anim/recycle_view_anim"
                 android:paddingHorizontal="@dimen/size_20dp"
                 android:paddingVertical="@dimen/size_20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sToImage"
                 tools:layoutAnimation="@null">
 
@@ -196,10 +207,10 @@
                     tools:text="New York, USA" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/tvPropertyType"
                     style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvPropertyAddress"
                     tools:text="Single Family" />
 
@@ -222,39 +233,76 @@
                     tools:text="Last Update: 15 Jan 2022, 15:00"
                     tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/tvPropertyDescriptionTitle"
-                    style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clContentDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_20dp"
-                    android:text="@string/screen_sale_property_details_property_description_title"
-                    app:layout_constraintStart_toStartOf="@id/tvPropertyPrice"
-                    app:layout_constraintTop_toBottomOf="@id/tvSalePropertyTime" />
+                    android:background="@drawable/bg_content_almost_transparent_corners_20dp"
+                    android:padding="@dimen/size_10dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvSalePropertyTime">
 
-                <TextView
-                    android:id="@+id/tvPropertyStatus"
-                    style="@style/AppTheme.Text.Paragraph4.Teflon"
+                    <TextView
+                        android:id="@+id/tvPropertyDescriptionTitle"
+                        style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/screen_sale_property_details_property_description_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPropertyStatus"
+                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_4dp"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyDescriptionTitle"
+                        tools:text="Sale Type: For Sale"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvPropertyDescription"
+                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_4dp"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyStatus"
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                    android:id="@+id/rvPropertyDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@id/tvPropertyPrice"
-                    app:layout_constraintTop_toBottomOf="@id/tvPropertyDescriptionTitle"
-                    tools:text="Sale Type: For Sale"
-                    tools:visibility="visible" />
+                    android:clipToPadding="false"
+                    android:descendantFocusability="blocksDescendants"
+                    app:animationDuration="500"
+                    app:layoutAnimation="@anim/recycle_view_from_end"
+                    app:layoutManagerOrientation="horizontal"
+                    app:layoutManagerType="linear"
+                    app:pagerSnap="true"
+                    app:layout_constraintTop_toBottomOf="@id/clContentDescription" />
 
-                <TextView
-                    android:id="@+id/tvPropertyDescription"
-                    style="@style/AppTheme.Text.Paragraph4.Teflon"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvMapContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    app:layout_constraintStart_toStartOf="@id/tvPropertyPrice"
-                    app:layout_constraintTop_toBottomOf="@id/tvPropertyStatus"
-                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+                    android:layout_height="@dimen/size_150dp"
+                    app:cardCornerRadius="@dimen/size_30dp"
+                    app:cardElevation="@dimen/size_5dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintTop_toBottomOf="@id/rvPropertyDetails">
 
+                    <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        map:cameraZoom="4" />
 
+                </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -19,6 +20,7 @@ class SalesPropertyViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(property: Property) {
         with(binding) {
+            ViewCompat.setTransitionName(ivProperty, property.propertyId)
             setPropertyImage(property)
             setBrandingLogoData(property.branding?.first())
 

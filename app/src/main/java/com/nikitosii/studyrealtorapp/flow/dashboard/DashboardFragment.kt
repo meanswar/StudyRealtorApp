@@ -2,7 +2,6 @@ package com.nikitosii.studyrealtorapp.flow.dashboard
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
 import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
@@ -16,10 +15,9 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.dividerHorizontal
+import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
 
 @RequiresViewModel(DashboardViewModel::class)
@@ -139,7 +137,10 @@ class DashboardFragment :
     }
 
     private fun onSaleRequestClick(filter: SalesRequest) {
-        DashboardFragmentDirections.openSearchScreen(filter, true).navigate()
+        val extras = FragmentNavigatorExtras(
+            binding.svSearch to "svSearch"
+        )
+        DashboardFragmentDirections.openSearchScreen(filter, true).navigate(extras)
     }
 
     private fun openSearchScreen() {

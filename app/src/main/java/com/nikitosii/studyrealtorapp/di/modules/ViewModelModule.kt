@@ -7,7 +7,7 @@ import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
 import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardViewModel
-import com.nikitosii.studyrealtorapp.flow.dashboard.details.PropertyDetailsViewModel
+import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterSalesViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchViewModel

@@ -19,6 +19,7 @@
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />
         </attr>
+        <attr name="pagerSnap" format="boolean" />
         <attr name="layoutManagerReverse" format="boolean" />
         <attr name="layoutManagerType" format="integer">
             <enum name="linear" value="0" />

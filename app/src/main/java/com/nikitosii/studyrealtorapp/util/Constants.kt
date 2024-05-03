@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.util
 
+import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType.*
 import kotlinx.coroutines.flow.SharedFlow

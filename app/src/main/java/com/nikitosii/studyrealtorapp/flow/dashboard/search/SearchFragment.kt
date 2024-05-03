@@ -2,8 +2,9 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.search
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.view.View
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -29,7 +30,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+            TransitionInflater.from(activity).inflateTransition(android.R.transition.move)
     }
 
     val args: SearchFragmentArgs by navArgs()
@@ -52,10 +53,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
                 if (it) rvSaleProperties.show()
             }
         }
-        getStartingData()
+        getPropertiesData()
     }
 
-    private fun getStartingData() {
+    private fun getPropertiesData() {
         if (viewModel.isDataAlreadyUploaded.value == false) {
             if (args.localRequest) viewModel.getLocalSaleProperties(args.saleRequest)
             else viewModel.getSaleProperties(args.saleRequest)
@@ -95,15 +96,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         }
     }
 
-    fun openPropertyDetails(property: Property, view: ImageView) {
-        view.transitionName = TRANSITION_NAME + "result"
+    private fun openPropertyDetails(property: Property, view: ImageView) {
         val extras = FragmentNavigatorExtras(
-            view to TRANSITION_NAME
+            view to view.transitionName
         )
         SearchFragmentDirections.openPropertyDetails(property).navigate(extras)
-    }
-
-    companion object {
-        private const val TRANSITION_NAME = "image_view"
     }
 }

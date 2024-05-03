@@ -7,10 +7,10 @@ import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
 import com.nikitosii.studyrealtorapp.flow.base.InjectableActivity
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.hide
-import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.hasPushNotificationPermission
+import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.requestNotificationPermission
+import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.start
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 

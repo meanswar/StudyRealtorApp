@@ -1,5 +1,6 @@
 package com.studyrealtorapp.di.modules
 
+import android.content.Context
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
@@ -32,13 +33,15 @@ object RepoModule {
         @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
         channelRecreateObserver: ChannelRecreateObserver,
         connectivityProvider: ConnectivityProvider,
+        context: Context
     ): PropertiesRepo = PropertiesRepoImpl(
         api,
         dao,
         io,
         channelRecreateObserver,
         connectivityProvider,
-        networkErrorHandler
+        networkErrorHandler,
+        context
     )
 
     @Provides

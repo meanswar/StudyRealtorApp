@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.core.source.net.model.property
 
 import com.nikitosii.studyrealtorapp.core.source.net.model.data.BrandingResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.description.DescriptionResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.description.DetailsResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.DetailedLocationResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.photo.PhotoResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.school.EducationFacilitiesResponseApi
@@ -16,6 +17,7 @@ data class PropertyDetailsResponseApi(
     @Json(name = "coming_soon_date")
     val comingSoonDate: String? = null,
     val description: DescriptionResponseApi? = null,
+    val details: List<DetailsResponseApi>? = null,
     @Json(name = "last_update_date")
     val lastUpdateDate: String? = null,
     @Json(name = "list_date")
@@ -25,7 +27,7 @@ data class PropertyDetailsResponseApi(
     @Json(name = "listing_id")
     val listingId: String? = null,
     val location: DetailedLocationResponseApi? = null,
-    val photoResponseApi: List<PhotoResponseApi>? = null,
+    val photos: List<PhotoResponseApi>? = null,
     val schools: EducationFacilitiesResponseApi? = null,
     val source: SourceResponseApi? = null,
     val propertyId: String? = null,
