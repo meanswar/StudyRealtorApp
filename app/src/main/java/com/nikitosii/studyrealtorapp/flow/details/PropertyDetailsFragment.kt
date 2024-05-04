@@ -22,19 +22,23 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.Branding
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Description
-import com.nikitosii.studyrealtorapp.core.source.local.model.parcelize.PhotoContainer
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
 import com.nikitosii.studyrealtorapp.databinding.FragmentPropertyDetailsBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.details.adapter.PropertyDetailsAdapter
 import com.nikitosii.studyrealtorapp.flow.details.adapter.PropertyImageAdapter
+import com.nikitosii.studyrealtorapp.flow.details.adapter.schools.SchoolInfoAdapter
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.DateExt.SERVER_YEAR_MONTH_DAY_TIME_PATTERN
 import com.nikitosii.studyrealtorapp.util.ext.DateExt.UI_DATE_PATTERN_WITH_TIME_AND_SPACE
 import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
+import com.nikitosii.studyrealtorapp.util.ext.callIntent
+import com.nikitosii.studyrealtorapp.util.ext.emailIntent
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.model.getName
+import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
 import com.nikitosii.studyrealtorapp.util.ext.toUiTime
@@ -48,8 +52,11 @@ class PropertyDetailsFragment :
     ), OnMapReadyCallback {
 
     private val args: PropertyDetailsFragmentArgs by navArgs()
+
     private val imageAdapter = PropertyImageAdapter { id, view -> openPropertyPhotosScreen(id, view)}
     private val propertyDetailsAdapter = PropertyDetailsAdapter()
+    private val schoolInfoAdapter by lazy { SchoolInfoAdapter() }
+
     private lateinit var googleMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +87,7 @@ class PropertyDetailsFragment :
             }
 
             rvPropertyDetails.adapter = propertyDetailsAdapter
+            rvNearbyPlaces.adapter = schoolInfoAdapter
             rvPropertyImage.adapter = imageAdapter
             rvPropertyImage.attachPagerSnap()
         }
@@ -89,14 +97,9 @@ class PropertyDetailsFragment :
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this@PropertyDetailsFragment)
-        onClick()
     }
 
-    private fun onClick() {
-        with(binding) {
 
-        }
-    }
 
     private fun setPropertyDescriptionInfo(data: Description?) {
         with(binding) {
@@ -149,6 +152,7 @@ class PropertyDetailsFragment :
             setViewModelData(property)
             setPropertyDescriptionInfo(property?.description)
             setAdaptersData(property)
+            setAgentData(property)
             tvPropertyStatus.text = property?.status
         }
     }
@@ -156,6 +160,7 @@ class PropertyDetailsFragment :
     private fun setAdaptersData(data: PropertyDetails?) {
         with(binding) {
             imageAdapter.submitList(data?.photos)
+            schoolInfoAdapter.submitList(data?.schools?.schools)
             propertyDetailsAdapter.submitList(data?.details)
             Handler(Looper.getMainLooper()).postDelayed(
                 { ivProperty.hide(); rvPropertyImage.show() },
@@ -180,6 +185,19 @@ class PropertyDetailsFragment :
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17f)
         googleMap.animateCamera(cameraUpdate)
         googleMap.addMarker(MarkerOptions().position(latLng))
+    }
+
+    private fun setAgentData(data: PropertyDetails?) {
+        with(binding) {
+            data?.let {
+                cvPhone.onClick { callIntent(it.branding?.first()?.phone) }
+                cvEmail.onClick { emailIntent(EMAIL) }
+                tvAgentName.text = it.branding?.first()?.name
+                tvAgentType.text = it.branding?.first()?.type
+                glideImage(it.branding?.first()?.photo, ivAgentImage, R.drawable.ic_menu_agent_peach)
+                tvAgencyName.showText(it.branding?.get(1)?.name)
+            }
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -215,6 +233,7 @@ class PropertyDetailsFragment :
 
     companion object {
         private const val MAP_PACKAGE = "com.google.android.apps.maps"
+        private const val EMAIL = "randomEmail@Gmail.com"
         private const val ANIMATION_TIME = 500L
     }
 }

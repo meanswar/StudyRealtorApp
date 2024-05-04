@@ -8,7 +8,6 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -25,7 +24,6 @@ import com.nikitosii.studyrealtorapp.util.ext.hideWithAnim
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
-import com.nikitosii.studyrealtorapp.util.ext.openKeyboard
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.ext.showWithScaleIn
@@ -41,14 +39,22 @@ class FilterSalesFragment : BaseFragment<FragmentFilterBinding, FilterSalesViewM
 
     private val _adapter = WeakReference(FilterAdapter { onHouseFilterClick(it) })
     private val recentSearchesAdapter = SaleRequestAdapter { viewModel.getLocalProperties(it) }
-//    private val args: FilterSalesFragmentArgs by navArgs()
+
+    //    private val args: FilterSalesFragmentArgs by navArgs()
     private var lastOpenedFilter: ExpandableTextView? = null
     private val isPropertiesLoaded = MutableLiveData(false)
 
     private val adapter: FilterAdapter?
         get() = _adapter.get()
 
-    private val salesPropertiesAdapter by lazy { SalesAdapter { data, view -> openPropertyDetails(data, view) } }
+    private val salesPropertiesAdapter by lazy {
+        SalesAdapter { data, view ->
+            openPropertyDetails(
+                data,
+                view
+            )
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

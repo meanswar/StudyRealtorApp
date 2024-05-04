@@ -34,9 +34,12 @@ fun Fragment.string(id: Int, vararg args: String) = resources.getString(id, args
 
 fun Activity.string(id: Int) = resources.getString(id)
 
-fun Fragment.glideImage(url: String?, view: ImageView) = Glide.with(view)
+fun Fragment.glideImage(url: String?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
     .load(url)
     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    .apply {
+        if (placeHolder != null) placeholder(placeHolder)
+    }
     .skipMemoryCache(false)
     .apply(
         RequestOptions().dontTransform() // this line

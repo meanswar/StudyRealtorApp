@@ -62,4 +62,18 @@
     <string name="screen_dashboard_btn_buy_title">Buy</string>
     <string name="screen_dashboard_btn_rent_title">Rent</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="tools_text"> "id": "0735718341"\n
+          "name": "Josiah Quincy Elementary School"\n
+          "distance_in_miles": 0.7\n
+          "education_levels": ["elementary"]\n
+          "funding_type": "public"\n
+          "grades": ["K", "1", "2", "3", "4", "5"]\n
+          "student_count": 742]\n
+          "student_teacher_ratio": 12.3\n
+          "parent_rating": 4\n
+          "rating": 6\n
+          "review_count": 9\n
+          "slug": "Josiah-Quincy-Elementary-School-0735718341"\n
+          "slug_id": "Josiah-Quincy-Elementary-School-0735718341"</string>
 </resources>

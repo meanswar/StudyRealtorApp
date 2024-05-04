@@ -90,24 +90,6 @@ class PropertiesRepoImpl @Inject constructor(
     }
 
     override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler{
-//        PropertyDetails.from(api.getPropertyDetails(id).result)
-        getLocalData()
-    }
-
-    @SuppressLint("CheckResult")
-    private fun getLocalData(): PropertyDetails {
-        try {
-            val data = context.resources.openRawResource(R.raw.buy)
-            val size = data.available()
-            val buffer = ByteArray(size)
-            data.read(buffer)
-            data.close()
-            val jsonResponse = String(buffer)
-            val result = Moshi.Builder().build().adapter(BaseSinglePropertyResponseApi::class.java).fromJson(jsonResponse)
-            return PropertyDetails.from(result?.result)
-        } catch (e: IOException) {
-            e.printStackTrace();
-            return PropertyDetails()
-        }
+        PropertyDetails.from(api.getPropertyDetails(id).result)
     }
 }
