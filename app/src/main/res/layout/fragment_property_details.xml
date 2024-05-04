@@ -64,21 +64,6 @@
                 app:reverseLayout="false"
                 tools:listitem="@layout/item_photo" />
 
-            <TextView
-                android:id="@+id/tvBranding"
-                style="@style/AppTheme.Text.Bold.Headline1.Teflon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="@dimen/size_10dp"
-                android:layout_marginEnd="@dimen/size_10dp"
-                android:background="@drawable/bg_content_corners_10dp"
-                android:padding="5dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Office Builds Inc." />
-
             <ImageView
                 android:id="@+id/ivBrandingLogo"
                 android:layout_width="@dimen/size_0dp"

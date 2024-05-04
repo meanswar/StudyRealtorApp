@@ -115,7 +115,6 @@ class PropertyDetailsFragment :
     private fun setBrandingInfo(data: Branding?) {
         with(binding) {
             if (data?.photo?.isNotEmpty() == true) glideImage(data.photo, ivBrandingLogo)
-            else tvBranding.showText(data?.name)
         }
     }
 
