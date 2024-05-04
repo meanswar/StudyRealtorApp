@@ -3,9 +3,6 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.search
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.widget.ImageView
-import androidx.cardview.widget.CardView
-import androidx.core.view.doOnPreDraw
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
@@ -18,7 +15,6 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.SalesAdapter
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
-import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import timber.log.Timber
 
@@ -34,7 +30,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     }
 
     val args: SearchFragmentArgs by navArgs()
-    private val salesPropertiesAdapter by lazy {
+    private val propertiesAdapter by lazy {
         SalesAdapter { data, view ->
             openPropertyDetails(
                 data,
@@ -42,16 +38,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             )
         }
     }
-    private val isPropertiesLoaded = MutableLiveData(true)
 
     override fun initViews() {
         with(binding) {
-            rvSaleProperties.adapter = salesPropertiesAdapter
-            rvSaleProperties.setItemViewCacheSize(5)
-            rvSaleProperties.recycledViewPool.setMaxRecycledViews(R.layout.item_sales, 5)
-            isPropertiesLoaded.observe(viewLifecycleOwner) {
-                if (it) rvSaleProperties.show()
-            }
+            rvProperties.adapter = propertiesAdapter
         }
         getPropertiesData()
     }
@@ -83,16 +73,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         with(binding) {
             if (isLoading) lavLoading.showWithAnimation(R.anim.scale_in)
             btnAccept.isEnabled = !isLoading
-            if (isLoading) lavLoading.playAnimation()
         }
     }
 
     private fun observeProperties(data: List<Property>?) {
         with(binding) {
-            isPropertiesLoaded.postValue(true)
             lavLoading.hide()
-            salesPropertiesAdapter.submitList(data)
-            rvSaleProperties.notifyDataSetChanged()
+            propertiesAdapter.submitList(data)
+            rvProperties.notifyDataSetChanged()
         }
     }
 

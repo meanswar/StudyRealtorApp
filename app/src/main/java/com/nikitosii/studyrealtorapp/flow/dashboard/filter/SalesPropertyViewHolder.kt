@@ -8,7 +8,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nikitosii.studyrealtorapp.core.source.local.model.Branding
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
-import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.formatPrice
 import com.nikitosii.studyrealtorapp.util.ext.model.getName
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
@@ -22,33 +22,21 @@ class SalesPropertyViewHolder(
         with(binding) {
             ViewCompat.setTransitionName(ivProperty, property.propertyId)
             setPropertyImage(property)
-            setBrandingLogoData(property.branding?.first())
 
             tvPropertyAddress.text = property.getName()
-            tvPropertyPrice.text = property.listPrice?.toString()
+            tvPropertyPrice.text = property.listPrice?.toString()?.formatPrice()
 
             tvPropertyBeds.showText(property.description?.beds?.toString())
             tvProperyBaths.showText(property.description?.baths?.toString())
             tvPropertySqft.showText(property.description?.sqft?.toString())
+            tvPropertyType.showText(property.description?.type)
 
             root.onClick { onItemClick(property, ivProperty) }
         }
     }
 
-    private fun setBrandingLogoData(data: Branding?) {
-        with(binding) {
-            val brandingLogo = data?.photo
-            if (brandingLogo != null) setImage(brandingLogo, binding.ivBrandingLogo)
-            else {
-                ivBrandingLogo.hide()
-                tvBrandingName.showText(data?.name)
-            }
-        }
-    }
-
     private fun setPropertyImage(data: Property) {
         with(binding) {
-//            lavSoldProperty.show(data.description?.soldDate == null || data.description.soldPrice == null)
             setImage(data.primaryPhoto.url, ivProperty)
         }
     }
