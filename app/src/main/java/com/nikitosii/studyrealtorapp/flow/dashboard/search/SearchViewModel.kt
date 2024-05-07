@@ -29,9 +29,9 @@ class SearchViewModel @Inject constructor(
     val sqftMaxFilter by lazy { MutableLiveData<Int>() }
     val requestType = MutableLiveData("sale")
 
-    fun buildSaleRequest(): PropertyRequest {
+    private fun buildSaleRequest(): PropertyRequest {
         return PropertyRequest(
-            addressFilter.value?.replaceFirstChar(Char::titlecase),
+            addressFilter.value?.replaceFirstChar(Char::titlecase) ?: "",
             filterHouses,
             priceMinFilter.value,
             priceMaxFilter.value,

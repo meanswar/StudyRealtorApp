@@ -18,6 +18,7 @@ import com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertyAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
@@ -54,6 +55,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             rvProperties.adapter = propertiesAdapter
             toolbar.showEndButton()
             toolbar.initEndBtnAnimation(clFilters)
+            svProperty.setText(args.propertyRequest.address)
+
             with(lFilters) {
                 rvFilterTypes.show()
                 rvRangePrice.show()
@@ -66,7 +69,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
                 rvRangeBeds.onRangeChanged { first, second -> onBedsChanged(first, second) }
                 rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
 
+                rvRangePrice.initResult(args.propertyRequest.priceMin, args.propertyRequest.priceMax)
+                rvRangeBaths.initResult(args.propertyRequest.bathsMin, args.propertyRequest.bathsMax)
+                rvRangeBeds.initResult(args.propertyRequest.bedsMin, args.propertyRequest.bedsMax)
+                rvRangeSqft.initResult(args.propertyRequest.sqftMin, args.propertyRequest.sqftMax)
+
                 rvFilterTypes.adapter = filtersAdapter
+                filtersAdapter.setSelectedList(args.propertyRequest.houses)
                 filtersAdapter.submitList(Constants.housesList)
             }
         }
@@ -76,6 +85,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     private fun onClick() {
         with(binding) {
             btnAccept.onClick { viewModel.getProperties() }
+            svProperty.setOnTextChanged { viewModel.addressFilter.value = it }
         }
     }
 
@@ -127,6 +137,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     private fun showLoading(isLoading: Boolean) {
         with(binding) {
             if (isLoading) lavLoading.showWithAnimation(R.anim.scale_in)
+            else lavLoading.hideWithScaleOut()
             btnAccept.isEnabled = !isLoading
         }
     }

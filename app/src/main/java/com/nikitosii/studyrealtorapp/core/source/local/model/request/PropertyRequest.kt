@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PropertyRequest(
-    val address: String? = null,
-    val houses: List<HouseType>? = null,
+    val address: String,
+    val houses: List<HouseType>,
     val priceMin: Int? = null,
     val priceMax: Int? = null,
     val bedsMin: Int? = null,
@@ -18,30 +18,4 @@ data class PropertyRequest(
     val sqftMax: Int? = null,
     val imageUrl: String? = null,
     val requestType: String = "buy"
-): Parcelable {
-    companion object {
-        fun create(
-            address: String?,
-            houses: List<HouseType>?,
-            priceMin: Int?,
-            priceMax: Int?,
-            bedsMin: Int?,
-            bedsMax: Int?,
-            bathsMin: Int?,
-            bathsMax: Int?,
-            sqftMin: Int?,
-            sqftMax: Int?
-        ): PropertyRequest = PropertyRequest(
-            address,
-            houses,
-            priceMin,
-            priceMax,
-            bedsMin,
-            bedsMax,
-            bathsMin,
-            bathsMax,
-            sqftMin,
-            sqftMax
-        )
-    }
-}
+): Parcelable

@@ -61,6 +61,10 @@ class SearchView @JvmOverloads constructor(
         }
     }
 
+    fun setText(text: String) {
+        binding.etSearch.setText(text)
+    }
+
     fun setIsFilled(isFilled: Boolean) {
         binding.ivEnd.setIsFilled(isFilled)
     }

@@ -32,7 +32,7 @@ class DashboardViewModel @Inject constructor(
 
     fun buildSaleRequest(): PropertyRequest {
         return PropertyRequest(
-            addressFilter.value?.replaceFirstChar(Char::titlecase),
+            addressFilter.value?.replaceFirstChar(Char::titlecase) ?: "",
             filterHouses,
             priceMinFilter.value,
             priceMaxFilter.value,

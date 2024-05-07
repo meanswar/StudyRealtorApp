@@ -102,7 +102,11 @@ class RangeView @JvmOverloads constructor(
 
     private fun initListeners() {
         with(binding) {
-            rsEditor.addOnChangeListener(RangeSlider.OnChangeListener { view, _, _ -> _onRangeChanged(view) })
+            rsEditor.addOnChangeListener(RangeSlider.OnChangeListener { view, _, _ ->
+                _onRangeChanged(
+                    view
+                )
+            })
         }
     }
 
@@ -121,9 +125,19 @@ class RangeView @JvmOverloads constructor(
         calculateValue(binding.rsEditor.values[1]).toFloat()
     )
 
-    fun initResult(from: Int, to: Int) {
-        setValues(from, to)
+    fun initResult(from: Int?, to: Int?) {
+        with(binding.rsEditor) {
+            when {
+                from == null && to == null -> setValues(0f, 100f)
+                from == null && to != null -> setValues(0f, calculateSetValue(to))
+                from != null && to == null -> setValues(calculateSetValue(from), 100f)
+                else -> setValues(calculateSetValue(from!!), calculateSetValue(to!!))
+            }
+        }
     }
+    
+    private fun calculateSetValue(value: Int): Float =
+        value.toFloat().div(coefficient.value!!.toFloat())
 
     companion object {
         private const val RANGE_TYPE_MONEY = 0
