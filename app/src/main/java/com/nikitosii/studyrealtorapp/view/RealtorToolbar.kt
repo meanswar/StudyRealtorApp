@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import androidx.navigation.findNavController
@@ -11,6 +12,7 @@ import com.nikitosii.studyrealtorapp.databinding.ViewToolbarBinding
 import com.nikitosii.studyrealtorapp.util.ext.getStringOrNull
 import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.show
 
 class RealtorToolbar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -41,5 +43,13 @@ class RealtorToolbar @JvmOverloads constructor(
             onClick { playAnimation() }
             onAnimCompleted { findNavController().navigateUp() }
         }
+    }
+
+    fun showEndButton() {
+        binding.btnEnd.show()
+    }
+
+    fun initEndBtnAnimation(targetView: ViewGroup) {
+        binding.btnEnd.initAnimation(targetView)
     }
 }

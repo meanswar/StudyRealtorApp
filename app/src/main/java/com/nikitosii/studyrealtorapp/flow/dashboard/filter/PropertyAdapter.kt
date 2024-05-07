@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
 
-class SalesAdapter(private val onItemClick: (Property, ImageView) -> Unit) :
-    ListAdapter<Property, SalesPropertyViewHolder>(PropertyDiffUtil) {
+class PropertyAdapter(private val onItemClick: (Property, ImageView) -> Unit) :
+    ListAdapter<Property, PropertyViewHolder>(PropertyDiffUtil) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesPropertyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
         val binding = ItemSalesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SalesPropertyViewHolder(binding, onItemClick)
+        return PropertyViewHolder(binding, onItemClick)
     }
 
-    override fun onBindViewHolder(holder: SalesPropertyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

@@ -4,13 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nikitosii.studyrealtorapp.di.ViewModelKey
 import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
-import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
-import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardViewModel
-import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
-import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterSalesViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchViewModel
+import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
+import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
+import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -29,11 +28,6 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(DashboardViewModel::class)
     fun bindSalesViewModel(viewModel: DashboardViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(FilterSalesViewModel::class)
-    fun bindFilterSalesViewModel(viewModel: FilterSalesViewModel): ViewModel
 
     @Binds
     @IntoMap

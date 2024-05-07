@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.description
 
+import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -22,6 +23,6 @@ data class DescriptionResponseApi(
     val sqft: Int? = null,
     val pool: String? = null,
     val text: String? = null,
-    val type: String? = null,
+    val type: HouseType? = null,
     val rooms: Int? = null
 )

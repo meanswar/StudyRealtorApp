@@ -14,19 +14,45 @@
         app:startAnimationSpeed="2.5"
         app:toolbar_title="Search Property" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_24dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:paddingVertical="@dimen/size_10dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <com.nikitosii.studyrealtorapp.view.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/svProperty"
+            app:drawableStart="@drawable/ic_search"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include layout="@layout/layout_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10dp"
+            app:layout_constraintTop_toBottomOf="@id/svProperty"
+            android:id="@+id/lFilters" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
         android:id="@+id/rvProperties"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_0dp"
+        android:layout_marginVertical="@dimen/size_24dp"
         android:clipToPadding="false"
         android:descendantFocusability="blocksDescendants"
         app:animationDuration="500"
         app:layoutAnimation="@anim/recycle_view_anim"
         app:layoutManagerOrientation="vertical"
         app:layoutManagerType="linear"
-        android:layout_marginVertical="@dimen/size_24dp"
         app:layout_constraintBottom_toTopOf="@id/cvAccept"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/clFilters" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAccept"
@@ -37,8 +63,9 @@
         android:layout_marginBottom="@dimen/size_24dp"
         android:visibility="gone"
         app:cardCornerRadius="@dimen/size_24dp"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAccept"
@@ -60,6 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
+        app:lottie_speed="4"
         app:lottie_fileName="loading.json"
         app:lottie_loop="true"
         tools:visibility="visible" />

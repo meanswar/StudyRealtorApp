@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        tools:title="Filter" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/btnBack"
@@ -25,5 +27,20 @@
         app:lottie_autoPlay="false"
         app:lottie_fileName="arrow_back.json"
         app:lottie_speed="3" />
+
+    <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+        android:id="@+id/btnEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/size_10dp"
+        android:src="@drawable/ic_filters"
+        android:visibility="gone"
+        app:animDuration="300"
+        app:colorFrom="@color/blue_end"
+        app:isRotated="true"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

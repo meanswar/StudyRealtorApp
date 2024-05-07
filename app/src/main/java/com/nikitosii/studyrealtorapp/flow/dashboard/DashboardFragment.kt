@@ -9,16 +9,15 @@ import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentDashboardBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+import com.nikitosii.studyrealtorapp.view.RangeView
 
 @RequiresViewModel(DashboardViewModel::class)
 class DashboardFragment :
@@ -26,29 +25,29 @@ class DashboardFragment :
         { FragmentDashboardBinding.bind(it) },
         R.layout.fragment_dashboard
     ) {
-    private var lastOpenedFilter: AnimatedFilterImageView? = null
     private val adapter = SaleRequestAdapter { onSaleRequestClick(it) }
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
 
     override fun initViews() {
         with(binding) {
             rvRecentSearches.adapter = adapter
-            rvFilterHouses.adapter = filterHousesAdapter
             filterHousesAdapter.submitList(Constants.housesList)
-
             svSearch.initEndAnimation(clFilters)
-            ivHouse.initAnimation(clFilterHouse)
-            ivPrice.initAnimation(clRangePrice)
-            ivBath.initAnimation(rvRangeBaths)
-            ivBed.initAnimation(rvRangeBeds)
-            ivSqft.initAnimation(rvRangeSquare)
+
+            with(lFilterAttributes) {
+                rvFilterTypes.adapter = filterHousesAdapter
+                rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
+                rvRangeBaths.onRangeChanged { first, second -> onBathsChanged(first, second) }
+                rvRangeBeds.onRangeChanged { first, second -> onBedsChanged(first, second) }
+                rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
+            }
         }
         onClick()
     }
 
     private fun onHouseFilterClick(house: HouseType): Boolean {
         with(viewModel) {
-            val result = viewModel.setFilterHouse(house.apiType)
+            val result = viewModel.setFilterHouse(house)
             binding.ivHouse.setIsFilled(isFilterHousesFilled())
             return result
         }
@@ -61,7 +60,7 @@ class DashboardFragment :
         }
     }
 
-    private val saleRequestsHistoryObserver: Observer<WorkResult<Status<List<SalesRequest>>>> =
+    private val saleRequestsHistoryObserver: Observer<WorkResult<Status<List<PropertyRequest>>>> =
         Observer {
             when (it.status) {
                 SUCCESS -> processRecentRequests(it.data?.obj)
@@ -72,62 +71,46 @@ class DashboardFragment :
 
     private fun onClick() {
         with(binding) {
-            svSearch.setOnEndClick { svSearch.setIsFilled(viewModel.checkFilters()); toggleFilter() }
-            ivHouse.setOnClick { checkFilterIsRotated(ivHouse) }
-            ivPrice.setOnClick { checkFilterIsRotated(ivPrice) }
-            ivBath.setOnClick { checkFilterIsRotated(ivBath) }
-            ivBed.setOnClick { checkFilterIsRotated(ivBed) }
-            ivSqft.setOnClick { checkFilterIsRotated(ivSqft) }
-
+            svSearch.setOnEndClick { svSearch.setIsFilled(viewModel.checkFilters()) }
             svSearch.setOnTextChanged { viewModel.addressFilter.value = it }
-//            rvRangePrice.onTextChanged { first, second -> onPriceChanged(first, second) }
-            rvRangeBaths.onTextChanged { first, second -> onBathsChanged(first, second) }
-            rvRangeBeds.onTextChanged { first, second -> onBedsChanged(first, second) }
-            rvRangeSquare.onTextChanged { first, second -> onSqftChanged(first, second) }
-
             btnBuy.onClick { openSearchScreen() }
+
+            with(lFilterAttributes) {
+                ivHouse.initAnimation(rvFilterTypes)
+                ivPrice.initAnimation(rvRangePrice)
+                ivBath.initAnimation(rvRangeBaths)
+                ivBed.initAnimation(rvRangeBeds)
+                ivSqft.initAnimation(rvRangeSqft)
+            }
         }
     }
 
-    private fun toggleFilter() {
-        with(binding) {
-            if (svSearch.isExpanded()) lastOpenedFilter?.hideIfExpanded() else lastOpenedFilter?.toggle()
-        }
+
+    private fun onPriceChanged(minValue: Int, maxValue: Int) {
+        binding.ivPrice.setIsFilled(minValue != RangeView.RANGE_VALUE_ANY || maxValue != RangeView.RANGE_VALUE_ANY)
+        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.priceMinFilter.value = minValue
+        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.priceMaxFilter.value = maxValue
     }
 
-
-    private fun onPriceChanged(textFrom: String, textTo: String) {
-        binding.ivPrice.setIsFilled(textFrom.isNotEmpty() || textTo.isNotEmpty())
-        if (textFrom.isNotEmpty()) viewModel.priceMinFilter.value = textFrom.toInt()
-        if (textTo.isNotEmpty()) viewModel.priceMaxFilter.value = textTo.toInt()
+    private fun onBedsChanged(minValue: Int, maxValue: Int) {
+        binding.ivBed.setIsFilled(minValue != RangeView.RANGE_VALUE_ANY || maxValue != RangeView.RANGE_VALUE_ANY)
+        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.bedsMinFilter.value = minValue
+        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.bedsMaxFilter.value = maxValue
     }
 
-    private fun onBedsChanged(textFrom: String, textTo: String) {
-        binding.ivBed.setIsFilled(textFrom.isNotEmpty() || textTo.isNotEmpty())
-        if (textFrom.isNotEmpty()) viewModel.bedsMinFilter.value = textFrom.toInt()
-        if (textTo.isNotEmpty()) viewModel.bedsMaxFilter.value = textTo.toInt()
+    private fun onBathsChanged(minValue: Int, maxValue: Int) {
+        binding.ivBath.setIsFilled(minValue != RangeView.RANGE_VALUE_ANY || maxValue != RangeView.RANGE_VALUE_ANY)
+        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.bathsMinFilter.value = minValue
+        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.bathsMaxFilter.value = maxValue
     }
 
-    private fun onBathsChanged(textFrom: String, textTo: String) {
-        binding.ivBath.setIsFilled(textFrom.isNotEmpty() || textTo.isNotEmpty())
-        if (textFrom.isNotEmpty()) viewModel.bathsMinFilter.value = textFrom.toInt()
-        if (textTo.isNotEmpty()) viewModel.bathsMaxFilter.value = textTo.toInt()
+    private fun onSqftChanged(minValue: Int, maxValue: Int) {
+        binding.ivSqft.setIsFilled(minValue != RangeView.RANGE_VALUE_ANY || maxValue != RangeView.RANGE_VALUE_ANY)
+        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMinFilter.value = minValue
+        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMaxFilter.value = maxValue
     }
 
-    private fun onSqftChanged(textFrom: String, textTo: String) {
-        binding.ivSqft.setIsFilled(textFrom.isNotEmpty() || textTo.isNotEmpty())
-        if (textFrom.isNotEmpty()) viewModel.sqftMinFilter.value = textFrom.toInt()
-        if (textTo.isNotEmpty()) viewModel.sqftMaxFilter.value = textTo.toInt()
-    }
-
-    private fun checkFilterIsRotated(view: AnimatedFilterImageView) {
-        if (lastOpenedFilter != view) {
-            lastOpenedFilter?.hideIfExpanded()
-            lastOpenedFilter = view
-        }
-    }
-
-    private fun processRecentRequests(data: List<SalesRequest>?) {
+    private fun processRecentRequests(data: List<PropertyRequest>?) {
         with(binding) {
             if (data?.isNotEmpty() == true) {
                 adapter.submitList(data)
@@ -136,7 +119,7 @@ class DashboardFragment :
         }
     }
 
-    private fun onSaleRequestClick(filter: SalesRequest) {
+    private fun onSaleRequestClick(filter: PropertyRequest) {
         val extras = FragmentNavigatorExtras(
             binding.svSearch to "svSearch"
         )
@@ -147,11 +130,9 @@ class DashboardFragment :
         val extras = FragmentNavigatorExtras(
             binding.svSearch to "svSearch"
         )
-        if(viewModel.checkFilters())
-        DashboardFragmentDirections.openSearchScreen(viewModel.buildSaleRequest(), false).navigate(extras)
+        if (viewModel.checkFilters())
+            DashboardFragmentDirections.openSearchScreen(viewModel.buildSaleRequest(), false)
+                .navigate(extras)
     }
 
-    companion object {
-        private val FILTER_NULLABLE = null
-    }
 }

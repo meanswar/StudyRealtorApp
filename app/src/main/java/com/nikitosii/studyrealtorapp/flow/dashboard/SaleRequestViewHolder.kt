@@ -4,17 +4,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 import com.nikitosii.studyrealtorapp.util.ext.model.getFiltersCount
 import com.nikitosii.studyrealtorapp.util.ext.showText
 
 class SaleRequestViewHolder(
     private val binding: ItemRecentSearchBinding,
-    private val onClick: (SalesRequest) -> Unit
+    private val onClick: (PropertyRequest) -> Unit
 ): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(saleRequest: SalesRequest) {
+    fun bind(saleRequest: PropertyRequest) {
         with(binding) {
             root.setOnClickListener { onClick(saleRequest) }
             tvSearchPlace.text = saleRequest.address

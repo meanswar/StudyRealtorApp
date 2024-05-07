@@ -13,6 +13,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ViewSearchBinding
+import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.measureWrapContentWidth
 import com.nikitosii.studyrealtorapp.util.ext.onFocus
 import com.nikitosii.studyrealtorapp.util.ext.onTextChanged
@@ -31,10 +32,10 @@ class SearchView @JvmOverloads constructor(
 
     init {
         context.withStyledAttributes(attrs, R.styleable.SearchView) {
-            getResourceId(R.styleable.SearchView_drawableStart, R.drawable.ic_search).run {
+            getResourceId(R.styleable.SearchView_drawableStart, DRAWABLE_NOTHING).run {
                 setDrawableStart(this)
             }
-            getResourceId(R.styleable.SearchView_drawableStart, R.drawable.ic_filters).run {
+            getResourceId(R.styleable.SearchView_drawableEnd, DRAWABLE_NOTHING).run {
                 setDrawableEnd(this)
             }
         }
@@ -46,6 +47,10 @@ class SearchView @JvmOverloads constructor(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setDrawableStart(resInt: Int) {
+        if (resInt == DRAWABLE_NOTHING) {
+            binding.ivStart.hide()
+            return
+        }
         val drawable = context.getDrawable(resInt)
         binding.ivStart.setImageDrawable(drawable)
     }
@@ -68,6 +73,10 @@ class SearchView @JvmOverloads constructor(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setDrawableEnd(resInt: Int) {
+        if (resInt == DRAWABLE_NOTHING) {
+            binding.ivEnd.hide()
+            return
+        }
         val drawable = context.getDrawable(resInt)
         binding.ivEnd.setImageDrawable(drawable)
     }
@@ -120,5 +129,9 @@ class SearchView @JvmOverloads constructor(
 
     fun initEndAnimation(targetView: ViewGroup) {
         binding.ivEnd.initAnimation(targetView)
+    }
+
+    companion object {
+        private const val DRAWABLE_NOTHING = -1
     }
 }

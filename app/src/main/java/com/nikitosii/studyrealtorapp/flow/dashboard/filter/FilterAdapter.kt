@@ -19,6 +19,11 @@ class FilterAdapter(
 
    private val selectedList = selectedList.toMutableList()
 
+    fun setSelectedList(list: List<HouseType>) {
+        selectedList.clear()
+        selectedList.addAll(list)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemFilterHouseBinding.inflate(inflater, parent, false)

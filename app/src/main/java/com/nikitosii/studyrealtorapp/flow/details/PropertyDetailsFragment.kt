@@ -38,7 +38,6 @@ import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.model.getName
 import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
 import com.nikitosii.studyrealtorapp.util.ext.toUiTime
@@ -77,7 +76,7 @@ class PropertyDetailsFragment :
                 getString(R.string.view_sale_property_description_price, args.property.listPrice)
             if (args.property.lastUpdateDate != null) {
                 tvSalePropertyTime.text = getString(
-                    R.string.screen_sale_property_details_property_description_last_update_title,
+                    R.string.screen_property_details_property_description_last_update_title,
                     args.property.lastUpdateDate.toUiTime(
                         SERVER_YEAR_MONTH_DAY_TIME_PATTERN,
                         UI_DATE_PATTERN_WITH_TIME_AND_SPACE

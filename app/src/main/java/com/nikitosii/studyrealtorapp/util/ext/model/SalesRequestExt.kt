@@ -1,8 +1,8 @@
 package com.nikitosii.studyrealtorapp.util.ext.model
 
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 
-fun SalesRequest.request(): String {
+fun PropertyRequest.request(): String {
     val request = StringBuilder()
     address?.let { request.append("location=$it") }
     houses?.let { request.append("&house=${it.joinToString(",")}") }
@@ -17,7 +17,7 @@ fun SalesRequest.request(): String {
     return request.toString()
 }
 
-fun SalesRequest.getFiltersCount(): Int? {
+fun PropertyRequest.getFiltersCount(): Int? {
     var count = 0
     houses?.let { if (it.size > 0) count++ }
     priceMin?.let { count++ }

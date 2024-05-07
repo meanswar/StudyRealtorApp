@@ -1,12 +1,11 @@
 package com.nikitosii.studyrealtorapp.di.modules
 
-import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterSalesFragment
-import com.nikitosii.studyrealtorapp.flow.rents.RentsFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardFragment
-import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchFragment
+import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsFragment
 import com.nikitosii.studyrealtorapp.flow.property_photos.PropertyPhotosFragment
+import com.nikitosii.studyrealtorapp.flow.rents.RentsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,8 +14,6 @@ abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeSalesFragment(): DashboardFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeFilterSalesFragment(): FilterSalesFragment
 
     @ContributesAndroidInjector
     abstract fun contributeRentsFragment(): RentsFragment

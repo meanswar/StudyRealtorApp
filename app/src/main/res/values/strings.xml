@@ -35,23 +35,8 @@
     <string name="view_sale_property_description_baths">Baths: %d</string>
     <string name="view_sale_property_description_bath">Bath: %d</string>
 
-    <string name="screen_sale_property_details_property_description_title">Property Description</string>
-    <string name="screen_sale_property_details_property_description_last_update_title">Last Update Time: %s</string>
-
-    <string name="screen_sale_property_details_property_description_baths">%d baths</string>
-    <string name="screen_sale_property_details_property_description_bath">%d bath</string>
-    <string name="screen_sale_property_details_property_description_full_baths">%d full baths</string>
-    <string name="screen_sale_property_details_property_description_full_bath">%d full bath</string>
-    <string name="screen_sale_property_details_property_description_half_baths">and %d half baths</string>
-    <string name="screen_sale_property_details_property_description_only_half_baths">%d half baths</string>
-    <string name="screen_sale_property_details_property_description_only_half_bath">%d half bath</string>
-    <string name="screen_sale_property_details_property_description_half_bath">and %d half bath</string>
-
-    <string name="screen_sale_property_details_property_description_sqft">Sqft of object is %d</string>
-    <string name="screen_sale_property_details_property_description_build_type">Type of building is %s</string>
-    <string name="screen_sale_property_details_property_description_build_year">was built in %d.</string>
-    <string name="screen_sale_property_details_property_description_lot_history_price">This object was sold at first time in %1d for %2d.</string>
-    <string name="screen_sale_property_details_property_description_lot_size">Lot size is %d.</string>
+    <string name="screen_property_details_property_description_title">Property Description</string>
+    <string name="screen_property_details_property_description_last_update_title">Last Update Time: %s</string>
 
     <string name="screen_sale_property_details_property_description_beds">Has %d beds</string>
     <string name="screen_sale_property_details_property_description_bed">Has %d bed</string>
@@ -61,7 +46,22 @@
     <string name="screen_dashboard_description_title">Find Your\nDream Home</string>
     <string name="screen_dashboard_btn_buy_title">Buy</string>
     <string name="screen_dashboard_btn_rent_title">Rent</string>
-    <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="layout_filters_house_type_title">House Type</string>
+    <string name="layout_filters_filter_price_title">Price: </string>
+    <string name="layout_filters_filter_beds_title">Beds: </string>
+    <string name="layout_filters_filter_baths_title">Baths: </string>
+    <string name="layout_filters_filter_sqft_title">Sqft: </string>
+
+    <string name="layout_filters_filter_result_money">$%1d to $%2d</string>
+    <string name="layout_filters_filter_result_money_any">Any</string>
+    <string name="layout_filters_filter_result_money_min">$%d min</string>
+    <string name="layout_filters_filter_result_money_max">$%d max</string>
+
+    <string name="layout_filters_filter_result">%1d to %2d</string>
+    <string name="layout_filters_filter_result_any">Any</string>
+    <string name="layout_filters_filter_result_min">%d min</string>
+    <string name="layout_filters_filter_result_max">%d max</string>
 
     <string name="tools_text"> "id": "0735718341"\n
           "name": "Josiah Quincy Elementary School"\n
@@ -76,4 +76,5 @@
           "review_count": 9\n
           "slug": "Josiah-Quincy-Elementary-School-0735718341"\n
           "slug_id": "Josiah-Quincy-Elementary-School-0735718341"</string>
+
 </resources>

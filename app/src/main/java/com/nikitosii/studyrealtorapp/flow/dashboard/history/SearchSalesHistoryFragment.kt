@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentSearchSalesHistoryBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.SaleRequestAdapter
@@ -44,13 +44,13 @@ class SearchSalesHistoryFragment :
        }
     }
 
-    private val searchHistoryObserver: Observer<List<SalesRequest>> = Observer {
+    private val searchHistoryObserver: Observer<List<PropertyRequest>> = Observer {
         adapter.submitList(it)
         binding.rvSearchHistory.showWithScaleIn()
         binding.rvSearchHistory.notifyDataSetChanged()
     }
 
-    private fun openFilterDetails(property: SalesRequest) {
+    private fun openFilterDetails(property: PropertyRequest) {
 //        SearchSalesHistoryFragmentDirections.openFilters(property).navigate()
     }
 }

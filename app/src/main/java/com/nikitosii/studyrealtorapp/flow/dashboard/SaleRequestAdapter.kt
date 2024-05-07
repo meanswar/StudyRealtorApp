@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 
-class SaleRequestAdapter(private val onClick: (SalesRequest) -> Unit) :
-    ListAdapter<SalesRequest, SaleRequestViewHolder>(SaleRequestDiffCallback) {
+class SaleRequestAdapter(private val onClick: (PropertyRequest) -> Unit) :
+    ListAdapter<PropertyRequest, SaleRequestViewHolder>(SaleRequestDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleRequestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,13 +21,13 @@ class SaleRequestAdapter(private val onClick: (SalesRequest) -> Unit) :
         holder.bind(getItem(position))
     }
 
-    object SaleRequestDiffCallback : DiffUtil.ItemCallback<SalesRequest>() {
-        override fun areItemsTheSame(oldItem: SalesRequest, newItem: SalesRequest): Boolean {
+    object SaleRequestDiffCallback : DiffUtil.ItemCallback<PropertyRequest>() {
+        override fun areItemsTheSame(oldItem: PropertyRequest, newItem: PropertyRequest): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: SalesRequest, newItem: SalesRequest): Boolean {
+        override fun areContentsTheSame(oldItem: PropertyRequest, newItem: PropertyRequest): Boolean {
             return oldItem == newItem
         }
     }

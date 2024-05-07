@@ -50,7 +50,7 @@ class AnimatedFilterImageView @JvmOverloads constructor(
     init {
         context.obtainStyledAttributes(attrs, R.styleable.AnimatedImageView).apply {
             getResourceId(R.styleable.AnimatedImageView_colorFrom, R.color.ic_color_black).let {
-                _colorEmptyFilter.postValue(resources.getColor(it, resources.newTheme()))
+                setColorFrom(it)
             }
             getResourceId(R.styleable.AnimatedImageView_colorTo, R.color.peach).let {
                 _colorActiveFilter.postValue(resources.getColor(it, resources.newTheme()))
@@ -68,6 +68,12 @@ class AnimatedFilterImageView @JvmOverloads constructor(
         setOnClick {}
     }
 
+    private fun setColorFrom(colorInt: Int) {
+        val color = resources.getColor(colorInt, resources.newTheme())
+        _colorEmptyFilter.postValue(color)
+        setColorFilter(color)
+    }
+
     fun setIsFilled(isFilled: Boolean) {
         _isFilled.postValue(isFilled)
         Timber.i("isFilled: $isFilled")
@@ -78,7 +84,6 @@ class AnimatedFilterImageView @JvmOverloads constructor(
     fun toggle() { onEndClick() }
 
     fun isExpanded() = isExpanded
-
 
     fun initAnimation(targetView: ViewGroup) {
         val animation = ValueAnimator.ofArgb(colorEmptyFilter, colorActiveFilter).apply {

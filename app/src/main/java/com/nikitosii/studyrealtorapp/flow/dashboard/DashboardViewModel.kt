@@ -1,7 +1,8 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard
 
 import androidx.lifecycle.MutableLiveData
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetRecentSaleRequestsUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
@@ -10,7 +11,7 @@ class DashboardViewModel @Inject constructor(
     getRequestHistoryUseCase: GetRecentSaleRequestsUseCase
 ) : BaseViewModel() {
 
-    private val filterHouses = mutableListOf<String>()
+    private val filterHouses = mutableListOf<HouseType>()
     val addressFilter by lazy { MutableLiveData<String>() }
     val priceMinFilter by lazy { MutableLiveData<Int>() }
     val priceMaxFilter by lazy { MutableLiveData<Int>() }
@@ -29,8 +30,8 @@ class DashboardViewModel @Inject constructor(
                 || filterHouses.isNotEmpty()) || (priceMinFilter.value ?: 0) > 0 || (priceMaxFilter.value ?: 0) > 0 || (bedsMinFilter.value ?: 0) > 0 || (bedsMaxFilter.value ?: 0) > 0 || (bathsMinFilter.value ?: 0) > 0 || (bathsMaxFilter.value ?: 0) > 0 || (sqftMinFilter.value ?: 0) > 0 || (sqftMaxFilter.value ?: 0) > 0)
     }
 
-    fun buildSaleRequest(): SalesRequest {
-        return SalesRequest(
+    fun buildSaleRequest(): PropertyRequest {
+        return PropertyRequest(
             addressFilter.value?.replaceFirstChar(Char::titlecase),
             filterHouses,
             priceMinFilter.value,
@@ -47,7 +48,7 @@ class DashboardViewModel @Inject constructor(
 
     val saleRequestsHistory = getRequestHistoryUseCase.execute().toWorkLiveData()
 
-    fun setFilterHouse(house: String): Boolean {
+    fun setFilterHouse(house: HouseType): Boolean {
         return if (filterHouses.contains(house)) {
             filterHouses.remove(house)
             false

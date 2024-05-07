@@ -16,7 +16,7 @@ data class Description(
     val lotSqft: Int? = null,
     val name: String? = null,
     val sqft: Int? = null,
-    val type: String? = null,
+    val type: HouseType? = null,
     val rooms: Int? = null,
     val pool: String? = null,
     val text: String? = null,

@@ -354,7 +354,7 @@
                         style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/screen_sale_property_details_property_description_title"
+                        android:text="@string/screen_property_details_property_description_title"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView

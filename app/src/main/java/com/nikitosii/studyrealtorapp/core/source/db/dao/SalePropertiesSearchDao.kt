@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase.Companion.DATABASE_TABLE_SALE_PROPERTIES_SEARCH
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.SalesRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
 
 @Dao
 interface SalePropertiesSearchDao {
@@ -24,13 +24,13 @@ interface SalePropertiesSearchDao {
     fun getById(id: Int): SalePropertiesSearchEntity
 
     @Query("SELECT * FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH WHERE `query` = :query")
-    fun getByQuery(query: SalesRequest): SalePropertiesSearchEntity
+    fun getByQuery(query: PropertyRequest): SalePropertiesSearchEntity
 
     @Query("SELECT `query` FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH ORDER BY id Desc LIMIT 3")
-    fun getLastSaleRequests(): List<SalesRequest>
+    fun getLastSaleRequests(): List<PropertyRequest>
 
     @Query("SELECT `query` FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH ORDER BY id Desc")
-    fun getSaleRequests(): List<SalesRequest>
+    fun getSaleRequests(): List<PropertyRequest>
 
     @Query("DELETE FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH WHERE id = :id")
     fun deleteById(id: Int)

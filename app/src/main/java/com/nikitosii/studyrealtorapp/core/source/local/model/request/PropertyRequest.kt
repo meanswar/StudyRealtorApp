@@ -1,12 +1,13 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model.request
 
 import android.os.Parcelable
+import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SalesRequest(
+data class PropertyRequest(
     val address: String? = null,
-    val houses: List<String>? = null,
+    val houses: List<HouseType>? = null,
     val priceMin: Int? = null,
     val priceMax: Int? = null,
     val bedsMin: Int? = null,
@@ -21,7 +22,7 @@ data class SalesRequest(
     companion object {
         fun create(
             address: String?,
-            houses: List<String>?,
+            houses: List<HouseType>?,
             priceMin: Int?,
             priceMax: Int?,
             bedsMin: Int?,
@@ -30,7 +31,7 @@ data class SalesRequest(
             bathsMax: Int?,
             sqftMin: Int?,
             sqftMax: Int?
-        ): SalesRequest = SalesRequest(
+        ): PropertyRequest = PropertyRequest(
             address,
             houses,
             priceMin,

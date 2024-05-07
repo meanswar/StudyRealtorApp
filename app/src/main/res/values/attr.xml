@@ -10,7 +10,11 @@
         <attr name="endDrawable" format="reference" />
         <attr name="minValue" format="integer" />
         <attr name="maxValue" format="integer" />
-        <attr name="stepValue" format="integer" />
+        <attr name="rangeType" format="integer">
+            <enum name="money" value="0" />
+            <enum name="other" value="1" />
+        </attr>
+        <attr name="rangeTitle" format="string" />
     </declare-styleable>
     <declare-styleable name="AnimatedRecyclerView">
         <attr name="layoutAnimation" format="reference" />
@@ -29,7 +33,7 @@
     </declare-styleable>
 
     <declare-styleable name="RealtorToolbar">
-        <attr name="startAnimationSpeed" format="float" default="1.0" />
+        <attr name="startAnimationSpeed" default="1.0" format="float" />
         <attr name="toolbar_title" format="string" />
     </declare-styleable>
     <declare-styleable name="SearchView">
