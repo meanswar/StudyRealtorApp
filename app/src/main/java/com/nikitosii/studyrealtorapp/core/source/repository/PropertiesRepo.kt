@@ -30,6 +30,10 @@ interface PropertiesRepo {
 
     suspend fun getLocalProperties(ids: List<String>): List<Property>
 
+    suspend fun getLocalProperty(id: String): Property
+
+    suspend fun getAllLocalProperties(): List<Property>
+
     suspend fun getPropertyDetails(id: String): PropertyDetails
 
 }

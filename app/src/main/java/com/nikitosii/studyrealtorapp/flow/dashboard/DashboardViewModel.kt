@@ -60,6 +60,10 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
+    fun setRequestType(requestType: RequestType) {
+        this.requestType.value = requestType
+    }
+
     fun getRecentSaleRequests() {
         val params = GetRecentSearchRequestsUseCase.Params.create(RequestType.SALE)
         ioToUi(

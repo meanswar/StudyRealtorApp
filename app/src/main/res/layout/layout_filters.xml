@@ -27,6 +27,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.55" />
 
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/grFilters"
+            app:constraint_referenced_ids="rvFilterTypes, rvRangePrice, rvRangeBeds, rvRangeBaths, rvRangeSqft" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFilterTypes"
         android:layout_width="match_parent"

@@ -60,6 +60,11 @@ class PropertiesRepoImpl @Inject constructor(
     override suspend fun getLocalProperties(ids: List<String>): List<Property> =
         dao.getLocalProperties(ids).map { Property.from(it) }
 
+    override suspend fun getLocalProperty(id: String): Property =
+        Property.from(dao.getLocalProperty(id))
+
+    override suspend fun getAllLocalProperties(): List<Property> = dao.getProperties().map { Property.from(it) }
+
     override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler {
         PropertyDetails.from(api.getPropertyDetails(id).result)
     }

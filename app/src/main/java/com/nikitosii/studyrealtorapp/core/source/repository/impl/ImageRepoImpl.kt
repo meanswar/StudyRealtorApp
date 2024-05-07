@@ -12,5 +12,5 @@ class ImageRepoImpl @Inject constructor(
 ) : BaseRepo(networkErrorHandler), ImageRepo {
 
     override suspend fun getImage(query: String) =
-        runWithErrorHandler { api.getPhoto(query).results.first().url }
+        runWithErrorHandler { api.getPhoto(query).results.first().url?.regular }
 }

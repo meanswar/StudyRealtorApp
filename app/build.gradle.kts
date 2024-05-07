@@ -216,4 +216,8 @@ dependencies {
     //Maps
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    //Stetho
+    implementation ("com.facebook.stetho:stetho:1.6.0")
+    implementation ("com.facebook.stetho:stetho-okhttp3:1.6.0")
 }

@@ -2,8 +2,10 @@ package com.nikitosii.studyrealtorapp.di.modules
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.nikitosii.studyrealtorapp.BuildConfig
+import com.nikitosii.studyrealtorapp.core.initializer.StethoInitializer
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.nikitosii.studyrealtorapp.core.source.local.impl.LocalStorageImpl
 import com.nikitosii.studyrealtorapp.core.source.net.TokenInterceptor
@@ -75,6 +77,10 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    internal fun providesStethoInterceptor() = StethoInterceptor()
+
+    @Provides
+    @Singleton
     internal fun providesLocalStorage(): LocalStorage = LocalStorageImpl()
 
     @Provides
@@ -87,10 +93,12 @@ class NetworkModule {
     internal fun providesClient(
         loggingInterceptor: HttpLoggingInterceptor,
         tokenInterceptor: TokenInterceptor,
-        chuckInterceptor: ChuckerInterceptor
+        chuckInterceptor: ChuckerInterceptor,
+        stethoInterceptor: StethoInterceptor
     ) = OkHttpClient().newBuilder()
         .addInterceptor(tokenInterceptor)
         .addInterceptor(loggingInterceptor)
+        .addNetworkInterceptor(stethoInterceptor)
         .addInterceptor(chuckInterceptor)
         .callTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
@@ -104,11 +112,13 @@ class NetworkModule {
     internal fun providesImageClient(
         loggingInterceptor: HttpLoggingInterceptor,
         tokenInterceptor: TokenInterceptor,
-        chuckInterceptor: ChuckerInterceptor
+        chuckInterceptor: ChuckerInterceptor,
+        stethoInterceptor: StethoInterceptor
     ) = OkHttpClient().newBuilder()
         .addInterceptor(tokenInterceptor)
         .addInterceptor(loggingInterceptor)
         .addInterceptor(chuckInterceptor)
+        .addNetworkInterceptor(stethoInterceptor)
         .callTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)

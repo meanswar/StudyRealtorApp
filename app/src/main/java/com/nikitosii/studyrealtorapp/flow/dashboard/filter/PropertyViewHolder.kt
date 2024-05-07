@@ -46,16 +46,10 @@ class PropertyViewHolder(
 
     private fun initFavoriteView(property: Property) {
         with(binding) {
-            when (property.favorite) {
-                true -> {
-                    cvFavorite.setCardBackgroundColor(root.context.getColor(R.color.peach))
-                    ivFavorite.setImageResource(R.drawable.ic_favorite_active)
-                }
-                false -> {
-                    cvFavorite.setCardBackgroundColor(root.context.getColor(R.color.gray))
-                    ivFavorite.setImageResource(R.drawable.ic_favorite)
-                }
-            }
+            ivFavorite.setImageResource(
+                if (property.favorite) R.drawable.ic_favorite_active
+                else R.drawable.ic_favorite
+            )
         }
     }
 

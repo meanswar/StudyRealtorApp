@@ -18,11 +18,14 @@ interface PropertyDao {
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY}")
     fun getProperties(): List<PropertyEntity>
 
-    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where propertyId IN (:ids) & favorite = 1")
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where `propertyId` IN (:ids) & `favorite` = 1")
     fun getFavoriteProperties(ids: List<String>): List<PropertyEntity>
 
-    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where propertyId IN (:ids)")
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where `propertyId` IN (:ids)")
     fun getLocalProperties(ids: List<String>): List<PropertyEntity>
+
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where `propertyId` = :id")
+    fun getLocalProperty(id: String): PropertyEntity
 
     @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY}")
     fun deleteAllProperties()

@@ -41,7 +41,20 @@ class SearchViewModel @Inject constructor(
     val propertiesForSaleData: LiveData<WorkResult<Pair<SearchRequest,List<Property>>>>
         get() = _propertiesForSaleData
 
-    val localProperties = MutableLiveData<List<Property>>()
+    val localProperties = WorkLiveData<List<Property>>()
+
+    fun setSearchRequest(request: SearchRequest) {
+        this.request.value = request
+        addressFilter.value = request.address
+        priceMinFilter.value = request.priceMin
+        priceMaxFilter.value = request.priceMax
+        bedsMinFilter.value = request.bedsMin
+        bedsMaxFilter.value = request.bedsMax
+        bathsMinFilter.value = request.bathsMin
+        bathsMaxFilter.value = request.bathsMax
+        sqftMinFilter.value = request.sqftMin
+        requestType.value = request.requestType
+    }
 
 
     fun updateSaleRequest(id: Int? = null): SearchRequest {
@@ -87,7 +100,7 @@ class SearchViewModel @Inject constructor(
 
     fun getPropertiesForSale() {
         if (checkFilters()) {
-            val data = updateSaleRequest()
+            val data = request.value ?: return
             val params = GetPropertiesForSaleUseCase.Params.create(data)
             ioToUiWorkData(
                 io = { getSaleRequestsUseCase.execute(params) },
@@ -100,7 +113,7 @@ class SearchViewModel @Inject constructor(
         val id = request.id
         id?.let {
             val params = GetLocalPropertiesUseCase.Params.from(id)
-            ioToUi(
+            ioToUiWorkData(
                 io = { getLocalPropertiesForSaleUseCase.execute(params) },
                 ui = { localProperties.postValue(it) }
             )

@@ -4,14 +4,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentDashboardBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
+import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.view.RangeView
 
 @RequiresViewModel(DashboardViewModel::class)
@@ -25,6 +27,8 @@ class DashboardFragment :
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
 
     override fun initViews() {
+        viewModel.getRecentRentRequests()
+        viewModel.getRecentSaleRequests()
         with(binding) {
             rvRecentSaleSearches.adapter = recentSaleAdapter
             rvRecentRentSearches.adapter = recentRentAdapter
@@ -32,6 +36,7 @@ class DashboardFragment :
             svSearch.initEndAnimation(clFilters)
 
             with(lFilterAttributes) {
+                grFilters.hide()
                 rvFilterTypes.adapter = filterHousesAdapter
                 rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
                 rvRangeBaths.onRangeChanged { first, second -> onBathsChanged(first, second) }
@@ -68,7 +73,7 @@ class DashboardFragment :
         with(binding) {
             svSearch.setOnEndClick { svSearch.setIsFilled(viewModel.checkFilters()) }
             svSearch.setOnTextChanged { viewModel.addressFilter.value = it }
-            btnBuy.onClick { openSearchScreen() }
+            btnBuy.onClick { viewModel.requestType.value = RequestType.SALE; openSearchSaleScreen() }
 
             with(lFilterAttributes) {
                 ivHouse.initAnimation(rvFilterTypes)
@@ -110,7 +115,7 @@ class DashboardFragment :
             if (data.isNotEmpty()) {
                 recentSaleAdapter.submitList(data)
                 rvRecentSaleSearches.notifyDataSetChanged()
-            } else grRecentSaleContent.hideWithScaleOut()
+            } else grRecentSaleContent.hide()
         }
     }
 
@@ -119,7 +124,7 @@ class DashboardFragment :
             if (data.isNotEmpty()) {
                 recentRentAdapter.submitList(data)
                 rvRecentRentSearches.notifyDataSetChanged()
-            } else grRecentRentContent.hideWithScaleOut()
+            } else grRecentRentContent.hide()
         }
     }
 
@@ -130,12 +135,14 @@ class DashboardFragment :
         DashboardFragmentDirections.openSearchScreen(filter, true).navigate(extras)
     }
 
-    private fun openSearchScreen() {
+    private fun openSearchSaleScreen() {
         val extras = FragmentNavigatorExtras(
             binding.svSearch to "svSearch"
         )
+        viewModel.setRequestType(RequestType.SALE)
+        val request = viewModel.buildSaleRequest()
         if (viewModel.checkFilters())
-            DashboardFragmentDirections.openSearchScreen(viewModel.buildSaleRequest(), false)
+            DashboardFragmentDirections.openSearchScreen(request, false)
                 .navigate(extras)
     }
 

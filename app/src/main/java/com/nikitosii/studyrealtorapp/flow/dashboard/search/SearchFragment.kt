@@ -52,6 +52,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         viewModel.setFilterHouse(house)
 
     override fun initViews() {
+        onClick()
+        initRangeValues()
         with(binding) {
             rvProperties.adapter = propertiesAdapter
             toolbar.showEndButton()
@@ -59,41 +61,26 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             svProperty.setText(args.propertyRequest.address)
 
             with(lFilters) {
-                rvFilterTypes.show()
-                rvRangePrice.show()
-                rvRangeBeds.show()
-                rvRangeBaths.show()
-                rvRangeSqft.show()
-
-                rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
-                rvRangeBaths.onRangeChanged { first, second -> onBathsChanged(first, second) }
-                rvRangeBeds.onRangeChanged { first, second -> onBedsChanged(first, second) }
-                rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
-
-                rvRangePrice.initResult(
-                    args.propertyRequest.priceMin,
-                    args.propertyRequest.priceMax
-                )
-                rvRangeBaths.initResult(
-                    args.propertyRequest.bathsMin,
-                    args.propertyRequest.bathsMax
-                )
-                rvRangeBeds.initResult(args.propertyRequest.bedsMin, args.propertyRequest.bedsMax)
-                rvRangeSqft.initResult(args.propertyRequest.sqftMin, args.propertyRequest.sqftMax)
-
+                grFilters.show()
                 rvFilterTypes.adapter = filtersAdapter
                 filtersAdapter.setSelectedList(args.propertyRequest.houses)
                 filtersAdapter.submitList(Constants.housesList)
             }
         }
+        viewModel.setSearchRequest(args.propertyRequest)
         getPropertiesData()
-        onClick()
     }
 
     private fun onClick() {
         with(binding) {
             btnAccept.onClick { viewModel.getPropertiesForSale() }
             svProperty.setOnTextChanged { viewModel.addressFilter.value = it }
+            with(lFilters) {
+                rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
+                rvRangeBaths.onRangeChanged { first, second -> onBathsChanged(first, second) }
+                rvRangeBeds.onRangeChanged { first, second -> onBedsChanged(first, second) }
+                rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
+            }
         }
     }
 
@@ -115,6 +102,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     private fun onSqftChanged(minValue: Int, maxValue: Int) {
         if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMinFilter.value = minValue
         if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMaxFilter.value = maxValue
+    }
+
+    private fun initRangeValues() {
+        with(binding.lFilters) {
+            rvRangePrice.initResult(args.propertyRequest.priceMin, args.propertyRequest.priceMax)
+            rvRangeBaths.initResult(args.propertyRequest.bathsMin, args.propertyRequest.bathsMax)
+            rvRangeBeds.initResult(args.propertyRequest.bedsMin, args.propertyRequest.bedsMax)
+            rvRangeSqft.initResult(args.propertyRequest.sqftMin, args.propertyRequest.sqftMax)
+        }
     }
 
     private fun getPropertiesData() {
@@ -144,8 +140,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             }
         }
 
-    private val localPropertiesObserver: Observer<List<Property>> =
-        Observer { observeProperties(it) }
+    private val localPropertiesObserver: Observer<WorkResult<List<Property>>> =
+        Observer { observeProperties(it.data) }
 
     private fun showLoading(isLoading: Boolean) {
         with(binding) {
