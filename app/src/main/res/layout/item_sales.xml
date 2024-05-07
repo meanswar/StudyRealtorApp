@@ -75,7 +75,6 @@
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_content_orange_corners_20dp"
                 app:drawableEndCompat="@drawable/ic_money"
                 android:paddingVertical="@dimen/size_5dp"
                 android:paddingHorizontal="@dimen/size_10dp"
@@ -87,7 +86,10 @@
                 android:id="@+id/tvPropertyType"
                 style="@style/AppTheme.Text.Bold.Headline2.Teflon"
                 android:layout_width="wrap_content"
+                android:background="@drawable/bg_content_orange_corners_20dp"
                 android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/size_5dp"
+                android:paddingHorizontal="@dimen/size_10dp"
                 android:layout_marginStart="@dimen/size_5dp"
                 app:layout_constraintStart_toEndOf="@id/glMidVertical"
                 app:layout_constraintTop_toTopOf="parent"
@@ -143,5 +145,27 @@
                 tools:text="1200 ft" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            app:cardCornerRadius="@dimen/size_25dp"
+            android:id="@+id/cvFavorite"
+            app:cardElevation="@dimen/size_0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:layout_marginEnd="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardBackgroundColor="@color/colorPrimary">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_favorite"
+                android:scaleType="centerInside"
+                android:id="@+id/ivFavorite" />
+        </androidx.cardview.widget.CardView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -51,6 +51,7 @@
     <color name="ic_color_gray">#C1BEC1</color>
     <color name="ic_color_black">#000000</color>
     <color name="ic_color_red">#FF0000</color>
+    <color name="color_favorite_active">#710202</color>
 
     <color name="bg_primary_hover">#CCEE6723</color>
     <color name="bg_primary_preset">#EE6723</color>

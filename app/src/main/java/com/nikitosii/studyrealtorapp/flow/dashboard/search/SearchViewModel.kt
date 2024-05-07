@@ -6,16 +6,21 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetLocalPropertiesForSaleUseCase
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertiesUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesForSaleUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
     private val getSaleRequestsUseCase: GetPropertiesForSaleUseCase,
-    private val getLocalPropertiesForSaleUseCase: GetLocalPropertiesForSaleUseCase
+    private val getLocalPropertiesForSaleUseCase: GetLocalPropertiesUseCase,
+    private val updatePropertyUseCase: UpdatePropertyUseCase
 ) : BaseViewModel() {
+
+    private val request = MutableLiveData<SearchRequest>()
 
     private val filterHouses = mutableListOf<HouseType>()
     val addressFilter by lazy { MutableLiveData<String>() }
@@ -27,25 +32,38 @@ class SearchViewModel @Inject constructor(
     val bathsMaxFilter by lazy { MutableLiveData<Int>() }
     val sqftMinFilter by lazy { MutableLiveData<Int>() }
     val sqftMaxFilter by lazy { MutableLiveData<Int>() }
-    val requestType = MutableLiveData("sale")
+    val requestType = MutableLiveData<RequestType>()
 
-    private fun buildSaleRequest(): PropertyRequest {
-        return PropertyRequest(
-            addressFilter.value?.replaceFirstChar(Char::titlecase) ?: "",
-            filterHouses,
-            priceMinFilter.value,
-            priceMaxFilter.value,
-            bedsMinFilter.value,
-            bedsMaxFilter.value,
-            bathsMinFilter.value,
-            bathsMaxFilter.value,
-            sqftMinFilter.value,
-            sqftMaxFilter.value,
-            requestType.value!!
-        )
+    private val _propertiesForSaleData = WorkLiveData<Pair<SearchRequest, List<Property>>>()
+
+    val isDataAlreadyUploaded = MutableLiveData(false)
+
+    val propertiesForSaleData: LiveData<WorkResult<Pair<SearchRequest,List<Property>>>>
+        get() = _propertiesForSaleData
+
+    val localProperties = MutableLiveData<List<Property>>()
+
+
+    fun updateSaleRequest(id: Int? = null): SearchRequest {
+        val newRequest = request.value?.copy(
+            id = id,
+            address = addressFilter.value?.replaceFirstChar(Char::titlecase) ?: "",
+            houses = filterHouses,
+            priceMin = priceMinFilter.value,
+            priceMax = priceMaxFilter.value,
+            bedsMin = bedsMinFilter.value,
+            bedsMax = bedsMaxFilter.value,
+            bathsMin = bathsMinFilter.value,
+            bathsMax = bathsMaxFilter.value,
+            sqftMin = sqftMinFilter.value,
+            sqftMax = sqftMaxFilter.value,
+            requestType = requestType.value!!,
+        ) ?: SearchRequest.emptyInstance()
+        request.postValue(newRequest)
+        return newRequest
     }
 
-    fun getProperties(request: PropertyRequest) {
+    fun getPropertiesForSale(request: SearchRequest) {
         addressFilter.value = request.address
         priceMinFilter.value = request.priceMin
         priceMaxFilter.value = request.priceMax
@@ -54,7 +72,8 @@ class SearchViewModel @Inject constructor(
         bathsMinFilter.value = request.bathsMin
         bathsMaxFilter.value = request.bathsMax
         sqftMinFilter.value = request.sqftMin
-        getProperties()
+        requestType.value = RequestType.SALE
+        getPropertiesForSale()
     }
 
     private fun checkFilters(): Boolean {
@@ -66,30 +85,26 @@ class SearchViewModel @Inject constructor(
             ?: 0) > 0 || (sqftMaxFilter.value ?: 0) > 0)
     }
 
-    private val _properties = WorkLiveData<List<Property>>()
-
-    val isDataAlreadyUploaded = MutableLiveData(false)
-
-    val properties: LiveData<WorkResult<List<Property>>>
-        get() = _properties
-
-    fun getProperties() {
+    fun getPropertiesForSale() {
         if (checkFilters()) {
-            val data = buildSaleRequest()
+            val data = updateSaleRequest()
             val params = GetPropertiesForSaleUseCase.Params.create(data)
             ioToUiWorkData(
                 io = { getSaleRequestsUseCase.execute(params) },
-                ui = { _properties.postValue(it) }
+                ui = { _propertiesForSaleData.postValue(it) }
             )
         }
     }
 
-    fun getLocalSaleProperties(request: PropertyRequest) {
-        val params = GetLocalPropertiesForSaleUseCase.Params.create(request)
-        ioToUiWorkData(
-            io = { getLocalPropertiesForSaleUseCase.execute(params) },
-            ui = { _properties.postValue(it) }
-        )
+    fun getLocalProperties(request: SearchRequest) {
+        val id = request.id
+        id?.let {
+            val params = GetLocalPropertiesUseCase.Params.from(id)
+            ioToUi(
+                io = { getLocalPropertiesForSaleUseCase.execute(params) },
+                ui = { localProperties.postValue(it) }
+            )
+        }
     }
 
     fun setFilterHouse(house: HouseType): Boolean {
@@ -99,6 +114,13 @@ class SearchViewModel @Inject constructor(
         } else {
             filterHouses.add(house)
             true
+        }
+    }
+
+    fun onFavoriteClick(data: Property) {
+        val params = UpdatePropertyUseCase.Params.create(data.copy(favorite = !data.favorite))
+        ioToUnit {
+            updatePropertyUseCase.execute(params)
         }
     }
 }

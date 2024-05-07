@@ -10,7 +10,6 @@
     <string name="bm_agents">Agents</string>
     <string name="search_field_hint">search</string>
     <string name="popular_places_title">Top 3 popular places</string>
-    <string name="recent_searches_title">Recent searches</string>
     <string name="layout_search_favorite_list_title">Suggested</string>
     <string name="view_range_from">From</string>
     <string name="view_range_to">To</string>
@@ -46,6 +45,8 @@
     <string name="screen_dashboard_description_title">Find Your\nDream Home</string>
     <string name="screen_dashboard_btn_buy_title">Buy</string>
     <string name="screen_dashboard_btn_rent_title">Rent</string>
+    <string name="screen_dashboard_recent_sale_requests">Recent Sale Searches</string>
+    <string name="screen_dashboard_recent_rent_requests">Recent Rent Searches</string>
 
     <string name="layout_filters_house_type_title">House Type</string>
     <string name="layout_filters_filter_price_title">Price: </string>

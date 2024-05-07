@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.nikitosii.studyrealtorapp.di.ViewModelKey
 import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardViewModel
-import com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchViewModel
 import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
@@ -33,11 +32,6 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(RentsViewModel::class)
     fun bindRentsViewModel(viewModel: RentsViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(SearchSalesHistoryViewModel::class)
-    fun bindSearchSalesViewModel(viewModel: SearchSalesHistoryViewModel): ViewModel
 
     @Binds
     @IntoMap

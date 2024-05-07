@@ -11,6 +11,7 @@ import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentSearchBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
@@ -38,12 +39,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private val args: SearchFragmentArgs by navArgs()
     private val propertiesAdapter by lazy {
-        PropertyAdapter { data, view ->
+        PropertyAdapter({ data, view ->
             openPropertyDetails(
                 data,
                 view
             )
-        }
+        }, { onFavoriteClick(it) })
     }
     private val filtersAdapter by lazy { FilterAdapter { onHouseFilterClick(it) } }
 
@@ -69,8 +70,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
                 rvRangeBeds.onRangeChanged { first, second -> onBedsChanged(first, second) }
                 rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
 
-                rvRangePrice.initResult(args.propertyRequest.priceMin, args.propertyRequest.priceMax)
-                rvRangeBaths.initResult(args.propertyRequest.bathsMin, args.propertyRequest.bathsMax)
+                rvRangePrice.initResult(
+                    args.propertyRequest.priceMin,
+                    args.propertyRequest.priceMax
+                )
+                rvRangeBaths.initResult(
+                    args.propertyRequest.bathsMin,
+                    args.propertyRequest.bathsMax
+                )
                 rvRangeBeds.initResult(args.propertyRequest.bedsMin, args.propertyRequest.bedsMax)
                 rvRangeSqft.initResult(args.propertyRequest.sqftMin, args.propertyRequest.sqftMax)
 
@@ -80,11 +87,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             }
         }
         getPropertiesData()
+        onClick()
     }
 
     private fun onClick() {
         with(binding) {
-            btnAccept.onClick { viewModel.getProperties() }
+            btnAccept.onClick { viewModel.getPropertiesForSale() }
             svProperty.setOnTextChanged { viewModel.addressFilter.value = it }
         }
     }
@@ -112,8 +120,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     private fun getPropertiesData() {
         with(viewModel) {
             if (isDataAlreadyUploaded.value == false) {
-                if (args.localRequest) getLocalSaleProperties(args.propertyRequest)
-                else getProperties(args.propertyRequest)
+                if (args.localRequest) getLocalProperties(args.propertyRequest)
+                else getPropertiesForSale(args.propertyRequest)
                 isDataAlreadyUploaded.postValue(true)
             }
         }
@@ -121,18 +129,23 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     override fun subscribe() {
         with(viewModel) {
-            properties.observe(viewLifecycleOwner, propertiesObserver)
+            propertiesForSaleData.observe(viewLifecycleOwner, propertiesObserver)
+            localProperties.observe(viewLifecycleOwner, localPropertiesObserver)
         }
     }
 
-    private val propertiesObserver: Observer<WorkResult<List<Property>>> = Observer {
-        showLoading(it.status == Status.LOADING)
-        when (it.status) {
-            Status.LOADING -> Timber.i("loading properties")
-            Status.SUCCESS -> observeProperties(it.data)
-            Status.ERROR -> handleException(it.exception) { openError() }
+    private val propertiesObserver: Observer<WorkResult<Pair<SearchRequest, List<Property>>>> =
+        Observer {
+            showLoading(it.status == Status.LOADING)
+            when (it.status) {
+                Status.LOADING -> Timber.i("loading properties")
+                Status.SUCCESS -> observeProperties(it.data)
+                Status.ERROR -> handleException(it.exception) { openError() }
+            }
         }
-    }
+
+    private val localPropertiesObserver: Observer<List<Property>> =
+        Observer { observeProperties(it) }
 
     private fun showLoading(isLoading: Boolean) {
         with(binding) {
@@ -140,6 +153,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             else lavLoading.hideWithScaleOut()
             btnAccept.isEnabled = !isLoading
         }
+    }
+
+    private fun observeProperties(data: Pair<SearchRequest, List<Property>>?) {
+        observeProperties(data?.second)
+        viewModel.updateSaleRequest(data?.first?.id)
     }
 
     private fun observeProperties(data: List<Property>?) {
@@ -155,5 +173,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
             view to view.transitionName
         )
         SearchFragmentDirections.openPropertyDetails(property).navigate(extras)
+    }
+
+    private fun onFavoriteClick(property: Property) {
+        viewModel.onFavoriteClick(property)
     }
 }

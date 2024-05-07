@@ -8,7 +8,6 @@ import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvid
 import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.studyrealtorapp.di.modules.RepoModule
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher

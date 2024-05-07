@@ -1,7 +1,6 @@
 package com.nikitosii.studyrealtorapp.di.modules
 
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardFragment
-import com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchFragment
 import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsFragment
 import com.nikitosii.studyrealtorapp.flow.property_photos.PropertyPhotosFragment
@@ -17,9 +16,6 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRentsFragment(): RentsFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributeSearchSalesHistoryFragment(): SearchSalesHistoryFragment
 
     @ContributesAndroidInjector
     abstract fun contributeSalePropertyDetailsFragment(): PropertyDetailsFragment

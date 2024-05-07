@@ -1,55 +1,31 @@
 package com.nikitosii.studyrealtorapp.core.source.repository.impl
 
-import android.content.Context
-import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
-import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.BaseRepo
-import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
-import com.nikitosii.studyrealtorapp.core.source.repository.base.repoChannel
-import com.nikitosii.studyrealtorapp.util.Flow
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class PropertiesRepoImpl @Inject constructor(
     private val api: PropertiesApi,
-    private val dao: SalePropertiesSearchDao,
-    io: CoroutineDispatcher,
-    channelRecreateObserver: ChannelRecreateObserver,
-    connectivityProvider: ConnectivityProvider,
-    networkErrorHandler: NetworkErrorHandler,
-    val context: Context
+    private val dao: PropertyDao,
+    networkErrorHandler: NetworkErrorHandler
 ) : BaseRepo(networkErrorHandler), PropertiesRepo {
 
-    private val channel = repoChannel<List<PropertyRequest>>(
-        io,
-        connectivityProvider,
-        channelRecreateObserver
-    ) {
-        storageConfig {
-            get = { dao.getLastSaleRequests() }
-        }
-    }
-
     override suspend fun getPropertiesForSale(
-        data: PropertyRequest,
+        data: SearchRequest,
         page: Int?,
         sort: String?
     ): List<Property> = runWithErrorHandler {
-        val houses = data.houses?.map { it.apiType }?.joinToString(",") { it }
-        val result = api.getPropertiesForSale(
+        val houses = data.houses.map { it.apiType }.joinToString(",") { it }
+        api.getPropertiesForSale(
             data.address,
-            if (houses.isNullOrEmpty()) null else houses,
+            houses.ifEmpty { null },
             data.priceMin,
             data.priceMax,
             data.bedsMin,
@@ -64,26 +40,27 @@ class PropertiesRepoImpl @Inject constructor(
             .homeSearch
             .results
             .map { Property.from(it) }
-        val salesData =
-            SalePropertiesSearchEntity.from(data, result.map { PropertyEntity.from(it) })
-        dao.insert(salesData)
-        result
     }
 
-
-    override fun getLastSaleRequestsHistory(): Flow<List<PropertyRequest>> = channel.value.flow
-
-    override suspend fun getSaleRequestsHistory(): List<PropertyRequest> = runWithErrorHandler {
-        dao.getSaleRequests()
+    override suspend fun saveProperties(properties: List<Property>) {
+        dao.insertProperties(properties.map { PropertyEntity.from(it) })
     }
 
-    override suspend fun updateRequestHistory() = runWithErrorHandler { channel.value.refreshOnlyLocal() }
-
-    override suspend fun getByQuery(query: PropertyRequest): List<Property>  = runWithErrorHandler {
-        dao.getByQuery(query).result.map { Property.from(it) }
+    override suspend fun updateProperty(property: Property) {
+        dao.insertProperty(PropertyEntity.from(property))
     }
 
-    override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler{
+    override suspend fun getLocalFavoriteProperties(ids: List<String>): List<Property> =
+        dao.getFavoriteProperties(ids).map { Property.from(it) }
+
+    override suspend fun getFavoritePropertiesIds(ids: List<String>): List<String> =
+        dao.getFavoriteProperties(ids).map { Property.from(it) }.map { it.propertyId }
+
+
+    override suspend fun getLocalProperties(ids: List<String>): List<Property> =
+        dao.getLocalProperties(ids).map { Property.from(it) }
+
+    override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler {
         PropertyDetails.from(api.getPropertyDetails(id).result)
     }
 }

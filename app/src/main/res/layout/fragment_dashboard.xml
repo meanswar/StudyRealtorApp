@@ -175,6 +175,7 @@
                 layout="@layout/layout_filters"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/size_10dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/clFilters" />
 
@@ -234,22 +235,29 @@
             tools:layoutAnimation="@null">
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/grRecentContent"
+                android:id="@+id/grRecentSaleContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tvRecentSearches, rvRecentSearches" />
+                app:constraint_referenced_ids="tvRecentSaleSearches, rvRecentSaleSearches" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/grRecentRentContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tvRecentRentSearches, rvRecentRentSearches" />
+
 
             <TextView
-                android:id="@+id/tvRecentSearches"
+                android:id="@+id/tvRecentSaleSearches"
                 style="@style/AppTheme.Text.Bold.Headline2.Teflon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/recent_searches_title"
+                android:text="@string/screen_dashboard_recent_sale_requests"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
-                android:id="@+id/rvRecentSearches"
+                android:id="@+id/rvRecentSaleSearches"
                 style="@style/AnimatedRecycleView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,11 +271,41 @@
                 app:layoutManagerOrientation="horizontal"
                 app:layoutManagerReverse="false"
                 app:layoutManagerType="linear"
-                app:layout_constraintTop_toBottomOf="@id/tvRecentSearches"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentSaleSearches"
                 app:pagerSnap="true"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_recent_search" />
 
+
+            <TextView
+                android:id="@+id/tvRecentRentSearches"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/screen_dashboard_recent_rent_requests"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/size_10dp"
+                app:layout_constraintTop_toBottomOf="@id/rvRecentSaleSearches"/>
+
+            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                android:id="@+id/rvRecentRentSearches"
+                style="@style/AnimatedRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:clipToPadding="false"
+                android:descendantFocusability="blocksDescendants"
+                android:elevation="@dimen/size_2dp"
+                android:nestedScrollingEnabled="false"
+                app:animationDuration="500"
+                app:layoutAnimation="@anim/recycle_view_from_end"
+                app:layoutManagerOrientation="horizontal"
+                app:layoutManagerReverse="false"
+                app:layoutManagerType="linear"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentRentSearches"
+                app:pagerSnap="true"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_recent_search" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

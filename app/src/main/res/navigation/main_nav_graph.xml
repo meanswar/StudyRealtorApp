@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_search">
         <argument
             android:name="propertyRequest"
-            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest"
             app:nullable="false" />
         <argument
             android:name="localRequest"

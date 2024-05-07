@@ -37,7 +37,7 @@ data class PropertyResponseApi(
     @Json(name = "primary_photo")
     val primaryPhotoResponseApi: PhotoResponseApi,
     @Json(name = "property_id")
-    val propertyId: String? = null,
+    val propertyId: String,
     val status: String? = null,
     val tags: List<String>? = null,
     @Json(name = "tax_record")

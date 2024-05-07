@@ -18,10 +18,11 @@ data class Property(
     val photos: List<Photo>? = null,
     val priceReducedAmount: String? = null,
     val primaryPhoto: Photo,
-    val propertyId: String? = null,
+    val propertyId: String,
     val status: String? = null,
     val tags: List<String>? = null,
-    val virtualTours: List<VrTour>? = null
+    val virtualTours: List<VrTour>? = null,
+    val favorite: Boolean = false
 ): Parcelable {
     companion object {
         fun from(data: PropertyResponseApi): Property = Property(

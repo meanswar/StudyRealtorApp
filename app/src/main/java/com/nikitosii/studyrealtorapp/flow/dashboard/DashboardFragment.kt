@@ -3,13 +3,8 @@ package com.nikitosii.studyrealtorapp.flow.dashboard
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
-import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
-import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
-import com.nikitosii.studyrealtorapp.core.domain.WorkResult
-import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
-import com.nikitosii.studyrealtorapp.core.source.local.model.request.PropertyRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentDashboardBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
@@ -25,12 +20,14 @@ class DashboardFragment :
         { FragmentDashboardBinding.bind(it) },
         R.layout.fragment_dashboard
     ) {
-    private val adapter = SaleRequestAdapter { onSaleRequestClick(it) }
+    private val recentSaleAdapter = SaleRequestAdapter { onSaleRequestClick(it) }
+    private val recentRentAdapter = SaleRequestAdapter { onSaleRequestClick(it) }
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
 
     override fun initViews() {
         with(binding) {
-            rvRecentSearches.adapter = adapter
+            rvRecentSaleSearches.adapter = recentSaleAdapter
+            rvRecentRentSearches.adapter = recentRentAdapter
             filterHousesAdapter.submitList(Constants.housesList)
             svSearch.initEndAnimation(clFilters)
 
@@ -56,18 +53,16 @@ class DashboardFragment :
 
     override fun subscribe() {
         with(viewModel) {
-            saleRequestsHistory.observe(viewLifecycleOwner, saleRequestsHistoryObserver)
+            recentSaleRequests.observe(viewLifecycleOwner, recentSaleRequestsObserver)
+            recentRentRequests.observe(viewLifecycleOwner, recentRentRequestsObserver)
         }
     }
 
-    private val saleRequestsHistoryObserver: Observer<WorkResult<Status<List<PropertyRequest>>>> =
-        Observer {
-            when (it.status) {
-                SUCCESS -> processRecentRequests(it.data?.obj)
-                LOADING -> logi("loading recent requests")
-                ERROR -> handleException(it.exception) { openError() }
-            }
-        }
+    private val recentSaleRequestsObserver: Observer<List<SearchRequest>> =
+        Observer { processRecentSaleRequests(it) }
+
+    private val recentRentRequestsObserver: Observer<List<SearchRequest>> =
+        Observer { processRecentRentRequests(it) }
 
     private fun onClick() {
         with(binding) {
@@ -110,16 +105,25 @@ class DashboardFragment :
         if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMaxFilter.value = maxValue
     }
 
-    private fun processRecentRequests(data: List<PropertyRequest>?) {
+    private fun processRecentSaleRequests(data: List<SearchRequest>) {
         with(binding) {
-            if (data?.isNotEmpty() == true) {
-                adapter.submitList(data)
-                rvRecentSearches.notifyDataSetChanged()
-            } else grRecentContent.hideWithScaleOut()
+            if (data.isNotEmpty()) {
+                recentSaleAdapter.submitList(data)
+                rvRecentSaleSearches.notifyDataSetChanged()
+            } else grRecentSaleContent.hideWithScaleOut()
         }
     }
 
-    private fun onSaleRequestClick(filter: PropertyRequest) {
+    private fun processRecentRentRequests(data: List<SearchRequest>) {
+        with(binding) {
+            if (data.isNotEmpty()) {
+                recentRentAdapter.submitList(data)
+                rvRecentRentSearches.notifyDataSetChanged()
+            } else grRecentRentContent.hideWithScaleOut()
+        }
+    }
+
+    private fun onSaleRequestClick(filter: SearchRequest) {
         val extras = FragmentNavigatorExtras(
             binding.svSearch to "svSearch"
         )

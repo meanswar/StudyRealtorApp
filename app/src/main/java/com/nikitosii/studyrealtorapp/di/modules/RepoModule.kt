@@ -1,24 +1,24 @@
-package com.studyrealtorapp.di.modules
+package com.nikitosii.studyrealtorapp.di.modules
 
-import android.content.Context
-import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.nikitosii.studyrealtorapp.core.source.net.api.image.ImageApi
 import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
+import com.nikitosii.studyrealtorapp.core.source.repository.RequestDataRepo
+import com.nikitosii.studyrealtorapp.core.source.repository.SearchRequestRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.TokenRepo
-import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.ImageRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.PropertiesRepoImpl
+import com.nikitosii.studyrealtorapp.core.source.repository.impl.RequestDataRepoImpl
+import com.nikitosii.studyrealtorapp.core.source.repository.impl.SearchRequestRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.TokenRepoImpl
-import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -28,21 +28,20 @@ object RepoModule {
     @Singleton
     internal fun providePropertiesRepo(
         api: PropertiesApi,
-        dao: SalePropertiesSearchDao,
-        networkErrorHandler: NetworkErrorHandler,
-        @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
-        channelRecreateObserver: ChannelRecreateObserver,
-        connectivityProvider: ConnectivityProvider,
-        context: Context
-    ): PropertiesRepo = PropertiesRepoImpl(
-        api,
-        dao,
-        io,
-        channelRecreateObserver,
-        connectivityProvider,
-        networkErrorHandler,
-        context
-    )
+        dao: PropertyDao,
+        networkErrorHandler: NetworkErrorHandler
+    ): PropertiesRepo = PropertiesRepoImpl(api, dao, networkErrorHandler)
+
+    @Provides
+    @Singleton
+    internal fun provideSearchRequestRepo(dao: SearchRequestDao): SearchRequestRepo =
+        SearchRequestRepoImpl(dao)
+
+    @Provides
+    @Singleton
+    internal fun provideRequestDataRepo(
+        dao: RequestDataDao
+    ): RequestDataRepo = RequestDataRepoImpl(dao)
 
     @Provides
     @Singleton
