@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.details
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.Branding
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Description
+import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
 import com.nikitosii.studyrealtorapp.databinding.FragmentPropertyDetailsBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
@@ -34,6 +36,7 @@ import com.nikitosii.studyrealtorapp.util.ext.DateExt.UI_DATE_PATTERN_WITH_TIME_
 import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.emailIntent
+import com.nikitosii.studyrealtorapp.util.ext.formatPrice
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.model.getName
@@ -71,6 +74,7 @@ class PropertyDetailsFragment :
             glideImage(args.property.primaryPhoto.url, ivProperty)
             setPropertyDescriptionInfo(args.property.description)
             setBrandingInfo(args.property.branding?.first())
+            setFavorite(args.property)
             tvPropertyAddress.text = args.property.getName()
             tvPropertyPrice.text =
                 getString(R.string.view_sale_property_description_price, args.property.listPrice)
@@ -90,12 +94,38 @@ class PropertyDetailsFragment :
             rvPropertyImage.adapter = imageAdapter
             rvPropertyImage.attachPagerSnap()
         }
-        args.property.propertyId?.let { viewModel.getPropertyDetails(it) }
+//      viewModel.getPropertyDetails(args.property.propertyId)
         viewModel.updateMapStatus(false)
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this@PropertyDetailsFragment)
+        onClick()
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun setFavorite(property: Property) {
+        with(binding) {
+            when (property.favorite) {
+                true -> {
+                    cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.peach))
+                    ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite_active))
+                }
+                false -> {
+                    cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.primary_white))
+                    ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite))
+                }
+            }
+        }
+    }
+
+    private fun onClick() {
+        with(binding) {
+            cvFavorite.onClick {
+                viewModel.onFavoriteClick(args.property)
+                setFavorite(args.property.copy(favorite = !args.property.favorite))
+            }
+        }
     }
 
 

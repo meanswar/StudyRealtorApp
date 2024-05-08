@@ -10,11 +10,13 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.parcelize.PhotoContainer
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetPropertyDetailsUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class PropertyDetailsViewModel @Inject constructor(
-    private val getPropertyDetailsUseCase: GetPropertyDetailsUseCase
+    private val getPropertyDetailsUseCase: GetPropertyDetailsUseCase,
+    private val updatePropertyUseCase: UpdatePropertyUseCase
 ): BaseViewModel() {
     private val _property = WorkLiveData<PropertyDetails>()
     val property: LiveData<WorkResult<PropertyDetails>>
@@ -45,5 +47,12 @@ class PropertyDetailsViewModel @Inject constructor(
     fun buildPhotoContainer(imageStarterId: Int): PhotoContainer {
         val photos = photos.value ?: listOf()
         return PhotoContainer(photos, imageStarterId)
+    }
+
+    fun onFavoriteClick(data: Property) {
+        val params = UpdatePropertyUseCase.Params.create(data.copy(favorite = !data.favorite))
+        ioToUnit {
+            updatePropertyUseCase.execute(params)
+        }
     }
 }

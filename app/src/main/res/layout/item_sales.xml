@@ -162,6 +162,7 @@
                 android:id="@+id/ivFavorite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_favorite" />
         </androidx.cardview.widget.CardView>

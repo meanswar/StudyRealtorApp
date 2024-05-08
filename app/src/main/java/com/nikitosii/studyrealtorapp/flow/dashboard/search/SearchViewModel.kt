@@ -9,6 +9,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertiesUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesForSaleUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getSaleRequestsUseCase: GetPropertiesForSaleUseCase,
     private val getLocalPropertiesForSaleUseCase: GetLocalPropertiesUseCase,
-    private val updatePropertyUseCase: UpdatePropertyUseCase
+    private val updatePropertyUseCase: UpdatePropertyUseCase,
+    private val getLocalPropertyUseCase: GetLocalPropertyUseCase
 ) : BaseViewModel() {
 
     private val request = MutableLiveData<SearchRequest>()
@@ -37,11 +39,14 @@ class SearchViewModel @Inject constructor(
     private val _propertiesForSaleData = WorkLiveData<Pair<SearchRequest, List<Property>>>()
 
     val isDataAlreadyUploaded = MutableLiveData(false)
+    private val isNeedToUpdateLocalPropertyData = MutableLiveData(false)
 
-    val propertiesForSaleData: LiveData<WorkResult<Pair<SearchRequest,List<Property>>>>
+    val propertiesForSaleData: LiveData<WorkResult<Pair<SearchRequest, List<Property>>>>
         get() = _propertiesForSaleData
 
     val localProperties = WorkLiveData<List<Property>>()
+    val openedPropertyId = MutableLiveData<String>()
+    val updatedProperty = MutableLiveData<Property>()
 
     fun setSearchRequest(request: SearchRequest) {
         this.request.value = request
@@ -54,6 +59,12 @@ class SearchViewModel @Inject constructor(
         bathsMaxFilter.value = request.bathsMax
         sqftMinFilter.value = request.sqftMin
         requestType.value = request.requestType
+    }
+
+    fun isNeedToUpdateLocalProperty(): Boolean = isNeedToUpdateLocalPropertyData.value == true
+
+    fun setNeedToUpdateLocalProperty(isNeed: Boolean) {
+        isNeedToUpdateLocalPropertyData.value = isNeed
     }
 
 
@@ -135,5 +146,14 @@ class SearchViewModel @Inject constructor(
         ioToUnit {
             updatePropertyUseCase.execute(params)
         }
+    }
+
+    fun getUpdatedProperty() {
+        val id = openedPropertyId.value ?: return
+        val params = GetLocalPropertyUseCase.Params.create(id)
+        ioToUi(
+            io = { getLocalPropertyUseCase.execute(params) },
+            ui = { updatedProperty.postValue(it) }
+        )
     }
 }

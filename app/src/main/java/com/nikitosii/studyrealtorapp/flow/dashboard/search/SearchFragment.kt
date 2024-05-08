@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.search
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.widget.ImageView
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
@@ -41,15 +42,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     private val propertiesAdapter by lazy {
         PropertyAdapter({ data, view ->
             openPropertyDetails(
-                data,
-                view
+                data, view
             )
         }, { onFavoriteClick(it) })
     }
     private val filtersAdapter by lazy { FilterAdapter { onHouseFilterClick(it) } }
 
-    private fun onHouseFilterClick(house: HouseType): Boolean =
-        viewModel.setFilterHouse(house)
+    private fun onHouseFilterClick(house: HouseType): Boolean = viewModel.setFilterHouse(house)
 
     override fun initViews() {
         onClick()
@@ -85,23 +84,29 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     }
 
     private fun onPriceChanged(minValue: Int, maxValue: Int) {
-        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.priceMinFilter.value = minValue
-        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.priceMaxFilter.value = maxValue
+        onValueFilterChanged(minValue, maxValue, viewModel.priceMinFilter, viewModel.priceMaxFilter)
     }
 
     private fun onBedsChanged(minValue: Int, maxValue: Int) {
-        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.bedsMinFilter.value = minValue
-        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.bedsMaxFilter.value = maxValue
+        onValueFilterChanged(minValue, maxValue, viewModel.bedsMinFilter, viewModel.bedsMaxFilter)
     }
 
     private fun onBathsChanged(minValue: Int, maxValue: Int) {
-        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.bathsMinFilter.value = minValue
-        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.bathsMaxFilter.value = maxValue
+        onValueFilterChanged(minValue, maxValue, viewModel.bathsMinFilter, viewModel.bathsMaxFilter)
     }
 
     private fun onSqftChanged(minValue: Int, maxValue: Int) {
-        if (minValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMinFilter.value = minValue
-        if (maxValue != RangeView.RANGE_VALUE_ANY) viewModel.sqftMaxFilter.value = maxValue
+        onValueFilterChanged(minValue, maxValue, viewModel.sqftMinFilter, viewModel.sqftMaxFilter)
+    }
+
+    private fun onValueFilterChanged(
+        minValue: Int,
+        maxValue: Int,
+        containerMin: MutableLiveData<Int>,
+        containerMax: MutableLiveData<Int>
+    ) {
+        if (minValue != RangeView.RANGE_VALUE_ANY) containerMin.value = minValue
+        if (maxValue != RangeView.RANGE_VALUE_ANY) containerMax.value = minValue
     }
 
     private fun initRangeValues() {
@@ -127,6 +132,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         with(viewModel) {
             propertiesForSaleData.observe(viewLifecycleOwner, propertiesObserver)
             localProperties.observe(viewLifecycleOwner, localPropertiesObserver)
+            updatedProperty.observe(viewLifecycleOwner, updatedPropertyObserver)
         }
     }
 
@@ -142,6 +148,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private val localPropertiesObserver: Observer<WorkResult<List<Property>>> =
         Observer { observeProperties(it.data) }
+
+    private val updatedPropertyObserver: Observer<Property> = Observer { updatedData ->
+        val idInAdapter =
+            propertiesAdapter.currentList.indexOfFirst { it.propertyId == updatedData.propertyId }
+        val data = mutableListOf(propertiesAdapter.currentList).flatten().toMutableList()
+        data.replaceAll { if (it.propertyId == updatedData.propertyId) updatedData else it }
+        propertiesAdapter.submitList(data)
+        propertiesAdapter.notifyItemChanged(idInAdapter)
+    }
 
     private fun showLoading(isLoading: Boolean) {
         with(binding) {
@@ -165,6 +180,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     }
 
     private fun openPropertyDetails(property: Property, view: ImageView) {
+        viewModel.openedPropertyId.value = property.propertyId
+        viewModel.setNeedToUpdateLocalProperty(true)
         val extras = FragmentNavigatorExtras(
             view to view.transitionName
         )
@@ -173,5 +190,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private fun onFavoriteClick(property: Property) {
         viewModel.onFavoriteClick(property)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.isNeedToUpdateLocalProperty()) getUpdatedLocalProperty()
+    }
+
+    private fun getUpdatedLocalProperty() {
+        viewModel.setNeedToUpdateLocalProperty(false)
+        viewModel.getUpdatedProperty()
     }
 }
