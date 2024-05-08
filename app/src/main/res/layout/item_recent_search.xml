@@ -98,5 +98,27 @@
             app:layout_constraintTop_toTopOf="@id/tvSearchPlace"
             tools:text="Obj: 54" />
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            android:id="@+id/cvFavorite"
+            app:cardCornerRadius="@dimen/size_25dp"
+            app:cardBackgroundColor="@color/white_transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardElevation="@dimen/size_0dp"
+            android:layout_marginTop="@dimen/size_15dp"
+            android:layout_marginEnd="@dimen/size_15dp"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ivFavorite"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:scaleType="center"
+                android:src="@drawable/ic_favorite_active" />
+
+        </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

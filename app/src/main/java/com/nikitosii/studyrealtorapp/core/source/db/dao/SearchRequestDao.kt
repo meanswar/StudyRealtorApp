@@ -25,4 +25,7 @@ interface SearchRequestDao {
 
     @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} WHERE id = :id")
     fun remove(id: Int)
+
+    @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} WHERE id != :id")
+    fun removeNot(id: Int = 1)
 }

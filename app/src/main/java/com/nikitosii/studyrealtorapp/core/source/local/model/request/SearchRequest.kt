@@ -38,7 +38,8 @@ data class SearchRequest(
             sqftMin = entity.sqftMin,
             sqftMax = entity.sqftMax,
             imageUrl = entity.imageUrl,
-            requestType = entity.requestType
+            requestType = entity.requestType,
+            favorite = entity.favorite
         )
 
         fun emptyInstance(): SearchRequest {

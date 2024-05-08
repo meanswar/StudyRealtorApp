@@ -8,16 +8,19 @@ import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 
-class SaleRequestAdapter(private val onClick: (SearchRequest) -> Unit) :
-    ListAdapter<SearchRequest, SaleRequestViewHolder>(SaleRequestDiffCallback) {
+class SaleRequestAdapter(
+    private val onClick: (SearchRequest) -> Unit,
+    private val onFavoriteClick: (SearchRequest) -> Unit
+) :
+    ListAdapter<SearchRequest, RequestViewHolder>(SaleRequestDiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleRequestViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemRecentSearchBinding.inflate(inflater, parent, false)
-        return SaleRequestViewHolder(binding, onClick)
+        return RequestViewHolder(binding, onClick, onFavoriteClick)
     }
 
-    override fun onBindViewHolder(holder: SaleRequestViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

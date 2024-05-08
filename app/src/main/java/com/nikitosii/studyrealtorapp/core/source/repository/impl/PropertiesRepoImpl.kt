@@ -47,7 +47,8 @@ class PropertiesRepoImpl @Inject constructor(
     }
 
     override suspend fun updateProperty(property: Property) {
-        dao.insertProperty(PropertyEntity.from(property))
+        val updated = PropertyEntity.from(property)
+        dao.insertProperty(updated)
     }
 
     override suspend fun getLocalFavoriteProperties(ids: List<String>): List<Property> =

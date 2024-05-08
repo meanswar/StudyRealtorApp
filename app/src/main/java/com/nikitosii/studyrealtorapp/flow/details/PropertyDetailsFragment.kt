@@ -23,7 +23,6 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.Branding
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Description
-import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
 import com.nikitosii.studyrealtorapp.databinding.FragmentPropertyDetailsBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
@@ -36,7 +35,6 @@ import com.nikitosii.studyrealtorapp.util.ext.DateExt.UI_DATE_PATTERN_WITH_TIME_
 import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.emailIntent
-import com.nikitosii.studyrealtorapp.util.ext.formatPrice
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.model.getName
@@ -55,7 +53,8 @@ class PropertyDetailsFragment :
 
     private val args: PropertyDetailsFragmentArgs by navArgs()
 
-    private val imageAdapter = PropertyImageAdapter { id, view -> openPropertyPhotosScreen(id, view)}
+    private val imageAdapter =
+        PropertyImageAdapter { id, view -> openPropertyPhotosScreen(id, view) }
     private val propertyDetailsAdapter = PropertyDetailsAdapter()
     private val schoolInfoAdapter by lazy { SchoolInfoAdapter() }
 
@@ -70,11 +69,12 @@ class PropertyDetailsFragment :
     override fun initViews() {
         with(binding) {
             postponeEnterTransition()
+            viewModel.setLocalProperty(args.property)
             ivProperty.transitionName = args.property.propertyId
             glideImage(args.property.primaryPhoto.url, ivProperty)
             setPropertyDescriptionInfo(args.property.description)
             setBrandingInfo(args.property.branding?.first())
-            setFavorite(args.property)
+            setFavorite()
             tvPropertyAddress.text = args.property.getName()
             tvPropertyPrice.text =
                 getString(R.string.view_sale_property_description_price, args.property.listPrice)
@@ -94,7 +94,7 @@ class PropertyDetailsFragment :
             rvPropertyImage.adapter = imageAdapter
             rvPropertyImage.attachPagerSnap()
         }
-//      viewModel.getPropertyDetails(args.property.propertyId)
+        viewModel.getPropertyDetails(args.property.propertyId)
         viewModel.updateMapStatus(false)
 
         val mapFragment = childFragmentManager
@@ -104,16 +104,19 @@ class PropertyDetailsFragment :
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun setFavorite(property: Property) {
+    private fun setFavorite() {
         with(binding) {
-            when (property.favorite) {
-                true -> {
-                    cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.peach))
-                    ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite_active))
-                }
-                false -> {
-                    cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.primary_white))
-                    ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite))
+            with(viewModel) {
+                when (localProperty.value?.favorite == true) {
+                    true -> {
+                        cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.peach))
+                        ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite_active))
+                    }
+
+                    false -> {
+                        cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.primary_white))
+                        ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite))
+                    }
                 }
             }
         }
@@ -122,12 +125,11 @@ class PropertyDetailsFragment :
     private fun onClick() {
         with(binding) {
             cvFavorite.onClick {
-                viewModel.onFavoriteClick(args.property)
-                setFavorite(args.property.copy(favorite = !args.property.favorite))
+                viewModel.onFavoriteClick()
+                setFavorite()
             }
         }
     }
-
 
 
     private fun setPropertyDescriptionInfo(data: Description?) {
@@ -152,6 +154,7 @@ class PropertyDetailsFragment :
             property.observe(viewLifecycleOwner, propertyObserver)
             isMapReady.observe(viewLifecycleOwner, isMapReadyObserver)
             coordinates.observe(viewLifecycleOwner, coordinatesObserver)
+            updateStatus.observe(viewLifecycleOwner, updateStatusObserver)
         }
     }
 
@@ -173,6 +176,15 @@ class PropertyDetailsFragment :
         if (viewModel.isMapReady.value == true) {
             moveToMapPosition(it)
         }
+    }
+
+    private val updateStatusObserver: Observer<WorkResult<Unit>> = Observer {
+        when (it.status) {
+            Status.SUCCESS -> {}
+            Status.LOADING -> Timber.i("loading property details")
+            Status.ERROR -> handleException(it.exception) { openError() }
+        }
+
     }
 
     private fun setPropertyDetailsData(property: PropertyDetails?) {
@@ -222,7 +234,11 @@ class PropertyDetailsFragment :
                 cvEmail.onClick { emailIntent(EMAIL) }
                 tvAgentName.text = it.branding?.first()?.name
                 tvAgentType.text = it.branding?.first()?.type
-                glideImage(it.branding?.first()?.photo, ivAgentImage, R.drawable.ic_menu_agent_peach)
+                glideImage(
+                    it.branding?.first()?.photo,
+                    ivAgentImage,
+                    R.drawable.ic_menu_agent_peach
+                )
                 tvAgencyName.showText(it.branding?.get(1)?.name)
             }
         }

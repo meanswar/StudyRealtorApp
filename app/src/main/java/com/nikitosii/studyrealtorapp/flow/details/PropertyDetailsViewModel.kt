@@ -17,10 +17,16 @@ import javax.inject.Inject
 class PropertyDetailsViewModel @Inject constructor(
     private val getPropertyDetailsUseCase: GetPropertyDetailsUseCase,
     private val updatePropertyUseCase: UpdatePropertyUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
     private val _property = WorkLiveData<PropertyDetails>()
     val property: LiveData<WorkResult<PropertyDetails>>
         get() = _property
+
+    val localProperty = MutableLiveData<Property>()
+
+    fun setLocalProperty(property: Property) {
+        localProperty.value = property
+    }
 
     private val _isMapReady = MutableLiveData(false)
     val isMapReady: LiveData<Boolean>
@@ -35,7 +41,7 @@ class PropertyDetailsViewModel @Inject constructor(
     fun getPropertyDetails(id: String) {
         val params = GetPropertyDetailsUseCase.Params.create(id)
         ioToUiWorkData(
-            io = {  getPropertyDetailsUseCase.execute(params) },
+            io = { getPropertyDetailsUseCase.execute(params) },
             ui = { _property.postValue(it) }
         )
     }
@@ -49,10 +55,16 @@ class PropertyDetailsViewModel @Inject constructor(
         return PhotoContainer(photos, imageStarterId)
     }
 
-    fun onFavoriteClick(data: Property) {
-        val params = UpdatePropertyUseCase.Params.create(data.copy(favorite = !data.favorite))
-        ioToUnit {
-            updatePropertyUseCase.execute(params)
-        }
+    val updateStatus = WorkLiveData<Unit>()
+
+    fun onFavoriteClick() {
+        val property = localProperty.value ?: return
+        val updatedProperty = property.copy(favorite = !property.favorite)
+        localProperty.value = updatedProperty
+        val params = UpdatePropertyUseCase.Params.create(updatedProperty)
+        ioToUiWorkData(
+            io = { updatePropertyUseCase.execute(params) },
+            ui = { updateStatus.postValue(it) }
+        )
     }
 }

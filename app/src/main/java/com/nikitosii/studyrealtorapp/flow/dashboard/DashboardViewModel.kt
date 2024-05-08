@@ -5,11 +5,13 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetRecentSearchRequestsUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.request.UpdateRequestUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class DashboardViewModel @Inject constructor(
-    private val getRequestHistoryUseCase: GetRecentSearchRequestsUseCase
+    private val getRequestHistoryUseCase: GetRecentSearchRequestsUseCase,
+    private val updateSearchRequestUseCase: UpdateRequestUseCase
 ) : BaseViewModel() {
 
     private val filterHouses = mutableListOf<HouseType>()
@@ -78,5 +80,10 @@ class DashboardViewModel @Inject constructor(
             io = { getRequestHistoryUseCase.execute(params) },
             ui = { recentRentRequests.value = it }
         )
+    }
+
+    fun updateRequest(request: SearchRequest) {
+        val params = UpdateRequestUseCase.Params.create(request)
+        ioToUnit(io = { updateSearchRequestUseCase.execute(params) })
     }
 }

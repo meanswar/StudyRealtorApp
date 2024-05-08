@@ -30,4 +30,6 @@ interface SearchRequestRepo {
      */
 
     suspend fun getRecentSearchRequests(type: RequestType): List<SearchRequest>
+
+    suspend fun updateSearchRequest(request: SearchRequest)
 }

@@ -13,7 +13,6 @@ import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.view.RangeView
 
 @RequiresViewModel(DashboardViewModel::class)
@@ -22,13 +21,13 @@ class DashboardFragment :
         { FragmentDashboardBinding.bind(it) },
         R.layout.fragment_dashboard
     ) {
-    private val recentSaleAdapter = SaleRequestAdapter { onSaleRequestClick(it) }
-    private val recentRentAdapter = SaleRequestAdapter { onSaleRequestClick(it) }
+    private val recentSaleAdapter =
+        SaleRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
+    private val recentRentAdapter =
+        SaleRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
 
     override fun initViews() {
-        viewModel.getRecentRentRequests()
-        viewModel.getRecentSaleRequests()
         with(binding) {
             rvRecentSaleSearches.adapter = recentSaleAdapter
             rvRecentRentSearches.adapter = recentRentAdapter
@@ -73,7 +72,9 @@ class DashboardFragment :
         with(binding) {
             svSearch.setOnEndClick { svSearch.setIsFilled(viewModel.checkFilters()) }
             svSearch.setOnTextChanged { viewModel.addressFilter.value = it }
-            btnBuy.onClick { viewModel.requestType.value = RequestType.SALE; openSearchSaleScreen() }
+            btnBuy.onClick {
+                viewModel.requestType.value = RequestType.SALE; openSearchSaleScreen()
+            }
 
             with(lFilterAttributes) {
                 ivHouse.initAnimation(rvFilterTypes)
@@ -135,6 +136,16 @@ class DashboardFragment :
         DashboardFragmentDirections.openSearchScreen(filter, true).navigate(extras)
     }
 
+    private fun onFavoriteClick(data: SearchRequest) {
+        viewModel.updateRequest(data.copy(favorite = !data.favorite))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getRecentSaleRequests()
+        viewModel.getRecentRentRequests()
+    }
+
     private fun openSearchSaleScreen() {
         val extras = FragmentNavigatorExtras(
             binding.svSearch to "svSearch"
@@ -145,5 +156,4 @@ class DashboardFragment :
             DashboardFragmentDirections.openSearchScreen(request, false)
                 .navigate(extras)
     }
-
 }

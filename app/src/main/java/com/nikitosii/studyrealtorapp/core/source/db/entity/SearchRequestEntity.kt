@@ -26,6 +26,7 @@ data class SearchRequestEntity(
 ) {
     companion object {
         fun from(data: SearchRequest) = SearchRequestEntity(
+            id = data.id ?: 0,
             address = data.address,
             houses = data.houses,
             priceMin = data.priceMin,
@@ -37,7 +38,8 @@ data class SearchRequestEntity(
             sqftMin = data.sqftMin,
             sqftMax = data.sqftMax,
             imageUrl = data.imageUrl,
-            requestType = data.requestType
+            requestType = data.requestType,
+            favorite = data.favorite
         )
         fun toLocal(data: SearchRequestEntity) = SearchRequest(
             id = data.id,
@@ -52,7 +54,8 @@ data class SearchRequestEntity(
             sqftMin = data.sqftMin,
             sqftMax = data.sqftMax,
             imageUrl = data.imageUrl,
-            requestType = data.requestType
+            requestType = data.requestType,
+            favorite = data.favorite
         )
     }
 }
