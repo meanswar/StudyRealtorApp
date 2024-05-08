@@ -58,7 +58,8 @@ data class Property(
             entity.propertyId,
             entity.status,
             entity.tags,
-            entity.virtualTours
+            entity.virtualTours,
+            entity.favorite
         )
     }
 }
