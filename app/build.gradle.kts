@@ -29,6 +29,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
         buildConfigField("String", "Image_URL", "\"https://api.unsplash.com/\"")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                argument("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
 
     signingConfigs {
@@ -192,6 +198,8 @@ dependencies {
     implementation("androidx.room:room-runtime:$room")
     kapt("androidx.room:room-compiler:$room")
     implementation("androidx.room:room-ktx:$room")
+    implementation ("com.github.MatrixDev.Roomigrant:RoomigrantLib:0.3.4")
+    kapt ("com.github.MatrixDev.Roomigrant:RoomigrantCompiler:0.3.4")
     //Picasso
     implementation("com.squareup.picasso:picasso:2.71828")
     //Swipe Refresh

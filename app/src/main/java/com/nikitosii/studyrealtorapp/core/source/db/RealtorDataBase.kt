@@ -33,7 +33,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SearchRequestEntity
-import com.nikitosii.studyrealtorapp.util.annotation.GenerateRoomMigrations
+import dev.matrix.roomigrant.GenerateRoomMigrations
 
 @Database(
     entities = [
@@ -42,9 +42,9 @@ import com.nikitosii.studyrealtorapp.util.annotation.GenerateRoomMigrations
         RequestDataEntity::class,
         SearchRequestEntity::class
     ],
-    version = DbConfig.VERSION
+    version = DbConfig.VERSION,
 )
-@GenerateRoomMigrations
+@GenerateRoomMigrations()
 @TypeConverters(
     BooleanTypeConverter::class,
     BrandingTypeConverter::class,
@@ -89,5 +89,5 @@ abstract class RealtorDataBase : RoomDatabase() {
 
 object DbConfig {
 
-    const val VERSION = 8
+    const val VERSION = 9
 }

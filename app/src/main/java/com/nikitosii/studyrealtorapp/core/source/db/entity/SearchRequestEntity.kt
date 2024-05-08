@@ -21,7 +21,8 @@ data class SearchRequestEntity(
     val sqftMin: Int? = null,
     val sqftMax: Int? = null,
     val imageUrl: String? = null,
-    val requestType: RequestType
+    val requestType: RequestType,
+    val favorite: Boolean = false
 ) {
     companion object {
         fun from(data: SearchRequest) = SearchRequestEntity(
