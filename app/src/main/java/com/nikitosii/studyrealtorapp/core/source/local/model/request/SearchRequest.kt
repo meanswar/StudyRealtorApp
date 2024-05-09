@@ -20,7 +20,10 @@ data class SearchRequest(
     val sqftMax: Int? = null,
     val imageUrl: String? = null,
     val requestType: RequestType,
-    val favorite: Boolean = false
+    val favorite: Boolean = false,
+    val cats: Boolean? = null,
+    val dogs: Boolean? = null,
+    val sort: SearchSortType? = null
 ): Parcelable {
     companion object {
         fun toEntity(request: SearchRequest) = SearchRequestEntity.from(request)
@@ -39,7 +42,9 @@ data class SearchRequest(
             sqftMax = entity.sqftMax,
             imageUrl = entity.imageUrl,
             requestType = entity.requestType,
-            favorite = entity.favorite
+            favorite = entity.favorite,
+            cats = entity.cats,
+            dogs = entity.dogs
         )
 
         fun emptyInstance(): SearchRequest {

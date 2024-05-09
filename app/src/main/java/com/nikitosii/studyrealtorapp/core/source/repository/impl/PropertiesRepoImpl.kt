@@ -19,8 +19,7 @@ class PropertiesRepoImpl @Inject constructor(
 
     override suspend fun getPropertiesForSale(
         data: SearchRequest,
-        page: Int?,
-        sort: String?
+        page: Int?
     ): List<Property> = runWithErrorHandler {
         val houses = data.houses.map { it.apiType }.joinToString(",") { it }
         api.getPropertiesForSale(
@@ -35,7 +34,7 @@ class PropertiesRepoImpl @Inject constructor(
             data.sqftMin,
             data.sqftMax,
             page,
-            sort
+            data.sort?.type
         )
             .homeSearch
             .results
@@ -68,5 +67,25 @@ class PropertiesRepoImpl @Inject constructor(
 
     override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler {
         PropertyDetails.from(api.getPropertyDetails(id).result)
+    }
+
+    override suspend fun getPropertiesForRent(data: SearchRequest, page: Int?): List<Property> = runWithErrorHandler {
+        val houses = data.houses.map { it.apiType }.joinToString(",") { it }
+        api.getPropertiesForRent(
+            data.address,
+            houses.ifEmpty { null },
+            data.priceMin,
+            data.priceMax,
+            data.bedsMin,
+            data.bedsMax,
+            data.bathsMin,
+            data.bathsMax,
+            data.sqftMin,
+            data.sqftMax,
+            data.cats,
+            data.dogs,
+            page,
+            data.sort?.type
+        ).homeSearch.results.map { Property.from(it) }
     }
 }

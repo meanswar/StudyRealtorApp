@@ -16,8 +16,7 @@ interface PropertiesRepo {
      */
     suspend fun getPropertiesForSale(
         data: SearchRequest,
-        page: Int? = null,
-        sort: String? = null
+        page: Int? = null
     ): List<Property>
 
     suspend fun saveProperties(properties: List<Property>)
@@ -36,4 +35,5 @@ interface PropertiesRepo {
 
     suspend fun getPropertyDetails(id: String): PropertyDetails
 
+    suspend fun getPropertiesForRent(data: SearchRequest, page: Int? = null): List<Property>
 }

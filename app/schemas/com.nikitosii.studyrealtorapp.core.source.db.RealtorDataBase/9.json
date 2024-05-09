@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 9,
-    "identityHash": "61e3309d08c6af0d93f858b1c3accd74",
+    "identityHash": "b992bc7974c7ccfd240d61d4661ec3e6",
     "entities": [
       {
         "tableName": "property",
@@ -174,7 +174,7 @@
       },
       {
         "tableName": "search_request",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `address` TEXT NOT NULL, `houses` TEXT NOT NULL, `priceMin` INTEGER, `priceMax` INTEGER, `bedsMin` INTEGER, `bedsMax` INTEGER, `bathsMin` INTEGER, `bathsMax` INTEGER, `sqftMin` INTEGER, `sqftMax` INTEGER, `imageUrl` TEXT, `requestType` TEXT NOT NULL, `favorite` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `address` TEXT NOT NULL, `houses` TEXT NOT NULL, `priceMin` INTEGER, `priceMax` INTEGER, `bedsMin` INTEGER, `bedsMax` INTEGER, `bathsMin` INTEGER, `bathsMax` INTEGER, `sqftMin` INTEGER, `sqftMax` INTEGER, `imageUrl` TEXT, `requestType` TEXT NOT NULL, `favorite` INTEGER NOT NULL, `cats` INTEGER, `dogs` INTEGER, `sort` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -259,6 +259,24 @@
             "columnName": "favorite",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "cats",
+            "columnName": "cats",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dogs",
+            "columnName": "dogs",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sort",
+            "columnName": "sort",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -274,7 +292,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '61e3309d08c6af0d93f858b1c3accd74')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b992bc7974c7ccfd240d61d4661ec3e6')"
     ]
   }
 }

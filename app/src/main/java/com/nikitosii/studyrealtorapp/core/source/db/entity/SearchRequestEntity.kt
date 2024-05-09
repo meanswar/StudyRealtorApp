@@ -6,6 +6,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchSortType
 
 @Entity(tableName = RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST)
 data class SearchRequestEntity(
@@ -22,7 +23,10 @@ data class SearchRequestEntity(
     val sqftMax: Int? = null,
     val imageUrl: String? = null,
     val requestType: RequestType,
-    val favorite: Boolean = false
+    val favorite: Boolean = false,
+    val cats: Boolean? = null,
+    val dogs: Boolean? = null,
+    val sort: SearchSortType? = null
 ) {
     companion object {
         fun from(data: SearchRequest) = SearchRequestEntity(
