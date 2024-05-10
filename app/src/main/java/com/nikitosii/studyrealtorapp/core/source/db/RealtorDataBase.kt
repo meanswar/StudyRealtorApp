@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.core.source.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.nikitosii.studyrealtorapp.core.source.db.converters.AdvertisersTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.BooleanTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.BrandingTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.CommunityTypeConverter
@@ -22,6 +23,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.converters.ProductTypeConver
 import com.nikitosii.studyrealtorapp.core.source.db.converters.PropertyTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.RequestTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SalesRequestTypeConverter
+import com.nikitosii.studyrealtorapp.core.source.db.converters.SearchSortTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SourceTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.TaxRecordTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.VrTourTypeConverter
@@ -68,6 +70,8 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
     VrTourTypeConverter::class,
     RequestTypeConverter::class,
     HouseTypeConverter::class,
+    SearchSortTypeConverter::class,
+    AdvertisersTypeConverter::class,
 )
 abstract class RealtorDataBase : RoomDatabase() {
 
@@ -89,5 +93,5 @@ abstract class RealtorDataBase : RoomDatabase() {
 
 object DbConfig {
 
-    const val VERSION = 9
+    const val VERSION = 13
 }

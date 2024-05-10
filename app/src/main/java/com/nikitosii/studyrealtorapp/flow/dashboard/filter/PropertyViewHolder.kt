@@ -8,8 +8,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
-import com.nikitosii.studyrealtorapp.util.ext.formatPrice
-import com.nikitosii.studyrealtorapp.util.ext.model.getName
+import com.nikitosii.studyrealtorapp.util.ext.model.getAddress
+import com.nikitosii.studyrealtorapp.util.ext.model.getPriceStringFormat
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
@@ -25,9 +25,10 @@ class PropertyViewHolder(
             setPropertyImage(property)
             initFavoriteView(property)
 
-            tvPropertyAddress.text = property.getName()
-            tvPropertyPrice.text = property.listPrice?.toString()?.formatPrice()
-
+            tvPropertyAddress.text = property.getAddress()
+            tvPropertyName.showText(property.description?.name)
+            val price = property.getPriceStringFormat() + " approx."
+            tvPropertyPrice.text = price
             tvPropertyBeds.showText(property.description?.beds?.toString())
             tvProperyBaths.showText(property.description?.baths?.toString())
             tvPropertySqft.showText(property.description?.sqft?.toString())

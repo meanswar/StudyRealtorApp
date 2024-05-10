@@ -26,5 +26,7 @@ enum class HouseType(val type: String, val apiType: String) {
     @Json(name = "cottage")
     COTTAGE("Cottage", "cottage"),
     @Json(name = "farm")
-    FARM("Farm", "farm")
+    FARM("Farm", "farm"),
+    @Json(name = "coop")
+    COOP("Co-op", "coop"),
 }

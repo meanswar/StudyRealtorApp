@@ -1,8 +1,10 @@
 package com.nikitosii.studyrealtorapp.core.source.net.api
 
+import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseHomeSearch
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponse
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseSinglePropertyResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.property.PropertyResponseApi
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -46,5 +48,5 @@ interface PropertiesApi {
         @Query("dogs") dogs: Boolean? = null,
         @Query("page") page: Int? = null,
         @Query("sort") sort: String? = null
-    ): BaseResponse
+    ): BaseHomeSearch<PropertyResponseApi>
 }

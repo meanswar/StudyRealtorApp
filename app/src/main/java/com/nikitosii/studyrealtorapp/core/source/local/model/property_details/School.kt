@@ -29,8 +29,6 @@ data class School(
             Parent Rating: ${parentRating ?: "N/A"}
             Rating: ${rating ?: "N/A"}
             Review Count: $reviewCount
-            Slug: $slug
-            Slug ID: $slugId
             -----------------------------------------------------
         """.trimIndent()
     }

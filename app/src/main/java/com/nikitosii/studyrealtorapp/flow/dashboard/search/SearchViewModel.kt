@@ -11,13 +11,15 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchReque
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertiesUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.rent.GetPropertiesForRentUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesForSaleUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val getSaleRequestsUseCase: GetPropertiesForSaleUseCase,
-    private val getLocalPropertiesForSaleUseCase: GetLocalPropertiesUseCase,
+    private val getPropertiesForSaleUseCase: GetPropertiesForSaleUseCase,
+    private val getPropertiesForRentUseCase: GetPropertiesForRentUseCase,
+    private val getLocalPropertiesUseCase: GetLocalPropertiesUseCase,
     private val updatePropertyUseCase: UpdatePropertyUseCase,
     private val getLocalPropertyUseCase: GetLocalPropertyUseCase
 ) : BaseViewModel() {
@@ -36,13 +38,13 @@ class SearchViewModel @Inject constructor(
     val sqftMaxFilter by lazy { MutableLiveData<Int>() }
     val requestType = MutableLiveData<RequestType>()
 
-    private val _propertiesForSaleData = WorkLiveData<Pair<SearchRequest, List<Property>>>()
+    private val _properties = WorkLiveData<Pair<SearchRequest, List<Property>>>()
 
     val isDataAlreadyUploaded = MutableLiveData(false)
     private val isNeedToUpdateLocalPropertyData = MutableLiveData(false)
 
-    val propertiesForSaleData: LiveData<WorkResult<Pair<SearchRequest, List<Property>>>>
-        get() = _propertiesForSaleData
+    val properties: LiveData<WorkResult<Pair<SearchRequest, List<Property>>>>
+        get() = _properties
 
     val localProperties = WorkLiveData<List<Property>>()
     val openedPropertyId = MutableLiveData<String>()
@@ -87,19 +89,6 @@ class SearchViewModel @Inject constructor(
         return newRequest
     }
 
-    fun getPropertiesForSale(request: SearchRequest) {
-        addressFilter.value = request.address
-        priceMinFilter.value = request.priceMin
-        priceMaxFilter.value = request.priceMax
-        bedsMinFilter.value = request.bedsMin
-        bedsMaxFilter.value = request.bedsMax
-        bathsMinFilter.value = request.bathsMin
-        bathsMaxFilter.value = request.bathsMax
-        sqftMinFilter.value = request.sqftMin
-        requestType.value = RequestType.SALE
-        getPropertiesForSale()
-    }
-
     private fun checkFilters(): Boolean {
         return ((!addressFilter.value.isNullOrEmpty()
                 || filterHouses.isNotEmpty()) || (priceMinFilter.value
@@ -109,13 +98,30 @@ class SearchViewModel @Inject constructor(
             ?: 0) > 0 || (sqftMaxFilter.value ?: 0) > 0)
     }
 
+    fun getPropertiesByRequest() {
+        val request = request.value?.requestType
+        if (request == RequestType.SALE) getPropertiesForSale()
+        else getPropertiesForRent()
+    }
+
     fun getPropertiesForSale() {
         if (checkFilters()) {
             val data = request.value ?: return
             val params = GetPropertiesForSaleUseCase.Params.create(data)
             ioToUiWorkData(
-                io = { getSaleRequestsUseCase.execute(params) },
-                ui = { _propertiesForSaleData.postValue(it) }
+                io = { getPropertiesForSaleUseCase.execute(params) },
+                ui = { _properties.postValue(it) }
+            )
+        }
+    }
+
+    fun getPropertiesForRent() {
+        if (checkFilters()) {
+            val data = request.value ?: return
+            val params = GetPropertiesForRentUseCase.Params.create(data)
+            ioToUiWorkData(
+                io = { getPropertiesForRentUseCase.execute(params) },
+                ui = { _properties.postValue(it) }
             )
         }
     }
@@ -125,7 +131,7 @@ class SearchViewModel @Inject constructor(
         id?.let {
             val params = GetLocalPropertiesUseCase.Params.from(id)
             ioToUiWorkData(
-                io = { getLocalPropertiesForSaleUseCase.execute(params) },
+                io = { getLocalPropertiesUseCase.execute(params) },
                 ui = { localProperties.postValue(it) }
             )
         }

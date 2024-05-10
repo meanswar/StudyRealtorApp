@@ -122,7 +122,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         with(viewModel) {
             if (isDataAlreadyUploaded.value == false) {
                 if (args.localRequest) getLocalProperties(args.propertyRequest)
-                else getPropertiesForSale(args.propertyRequest)
+                else getPropertiesByRequest()
                 isDataAlreadyUploaded.postValue(true)
             }
         }
@@ -130,7 +130,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     override fun subscribe() {
         with(viewModel) {
-            propertiesForSaleData.observe(viewLifecycleOwner, propertiesObserver)
+            properties.observe(viewLifecycleOwner, propertiesObserver)
             localProperties.observe(viewLifecycleOwner, localPropertiesObserver)
             updatedProperty.observe(viewLifecycleOwner, updatedPropertyObserver)
         }

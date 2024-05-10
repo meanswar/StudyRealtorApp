@@ -57,11 +57,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@color/white_transparent"
             android:paddingHorizontal="@dimen/size_10dp"
             android:paddingVertical="@dimen/size_10dp"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="@id/cvPropertyImageContainer"
+            app:layout_constraintTop_toTopOf="@id/cvPropertyImageContainer">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/glMidVertical"
@@ -75,7 +76,6 @@
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/size_10dp"
                 android:paddingVertical="@dimen/size_5dp"
                 app:drawableEndCompat="@drawable/ic_money"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
                 tools:text="single family" />
 
             <TextView
-                android:id="@+id/tvPropertyAddress"
+                android:id="@+id/tvPropertyName"
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -105,6 +105,17 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@id/tvPropertyType"
                 app:layout_constraintTop_toBottomOf="@id/tvPropertyType"
+                tools:text="The Lofts on Saw mill River" />
+
+            <TextView
+                android:id="@+id/tvPropertyAddress"
+                style="@style/AppTheme.Text.Paragraph4.Teflon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/tvPropertyType"
+                app:layout_constraintTop_toBottomOf="@id/tvPropertyName"
                 tools:text="22 street, New York, USA" />
 
             <TextView
@@ -116,7 +127,7 @@
                 android:drawablePadding="@dimen/size_5dp"
                 app:drawableStartCompat="@drawable/ic_bed_24dp_blue"
                 app:layout_constraintStart_toStartOf="@id/tvPropertyType"
-                app:layout_constraintTop_toBottomOf="@id/tvPropertyAddress"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="4" />
 
             <TextView

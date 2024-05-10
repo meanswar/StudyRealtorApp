@@ -25,4 +25,8 @@ fun String.formatPrice(): String {
     return formattedPrice.toString()
 }
 
+fun String?.ifNull(default: String?): String? = this ?: default
+
+fun String?.ifNullOrEmpty(default: String?): String? = if (isNullOrEmpty()) default else this
+
 

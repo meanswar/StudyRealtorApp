@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.di.modules
 
+import android.content.Context
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
@@ -29,8 +30,9 @@ object RepoModule {
     internal fun providePropertiesRepo(
         api: PropertiesApi,
         dao: PropertyDao,
-        networkErrorHandler: NetworkErrorHandler
-    ): PropertiesRepo = PropertiesRepoImpl(api, dao, networkErrorHandler)
+        networkErrorHandler: NetworkErrorHandler,
+        context: Context
+    ): PropertiesRepo = PropertiesRepoImpl(api, dao, networkErrorHandler, context)
 
     @Provides
     @Singleton

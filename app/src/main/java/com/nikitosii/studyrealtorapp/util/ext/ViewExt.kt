@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
@@ -26,6 +27,14 @@ fun TextView.showText(text: String?) {
     if (text.isNullOrEmpty()) hide()
     else {
         this.text = text
+        show()
+    }
+}
+
+fun TextView.showText(textInt: Int?) {
+    if (text.isNullOrEmpty()) hide()
+    else {
+        this.text = text.toString()
         show()
     }
 }
@@ -145,4 +154,8 @@ fun ViewGroup.measureWrapContentWidth(): Int {
             .makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
     )
     return measuredWidth
+}
+
+inline fun RadioButton.onCheck(crossinline action: (Boolean) -> Unit) {
+    this.setOnCheckedChangeListener { _, isChecked -> action(isChecked) }
 }

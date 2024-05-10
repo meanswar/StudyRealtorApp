@@ -1,8 +1,11 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard
 
+import android.widget.RadioButton
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nikitosii.studyrealtorapp.R
+import com.nikitosii.studyrealtorapp.core.domain.Status
+import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
@@ -12,8 +15,11 @@ import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.view.PulseLayout
 import com.nikitosii.studyrealtorapp.view.RangeView
+import timber.log.Timber
 
 @RequiresViewModel(DashboardViewModel::class)
 class DashboardFragment :
@@ -44,6 +50,7 @@ class DashboardFragment :
             }
         }
         onClick()
+        binding.btnBuy.isChecked = true
     }
 
     private fun onHouseFilterClick(house: HouseType): Boolean {
@@ -62,19 +69,26 @@ class DashboardFragment :
         }
     }
 
-    private val recentSaleRequestsObserver: Observer<List<SearchRequest>> =
-        Observer { processRecentSaleRequests(it) }
+    private val recentSaleRequestsObserver: Observer<WorkResult<List<SearchRequest>>> = Observer {
+        when (it.status) {
+            Status.SUCCESS -> processRecentSaleRequests(it.data!!)
+            Status.ERROR -> handleException(it.exception) { openError() }
+            Status.LOADING -> Timber.i("loading sale requests")
+        }
+    }
 
-    private val recentRentRequestsObserver: Observer<List<SearchRequest>> =
-        Observer { processRecentRentRequests(it) }
+    private val recentRentRequestsObserver: Observer<WorkResult<List<SearchRequest>>> = Observer {
+        when (it.status) {
+            Status.SUCCESS -> processRecentRentRequests(it.data!!)
+            Status.ERROR -> handleException(it.exception) { openError() }
+            Status.LOADING -> Timber.i("loading rent requests")
+        }
+    }
 
     private fun onClick() {
         with(binding) {
             svSearch.setOnEndClick { svSearch.setIsFilled(viewModel.checkFilters()) }
             svSearch.setOnTextChanged { viewModel.addressFilter.value = it }
-            btnBuy.onClick {
-                viewModel.requestType.value = RequestType.SALE; openSearchSaleScreen()
-            }
 
             with(lFilterAttributes) {
                 ivHouse.initAnimation(rvFilterTypes)
@@ -83,6 +97,25 @@ class DashboardFragment :
                 ivBed.initAnimation(rvRangeBeds)
                 ivSqft.initAnimation(rvRangeSqft)
             }
+
+            btnBuy.onCheck { onCheckCallback(it, btnRent, plBuy, plRent, RequestType.SALE) }
+            btnRent.onCheck { onCheckCallback(it, btnBuy, plRent, plBuy, RequestType.RENT) }
+            btnSearch.onClick { openSearchScreen() }
+        }
+    }
+
+    private fun onCheckCallback(
+        isChecked: Boolean,
+        scndBtn: RadioButton,
+        pulseChecked: PulseLayout,
+        pulseNotChecked: PulseLayout,
+        type: RequestType
+    ) {
+        if (isChecked) {
+            pulseChecked.startAnimation()
+            pulseNotChecked.stopAnimation()
+            scndBtn.isChecked = false
+            viewModel.requestType.value = type
         }
     }
 
@@ -146,11 +179,10 @@ class DashboardFragment :
         viewModel.getRecentRentRequests()
     }
 
-    private fun openSearchSaleScreen() {
+    private fun openSearchScreen() {
         val extras = FragmentNavigatorExtras(
             binding.svSearch to "svSearch"
         )
-        viewModel.setRequestType(RequestType.SALE)
         val request = viewModel.buildSaleRequest()
         if (viewModel.checkFilters())
             DashboardFragmentDirections.openSearchScreen(request, false)

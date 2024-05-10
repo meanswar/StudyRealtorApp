@@ -24,8 +24,8 @@ data class SearchRequestEntity(
     val imageUrl: String? = null,
     val requestType: RequestType,
     val favorite: Boolean = false,
-    val cats: Boolean? = null,
-    val dogs: Boolean? = null,
+    val cats: Boolean,
+    val dogs: Boolean,
     val sort: SearchSortType? = null
 ) {
     companion object {
@@ -43,7 +43,10 @@ data class SearchRequestEntity(
             sqftMax = data.sqftMax,
             imageUrl = data.imageUrl,
             requestType = data.requestType,
-            favorite = data.favorite
+            favorite = data.favorite,
+            cats = false,
+            dogs = false,
+            sort = null
         )
         fun toLocal(data: SearchRequestEntity) = SearchRequest(
             id = data.id,
@@ -59,7 +62,10 @@ data class SearchRequestEntity(
             sqftMax = data.sqftMax,
             imageUrl = data.imageUrl,
             requestType = data.requestType,
-            favorite = data.favorite
+            favorite = data.favorite,
+            cats = data.cats,
+            dogs = data.dogs,
+            sort = data.sort
         )
     }
 }

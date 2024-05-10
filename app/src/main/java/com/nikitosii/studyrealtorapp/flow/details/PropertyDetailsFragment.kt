@@ -37,7 +37,8 @@ import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.emailIntent
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
-import com.nikitosii.studyrealtorapp.util.ext.model.getName
+import com.nikitosii.studyrealtorapp.util.ext.model.getAddress
+import com.nikitosii.studyrealtorapp.util.ext.model.getPriceStringFormat
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
@@ -73,14 +74,14 @@ class PropertyDetailsFragment :
             ivProperty.transitionName = args.property.propertyId
             glideImage(args.property.primaryPhoto.url, ivProperty)
             setPropertyDescriptionInfo(args.property.description)
-            setBrandingInfo(args.property.branding?.first())
+            setBrandingInfo(args.property.branding?.firstOrNull())
             setFavorite()
-            tvPropertyAddress.text = args.property.getName()
-            tvPropertyPrice.text =
-                getString(R.string.view_sale_property_description_price, args.property.listPrice)
+            tvPropertyAddress.text = "Address: ${args.property.getAddress()}"
+            tvPropertyPrice.text = args.property.getPriceStringFormat()
+
             if (args.property.lastUpdateDate != null) {
                 tvSalePropertyTime.text = getString(
-                    R.string.screen_property_details_property_description_last_update_title,
+                    R.string.screen_property_details_description_last_time_update,
                     args.property.lastUpdateDate.toUiTime(
                         SERVER_YEAR_MONTH_DAY_TIME_PATTERN,
                         UI_DATE_PATTERN_WITH_TIME_AND_SPACE
@@ -134,12 +135,17 @@ class PropertyDetailsFragment :
 
     private fun setPropertyDescriptionInfo(data: Description?) {
         with(binding) {
-            tvFilterBaths.showText(data?.baths.toString())
-            tvGarage.showText(data?.garage.toString())
-            tvFilterSqft.showText(data?.sqft.toString())
-            tvBeds.showText(data?.beds.toString())
-            tvRooms.showText(data?.rooms.toString())
+            tvFilterBaths.showText(data?.baths)
+            tvGarage.showText(data?.garage)
+            tvFilterSqft.showText(data?.sqft)
+            tvBeds.showText(data?.beds)
+            tvRooms.showText(data?.rooms)
             tvPropertyDescription.text = data?.text
+            tvPropertyName.showText(data?.name)
+            tvPropertyType.showText(
+                data?.type?.type,
+                R.string.screen_property_details_description_type
+            )
         }
     }
 
@@ -230,16 +236,16 @@ class PropertyDetailsFragment :
     private fun setAgentData(data: PropertyDetails?) {
         with(binding) {
             data?.let {
-                cvPhone.onClick { callIntent(it.branding?.first()?.phone) }
+                cvPhone.onClick { callIntent(it.branding?.firstOrNull()?.phone) }
                 cvEmail.onClick { emailIntent(EMAIL) }
-                tvAgentName.text = it.branding?.first()?.name
-                tvAgentType.text = it.branding?.first()?.type
+                tvAgentName.text = it.branding?.firstOrNull()?.name
+                tvAgentType.text = it.branding?.firstOrNull()?.type
                 glideImage(
-                    it.branding?.first()?.photo,
+                    it.branding?.firstOrNull()?.photo,
                     ivAgentImage,
-                    R.drawable.ic_menu_agent_peach
+                    R.drawable.ic_menu_agent_black
                 )
-                tvAgencyName.showText(it.branding?.get(1)?.name)
+                tvAgencyName.showText(it.branding?.getOrNull(1)?.name)
             }
         }
     }

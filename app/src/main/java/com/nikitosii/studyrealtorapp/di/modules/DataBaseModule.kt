@@ -22,7 +22,6 @@ object DataBaseModule {
         RealtorDataBase::class.java,
         RealtorDataBase.DATABASE_NAME
     )
-        .addMigrations(*RealtorDataBase_Migrations.build())
         .fallbackToDestructiveMigration()
         .build()
 
@@ -43,6 +42,4 @@ object DataBaseModule {
     @Singleton
     internal fun providesSearchRequestDao(db: RealtorDataBase): SearchRequestDao =
         db.searchRequestDao()
-
-
 }

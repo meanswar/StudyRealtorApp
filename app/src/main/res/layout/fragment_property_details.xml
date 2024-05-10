@@ -205,37 +205,35 @@
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvPropertyAddress"
-                    style="@style/AppTheme.Text.Paragraph4.Teflon"
+                    android:id="@+id/tvPropertyName"
+                    style="@style/AppTheme.Text.Bold.Headline2.Teflon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_20dp"
                     app:layout_constraintTop_toBottomOf="@id/llPropertyFilters"
                     tools:text="New York, USA" />
 
-                <TextView
-                    android:id="@+id/tvPropertyType"
-                    style="@style/AppTheme.Text.Bold.Headline2.Teflon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tvPropertyAddress"
-                    tools:text="Single Family" />
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvPropertyPrice"
                     style="@style/AppTheme.Text.Bold.Headline2.Teflon"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_6dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvPropertyType"
-                    tools:text="AMV: $150 000" />
+                    android:paddingHorizontal="@dimen/size_10dp"
+                    android:paddingVertical="@dimen/size_5dp"
+                    android:drawableStart="@drawable/ic_money"
+                    android:background="@drawable/bg_content_corners_10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvPropertyName"
+                    tools:text="150 000" />
 
                 <TextView
                     android:id="@+id/tvSalePropertyTime"
                     style="@style/AppTheme.Text.Paragraph4.Teflon"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvPropertyPrice"
                     tools:text="Last Update: 15 Jan 2022, 15:00"
                     tools:visibility="visible" />
@@ -245,7 +243,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_10dp"
-                    android:background="@drawable/bg_corner_15dp"
+                    android:background="@drawable/bg_peach_corners_60dp"
                     android:paddingHorizontal="@dimen/size_20dp"
                     android:paddingVertical="@dimen/size_10dp"
                     app:layout_constraintTop_toBottomOf="@id/tvSalePropertyTime">
@@ -269,7 +267,7 @@
 
                     <TextView
                         android:id="@+id/tvAgentName"
-                        style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                        style="@style/AppTheme.Text.Bold.Headline2.White"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/size_5dp"
@@ -279,7 +277,7 @@
 
                     <TextView
                         android:id="@+id/tvAgentType"
-                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        style="@style/AppTheme.Text.Paragraph4.White"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="@id/tvAgentName"
@@ -288,7 +286,7 @@
 
                     <TextView
                         android:id="@+id/tvAgencyName"
-                        style="@style/AppTheme.Text.Paragraph3.Teflon"
+                        style="@style/AppTheme.Text.Paragraph3.White"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/size_5dp"
@@ -299,7 +297,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cvEmail"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/size_80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/size_10dp"
                         android:foreground="?android:attr/selectableItemBackground"
@@ -309,16 +307,16 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <TextView
+                        <ImageView
                             style="@style/AppTheme.Text.Bold.Headline2.Teflon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white_transparent"
                             android:drawablePadding="@dimen/size_5dp"
-                            android:gravity="center"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_email"
                             android:paddingHorizontal="@dimen/size_10dp"
-                            android:paddingVertical="@dimen/size_5dp"
-                            android:text="Message" />
+                            android:paddingVertical="@dimen/size_5dp" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -336,15 +334,15 @@
                         app:layout_constraintStart_toStartOf="@id/cvEmail"
                         app:layout_constraintTop_toBottomOf="@id/cvEmail">
 
-                        <TextView
+                        <ImageView
                             style="@style/AppTheme.Text.Bold.Headline2.Teflon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="@dimen/size_5dp"
                             android:gravity="center"
+                            android:src="@drawable/ic_phone"
                             android:paddingHorizontal="@dimen/size_10dp"
-                            android:paddingVertical="@dimen/size_5dp"
-                            android:text="Call" />
+                            android:paddingVertical="@dimen/size_5dp" />
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -353,6 +351,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
+                    android:layout_marginTop="@dimen/size_10dp"
                     android:descendantFocusability="blocksDescendants"
                     app:animationDuration="500"
                     app:layoutAnimation="@anim/recycle_view_from_end"
@@ -365,7 +364,7 @@
                     android:id="@+id/clContentDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_20dp"
+                    android:layout_marginTop="@dimen/size_10dp"
                     android:background="@drawable/bg_content_almost_transparent_corners_20dp"
                     android:padding="@dimen/size_10dp"
                     app:layout_constraintTop_toBottomOf="@id/rvPropertyDetails">
@@ -375,8 +374,16 @@
                         style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/screen_property_details_property_description_title"
+                        android:text="@string/screen_property_details_description_title"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPropertyType"
+                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyDescriptionTitle"
+                        tools:text="Type: Single Family" />
 
                     <TextView
                         android:id="@+id/tvPropertyStatus"
@@ -385,7 +392,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/size_4dp"
                         android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@id/tvPropertyDescriptionTitle"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyType"
                         tools:text="Sale Type: For Sale"
                         tools:visibility="visible" />
 
@@ -417,6 +424,15 @@
                         android:text="Address Information"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPropertyAddress"
+                        style="@style/AppTheme.Text.Paragraph3.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddressTitle"
+                        tools:text="Address: New York, USA" />
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cvMapContainer"
                         android:layout_width="match_parent"
@@ -425,7 +441,7 @@
                         app:cardElevation="@dimen/size_5dp"
                         app:cardUseCompatPadding="true"
                         app:layout_constraintDimensionRatio="H,1.9:1"
-                        app:layout_constraintTop_toBottomOf="@id/tvAddressTitle">
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyAddress">
 
 
                         <fragment xmlns:map="http://schemas.android.com/apk/res-auto"

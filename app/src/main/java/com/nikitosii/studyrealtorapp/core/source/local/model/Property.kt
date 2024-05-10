@@ -7,43 +7,50 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Property(
-    val branding: List<Branding>? = null,
+    val adverisers: List<Advertiser>,
+    val branding: List<Branding>,
     val comingSoonDate: String? = null,
     val description: Description? = null,
     val flags: Flags? = null,
     val lastUpdateDate: String? = null,
     val listDate: String? = null,
     val listPrice: Int? = null,
+    val listPriceMax: Int,
+    val listPriceMin: Int,
     val location: Location? = null,
-    val photos: List<Photo>? = null,
+    val photos: List<Photo>,
     val priceReducedAmount: String? = null,
     val primaryPhoto: Photo,
     val propertyId: String,
     val status: String? = null,
-    val tags: List<String>? = null,
-    val virtualTours: List<VrTour>? = null,
+    val tags: List<String>,
+    val virtualTours: List<VrTour>,
     val favorite: Boolean = false
 ): Parcelable {
     companion object {
         fun from(data: PropertyResponseApi): Property = Property(
-            data.branding?.map { Branding.from(it) },
+            data.advertisers?.map { Advertiser.from(it) } ?: listOf(),
+            data.branding?.map { Branding.from(it) } ?: listOf(),
             data.comingSoonDate,
             Description.from(data.description),
             Flags.from(data.flags),
             data.lastUpdateDate,
             data.listDate,
             data.listPrice,
+            data.listPriceMax ?: 0,
+            data.listPriceMin ?: 0,
             Location.from(data.location),
-            data.photoResponseApis?.map { Photo.from(it) },
+            data.photos?.map { Photo.from(it) } ?: listOf(),
             data.priceReducedAmount,
-            Photo.from(data.primaryPhotoResponseApi),
+            Photo.from(data.primaryPhoto),
             data.propertyId,
             data.status,
-            data.tags,
-            data.virtualTours?.map { VrTour.from(it) }
+            data.tags ?: listOf(),
+            data.virtualTours?.map { VrTour.from(it) } ?: listOf()
         )
 
         fun from(entity: PropertyEntity): Property = Property(
+            entity.advertisers,
             entity.branding,
             entity.comingSoonDate,
             entity.description,
@@ -51,6 +58,8 @@ data class Property(
             entity.lastUpdateDate,
             entity.listDate,
             entity.listPrice,
+            entity.listPriceMax,
+            entity.listPriceMin,
             entity.location,
             entity.photos,
             entity.priceReducedAmount,
