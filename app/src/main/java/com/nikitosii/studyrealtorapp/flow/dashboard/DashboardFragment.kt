@@ -163,10 +163,7 @@ class DashboardFragment :
     }
 
     private fun onSaleRequestClick(filter: SearchRequest) {
-        val extras = FragmentNavigatorExtras(
-            binding.svSearch to "svSearch"
-        )
-        DashboardFragmentDirections.openSearchScreen(filter, true).navigate(extras)
+        DashboardFragmentDirections.openSearchScreen(filter, true).navigate()
     }
 
     private fun onFavoriteClick(data: SearchRequest) {
@@ -180,12 +177,9 @@ class DashboardFragment :
     }
 
     private fun openSearchScreen() {
-        val extras = FragmentNavigatorExtras(
-            binding.svSearch to "svSearch"
-        )
         val request = viewModel.buildSaleRequest()
         if (viewModel.checkFilters())
             DashboardFragmentDirections.openSearchScreen(request, false)
-                .navigate(extras)
+                .navigate()
     }
 }

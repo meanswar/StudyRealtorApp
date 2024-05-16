@@ -13,6 +13,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.slider.RangeSlider
 import com.nikitosii.studyrealtorapp.R
 
 fun View.show(show: Boolean = true, useGone: Boolean = true) {
@@ -158,4 +159,8 @@ fun ViewGroup.measureWrapContentWidth(): Int {
 
 inline fun RadioButton.onCheck(crossinline action: (Boolean) -> Unit) {
     this.setOnCheckedChangeListener { _, isChecked -> action(isChecked) }
+}
+
+inline fun RangeSlider.onChange(crossinline action: (RangeSlider, value: Float) -> Unit) {
+    this.addOnChangeListener(RangeSlider.OnChangeListener { view, value, _ -> action(view, value) })
 }

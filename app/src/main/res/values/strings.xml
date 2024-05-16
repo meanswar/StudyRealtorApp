@@ -4,6 +4,8 @@
     <string name="timeout_error">Timeout</string>
     <string name="interrupt_error">Interrupt</string>
     <string name="wrong_token_error">Wrong token</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="bm_for_sale">For Sale</string>
     <string name="bm_for_rent">For Rent</string>
@@ -55,6 +57,13 @@
     <string name="layout_filters_filter_baths_title">Baths: </string>
     <string name="layout_filters_filter_sqft_title">Sqft: </string>
 
+    <string name="layout_agent_filters_house_type_title">House Type</string>
+    <string name="layout_agent_filters_filter_price_title">Price: </string>
+    <string name="layout_agent_filters_filter_name_title">Agent Name: </string>
+    <string name="layout_agent_filters_filter_rating_title">Rating: </string>
+    <string name="layout_agent_filters_filter_hint_name">Agent name</string>
+    <string name="layout_agent_filters_filter_hint_language">Language</string>
+
     <string name="layout_filters_filter_result_money">$%1d to $%2d</string>
     <string name="layout_filters_filter_result_money_any">Any</string>
     <string name="layout_filters_filter_result_money_min">$%d min</string>
@@ -64,6 +73,9 @@
     <string name="layout_filters_filter_result_any">Any</string>
     <string name="layout_filters_filter_result_min">%d min</string>
     <string name="layout_filters_filter_result_max">%d max</string>
+
+    <string name="screen_agent_home_page_title">Lets Find Your\nFavorite Agent</string>
+    <string name="screen_agent_home_page_user_title">Are You looking for Agents?</string>
 
     <string name="tools_text"> "id": "0735718341"\n
           "name": "Josiah Quincy Elementary School"\n

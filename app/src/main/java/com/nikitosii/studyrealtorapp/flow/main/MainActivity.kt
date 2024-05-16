@@ -3,6 +3,8 @@ package com.nikitosii.studyrealtorapp.flow.main
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
 import com.nikitosii.studyrealtorapp.flow.base.InjectableActivity
@@ -30,12 +32,19 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
         with(binding) {
             bottomNavigation.setMenuItems(getMenuItems())
 
+
             navController?.let {
                 bottomNavigation.setupWithNavController(it)
                 it.addOnDestinationChangedListener { _, destination, _ ->
                     val destinationId = destination.id
                     tryHideBottomBar(destinationId)
                 }
+            }
+
+            bottomNavigation.setOnMenuItemClickListener { item, i ->
+                Handler(Looper.getMainLooper()).postDelayed({
+                    navController?.navigate(item.destinationId)
+                }, 250)
             }
         }
     }
@@ -55,7 +64,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
             CbnMenuItem(
                 R.drawable.ic_menu_agent_black,
                 R.drawable.avd_menu_agent_peach,
-                R.id.agentsFragment
+                R.id.agents_nav_graph
             )
         )
     }
@@ -65,7 +74,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
         binding.run {
             when (destinationId) {
                 R.id.dashboardFragment,
-                R.id.rentsFragment,
+                R.id.agentsHomePageFragment,
                 R.id.agentsFragment -> bottomNavigation.show(true)
 
                 else -> bottomNavigation.hide()

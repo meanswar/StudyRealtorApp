@@ -9,6 +9,7 @@ import com.nikitosii.studyrealtorapp.core.initializer.StethoInitializer
 import com.nikitosii.studyrealtorapp.core.source.local.LocalStorage
 import com.nikitosii.studyrealtorapp.core.source.local.impl.LocalStorageImpl
 import com.nikitosii.studyrealtorapp.core.source.net.TokenInterceptor
+import com.nikitosii.studyrealtorapp.core.source.net.api.AgentsApi
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.nikitosii.studyrealtorapp.core.source.net.api.image.ImageApi
 import com.squareup.moshi.Json
@@ -147,6 +148,11 @@ class NetworkModule {
     @Singleton
     internal fun providesPropertiesApi(@Named("RealtorRetrofit") retrofit: Retrofit) =
         retrofit.create(PropertiesApi::class.java)
+
+    @Provides
+    @Singleton
+    internal fun providesAgentsApi(@Named("RealtorRetrofit") retrofit: Retrofit) =
+        retrofit.create(AgentsApi::class.java)
 
     @Provides
     @Singleton

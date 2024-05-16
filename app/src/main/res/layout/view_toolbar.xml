@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tbFilter"
@@ -28,6 +28,45 @@
         app:lottie_fileName="arrow_back.json"
         app:lottie_speed="3" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="@dimen/size_0dp"
+        android:background="@color/white_transparent_alpha_0.2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnEnd"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/etSearch"
+            style="@style/AppTheme.Text.Paragraph3.Teflon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:visibility="gone"
+            android:paddingStart="@dimen/size_10dp"
+            tools:text="asdasdads"
+            android:textColorHint="@color/peach"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/size_10dp"
+        android:src="@drawable/ic_search"
+        android:visibility="gone"
+        app:animDuration="300"
+        app:colorFrom="@color/blue_end"
+        app:isRotated="true"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toStartOf="@id/btnEnd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="@dimen/size_10dp"
+        tools:visibility="visible" />
+
     <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
         android:id="@+id/btnEnd"
         android:layout_width="wrap_content"
@@ -38,9 +77,9 @@
         app:animDuration="300"
         app:colorFrom="@color/blue_end"
         app:isRotated="true"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

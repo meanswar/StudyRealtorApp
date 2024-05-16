@@ -185,15 +185,6 @@
                     app:layout_constraintTop_toBottomOf="@id/clFilters"
                     tools:visibility="gone" />
 
-                <RadioGroup
-                    android:id="@+id/tabBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_24dp"
-                    android:checkedButton="@id/btnBuy"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/lFilterAttributes" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lSearchTypes"
                     android:layout_width="match_parent"
@@ -213,12 +204,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/size_20dp"
-                        app:animation_duration="1000"
+                        app:animation_duration="2000"
                         app:layout_constraintEnd_toStartOf="@id/glMid"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:wave_color="@color/blue_end"
-                        app:wave_count="3"
+                        app:wave_count="1"
                         app:wave_start_alpha="0.7">
 
                         <RadioButton
@@ -227,7 +218,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_48dp"
                             android:layout_weight="3"
-                            android:background="@drawable/radio_left"
+                            android:background="@drawable/radio"
                             android:text="@string/screen_dashboard_btn_buy_title" />
                     </com.nikitosii.studyrealtorapp.view.PulseLayout>
 
@@ -238,12 +229,12 @@
                         android:clipChildren="false"
                         android:clipToPadding="false"
                         android:paddingHorizontal="@dimen/size_20dp"
-                        app:animation_duration="1000"
+                        app:animation_duration="2000"
                         app:layout_constraintEnd_toEndOf="@id/lSearchTypes"
                         app:layout_constraintStart_toEndOf="@id/glMid"
                         app:layout_constraintTop_toTopOf="parent"
                         app:wave_color="@color/blue_end"
-                        app:wave_count="3"
+                        app:wave_count="1"
                         app:wave_radius="50"
                         app:wave_start_alpha="0.7">
 
@@ -253,7 +244,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_48dp"
                             android:layout_weight="3"
-                            android:background="@drawable/radio_left"
+                            android:background="@drawable/radio"
                             android:text="@string/screen_dashboard_btn_rent_title" />
                     </com.nikitosii.studyrealtorapp.view.PulseLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

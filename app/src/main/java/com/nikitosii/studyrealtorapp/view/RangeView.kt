@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.slider.RangeSlider
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ViewRangeBinding
+import com.nikitosii.studyrealtorapp.util.ext.onChange
 import timber.log.Timber
 import java.math.BigDecimal
 
@@ -27,7 +28,7 @@ class RangeView @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.RangeView) {
             setTitle(getString(R.styleable.RangeView_rangeTitle))
             getInteger(R.styleable.RangeView_rangeType, RANGE_TYPE_OTHER).let { setRangeType(it) }
-            val minValue = getInt(R.styleable.RangeView_minValue, 0)
+            val minValue = getInt(R.styleable.RangeView_minValue, -1)
             val maxValue = getInt(R.styleable.RangeView_maxValue, 100)
             val decimal = BigDecimal(maxValue - minValue).setScale(9)
             setValues(minValue, maxValue)
@@ -51,7 +52,7 @@ class RangeView @JvmOverloads constructor(
     }
 
     fun onRangeChanged(action: (Int, Int) -> Unit) {
-        binding.rsEditor.addOnChangeListener(RangeSlider.OnChangeListener { view, _, _ ->
+        binding.rsEditor.onChange { view, _ ->
             _onRangeChanged(view)
             val minValue = view.values[0]
             val maxValue = view.values[1]
@@ -59,6 +60,14 @@ class RangeView @JvmOverloads constructor(
                 if (minValue == 0f) RANGE_VALUE_ANY else calculateValue(view.values[0]),
                 if (maxValue == 100f) RANGE_VALUE_ANY else calculateValue(view.values[1])
             )
+        }
+    }
+
+    fun onRangeChanged(action: (Int) -> Unit) {
+        binding.rsEditor.addOnChangeListener(RangeSlider.OnChangeListener { view, _, _ ->
+            val value = view.values[0]
+            binding.tvResult.text = value.toString()
+            action(calculateValue(value))
         })
     }
 
@@ -113,17 +122,21 @@ class RangeView @JvmOverloads constructor(
     private fun calculateValue(value: Float): Int = (value * coefficient.value?.toFloat()!!).toInt()
 
     private fun setValues(from: Int, to: Int) {
-        binding.rsEditor.values = mutableListOf(from.toFloat(), to.toFloat())
-        valueMax.postValue(to)
-        valueMin.postValue(from)
+        with(binding) {
+            if (from == -1) {
+                Timber.i("from 0; to $to")
+                rsEditor.valueTo = to.toFloat()
+                rsEditor.valueFrom = 1f
+            } else {
+                Timber.i("from $from; to $to")
+                rsEditor.setValues(to.toFloat())
+                valueMax.postValue(to)
+                valueMin.postValue(from)
+            }
+        }
     }
 
     private fun isMoneyType(): Boolean = rangeType.value == RANGE_TYPE_MONEY
-
-    fun getValues(): List<Float> = listOf(
-        calculateValue(binding.rsEditor.values[0]).toFloat(),
-        calculateValue(binding.rsEditor.values[1]).toFloat()
-    )
 
     fun initResult(from: Int?, to: Int?) {
         with(binding.rsEditor) {

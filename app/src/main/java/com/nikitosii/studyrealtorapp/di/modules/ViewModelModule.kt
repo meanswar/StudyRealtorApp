@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nikitosii.studyrealtorapp.di.ViewModelKey
 import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
+import com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsHomePageViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchViewModel
 import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
@@ -41,5 +42,10 @@ interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SearchViewModel::class)
-    fun binSearchViewmodel(viewModel: SearchViewModel): ViewModel
+    fun bindSearchViewmodel(viewModel: SearchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AgentsHomePageViewModel::class)
+    fun bindAgentsHomePageViewModel(viewModel: AgentsHomePageViewModel): ViewModel
 }

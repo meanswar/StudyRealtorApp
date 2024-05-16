@@ -72,12 +72,12 @@
     </fragment>
 
     <navigation
-        android:id="@+id/rents_nav_graph"
-        app:startDestination="@id/rentsFragment">
+        android:id="@+id/agents_nav_graph"
+        app:startDestination="@id/agentsHomePageFragment">
         <fragment
-            android:id="@+id/rentsFragment"
-            android:name="com.nikitosii.studyrealtorapp.flow.rents.RentsFragment"
+            android:id="@+id/agentsHomePageFragment"
+            android:name="com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsHomePageFragment"
             android:label="RentsFragment"
-            tools:layout="@layout/fragment_dashboard" />
+            tools:layout="@layout/fragment_home_page_agents" />
     </navigation>
 </navigation>

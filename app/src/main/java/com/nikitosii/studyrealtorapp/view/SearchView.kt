@@ -13,6 +13,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ViewSearchBinding
+import com.nikitosii.studyrealtorapp.util.ext.getStringOrNull
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.measureWrapContentWidth
 import com.nikitosii.studyrealtorapp.util.ext.onFocus
@@ -38,11 +39,16 @@ class SearchView @JvmOverloads constructor(
             getResourceId(R.styleable.SearchView_drawableEnd, DRAWABLE_NOTHING).run {
                 setDrawableEnd(this)
             }
+            getStringOrNull(R.styleable.SearchView_svHint)?.run { setHint(this) }
         }
         initStartAnimation()
         with(binding) {
             etSearch.onFocus { onFocus() }
         }
+    }
+
+    fun setHint(hint: String) {
+        binding.etSearch.hint = hint
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

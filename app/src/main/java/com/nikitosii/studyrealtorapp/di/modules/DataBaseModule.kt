@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase_Migrations
+import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
@@ -22,6 +23,7 @@ object DataBaseModule {
         RealtorDataBase::class.java,
         RealtorDataBase.DATABASE_NAME
     )
+        .addMigrations(*RealtorDataBase_Migrations.build())
         .fallbackToDestructiveMigration()
         .build()
 
@@ -42,4 +44,8 @@ object DataBaseModule {
     @Singleton
     internal fun providesSearchRequestDao(db: RealtorDataBase): SearchRequestDao =
         db.searchRequestDao()
+
+    @Provides
+    @Singleton
+    internal fun providesAgentsDao(db: RealtorDataBase): AgentDao = db.agentsDao()
 }
