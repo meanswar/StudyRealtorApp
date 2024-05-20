@@ -62,6 +62,7 @@
     <string name="layout_agent_filters_filter_name_title">Agent Name: </string>
     <string name="layout_agent_filters_filter_rating_title">Rating: </string>
     <string name="layout_agent_filters_filter_hint_name">Agent name</string>
+    <string name="layout_agent_filters_filter_hint_location">Location</string>
     <string name="layout_agent_filters_filter_hint_language">Language</string>
 
     <string name="layout_filters_filter_result_money">$%1d to $%2d</string>
@@ -90,5 +91,6 @@
           "review_count": 9\n
           "slug": "Josiah-Quincy-Elementary-School-0735718341"\n
           "slug_id": "Josiah-Quincy-Elementary-School-0735718341"</string>
+    <string name="screen_agent_home_page_empty_title">Looks like your list is empty :(\ntry to make another search</string>
 
 </resources>

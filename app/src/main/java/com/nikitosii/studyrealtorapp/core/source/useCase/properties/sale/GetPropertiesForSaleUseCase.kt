@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale
 
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
@@ -33,7 +34,7 @@ class GetPropertiesForSaleUseCase @Inject constructor(
             .map { it.copy(favorite = favoriteProperties.contains(it.propertyId)) }
         propertiesRepo.saveProperties(updatedProperties)
         val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl))
-
+        searchRequestRepo.refreshRecentSearchRequests(RequestType.SALE)
         requestDataRepo.saveData(RequestDataEntity(request.id!!, updatedProperties.map { it.propertyId }))
 
         return Pair(request, updatedProperties)

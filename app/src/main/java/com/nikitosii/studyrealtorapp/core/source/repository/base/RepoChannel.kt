@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.core.source.repository.base
 
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
+import com.nikitosii.studyrealtorapp.util.Flow
 import com.nikitosii.studyrealtorapp.util.ext.asRefreshing
 import com.nikitosii.studyrealtorapp.util.ext.asUpToDate
 import com.nikitosii.studyrealtorapp.util.ext.sendToChannel
@@ -67,7 +68,7 @@ class RepoChannel<T : Any>(
 
     private var refresh = false
 
-    val flow: SharedFlow<Status<T>>
+    val flow: Flow<T>
         get() {
             if (refresh) {
                 refresh()

@@ -7,6 +7,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class ImageResponseApi(
-    @Json(name = "urls.regular")
+    @Json(name = "urls")
     val url: UrlsResponseApi? = null
 )

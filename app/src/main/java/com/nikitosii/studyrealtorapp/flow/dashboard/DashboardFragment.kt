@@ -2,7 +2,6 @@ package com.nikitosii.studyrealtorapp.flow.dashboard
 
 import android.widget.RadioButton
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -61,7 +60,6 @@ class DashboardFragment :
         }
     }
 
-
     override fun subscribe() {
         with(viewModel) {
             recentSaleRequests.observe(viewLifecycleOwner, recentSaleRequestsObserver)
@@ -69,17 +67,17 @@ class DashboardFragment :
         }
     }
 
-    private val recentSaleRequestsObserver: Observer<WorkResult<List<SearchRequest>>> = Observer {
+    private val recentSaleRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> = Observer {
         when (it.status) {
-            Status.SUCCESS -> processRecentSaleRequests(it.data!!)
+            Status.SUCCESS -> processRecentSaleRequests(it.data?.obj ?: listOf())
             Status.ERROR -> handleException(it.exception) { openError() }
             Status.LOADING -> Timber.i("loading sale requests")
         }
     }
 
-    private val recentRentRequestsObserver: Observer<WorkResult<List<SearchRequest>>> = Observer {
+    private val recentRentRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> = Observer {
         when (it.status) {
-            Status.SUCCESS -> processRecentRentRequests(it.data!!)
+            Status.SUCCESS -> processRecentRentRequests(it.data?.obj ?: listOf())
             Status.ERROR -> handleException(it.exception) { openError() }
             Status.LOADING -> Timber.i("loading rent requests")
         }
@@ -168,12 +166,6 @@ class DashboardFragment :
 
     private fun onFavoriteClick(data: SearchRequest) {
         viewModel.updateRequest(data.copy(favorite = !data.favorite))
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getRecentSaleRequests()
-        viewModel.getRecentRentRequests()
     }
 
     private fun openSearchScreen() {

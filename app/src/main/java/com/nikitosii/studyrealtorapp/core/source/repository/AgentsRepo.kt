@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.core.source.repository
 
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
+import com.nikitosii.studyrealtorapp.util.Flow
 
 interface AgentsRepo {
 
@@ -15,7 +16,9 @@ interface AgentsRepo {
 
     suspend fun getFavoriteAgentsFromList(ids: List<String>): List<Agent>
 
-    suspend fun getRecentFavoriteAgents(): List<Agent>
+    fun getRecentFavoriteAgents(): Flow<List<Agent>>
+
+    suspend fun refreshRecentFavoriteAgents()
 
     suspend fun updateAgent(agent: Agent)
 

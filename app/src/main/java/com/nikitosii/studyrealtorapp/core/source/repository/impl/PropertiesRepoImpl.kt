@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.core.source.repository.impl
 import android.content.Context
 import com.google.gson.Gson
 import com.nikitosii.studyrealtorapp.R
+import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
@@ -13,8 +14,11 @@ import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseSinglePropertyResponseApi
 import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.BaseRepo
+import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
+import com.nikitosii.studyrealtorapp.core.source.repository.base.repoChannel
 import com.nikitosii.studyrealtorapp.util.JsonReader
 import com.squareup.moshi.Moshi
+import kotlinx.coroutines.CoroutineDispatcher
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

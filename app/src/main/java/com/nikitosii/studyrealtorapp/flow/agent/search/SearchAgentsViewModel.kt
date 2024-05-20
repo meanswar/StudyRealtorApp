@@ -1,4 +1,4 @@
-package com.nikitosii.studyrealtorapp.flow.agent.homepage
+package com.nikitosii.studyrealtorapp.flow.agent.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,19 +7,14 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
 import com.nikitosii.studyrealtorapp.core.source.useCase.agent.GetAgentsFromNetworkUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.agent.GetRecentFavoriteAgentsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.agent.UpdateAgentFavoriteStatusUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
-class AgentsHomePageViewModel @Inject constructor(
-    getRecentFavoriteAgentsUseCase: GetRecentFavoriteAgentsUseCase,
-    private val updateAgentFavoriteStatusUseCase: UpdateAgentFavoriteStatusUseCase,
-    private val getAgentsFromNetworkUseCase: GetAgentsFromNetworkUseCase
+class SearchAgentsViewModel @Inject constructor(
+    private val getAgentsFromNetworkUseCase: GetAgentsFromNetworkUseCase,
+    private val updateAgentsFavoriteStatusUseCase: UpdateAgentFavoriteStatusUseCase
 ) : BaseViewModel() {
-
-    val favoriteAgents = getRecentFavoriteAgentsUseCase.execute().toWorkLiveData()
-    val isNetworkRequesting = MutableLiveData(false)
 
     private val _agents = WorkLiveData<List<Agent>>()
     val agents: LiveData<WorkResult<List<Agent>>>
@@ -33,8 +28,6 @@ class AgentsHomePageViewModel @Inject constructor(
     private val langFilter = MutableLiveData<String>()
 
     val isFilterFilled = MutableLiveData(false)
-
-    fun isNetworkRequest(): Boolean = isNetworkRequesting.value == true
 
     fun setLocationFilter(value: String) {
         locationFilter.value = value
@@ -75,16 +68,24 @@ class AgentsHomePageViewModel @Inject constructor(
         page = 1
     )
 
-    fun updateAgentFavoriteStatus(agent: Agent) {
-        val params = UpdateAgentFavoriteStatusUseCase.Params.create(agent.copy(favorite = !agent.favorite))
-        ioToUnit { updateAgentFavoriteStatusUseCase.execute(params) }
+    fun setAgentRequestData(request: AgentRequestApi) {
+        locationFilter.postValue(request.location)
+        request.agentName?.let { nameFilter.postValue(it) }
+        request.rating?.let { ratingFilter.postValue(it) }
+        request.price?.let { priceFilter.postValue(it) }
+        request.photo?.let { photoFilter.postValue(it) }
+        request.lang?.let { langFilter.postValue(it) }
     }
 
-    fun getAgentsFromNetwork() {
-        isNetworkRequesting.postValue(true)
+    fun getAgents() {
         val params = GetAgentsFromNetworkUseCase.Params.from(buildAgentRequest())
         ioToUiWorkData(
             io = { getAgentsFromNetworkUseCase.execute(params) },
             ui = { _agents.postValue(it) })
+    }
+
+    fun updateAgentFavoriteStatus(agent: Agent) {
+        val params = UpdateAgentFavoriteStatusUseCase.Params.create(agent)
+        ioToUnit { updateAgentsFavoriteStatusUseCase.execute(params) }
     }
 }

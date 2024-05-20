@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:animationCache="true"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:animationCache="true"
     tools:background="@drawable/bg_content">
 
     <com.nikitosii.studyrealtorapp.view.RealtorToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:toolbar_title="Search Agents"
         android:visibility="gone"
-        tools:visibility="visible"
-        app:isSearchVisible="true"
-        app:isBackVisible="false"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbar_title="Search Agents"
+        tools:visibility="visible" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -27,24 +26,26 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/anim_top_content"
+            android:paddingTop="@dimen/size_20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layoutAnimation="@null">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clTopContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layoutAnimation="@anim/anim_top_content"
                 android:paddingHorizontal="@dimen/size_20dp"
-                android:paddingTop="@dimen/size_20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layoutAnimation="@null">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.Group
+                    android:id="@+id/grTopContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/grTopContent"
-                    app:constraint_referenced_ids="clFilters, lFilterAttributes, plBtn, tvUserWelcome, tvDashboardTitle, cvProfileImage, svSearch" />
+                    app:constraint_referenced_ids="tvUserWelcome, tvDashboardTitle, cvProfileImage" />
 
                 <TextView
                     android:id="@+id/tvUserWelcome"
@@ -192,29 +193,28 @@
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <include
-                    android:id="@+id/lFilterAttributes"
-                    layout="@layout/layout_agent_filters"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/clFilters"
-                    tools:visibility="gone" />
+                    <include
+                        android:id="@+id/lFilterAttributes"
+                        layout="@layout/layout_agent_filters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10dp"
+                        app:layout_constraintTop_toBottomOf="@id/clFilters"
+                        tools:visibility="gone" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.nikitosii.studyrealtorapp.view.PulseLayout
                     android:id="@+id/plBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/size_20dp"
+                    android:layout_marginTop="10dp"
                     app:animation_duration="2000"
-                    app:layout_constraintTop_toBottomOf="@id/lFilterAttributes"
+                    android:paddingHorizontal="@dimen/size_20dp"
+                    app:layout_constraintTop_toBottomOf="@id/clFilters"
                     app:wave_color="@color/blue_end"
                     app:wave_count="1"
                     app:wave_start_alpha="0.7">
-
                     <Button
                         android:id="@+id/btnSearch"
                         style="@style/AppTheme.Button.Primary"
@@ -224,29 +224,70 @@
                 </com.nikitosii.studyrealtorapp.view.PulseLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
-                android:id="@+id/rvAgents"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/size_0dp"
                 android:layout_marginTop="@dimen/size_20dp"
-                app:animationDuration="400"
-                app:layoutAnimation="@anim/recycle_view_anim"
-                app:layoutManagerOrientation="vertical"
-                app:layoutManagerReverse="false"
-                app:layoutManagerType="linear"
-                app:layout_constraintTop_toBottomOf="@id/clTopContent" />
+                android:background="@drawable/bg_white_top_20dp"
+                android:paddingHorizontal="@dimen/size_20dp"
+                android:paddingTop="@dimen/size_20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clTopContent">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lavLoading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/clTopContent"
-                app:lottie_autoPlay="true"
-                android:visibility="gone"
-                app:lottie_fileName="loading.json"
-                app:lottie_loop="true"
-                app:lottie_speed="1.5" />
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/grEmpty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="lavEmpty, tvEmptyTitle" />
+
+                <TextView
+                    android:id="@+id/tvEmptyTitle"
+                    style="@style/AppTheme.Text.Paragraph3.Teflon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/size_2dp"
+                    android:gravity="center"
+                    android:text="@string/screen_agent_home_page_empty_title"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                    android:id="@+id/rvAgents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    app:animationDuration="400"
+                    app:layoutAnimation="@anim/recycle_view_anim"
+                    app:layoutManagerOrientation="vertical"
+                    app:layoutManagerReverse="false"
+                    app:layoutManagerType="linear"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lavLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="loading.json"
+                    app:lottie_loop="true"
+                    app:lottie_speed="1.5"
+                    tools:visibility="visible" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lavEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    android:scaleY="0.5"
+                    android:scaleX="0.5"
+                    app:lottie_fileName="anim_empty.json"
+                    app:lottie_loop="true" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,204 +5,184 @@
     android:id="@+id/clFilters"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="@dimen/size_20dp"
-    tools:background="@drawable/bg_content">
+    android:animateLayoutChanges="true"
+    android:paddingHorizontal="@dimen/size_20dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grFilters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="svName, rvRangePrice, svLanguage, clRating, clRadioPhoto" />
+
+    <com.nikitosii.studyrealtorapp.view.SearchView
+        android:id="@+id/svName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
+        app:drawableStart="@drawable/ic_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:svHint="@string/layout_agent_filters_filter_hint_name" />
+
+    <com.nikitosii.studyrealtorapp.view.SearchView
+        android:id="@+id/svLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
+        app:drawableStart="@drawable/ic_search"
+        app:layout_constraintTop_toBottomOf="@id/svName"
+        app:svHint="@string/layout_agent_filters_filter_hint_language" />
+
+    <com.nikitosii.studyrealtorapp.view.RangeView
+        android:id="@+id/rvRangePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/svLanguage"
+        app:maxValue="2000000"
+        app:minValue="10000"
+        app:rangeTitle="@string/layout_filters_filter_price_title"
+        app:rangeType="money"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:paddingHorizontal="@dimen/size_10dp"
+        android:paddingVertical="@dimen/size_5dp"
+        app:layout_constraintTop_toBottomOf="@id/rvRangePrice">
+
+        <TextView
+            android:id="@+id/tvRating"
+            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/layout_agent_filters_filter_rating_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRatingResult"
+            style="@style/AppTheme.Text.Paragraph3.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_5dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvRating"
+            app:layout_constraintStart_toEndOf="@id/tvRating"
+            tools:text="4" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/rsRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="0"
+            android:valueTo="5"
+            app:layout_constraintTop_toBottomOf="@id/tvRating"
+            app:thumbColor="@color/peach"
+            app:thumbStrokeColor="@color/peach"
+            app:trackColorActive="@color/peach" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRadioPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:paddingVertical="@dimen/size_5dp"
+        app:layout_constraintTop_toBottomOf="@id/clRating">
+
+        <TextView
+            android:id="@+id/tvPhoto"
+            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10dp"
+            android:text="Photo: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPhotoResult"
+            style="@style/AppTheme.Text.Paragraph3.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tvPhoto"
+            app:layout_constraintStart_toEndOf="@id/tvPhoto" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/glVersticalMidStart"
+            android:id="@+id/glMid"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.45" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/glVersticalMidEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.55" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/grFilters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="svName, rvRangePrice, svLanguage, clRating, clRadioPhoto" />
-
-        <com.nikitosii.studyrealtorapp.view.SearchView
-            android:id="@+id/svName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
-            app:drawableStart="@drawable/ic_search"
-            app:layout_constraintTop_toTopOf="parent"
-            app:svHint="@string/layout_agent_filters_filter_hint_name" />
-
-        <com.nikitosii.studyrealtorapp.view.SearchView
-            android:id="@+id/svLanguage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
-            app:drawableStart="@drawable/ic_search"
-            app:layout_constraintTop_toBottomOf="@id/svName"
-            app:svHint="@string/layout_agent_filters_filter_hint_language" />
-
-        <com.nikitosii.studyrealtorapp.view.RangeView
-            android:id="@+id/rvRangePrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:background="@drawable/bg_content_almost_transparent_corners_10dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/svLanguage"
-            app:maxValue="2000000"
-            app:minValue="10000"
-            app:rangeTitle="@string/layout_filters_filter_price_title"
-            app:rangeType="money"
-            tools:visibility="visible" />
+            app:layout_constraintGuide_begin="186dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clRating"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:background="@drawable/bg_content_almost_transparent_corners_10dp"
-            android:paddingHorizontal="@dimen/size_10dp"
-            android:paddingVertical="@dimen/size_5dp"
-            app:layout_constraintTop_toBottomOf="@id/rvRangePrice">
+            android:layout_marginTop="@dimen/size_4dp"
+            app:layout_constraintEnd_toStartOf="@id/glMid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPhoto">
 
-            <TextView
-                android:id="@+id/tvRating"
-                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/layout_agent_filters_filter_rating_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvRatingResult"
-                style="@style/AppTheme.Text.Paragraph3.Teflon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_5dp"
-                app:layout_constraintBottom_toBottomOf="@id/tvRating"
-                app:layout_constraintStart_toEndOf="@id/tvRating"
-                tools:text="4" />
-
-            <com.google.android.material.slider.RangeSlider
-                android:id="@+id/rsRating"
+            <com.nikitosii.studyrealtorapp.view.PulseLayout
+                android:id="@+id/plYes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stepSize="1"
-                android:valueFrom="0"
-                android:valueTo="5"
-                app:layout_constraintTop_toBottomOf="@id/tvRating"
-                app:thumbColor="@color/peach"
-                app:thumbStrokeColor="@color/peach"
-                app:trackColorActive="@color/peach" />
+                android:layout_marginTop="@dimen/size_4dp"
+                android:layout_marginEnd="@dimen/size_10dp"
+                app:animation_duration="2000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:wave_color="@color/blue_end"
+                app:wave_count="1"
+                app:wave_radius="25"
+                app:wave_start_alpha="0.7">
+
+                <RadioButton
+                    android:id="@+id/btnYes"
+                    style="@style/AppTheme.RadioButtonFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginHorizontal="@dimen/size_20dp"
+                    android:background="@drawable/radio"
+                    android:text="@string/yes" />
+            </com.nikitosii.studyrealtorapp.view.PulseLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clRadioPhoto"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:background="@drawable/bg_content_almost_transparent_corners_10dp"
-            android:paddingHorizontal="@dimen/size_10dp"
-            android:paddingVertical="@dimen/size_5dp"
-            app:layout_constraintTop_toBottomOf="@id/clRating">
+            android:layout_marginTop="@dimen/size_4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/glMid"
+            app:layout_constraintTop_toBottomOf="@id/tvPhoto">
 
-            <TextView
-                android:id="@+id/tvPhoto"
-                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
-                android:layout_width="wrap_content"
+            <com.nikitosii.studyrealtorapp.view.PulseLayout
+                android:id="@+id/plNo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Photo: "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:animation_duration="2000"
+                app:layout_constraintTop_toTopOf="parent"
+                app:wave_color="@color/blue_end"
+                app:wave_count="1"
+                app:wave_radius="25"
+                app:wave_start_alpha="0.7">
 
-            <TextView
-                android:id="@+id/tvPhotoResult"
-                style="@style/AppTheme.Text.Paragraph3.Teflon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/tvPhoto"
-                app:layout_constraintStart_toEndOf="@id/tvPhoto" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glMid"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="@dimen/size_0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_4dp"
-                app:layout_constraintEnd_toStartOf="@id/glMid"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPhoto">
-
-                <com.nikitosii.studyrealtorapp.view.PulseLayout
-                    android:id="@+id/plYes"
+                <RadioButton
+                    android:id="@+id/btnNo"
+                    style="@style/AppTheme.RadioButtonFeedback"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    android:layout_marginEnd="@dimen/size_10dp"
-                    android:paddingHorizontal="@dimen/size_20dp"
-                    app:animation_duration="2000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:wave_color="@color/blue_end"
-                    app:wave_count="1"
-                    app:wave_radius="25"
-                    app:wave_start_alpha="0.7">
-
-                    <RadioButton
-                        android:id="@+id/btnYes"
-                        style="@style/AppTheme.RadioButtonFeedback"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_48dp"
-                        android:background="@drawable/radio"
-                        android:text="@string/yes" />
-                </com.nikitosii.studyrealtorapp.view.PulseLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="@dimen/size_0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/glMid"
-                app:layout_constraintTop_toBottomOf="@id/tvPhoto">
-
-                <com.nikitosii.studyrealtorapp.view.PulseLayout
-                    android:id="@+id/plNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/size_20dp"
-                    app:animation_duration="2000"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:wave_color="@color/blue_end"
-                    app:wave_count="1"
-                    app:wave_radius="25"
-                    app:wave_start_alpha="0.7">
-
-                    <RadioButton
-                        android:id="@+id/btnNo"
-                        style="@style/AppTheme.RadioButtonFeedback"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_48dp"
-                        android:background="@drawable/radio"
-                        android:text="@string/no" />
-                </com.nikitosii.studyrealtorapp.view.PulseLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="@dimen/size_48dp"
+                    android:layout_marginHorizontal="@dimen/size_20dp"
+                    android:background="@drawable/radio"
+                    android:text="@string/no" />
+            </com.nikitosii.studyrealtorapp.view.PulseLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

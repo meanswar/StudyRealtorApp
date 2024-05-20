@@ -6,8 +6,11 @@ import android.view.View
 import android.widget.RadioButton
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status
+import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
+import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
+import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.databinding.FragmentHomePageAgentsBinding
 import com.nikitosii.studyrealtorapp.flow.agent.homepage.adapter.AgentAdapter
@@ -28,7 +31,7 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
     { FragmentHomePageAgentsBinding.bind(it) }, R.layout.fragment_home_page_agents
 ) {
 
-    val adapter by lazy { AgentAdapter(onAgentClick) }
+    private val agentsAdapter by lazy { AgentAdapter(onAgentClick) }
 
     private val onAgentClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
         when (view.id) {
@@ -38,21 +41,13 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
         }
     }
 
-    private fun onFavorite(agent: Agent) {
-        viewModel.updateLocalAgent(agent)
-    }
+    private fun onFavorite(agent: Agent) { viewModel.updateAgentFavoriteStatus(agent) }
 
-    private fun onEmail(agent: Agent) {
-        emailIntent(agent.office?.email)
-    }
+    private fun onEmail(agent: Agent) { emailIntent(agent.office?.email) }
 
-    private fun onPhone(agent: Agent) {
-        callIntent(agent.phone)
-    }
+    private fun onPhone(agent: Agent) { callIntent(agent.phone) }
 
     override fun initViews() {
-        viewModel.getFavoriteAgents()
-
         with(binding) {
             svSearch.initEndAnimation(clFilters)
             ivLanguage.initAnimation(lFilterAttributes.svLanguage)
@@ -61,48 +56,71 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
             ivRating.initAnimation(lFilterAttributes.clRating)
             ivPofilePhoto.initAnimation(lFilterAttributes.clRadioPhoto)
             plBtn.stopAnimation()
-            toolbar.initEndBtnAnimation(clFilters)
 
-            rvAgents.adapter = adapter
-            grTopContent.show(viewModel.isLocalAgents.value == true)
-            toolbar.show(viewModel.isLocalAgents.value == false)
+            rvAgents.adapter = agentsAdapter
             lFilterAttributes.grFilters.hide()
+            plBtn.show()
             clFilters.hide()
         }
     }
 
     override fun subscribe() {
         with(viewModel) {
-            agents.observe(viewLifecycleOwner, agentsObserver)
+            favoriteAgents.observe(viewLifecycleOwner, favoriteAgentsObserver)
+            agents.observe(viewLifecycleOwner, agentsFromNetworkObserver)
             isFilterFilled.observe(viewLifecycleOwner, isFilterFilledObserver)
+            isNetworkRequesting.observe(viewLifecycleOwner, isNetworkRequestingObserver)
         }
     }
 
-    private val agentsObserver: Observer<WorkResult<List<Agent>>> = Observer {
-        onLoading(it.status == Status.LOADING)
+    private val favoriteAgentsObserver: Observer<WorkResult<Status<List<Agent>>>> = Observer {
         when (it.status) {
-            Status.ERROR -> handleException(it.exception) { openError() }
-            Status.LOADING -> Timber.i("loading agents")
-            Status.SUCCESS -> processAgents(it.data)
+            ERROR -> handleException(it.exception) { openError() }
+            LOADING -> Timber.i("loading agents")
+            SUCCESS -> processAgents(it.data?.obj, !viewModel.isNetworkRequest())
+        }
+    }
+
+    private val agentsFromNetworkObserver: Observer<WorkResult<List<Agent>>> = Observer {
+        onLoading(it.status == LOADING)
+        when (it.status) {
+            ERROR -> handleException(it.exception) { openError() }
+            LOADING -> Timber.i("loading agents")
+            SUCCESS -> processAgents(it.data, viewModel.isNetworkRequest())
         }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private val isFilterFilledObserver: Observer<Boolean> = Observer {
         binding.plBtn.startAnimation()
-        binding.btnSearch.background = context?.getDrawable(R.drawable.bg_radio_btn_active)
+        binding.btnSearch.background =
+            context?.getDrawable(R.drawable.bg_radio_btn_active)
     }
 
-    private fun processAgents(data: List<Agent>?) {
-        adapter.submitList(data)
-        binding.rvAgents.notifyDataSetChanged()
+    private val isNetworkRequestingObserver: Observer<Boolean> = Observer {
+        with(binding) {
+            grTopContent.show(!it)
+            toolbar.show(!it)
+        }
+    }
+
+    private fun processAgents(data: List<Agent>?, isNetworkRequest: Boolean) {
+        with(binding) {
+            if (isNetworkRequest) {
+                agentsAdapter.submitList(data)
+                rvAgents.notifyDataSetChanged()
+            }
+            grEmpty.show(data?.isEmpty() == true)
+        }
     }
 
     private fun onLoading(isLoading: Boolean) {
         with(binding) {
-            if (viewModel.isLocalAgents.value == false) {
-                lavLoading.show(isLoading)
-            }
+            grEmpty.hide()
+            grTopContent.hide()
+            lavLoading.show(isLoading)
+            if (isLoading) plBtn.stopAnimation() else plBtn.startAnimation()
+            btnSearch.isEnabled = !isLoading
         }
     }
 
@@ -123,14 +141,8 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
 
         with(binding) {
             btnSearch.onClick { searchAgents() }
-            svSearch.setOnTextChanged {
-                viewModel.setLocationFilter(it)
-                binding.toolbar.setSearchText(it)
-            }
-            toolbar.showEndButton()
-            toolbar.onSearchClick { toolbar.showSearchContent() }
+            svSearch.setOnTextChanged { viewModel.setLocationFilter(it) }
         }
-
     }
 
     private fun onRatingRangeChanged(value: Float) {
@@ -158,10 +170,6 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
     }
 
     private fun searchAgents() {
-        with(binding) {
-            grTopContent.hide()
-            toolbar.show()
-            viewModel.getAgents()
-        }
+        viewModel.getAgentsFromNetwork()
     }
 }

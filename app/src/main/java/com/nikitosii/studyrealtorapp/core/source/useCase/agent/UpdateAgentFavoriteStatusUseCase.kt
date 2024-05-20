@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class UpdateAgentFavoriteStatusUseCase @Inject constructor(
     private val repo: AgentsRepo
-): UseCaseParams<Unit, UpdateAgentFavoriteStatusUseCase.Params>(){
+) : UseCaseParams<Unit, UpdateAgentFavoriteStatusUseCase.Params>() {
 
     class Params private constructor(val agent: Agent) {
         companion object {
@@ -15,5 +15,8 @@ class UpdateAgentFavoriteStatusUseCase @Inject constructor(
         }
     }
 
-    override suspend fun execute(data: Params) { repo.updateAgent(data.agent) }
+    override suspend fun execute(data: Params) {
+        repo.updateAgent(data.agent)
+        repo.refreshRecentFavoriteAgents()
+    }
 }

@@ -35,8 +35,6 @@
     <declare-styleable name="RealtorToolbar">
         <attr name="startAnimationSpeed" default="1.0" format="float" />
         <attr name="toolbar_title" format="string" />
-        <attr name="isSearchVisible" format="boolean" />
-        <attr name="isBackVisible" format="boolean" />
     </declare-styleable>
     <declare-styleable name="SearchView">
         <attr name="drawableStart" format="reference" />

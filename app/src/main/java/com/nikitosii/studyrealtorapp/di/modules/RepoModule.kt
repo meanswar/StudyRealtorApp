@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.di.modules
 
 import android.content.Context
+import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
@@ -16,6 +17,7 @@ import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.RequestDataRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.SearchRequestRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.TokenRepo
+import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.AgentsRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.ImageRepoImpl
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.PropertiesRepoImpl
@@ -24,6 +26,8 @@ import com.nikitosii.studyrealtorapp.core.source.repository.impl.SearchRequestRe
 import com.nikitosii.studyrealtorapp.core.source.repository.impl.TokenRepoImpl
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -40,8 +44,14 @@ object RepoModule {
 
     @Provides
     @Singleton
-    internal fun provideSearchRequestRepo(dao: SearchRequestDao): SearchRequestRepo =
-        SearchRequestRepoImpl(dao)
+    internal fun provideSearchRequestRepo(
+        dao: SearchRequestDao,
+        @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
+        networkErrorHandler: NetworkErrorHandler,
+        recreateObserver: ChannelRecreateObserver,
+        connectivityProvider: ConnectivityProvider
+    ): SearchRequestRepo =
+        SearchRequestRepoImpl(dao, io, connectivityProvider, recreateObserver, networkErrorHandler)
 
     @Provides
     @Singleton
@@ -67,6 +77,9 @@ object RepoModule {
     internal fun provideAgentsRepo(
         api: AgentsApi,
         dao: AgentDao,
-        networkErrorHandler: NetworkErrorHandler
-    ): AgentsRepo = AgentsRepoImpl(api, dao, networkErrorHandler)
+        networkErrorHandler: NetworkErrorHandler,
+        @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
+        connectivityProvider: ConnectivityProvider,
+        recreateObserver: ChannelRecreateObserver
+    ): AgentsRepo = AgentsRepoImpl(api, dao, networkErrorHandler, io, connectivityProvider, recreateObserver)
 }

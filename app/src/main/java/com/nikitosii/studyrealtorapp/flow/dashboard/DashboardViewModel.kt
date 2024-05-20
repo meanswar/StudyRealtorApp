@@ -5,15 +5,20 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetRecentSearchRequestsUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.rent.GetRecentRentSearchRequestsUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetRecentSaleSearchRequestsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.request.UpdateRequestUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class DashboardViewModel @Inject constructor(
-    private val getRequestHistoryUseCase: GetRecentSearchRequestsUseCase,
+    getRecentSaleSearchRequestsUseCase: GetRecentSaleSearchRequestsUseCase,
+    getRecentRentSearchRequestsUseCase: GetRecentRentSearchRequestsUseCase,
     private val updateSearchRequestUseCase: UpdateRequestUseCase
 ) : BaseViewModel() {
+
+    val recentSaleRequests = getRecentSaleSearchRequestsUseCase.execute().toWorkLiveData()
+    val recentRentRequests = getRecentRentSearchRequestsUseCase.execute().toWorkLiveData()
 
     private val filterHouses = mutableListOf<HouseType>()
     val addressFilter by lazy { MutableLiveData<String>() }
@@ -26,9 +31,6 @@ class DashboardViewModel @Inject constructor(
     val sqftMinFilter by lazy { MutableLiveData<Int>() }
     val sqftMaxFilter by lazy { MutableLiveData<Int>() }
     val requestType = MutableLiveData<RequestType>()
-
-    val recentSaleRequests = WorkLiveData<List<SearchRequest>>()
-    val recentRentRequests = WorkLiveData<List<SearchRequest>>()
 
     fun isFilterHousesFilled(): Boolean = run { filterHouses.isNotEmpty() }
 
@@ -69,22 +71,6 @@ class DashboardViewModel @Inject constructor(
 
     fun setRequestType(requestType: RequestType) {
         this.requestType.value = requestType
-    }
-
-    fun getRecentSaleRequests() {
-        val params = GetRecentSearchRequestsUseCase.Params.create(RequestType.SALE)
-        ioToUiWorkData(
-            io = { getRequestHistoryUseCase.execute(params) },
-            ui = { recentSaleRequests.value = it }
-        )
-    }
-
-    fun getRecentRentRequests() {
-        val params = GetRecentSearchRequestsUseCase.Params.create(RequestType.RENT)
-        ioToUiWorkData(
-            io = { getRequestHistoryUseCase.execute(params) },
-            ui = { recentRentRequests.value = it }
-        )
     }
 
     fun updateRequest(request: SearchRequest) {

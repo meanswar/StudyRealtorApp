@@ -109,7 +109,7 @@
                 android:id="@+id/clContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_white_corners_top_20dp"
+                android:background="@drawable/bg_almost_transparent_top_20dp"
                 android:layoutAnimation="@anim/recycle_view_anim"
                 android:paddingHorizontal="@dimen/size_20dp"
                 android:paddingVertical="@dimen/size_20dp"
