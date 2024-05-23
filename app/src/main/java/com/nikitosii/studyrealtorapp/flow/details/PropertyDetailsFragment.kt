@@ -226,7 +226,6 @@ class PropertyDetailsFragment :
     }
 
     private fun moveToMapPosition(data: Coordinate) {
-        Timber.i("move camera to position: ${data.latitude}, ${data.longitude}")
         val latLng = LatLng(data.latitude, data.longitude)
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17f)
         googleMap.animateCamera(cameraUpdate)

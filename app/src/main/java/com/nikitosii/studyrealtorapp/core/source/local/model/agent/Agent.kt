@@ -1,12 +1,13 @@
 package com.nikitosii.studyrealtorapp.core.source.local.model.agent
 
+import android.os.Parcelable
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Address
 import com.nikitosii.studyrealtorapp.core.source.local.model.Office
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentResponseApi
-import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.AddressResponseApi
-import com.nikitosii.studyrealtorapp.core.source.net.model.office.OfficeResponseApi
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Agent(
     val id: String,
     val fullName: String?,
@@ -26,8 +27,9 @@ data class Agent(
     val maxForSalePrice: Int?,
     val reviewCount: Int?,
     val recommendationsCount: Int?,
-    val favorite: Boolean = false
-) {
+    val favorite: Boolean = false,
+    val salePrice: SalePrice?
+) : Parcelable {
     companion object {
         fun from(api: AgentResponseApi) = Agent(
             fullName = api.fullName,
@@ -47,7 +49,8 @@ data class Agent(
             maxForSalePrice = api.maxForSalePrice,
             reviewCount = api.reviewCount,
             recommendationsCount = api.recommendationsCount,
-            id = api.id
+            id = api.id,
+            salePrice = SalePrice.from(api.salePrice)
         )
 
         fun from(entity: AgentEntity) = Agent(
@@ -69,7 +72,8 @@ data class Agent(
             maxForSalePrice = entity.maxForSalePrice,
             reviewCount = entity.reviewCount,
             recommendationsCount = entity.recommendationsCount,
-            favorite = entity.favorite
+            favorite = entity.favorite,
+            salePrice = entity.salePrice
         )
     }
 }

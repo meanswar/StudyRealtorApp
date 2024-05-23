@@ -91,6 +91,17 @@
           "review_count": 9\n
           "slug": "Josiah-Quincy-Elementary-School-0735718341"\n
           "slug_id": "Josiah-Quincy-Elementary-School-0735718341"</string>
-    <string name="screen_agent_home_page_empty_title">Looks like your list is empty :(\ntry to make another search</string>
+
+    <string name="screen_agent_home_page_empty_title">Looks like your list of favorite agents is empty :(\nTry to make another search</string>
+    <string name="screen_agent_details_license_title">License:</string>
+    <string name="screen_agent_details_tax_number_title">Tax Number:</string>
+    <string name="screen_agent_details_email_title">Email ID:</string>
+    <string name="screen_agent_details_phone_title">Phone number:</string>
+    <string name="screen_agent_details_about_agent_title">About</string>
+    <string name="screen_agent_details_about_broker_info">Broker in %s</string>
+    <string name="screen_agent_details_about_broker_info_url">Website: %s</string>
+    <string name="screen_agent_details_about_languages_title">Languages:</string>
+    <string name="screen_agent_details_about_price_last_time_update">Price range (last update %s)</string>
+    <string name="screen_agent_details_about_price_range">$%1s-$%2s</string>
 
 </resources>

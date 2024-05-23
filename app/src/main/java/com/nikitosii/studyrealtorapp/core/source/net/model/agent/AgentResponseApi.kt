@@ -1,7 +1,9 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.agent
 
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.AddressResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.office.OfficeResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.phone.PhoneResponseApi
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -34,5 +36,7 @@ data class AgentResponseApi(
     val reviewCount: Int?,
     @Json(name="recommendations_count")
     val recommendationsCount: Int?,
-    val id: String
+    val id: String,
+    @Json(name = "for_sale_price")
+    val salePrice: SalePriceResponseApi? = null
 )

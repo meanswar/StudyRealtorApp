@@ -13,7 +13,7 @@ class PhotoTypeConverter : BaseTypeConverter<Photo>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Photo? {
+    override fun toData(json: String?): Photo? {
         return Gson().fromJson(json, object : TypeToken<Photo>() {}.type)
     }
 }

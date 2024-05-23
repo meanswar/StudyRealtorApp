@@ -14,7 +14,7 @@ class FlagsTypeConverter : BaseTypeConverter<Flags>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Flags? {
+    override fun toData(json: String?): Flags? {
         return Gson().fromJson(json, object : TypeToken<Flags>() {}.type)
     }
 }

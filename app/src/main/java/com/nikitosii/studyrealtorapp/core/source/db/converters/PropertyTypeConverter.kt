@@ -11,7 +11,7 @@ class PropertyTypeConverter : BaseTypeConverter<List<PropertyEntity>>() {
     override fun fromData(data: List<PropertyEntity>?): String? = Gson().toJson(data)
 
     @TypeConverter
-    override fun toData(json: String): List<PropertyEntity>? = Gson().fromJson(json, object :
+    override fun toData(json: String?): List<PropertyEntity>? = Gson().fromJson(json, object :
         TypeToken<List<PropertyEntity>>() {}.type)
 
 }

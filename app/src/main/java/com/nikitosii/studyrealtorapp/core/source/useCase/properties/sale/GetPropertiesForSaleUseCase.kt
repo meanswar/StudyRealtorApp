@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale
 
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
+import com.nikitosii.studyrealtorapp.core.source.local.model.image.ImageData
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.repository.ImageRepo
@@ -26,17 +27,27 @@ class GetPropertiesForSaleUseCase @Inject constructor(
 
     override suspend fun execute(data: Params): Pair<SearchRequest, List<Property>> {
         val properties = propertiesRepo.getPropertiesForSale(data.request)
-        val requestImageUrl = imageRepo.getImage(data.request.address)
+        val requestImageUrl = getImageData(data.request)
 
         val favoriteProperties =
             propertiesRepo.getFavoritePropertiesIds(properties.map { it.propertyId })
         val updatedProperties = properties
             .map { it.copy(favorite = favoriteProperties.contains(it.propertyId)) }
         propertiesRepo.saveProperties(updatedProperties)
-        val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl))
+        val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl.url))
         searchRequestRepo.refreshRecentSearchRequests(RequestType.SALE)
         requestDataRepo.saveData(RequestDataEntity(request.id!!, updatedProperties.map { it.propertyId }))
 
         return Pair(request, updatedProperties)
+    }
+
+    private suspend fun getImageData(request: SearchRequest): ImageData {
+        val localImage = imageRepo.getLocalImage(request.address)
+        val requestImageUrl = if (localImage?.url == null) {
+            val data = imageRepo.getImage(request.address)
+            imageRepo.insertImageData(data)
+            data
+        } else localImage
+        return requestImageUrl
     }
 }

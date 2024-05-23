@@ -13,7 +13,7 @@ class AddressTypeConverter : BaseTypeConverter<Address>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Address? {
+    override fun toData(json: String?): Address? {
         val type = object : TypeToken<Address>() {}.type
         return Gson().fromJson(json, type)
     }

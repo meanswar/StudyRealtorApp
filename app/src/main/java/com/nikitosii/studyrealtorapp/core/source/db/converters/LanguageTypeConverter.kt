@@ -14,7 +14,7 @@ class LanguageTypeConverter: BaseTypeConverter<List<Language>>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): List<Language>? {
+    override fun toData(json: String?): List<Language>? {
         return Gson().fromJson(json, object : TypeToken<List<Language>>() {}.type)
     }
 }

@@ -1,17 +1,23 @@
 package com.nikitosii.studyrealtorapp.core.source.repository.impl
 
+import android.content.Context
+import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentDetails
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
 import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.AgentsApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentDetailsResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseAgentDetailsResponse
 import com.nikitosii.studyrealtorapp.core.source.repository.AgentsRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.BaseRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
 import com.nikitosii.studyrealtorapp.core.source.repository.base.repoChannel
 import com.nikitosii.studyrealtorapp.util.Flow
+import com.nikitosii.studyrealtorapp.util.JsonReader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -21,6 +27,7 @@ import javax.inject.Inject
 class AgentsRepoImpl @Inject constructor(
     private val api: AgentsApi,
     private val dao: AgentDao,
+    private val context: Context,
     networkErrorHandler: NetworkErrorHandler,
     io: CoroutineDispatcher,
     connectivityProvider: ConnectivityProvider,
@@ -47,8 +54,10 @@ class AgentsRepoImpl @Inject constructor(
     override suspend fun getLocalAgents(id: List<String>): List<Agent> =
         dao.getLocalAgents(id).map { Agent.from(it) }
 
-    override suspend fun getAgentDetails(id: String): Agent = runWithErrorHandler {
-        Agent.from(api.getAgentDetails(id).agentDetails)
+    override suspend fun getAgentDetails(id: String): AgentDetails = runWithErrorHandler {
+//        AgentDetails.from(api.getAgentDetails(id).agentDetails)
+        val data = JsonReader.readJson<BaseAgentDetailsResponse>(context, R.raw.agent_details_json)
+        AgentDetails.from(data!!.agentDetails)
     }
 
     override suspend fun getFavoriteAgents(): List<Agent> =

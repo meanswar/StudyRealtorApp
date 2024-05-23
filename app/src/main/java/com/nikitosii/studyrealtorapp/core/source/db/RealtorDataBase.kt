@@ -8,7 +8,6 @@ import com.nikitosii.studyrealtorapp.core.source.db.converters.AdvertisersTypeCo
 import com.nikitosii.studyrealtorapp.core.source.db.converters.BooleanTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.BrandingTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.CommunityTypeConverter
-import com.nikitosii.studyrealtorapp.core.source.db.converters.CursorTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.DescriptionTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.FlagsTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.HouseDescriptionTypeConverter
@@ -26,17 +25,20 @@ import com.nikitosii.studyrealtorapp.core.source.db.converters.PhotosTypeConvert
 import com.nikitosii.studyrealtorapp.core.source.db.converters.ProductTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.PropertyTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.RequestTypeConverter
+import com.nikitosii.studyrealtorapp.core.source.db.converters.SalePriceTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SalesRequestTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SearchSortTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SourceTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.TaxRecordTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.VrTourTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
+import com.nikitosii.studyrealtorapp.core.source.db.entity.ImageDataEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
@@ -50,6 +52,7 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
         RequestDataEntity::class,
         SearchRequestEntity::class,
         AgentEntity::class,
+        ImageDataEntity::class,
     ],
     version = DbConfig.VERSION,
 )
@@ -82,6 +85,7 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
     LanguageTypeConverter::class,
     AddressTypeConverter::class,
     OfficeTypeConverter::class,
+    SalePriceTypeConverter::class
 )
 abstract class RealtorDataBase : RoomDatabase() {
 
@@ -91,6 +95,8 @@ abstract class RealtorDataBase : RoomDatabase() {
     abstract fun requestDataDao(): RequestDataDao
     abstract fun agentsDao(): AgentDao
 
+    abstract fun imageDataDao(): ImageDataDao
+
     companion object {
         const val DATABASE_NAME = "studyrealtor.db"
         const val DATABASE_TABLE_PROPERTY = "property"
@@ -98,9 +104,10 @@ abstract class RealtorDataBase : RoomDatabase() {
         const val DATABASE_TABLE_SEARCH_REQUEST = "search_request"
         const val DATABASE_TABLE_REQUEST_DATA = "request_data"
         const val DATABASE_TABLE_AGENT = "agents"
+        const val DATABASE_TABLE_PHOTO = "photos"
     }
 }
 
 object DbConfig {
-    const val VERSION = 14
+    const val VERSION = 16
 }

@@ -27,12 +27,17 @@ class RealtorToolbar @JvmOverloads constructor(
                 setStartAnimationSpeed(this)
             }
             getStringOrNull(R.styleable.RealtorToolbar_toolbar_title)?.run { setTitle(this) }
+            getBoolean(R.styleable.RealtorToolbar_endBtnVisible, true).run { setEndBtnVisible(this) }
         }
         onBackClick()
     }
 
     private fun setStartAnimationSpeed(speed: Float) {
         binding.btnBack.speed = speed
+    }
+
+    private fun setEndBtnVisible(isVisible: Boolean) {
+        binding.btnEnd.show(isVisible)
     }
 
     private fun setTitle(title: String) {

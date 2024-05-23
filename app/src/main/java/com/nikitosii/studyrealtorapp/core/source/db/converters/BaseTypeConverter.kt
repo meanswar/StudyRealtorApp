@@ -7,5 +7,5 @@ abstract class BaseTypeConverter<T> {
     abstract fun fromData(data: T?): String?
 
     @TypeConverter
-    abstract fun toData(json: String): T?
+    abstract fun toData(json: String?): T?
 }

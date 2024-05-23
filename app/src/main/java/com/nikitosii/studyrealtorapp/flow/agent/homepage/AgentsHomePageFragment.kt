@@ -38,6 +38,7 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
             R.id.cvFavorite -> onFavorite(agent)
             R.id.cvEmail -> onEmail(agent)
             R.id.cvPhone -> onPhone(agent)
+            R.id.clAgentContent -> onAgentClick(agent)
         }
     }
 
@@ -46,6 +47,10 @@ class AgentsHomePageFragment : BaseFragment<FragmentHomePageAgentsBinding, Agent
     private fun onEmail(agent: Agent) { emailIntent(agent.office?.email) }
 
     private fun onPhone(agent: Agent) { callIntent(agent.phone) }
+
+    private fun onAgentClick(agent: Agent) {
+        AgentsHomePageFragmentDirections.openAgentDetails(agent).navigate()
+    }
 
     override fun initViews() {
         with(binding) {

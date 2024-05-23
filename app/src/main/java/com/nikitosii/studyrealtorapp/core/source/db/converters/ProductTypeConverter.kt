@@ -13,7 +13,7 @@ class ProductTypeConverter : BaseTypeConverter<Product>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Product? {
+    override fun toData(json: String?): Product? {
         return Gson().fromJson(json, object : TypeToken<Product>() {}.type)
     }
 }

@@ -13,7 +13,7 @@ class AdvertisersTypeConverter: BaseTypeConverter<List<Advertiser>>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): List<Advertiser>? {
+    override fun toData(json: String?): List<Advertiser>? {
         return Gson().fromJson(json, object : TypeToken<List<Advertiser>>() {}.type)
     }
 }

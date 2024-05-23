@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.di.modules
 import android.content.Context
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
@@ -69,17 +70,27 @@ object RepoModule {
     @Singleton
     internal fun provideImageRepo(
         api: ImageApi,
+        dao: ImageDataDao,
         networkErrorHandler: NetworkErrorHandler
-    ): ImageRepo = ImageRepoImpl(api, networkErrorHandler)
+    ): ImageRepo = ImageRepoImpl(api, dao, networkErrorHandler)
 
     @Provides
     @Singleton
     internal fun provideAgentsRepo(
         api: AgentsApi,
         dao: AgentDao,
+        context: Context,
         networkErrorHandler: NetworkErrorHandler,
         @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
         connectivityProvider: ConnectivityProvider,
         recreateObserver: ChannelRecreateObserver
-    ): AgentsRepo = AgentsRepoImpl(api, dao, networkErrorHandler, io, connectivityProvider, recreateObserver)
+    ): AgentsRepo = AgentsRepoImpl(
+        api,
+        dao,
+        context,
+        networkErrorHandler,
+        io,
+        connectivityProvider,
+        recreateObserver
+    )
 }

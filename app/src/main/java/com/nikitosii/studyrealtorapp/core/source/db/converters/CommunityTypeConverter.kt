@@ -13,7 +13,7 @@ class CommunityTypeConverter: BaseTypeConverter<Community>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Community? {
+    override fun toData(json: String?): Community? {
         val type = object : TypeToken<Community>() {}.type
         return Gson().fromJson(json, type)
     }

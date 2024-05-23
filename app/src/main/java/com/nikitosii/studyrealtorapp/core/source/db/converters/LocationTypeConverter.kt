@@ -13,7 +13,7 @@ class LocationTypeConverter : BaseTypeConverter<Location>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Location? {
+    override fun toData(json: String?): Location? {
         return Gson().fromJson(json, object : TypeToken<Location?>() {}.type)
     }
 }

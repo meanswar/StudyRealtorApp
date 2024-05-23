@@ -13,7 +13,7 @@ class BrandingTypeConverter: BaseTypeConverter<List<Branding>>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): List<Branding>? {
+    override fun toData(json: String?): List<Branding>? {
         return Gson().fromJson(json, object : TypeToken<List<Branding>>() {}.type)
     }
 }

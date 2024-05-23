@@ -4,7 +4,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.util.ext.formatPrice
 
 fun Property.getAddress(): String =
-    "${location?.address?.line}, ${location?.address?.city}, ${location?.address?.stateCode}"
+    "${location?.address?.line}, ${location?.address?.city}, ${location?.address?.state}"
 
 fun Property.getPrice(): Int {
 

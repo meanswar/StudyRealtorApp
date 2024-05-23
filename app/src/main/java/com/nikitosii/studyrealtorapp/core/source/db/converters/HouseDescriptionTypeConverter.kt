@@ -13,7 +13,7 @@ class HouseDescriptionTypeConverter: BaseTypeConverter<List<HouseDescription>>()
     }
 
     @TypeConverter
-    override fun toData(json: String): List<HouseDescription>? {
+    override fun toData(json: String?): List<HouseDescription>? {
         return Gson().fromJson(json, object : TypeToken<List<HouseDescription>>() {}.type)
     }
 }

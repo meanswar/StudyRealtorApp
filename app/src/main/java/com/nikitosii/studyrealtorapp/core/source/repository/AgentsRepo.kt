@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.core.source.repository
 
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentDetails
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
 import com.nikitosii.studyrealtorapp.util.Flow
 
@@ -10,7 +11,7 @@ interface AgentsRepo {
 
     suspend fun getLocalAgents(id: List<String>): List<Agent>
 
-    suspend fun getAgentDetails(id: String): Agent
+    suspend fun getAgentDetails(id: String): AgentDetails
 
     suspend fun getFavoriteAgents(): List<Agent>
 

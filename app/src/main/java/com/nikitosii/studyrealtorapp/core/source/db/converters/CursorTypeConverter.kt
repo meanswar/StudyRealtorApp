@@ -14,7 +14,7 @@ class CursorTypeConverter : BaseTypeConverter<Cursor>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Cursor? {
+    override fun toData(json: String?): Cursor? {
         val type = object : TypeToken<Cursor>() {}.type
         return Gson().fromJson(json, type)
     }

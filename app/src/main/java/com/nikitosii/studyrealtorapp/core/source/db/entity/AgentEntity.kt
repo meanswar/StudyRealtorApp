@@ -6,6 +6,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.local.model.Address
 import com.nikitosii.studyrealtorapp.core.source.local.model.Office
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.AddressResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.office.OfficeResponseApi
 import com.squareup.moshi.JsonClass
@@ -30,7 +31,8 @@ data class AgentEntity(
     val maxForSalePrice: Int?,
     val reviewCount: Int?,
     val recommendationsCount: Int?,
-    val favorite: Boolean
+    val favorite: Boolean,
+    val salePrice: SalePrice? = null
 ) {
     companion object {
         fun from(agent: Agent) = AgentEntity(
@@ -52,7 +54,8 @@ data class AgentEntity(
             maxForSalePrice = agent.maxForSalePrice,
             reviewCount = agent.reviewCount,
             recommendationsCount = agent.recommendationsCount,
-            favorite = agent.favorite
+            favorite = agent.favorite,
+            salePrice = agent.salePrice
         )
         fun asLocal(agent: Agent) = from(agent).copy(id = agent.id)
     }

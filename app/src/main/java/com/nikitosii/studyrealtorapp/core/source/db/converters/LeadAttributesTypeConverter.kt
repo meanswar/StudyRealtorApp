@@ -13,7 +13,7 @@ class LeadAttributesTypeConverter : BaseTypeConverter<LeadAttributes>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): LeadAttributes? {
+    override fun toData(json: String?): LeadAttributes? {
         return Gson().fromJson(json, object : TypeToken<LeadAttributes>() {}.type)
     }
 }

@@ -12,6 +12,6 @@ class VrTourTypeConverter : BaseTypeConverter<List<VrTour>>() {
 
 
     @TypeConverter
-    override fun toData(json: String): List<VrTour>? =
+    override fun toData(json: String?): List<VrTour>? =
         Gson().fromJson(json, object : TypeToken<List<VrTour>>() {}.type)
 }

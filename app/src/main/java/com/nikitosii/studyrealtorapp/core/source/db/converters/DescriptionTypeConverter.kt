@@ -13,7 +13,7 @@ class DescriptionTypeConverter: BaseTypeConverter<Description>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Description? {
+    override fun toData(json: String?): Description? {
         return Gson().fromJson(json, object : TypeToken<Description>() {}.type)
     }
 }

@@ -15,7 +15,7 @@ class OfficeTypeConverter: BaseTypeConverter<Office>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Office? {
+    override fun toData(json: String?): Office? {
         val type = object : TypeToken<Office>() {}.type
         return Gson().fromJson(json, type)
     }

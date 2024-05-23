@@ -13,7 +13,7 @@ class SalesRequestTypeConverter: BaseTypeConverter<SearchRequest>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): SearchRequest? {
+    override fun toData(json: String?): SearchRequest? {
         return Gson().fromJson(json, object : TypeToken<SearchRequest?>() {}.type)
     }
 }

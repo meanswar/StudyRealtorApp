@@ -33,7 +33,7 @@ class GetPropertiesForRentUseCase @Inject constructor(
         val updatedProperties = properties
             .map { it.copy(favorite = favoriteProperties.contains(it.propertyId)) }
         propertiesRepo.saveProperties(updatedProperties)
-        val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl))
+        val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl.url))
         searchRequestRepo.refreshRecentSearchRequests(RequestType.RENT)
         requestDataRepo.saveData(RequestDataEntity(request.id!!, updatedProperties.map { it.propertyId }))
 

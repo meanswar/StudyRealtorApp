@@ -13,7 +13,7 @@ class RequestTypeConverter : BaseTypeConverter<RequestType>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): RequestType? {
+    override fun toData(json: String?): RequestType? {
         return Gson().fromJson(json, object : TypeToken<RequestType>() {}.type)
     }
 }

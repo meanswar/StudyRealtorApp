@@ -15,7 +15,7 @@ class TokenInterceptor(
         val token = MutableLiveData(storage.getToken())
         /**
          *  this code doesn`t have to exist, but i use free api which  have no ability
-         *  to generate tokens and it uses default token, which stores here in [KEY_TOKEN] value
+         *  to regenerate tokens and it uses default token, which stores here in [KEY_TOKEN] value
          */
         while (token.value?.isEmpty() == null) {
             storage.saveToken(KEY_TOKEN)

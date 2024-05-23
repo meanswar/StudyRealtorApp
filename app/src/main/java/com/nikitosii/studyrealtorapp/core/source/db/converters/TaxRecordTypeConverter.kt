@@ -13,7 +13,7 @@ class TaxRecordTypeConverter : BaseTypeConverter<TaxRecord>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): TaxRecord? {
+    override fun toData(json: String?): TaxRecord? {
         return Gson().fromJson(json, object : TypeToken<TaxRecord>() {}.type)
     }
 }

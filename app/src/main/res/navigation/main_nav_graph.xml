@@ -14,9 +14,6 @@
             android:id="@+id/openSearchScreen"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/openSaleSearchHistory"
-            app:destination="@id/searchSaleHistoryFragment" />
-        <action
             android:id="@+id/openPropertyDetails"
             app:destination="@id/propertyDetailsFragment" />
     </fragment>
@@ -36,15 +33,6 @@
             android:id="@+id/openPropertyDetails"
             app:destination="@id/propertyDetailsFragment" />
 
-    </fragment>
-    <fragment
-        android:id="@+id/searchSaleHistoryFragment"
-        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.history.SearchSalesHistoryFragment"
-        android:label="Sale History Fragment"
-        tools:layout="@layout/fragment_search_sales_history">
-        <action
-            android:id="@id/openSearchScreen"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/propertyDetailsFragment"
@@ -78,6 +66,20 @@
             android:id="@+id/agentsHomePageFragment"
             android:name="com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsHomePageFragment"
             android:label="RentsFragment"
-            tools:layout="@layout/fragment_home_page_agents" />
+            tools:layout="@layout/fragment_home_page_agents">
+            <action
+                android:id="@+id/openAgentDetails"
+                app:destination="@id/agentDetailsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/agentDetailsFragment"
+            android:name="com.nikitosii.studyrealtorapp.flow.agent.details.AgentDetailsFragment"
+            android:label="Agent Details Screen"
+            tools:layout="@layout/fragment_agent_details">
+            <argument
+                android:name="agent"
+                app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent"
+                app:nullable="false" />
+        </fragment>
     </navigation>
 </navigation>

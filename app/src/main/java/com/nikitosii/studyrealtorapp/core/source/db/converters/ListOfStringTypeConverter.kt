@@ -12,7 +12,7 @@ class ListOfStringTypeConverter : BaseTypeConverter<List<String>>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): List<String>? {
+    override fun toData(json: String?): List<String>? {
         return Gson().fromJson(json, object : TypeToken<List<String>>() {}.type)
     }
 }

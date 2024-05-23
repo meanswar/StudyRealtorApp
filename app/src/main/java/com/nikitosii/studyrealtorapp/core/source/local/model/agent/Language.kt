@@ -7,49 +7,34 @@ enum class Language {
     AFRIKAANS,
     @Json(name = "albanian")
     ALBANIAN,
-
     @Json(name = "arabic")
     ARABIC,
-
     @Json(name = "armenian")
     ARMENIAN,
-
     @Json(name = "asl")
     ASL,
-
     @Json(name = "bengali")
     BENGALI,
-
     @Json(name = "bosnian")
     BOSNIAN,
-
     @Json(name = "bulgarian")
     BULGARIAN,
-
     @Json(name = "chinese")
     CHINESE,
-
     @Json(name = "croatian")
     CROATIAN,
-
     @Json(name = "czech")
     CZECH,
-
     @Json(name = "danish")
     DANISH,
-
     @Json(name = "dutch")
     DUTCH,
-
     @Json(name = "estonian")
     ESTONIAN,
-
     @Json(name = "farsi")
     FARSI,
-
     @Json(name = "filipino")
     FILIPINO,
-
     @Json(name = "finnish")
     FINNISH,
 

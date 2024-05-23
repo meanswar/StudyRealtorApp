@@ -13,7 +13,7 @@ class OtherTypeConverter : BaseTypeConverter<List<Other>>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): List<Other>? {
+    override fun toData(json: String?): List<Other>? {
         return Gson().fromJson(json, object : TypeToken<List<Other>>() {}.type)
     }
 }

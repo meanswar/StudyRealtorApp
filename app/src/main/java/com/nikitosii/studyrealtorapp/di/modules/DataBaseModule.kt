@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase_Migrations
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
@@ -48,4 +49,8 @@ object DataBaseModule {
     @Provides
     @Singleton
     internal fun providesAgentsDao(db: RealtorDataBase): AgentDao = db.agentsDao()
+
+    @Provides
+    @Singleton
+    internal fun providesImageDataDao(db: RealtorDataBase): ImageDataDao = db.imageDataDao()
 }

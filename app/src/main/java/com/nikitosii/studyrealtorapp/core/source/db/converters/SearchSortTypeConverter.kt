@@ -16,7 +16,7 @@ class SearchSortTypeConverter: BaseTypeConverter<SearchSortType>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): SearchSortType? {
+    override fun toData(json: String?): SearchSortType? {
         return Gson().fromJson(json, object : TypeToken<SearchSortType>() {}.type)
     }
 }

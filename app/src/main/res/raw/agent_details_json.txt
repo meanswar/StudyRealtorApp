@@ -1,0 +1,297 @@
+{
+  "agentDetails": {
+    "address": {
+      "city": "SANTA MONICA",
+      "country": "USA",
+      "line": "2113-2115 Main St.",
+      "line2": "",
+      "postal_code": "90405",
+      "state": "CA",
+      "state_code": "CA"
+    },
+    "advertiser_id": 4068651,
+    "agent_rating": 0,
+    "agent_type": [
+      "buyer",
+      "seller"
+    ],
+    "background_photo": {
+      "href": "https://ap.rdcpix.com/1079434100/ddfc07c1eb41f24a97ddcb3bb2bb10feg-c0s.jpg"
+    },
+    "broker": {
+      "accent_color": "Transparent (no color)",
+      "designations": [],
+      "fulfillment_id": 2107942,
+      "name": "Compass",
+      "photo": {
+        "href": ""
+      },
+      "video": ""
+    },
+    "description": "",
+    "designations": [],
+    "feed_licenses": [
+      {
+        "country": "US",
+        "license_number": "01984179",
+        "state_code": "CA"
+      }
+    ],
+    "first_month": 8,
+    "first_year": 2015,
+    "full_name": "Melanie Tielmann",
+    "has_photo": true,
+    "href": "https://melanietielmann.evrealestate.com/",
+    "id": "5eddf4d87e27f30011b1de65",
+    "is_realtor": true,
+    "languages": [],
+    "last_updated": "Tue, 02 Apr 2024 23:34:48 GMT",
+    "marketing_area_cities": [
+      {
+        "city_state": "Santa Monica_CA",
+        "name": "Santa Monica",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "Los Angeles_CA",
+        "name": "Los Angeles",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "Marina del Rey_CA",
+        "name": "Marina del Rey",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "Culver City_CA",
+        "name": "Culver City",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "Pacific Palisades_CA",
+        "name": "Pacific Palisades",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "Ladera Heights_CA",
+        "name": "Ladera Heights",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "West Los Angeles_CA",
+        "name": "West Los Angeles",
+        "state_code": "CA"
+      },
+      {
+        "city_state": "Veterans Administration_CA",
+        "name": "Veterans Administration",
+        "state_code": "CA"
+      }
+    ],
+    "mls": [
+      {
+        "abbreviation": "FAR_22221A4E",
+        "license_number": "",
+        "member": {
+          "id": "FAR_227A14671656"
+        },
+        "primary": true,
+        "type": "A"
+      }
+    ],
+    "mls_history": [],
+    "mls_monetization": false,
+    "name": "Melanie Tielmann, Agent",
+    "nar_only": 1,
+    "nrds_id": "818964428",
+    "office": {
+      "address": {
+        "city": "SANTA MONICA",
+        "country": "USA",
+        "line": "2113-2115 Main St.",
+        "line2": "",
+        "postal_code": "90405",
+        "state": "CA",
+        "state_code": "CA"
+      },
+      "feed_licenses": null,
+      "fulfillment_id": 3761024,
+      "licenses": null,
+      "mls": [
+        {
+          "abbreviation": "FAR_22221A4E",
+          "member": {
+            "id": "FAR_22791339152A1335"
+          },
+          "primary": true,
+          "type": "O"
+        }
+      ],
+      "name": "COMPASS",
+      "nrds_id": null,
+      "phone_list": {
+        "phone_1": {
+          "ext": "",
+          "number": "3104489500",
+          "type": "BUSINESS_MOBILE"
+        }
+      },
+      "phones": [
+        {
+          "ext": "",
+          "number": "(310) 448-9500",
+          "type": "BUSINESS_MOBILE"
+        }
+      ],
+      "photo": {
+        "href": "https://ap.rdcpix.com/3d4487bc2a822ef4894eb9f45c6e137fg-c3724393093s.jpg",
+        "is_zoomed": null
+      },
+      "slogan": null,
+      "video": null,
+      "website": null
+    },
+    "party_id": 490351821,
+    "person_name": "Melanie Tielmann",
+    "phones": [
+      {
+        "ext": "",
+        "key": "phone_1",
+        "number": "(310) 880-8892",
+        "type": "Mobile"
+      }
+    ],
+    "photo": {
+      "href": "https://ap.rdcpix.com/3924026b3d57a86cc2de3359d9a398e8a-c343622123s.jpg",
+      "is_zoomed": true
+    },
+    "recommendations_count": 0,
+    "review_count": 0,
+    "role": "agent",
+    "served_areas": [
+      {
+        "name": "Culver City",
+        "state_code": "CA"
+      },
+      {
+        "name": "Los Angeles",
+        "state_code": "CA"
+      },
+      {
+        "name": "Los Angeles Westside",
+        "state_code": "NA"
+      },
+      {
+        "name": "Marina del Rey",
+        "state_code": "CA"
+      },
+      {
+        "name": "Pacific Palisades",
+        "state_code": "CA"
+      },
+      {
+        "name": "Santa Monica",
+        "state_code": "CA"
+      }
+    ],
+    "settings": {
+      "broker_data_feed_opt_out": false,
+      "display_listings": true,
+      "display_price_range": true,
+      "display_ratings": false,
+      "display_sold_listings": true,
+      "far_override": false,
+      "full_access": false,
+      "has_dotrealtor": false,
+      "loaded_from_sb": false,
+      "new_feature_popup_closed": {
+        "agent_left_nav_avatar_to_profile": false
+      },
+      "profile_wizard": {
+        "realsatisfied_opt_out": false,
+        "tt_opt_out": false
+      },
+      "share_contacts": false,
+      "show_stream": false,
+      "terms_of_use": false,
+      "unsubscribe": {
+        "account_notify": false,
+        "autorecs": false,
+        "recapprove": false
+      }
+    },
+    "specializations": [],
+    "title": "Agent",
+    "types": "agent",
+    "user_languages": [
+      "German",
+      "English"
+    ],
+    "web_url": "https://www.realtor.com/realestateagents/Melanie-Tielmann_SANTA-MONICA_CA_4068651_818964428",
+    "zips": [
+      "90403",
+      "90402",
+      "90405",
+      "90404",
+      "90049",
+      "90077",
+      "90292",
+      "90272",
+      "90066",
+      "90067",
+      "90230",
+      "90025",
+      "90024"
+    ]
+  },
+  "deviceType": "desktop",
+  "hostUrl": "https://www.realtor.com",
+  "isGoogleBot": false,
+  "jsonld": {
+    "content": {
+      "agentName": "Melanie Tielmann",
+      "agentReviews": null,
+      "averagegRating": {
+        "ratingValue": null,
+        "reviewCount": null
+      },
+      "description": "",
+      "image": "https://ap.rdcpix.com/3924026b3d57a86cc2de3359d9a398e8a-c343622123s.jpg",
+      "inLanguage": "en",
+      "isBotAndDeviceType": {
+        "deviceType": "desktop",
+        "isBot": false
+      },
+      "knowsLanguage": [
+        "German",
+        "English"
+      ],
+      "localUrl": "/realestateagents/5eddf4d87e27f30011b1de65",
+      "location": {
+        "city": "SANTA MONICA",
+        "country": "USA",
+        "line": "2113-2115 Main St.",
+        "line2": "",
+        "postal_code": "90405",
+        "state": "CA",
+        "state_code": "CA"
+      },
+      "officeName": "COMPASS",
+      "silos": "FAR_AGENTS_LDP",
+      "telephone": "(310) 880-8892",
+      "url": "/realestateagents/5eddf4d87e27f30011b1de65"
+    },
+    "schemaTypes": [
+      "AgentInfo",
+      "Review"
+    ]
+  },
+  "query": {
+    "isDotRealtor": false,
+    "langCode": "en",
+    "nrds_id": "",
+    "profileId": "5eddf4d87e27f30011b1de65",
+    "selectedType": "agent"
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
+}

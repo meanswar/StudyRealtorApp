@@ -13,7 +13,7 @@ class SourceTypeConverter : BaseTypeConverter<Source>() {
     }
 
     @TypeConverter
-    override fun toData(json: String): Source? {
+    override fun toData(json: String?): Source? {
         return Gson().fromJson(json, object : TypeToken<Source>() {}.type)
     }
 }
