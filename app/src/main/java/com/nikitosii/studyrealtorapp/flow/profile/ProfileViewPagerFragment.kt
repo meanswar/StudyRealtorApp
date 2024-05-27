@@ -40,7 +40,7 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
             )
             vpContent.apply {
                 adapter = viewPagerAdapter
-                isUserInputEnabled = false
+                isUserInputEnabled = true
                 orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
             TabLayoutMediator(tlContent, vpContent) { tab, position ->

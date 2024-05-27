@@ -22,7 +22,7 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
 
     private val onRequestClick: (SearchRequest) -> Unit = { data -> openSearchRequestDetails(data) }
 
-    private val adapter = SearchRequestAdapter(onRequestClick, onFavoriteClick)
+    private val adapter = SearchRequestAdapter(onRequestClick, onFavoriteClick, true)
 
     override fun initViews() {
         with(binding) {
