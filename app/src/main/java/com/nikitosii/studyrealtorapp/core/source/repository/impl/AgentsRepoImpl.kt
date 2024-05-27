@@ -27,7 +27,6 @@ import javax.inject.Inject
 class AgentsRepoImpl @Inject constructor(
     private val api: AgentsApi,
     private val dao: AgentDao,
-    private val context: Context,
     networkErrorHandler: NetworkErrorHandler,
     io: CoroutineDispatcher,
     connectivityProvider: ConnectivityProvider,
@@ -54,10 +53,10 @@ class AgentsRepoImpl @Inject constructor(
     override suspend fun getLocalAgents(id: List<String>): List<Agent> =
         dao.getLocalAgents(id).map { Agent.from(it) }
 
+    override suspend fun getLocalAgents(): List<Agent> = dao.getLocalAgents().map { Agent.from(it) }
+
     override suspend fun getAgentDetails(id: String): AgentDetails = runWithErrorHandler {
-//        AgentDetails.from(api.getAgentDetails(id).agentDetails)
-        val data = JsonReader.readJson<BaseAgentDetailsResponse>(context, R.raw.agent_details_json)
-        AgentDetails.from(data!!.agentDetails)
+        AgentDetails.from(api.getAgentDetails(id).agentDetails)
     }
 
     override suspend fun getFavoriteAgents(): List<Agent> =

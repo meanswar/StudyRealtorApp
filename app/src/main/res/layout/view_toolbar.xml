@@ -28,7 +28,7 @@
         app:lottie_fileName="arrow_back.json"
         app:lottie_speed="3" />
 
-    <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+    <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
         android:id="@+id/btnEnd"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

@@ -16,8 +16,8 @@ import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.view.PulseLayout
-import com.nikitosii.studyrealtorapp.view.RangeView
+import com.nikitosii.studyrealtorapp.util.view.PulseLayout
+import com.nikitosii.studyrealtorapp.util.view.RangeView
 import timber.log.Timber
 
 @RequiresViewModel(DashboardViewModel::class)
@@ -27,9 +27,9 @@ class DashboardFragment :
         R.layout.fragment_dashboard
     ) {
     private val recentSaleAdapter =
-        SaleRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
+        SearchRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
     private val recentRentAdapter =
-        SaleRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
+        SearchRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
 
     override fun initViews() {
@@ -67,21 +67,23 @@ class DashboardFragment :
         }
     }
 
-    private val recentSaleRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> = Observer {
-        when (it.status) {
-            Status.SUCCESS -> processRecentSaleRequests(it.data?.obj ?: listOf())
-            Status.ERROR -> handleException(it.exception) { openError() }
-            Status.LOADING -> Timber.i("loading sale requests")
+    private val recentSaleRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> =
+        Observer {
+            when (it.status) {
+                Status.SUCCESS -> processRecentSaleRequests(it.data?.obj ?: listOf())
+                Status.ERROR -> handleException(it.exception) { openError() }
+                Status.LOADING -> Timber.i("loading sale requests")
+            }
         }
-    }
 
-    private val recentRentRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> = Observer {
-        when (it.status) {
-            Status.SUCCESS -> processRecentRentRequests(it.data?.obj ?: listOf())
-            Status.ERROR -> handleException(it.exception) { openError() }
-            Status.LOADING -> Timber.i("loading rent requests")
+    private val recentRentRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> =
+        Observer {
+            when (it.status) {
+                Status.SUCCESS -> processRecentRentRequests(it.data?.obj ?: listOf())
+                Status.ERROR -> handleException(it.exception) { openError() }
+                Status.LOADING -> Timber.i("loading rent requests")
+            }
         }
-    }
 
     private fun onClick() {
         with(binding) {

@@ -48,6 +48,9 @@ class SearchRequestRepoImpl @Inject constructor(
     override fun getRecentSearchRequests(type: RequestType): Flow<List<SearchRequest>> =
         if (type == RequestType.RENT) channelRentSearchRequests.value.flow else channelSaleSearchRequests.value.flow
 
+    override fun getLocalRequests(): List<SearchRequest> =
+        dao.getAllSearchRequests().map { SearchRequest.from(it) }
+
     override suspend fun refreshRecentSearchRequests(type: RequestType) {
         if (type == RequestType.RENT) channelRentSearchRequests.value.refresh()
         else channelSaleSearchRequests.value.refresh()

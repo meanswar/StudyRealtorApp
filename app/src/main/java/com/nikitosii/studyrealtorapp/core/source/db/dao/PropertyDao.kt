@@ -15,7 +15,7 @@ interface PropertyDao {
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     fun insertProperties(properties: List<PropertyEntity>): List<Long>
 
-    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY}")
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} order by favorite desc")
     fun getProperties(): List<PropertyEntity>
 
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where `propertyId` IN (:ids) & `favorite` = 1")

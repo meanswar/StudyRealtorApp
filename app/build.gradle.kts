@@ -232,4 +232,9 @@ dependencies {
 
     //Pulse animation
     implementation("pl.bclogic:pulsator4droid:1.0.3")
+
+    //ViewPager
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    //TabLayout
+    implementation("com.github.Andy671:Dachshund-Tab-Layout:v0.3.3")
 }

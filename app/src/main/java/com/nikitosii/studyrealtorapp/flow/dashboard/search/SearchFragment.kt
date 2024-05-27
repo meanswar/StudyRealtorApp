@@ -24,7 +24,7 @@ import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
-import com.nikitosii.studyrealtorapp.view.RangeView
+import com.nikitosii.studyrealtorapp.util.view.RangeView
 import timber.log.Timber
 
 @RequiresViewModel(SearchViewModel::class)

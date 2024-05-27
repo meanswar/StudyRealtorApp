@@ -37,7 +37,7 @@
                     tools:src="@drawable/ic_search" />
             </FrameLayout>
 
-            <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                 android:id="@+id/ivEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

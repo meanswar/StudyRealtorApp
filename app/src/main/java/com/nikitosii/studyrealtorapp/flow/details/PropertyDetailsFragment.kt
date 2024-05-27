@@ -242,7 +242,7 @@ class PropertyDetailsFragment :
                 glideImage(
                     it.branding?.firstOrNull()?.photo,
                     ivAgentImage,
-                    R.drawable.ic_menu_agent_black
+                    R.drawable.ic_menu_agent_not_active
                 )
                 tvAgencyName.showText(it.branding?.getOrNull(1)?.name)
             }

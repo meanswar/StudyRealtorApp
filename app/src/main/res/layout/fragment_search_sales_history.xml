@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/size_20dp">
 
-            <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+            <com.nikitosii.studyrealtorapp.util.view.AnimatedRecyclerView
                 android:id="@+id/rvSearchHistory"
                 style="@style/AnimatedRecycleView"
                 android:layout_width="match_parent"

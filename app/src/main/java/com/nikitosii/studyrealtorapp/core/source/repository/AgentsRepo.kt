@@ -11,6 +11,8 @@ interface AgentsRepo {
 
     suspend fun getLocalAgents(id: List<String>): List<Agent>
 
+    suspend fun getLocalAgents(): List<Agent>
+
     suspend fun getAgentDetails(id: String): AgentDetails
 
     suspend fun getFavoriteAgents(): List<Agent>

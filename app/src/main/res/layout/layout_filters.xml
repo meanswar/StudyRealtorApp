@@ -50,7 +50,7 @@
         tools:listitem="@layout/item_filter_house"
         tools:visibility="visible" />
 
-    <com.nikitosii.studyrealtorapp.view.RangeView
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
         android:id="@+id/rvRangePrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         app:rangeType="money"
         tools:visibility="visible" />
 
-    <com.nikitosii.studyrealtorapp.view.RangeView
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
         android:id="@+id/rvRangeBeds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         app:rangeTitle="@string/layout_filters_filter_beds_title"
         tools:visibility="visible" />
 
-    <com.nikitosii.studyrealtorapp.view.RangeView
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
         android:id="@+id/rvRangeBaths"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
         app:rangeTitle="@string/layout_filters_filter_baths_title"
         tools:visibility="visible" />
 
-    <com.nikitosii.studyrealtorapp.view.RangeView
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
         android:id="@+id/rvRangeSqft"
         android:layout_width="match_parent"
         android:background="@drawable/bg_content_almost_transparent_corners_10dp"

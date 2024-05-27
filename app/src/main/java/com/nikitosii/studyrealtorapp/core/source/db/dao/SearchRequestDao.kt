@@ -14,6 +14,9 @@ interface SearchRequestDao {
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} where requestType = :requestType")
     fun getSearchRequest(requestType: RequestType): List<SearchRequestEntity>
 
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} order by id desc")
+    fun getAllSearchRequests(): List<SearchRequestEntity>
+
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} where requestType = :requestType ORDER BY id Desc LIMIT 3")
     fun getRecentSearchRequests(requestType: RequestType): List<SearchRequestEntity>
 

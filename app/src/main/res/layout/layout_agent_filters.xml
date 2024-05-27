@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="svName, rvRangePrice, svLanguage, clRating, clRadioPhoto" />
 
-    <com.nikitosii.studyrealtorapp.view.SearchView
+    <com.nikitosii.studyrealtorapp.util.view.SearchView
         android:id="@+id/svName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:svHint="@string/layout_agent_filters_filter_hint_name" />
 
-    <com.nikitosii.studyrealtorapp.view.SearchView
+    <com.nikitosii.studyrealtorapp.util.view.SearchView
         android:id="@+id/svLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/svName"
         app:svHint="@string/layout_agent_filters_filter_hint_language" />
 
-    <com.nikitosii.studyrealtorapp.view.RangeView
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
         android:id="@+id/rvRangePrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPhoto">
 
-            <com.nikitosii.studyrealtorapp.view.PulseLayout
+            <com.nikitosii.studyrealtorapp.util.view.PulseLayout
                 android:id="@+id/plYes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                     android:layout_marginHorizontal="@dimen/size_20dp"
                     android:background="@drawable/radio"
                     android:text="@string/yes" />
-            </com.nikitosii.studyrealtorapp.view.PulseLayout>
+            </com.nikitosii.studyrealtorapp.util.view.PulseLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -163,7 +163,7 @@
             app:layout_constraintStart_toStartOf="@id/glMid"
             app:layout_constraintTop_toBottomOf="@id/tvPhoto">
 
-            <com.nikitosii.studyrealtorapp.view.PulseLayout
+            <com.nikitosii.studyrealtorapp.util.view.PulseLayout
                 android:id="@+id/plNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                     android:layout_marginHorizontal="@dimen/size_20dp"
                     android:background="@drawable/radio"
                     android:text="@string/no" />
-            </com.nikitosii.studyrealtorapp.view.PulseLayout>
+            </com.nikitosii.studyrealtorapp.util.view.PulseLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

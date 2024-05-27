@@ -8,7 +8,7 @@
     android:animationCache="true"
     tools:background="@drawable/bg_content">
 
-    <com.nikitosii.studyrealtorapp.view.RealtorToolbar
+    <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                         android:src="@drawable/ic_user_profile" />
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.nikitosii.studyrealtorapp.view.SearchView
+                <com.nikitosii.studyrealtorapp.util.view.SearchView
                     android:id="@+id/svSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-                            <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                                 android:id="@+id/ivName"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-                            <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                                 android:id="@+id/ivLanguage"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-                            <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                                 android:id="@+id/ivPrice"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-                            <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                                 android:id="@+id/ivRating"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-                            <com.nikitosii.studyrealtorapp.view.AnimatedFilterImageView
+                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                                 android:id="@+id/ivPofilePhoto"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                         tools:visibility="gone" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.nikitosii.studyrealtorapp.view.PulseLayout
+                <com.nikitosii.studyrealtorapp.util.view.PulseLayout
                     android:id="@+id/plBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_48dp"
                         android:text="@string/search_field_hint" />
-                </com.nikitosii.studyrealtorapp.view.PulseLayout>
+                </com.nikitosii.studyrealtorapp.util.view.PulseLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -251,7 +251,7 @@
                     android:text="@string/screen_agent_home_page_empty_title"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.nikitosii.studyrealtorapp.view.AnimatedRecyclerView
+                <com.nikitosii.studyrealtorapp.util.view.AnimatedRecyclerView
                     android:id="@+id/rvAgents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

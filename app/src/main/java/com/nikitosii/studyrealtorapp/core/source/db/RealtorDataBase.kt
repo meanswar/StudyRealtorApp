@@ -30,15 +30,18 @@ import com.nikitosii.studyrealtorapp.core.source.db.converters.SalesRequestTypeC
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SearchSortTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.SourceTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.TaxRecordTypeConverter
+import com.nikitosii.studyrealtorapp.core.source.db.converters.UriTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.converters.VrTourTypeConverter
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.ProfileDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.ImageDataEntity
+import com.nikitosii.studyrealtorapp.core.source.db.entity.ProfileEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
@@ -53,6 +56,7 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
         SearchRequestEntity::class,
         AgentEntity::class,
         ImageDataEntity::class,
+        ProfileEntity::class
     ],
     version = DbConfig.VERSION,
 )
@@ -85,7 +89,8 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
     LanguageTypeConverter::class,
     AddressTypeConverter::class,
     OfficeTypeConverter::class,
-    SalePriceTypeConverter::class
+    SalePriceTypeConverter::class,
+    UriTypeConverter::class
 )
 abstract class RealtorDataBase : RoomDatabase() {
 
@@ -96,6 +101,7 @@ abstract class RealtorDataBase : RoomDatabase() {
     abstract fun agentsDao(): AgentDao
 
     abstract fun imageDataDao(): ImageDataDao
+    abstract fun profileDao(): ProfileDao
 
     companion object {
         const val DATABASE_NAME = "studyrealtor.db"
@@ -105,9 +111,10 @@ abstract class RealtorDataBase : RoomDatabase() {
         const val DATABASE_TABLE_REQUEST_DATA = "request_data"
         const val DATABASE_TABLE_AGENT = "agents"
         const val DATABASE_TABLE_PHOTO = "photos"
+        const val DATABASE_TABLE_PROFILE = "user_profile"
     }
 }
 
 object DbConfig {
-    const val VERSION = 16
+    const val VERSION = 19
 }

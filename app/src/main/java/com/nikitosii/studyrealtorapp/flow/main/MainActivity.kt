@@ -52,20 +52,20 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
     private fun getMenuItems(): Array<CbnMenuItem> {
         return arrayOf(
             CbnMenuItem(
-                R.drawable.ic_menu_sale_black,
-                R.drawable.avd_ic_menu_sales_peach,
+                R.drawable.avd_menu_property_not_active,
+                R.drawable.avd_menu_property_active,
                 R.id.dashboardFragment
             ),
             CbnMenuItem(
-                R.drawable.ic_menu_rent_black,
-                R.drawable.avd_menu_rent_peach,
-                R.id.rents_nav_graph
+                R.drawable.avd_menu_agent_not_active,
+                R.drawable.avd_menu_agent_active,
+                R.id.agentsFragment
             ),
             CbnMenuItem(
-                R.drawable.ic_menu_agent_black,
-                R.drawable.avd_menu_agent_peach,
-                R.id.agents_nav_graph
-            )
+                R.drawable.avd_menu_profile_not_active,
+                R.drawable.avd_menu_profile_active,
+                R.id.profileViewPagerFragment
+            ),
         )
     }
 
@@ -74,9 +74,8 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
         binding.run {
             when (destinationId) {
                 R.id.dashboardFragment,
-                R.id.agentsHomePageFragment,
+                R.id.profileViewPagerFragment,
                 R.id.agentsFragment -> bottomNavigation.show(true)
-
                 else -> bottomNavigation.hide()
             }
         }

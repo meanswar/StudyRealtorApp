@@ -59,27 +59,39 @@
             app:nullable="false" />
     </fragment>
 
-    <navigation
-        android:id="@+id/agents_nav_graph"
-        app:startDestination="@id/agentsHomePageFragment">
-        <fragment
-            android:id="@+id/agentsHomePageFragment"
-            android:name="com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsHomePageFragment"
-            android:label="RentsFragment"
-            tools:layout="@layout/fragment_home_page_agents">
-            <action
-                android:id="@+id/openAgentDetails"
-                app:destination="@id/agentDetailsFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/agentDetailsFragment"
-            android:name="com.nikitosii.studyrealtorapp.flow.agent.details.AgentDetailsFragment"
-            android:label="Agent Details Screen"
-            tools:layout="@layout/fragment_agent_details">
-            <argument
-                android:name="agent"
-                app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent"
-                app:nullable="false" />
-        </fragment>
-    </navigation>
+    <fragment
+        android:id="@+id/profileViewPagerFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/openAgentDetails"
+            app:destination="@id/agentDetailsFragment" />
+        <action
+            android:id="@+id/openPropertyDetails"
+            app:destination="@id/propertyDetailsFragment" />
+        <action
+            android:id="@+id/openSearchRequestDetails"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/agentsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsFragment"
+        android:label="RentsFragment"
+        tools:layout="@layout/fragment_home_page_agents">
+        <action
+            android:id="@+id/openAgentDetails"
+            app:destination="@id/agentDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agentDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.agent.details.AgentDetailsFragment"
+        android:label="Agent Details Screen"
+        tools:layout="@layout/fragment_agent_details">
+        <argument
+            android:name="agent"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent"
+            app:nullable="false" />
+    </fragment>
 </navigation>

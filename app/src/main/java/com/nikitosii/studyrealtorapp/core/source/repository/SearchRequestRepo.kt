@@ -31,6 +31,8 @@ interface SearchRequestRepo {
 
     fun getRecentSearchRequests(type: RequestType): Flow<List<SearchRequest>>
 
+    fun getLocalRequests(): List<SearchRequest>
+
     /**
      * Refreshers flow of recent search requests from the local storage.
      *

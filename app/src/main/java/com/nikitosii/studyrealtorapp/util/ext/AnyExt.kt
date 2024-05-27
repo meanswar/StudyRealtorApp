@@ -1,7 +1,9 @@
 package com.nikitosii.studyrealtorapp.util.ext
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -34,6 +36,7 @@ fun Fragment.string(id: Int, vararg args: String) = resources.getString(id, args
 
 fun Activity.string(id: Int) = resources.getString(id)
 
+@SuppressLint("CheckResult")
 fun Fragment.glideImage(url: String?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
     .load(url)
     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
@@ -43,32 +46,19 @@ fun Fragment.glideImage(url: String?, view: ImageView, placeHolder: Int? = null)
     .skipMemoryCache(false)
     .apply(
         RequestOptions().dontTransform() // this line
-    )
-    .addListener(object : RequestListener<Drawable> {
-        override fun onLoadFailed(
-            p0: GlideException?,
-            p1: Any?,
-            p2: Target<Drawable>?,
-            p3: Boolean
-        ): Boolean {
-            Timber.i("startPostponedEnterTransition error")
-            startPostponedEnterTransition()
-            return false
-        }
+    ).into(view)
 
-        override fun onResourceReady(
-            p0: Drawable?,
-            p1: Any?,
-            p2: Target<Drawable>?,
-            p3: DataSource?,
-            p4: Boolean
-        ): Boolean {
-            Timber.i("startPostponedEnterTransition success")
-            startPostponedEnterTransition()
-            return false
-        }
-    })
-    .into(view)
+@SuppressLint("CheckResult")
+fun Fragment.glideImage(uri: Uri?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
+    .load(uri)
+    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    .apply {
+        if (placeHolder != null) placeholder(placeHolder)
+    }
+    .skipMemoryCache(false)
+    .apply(
+        RequestOptions().dontTransform() // this line
+    ).into(view)
 
 fun RecyclerView.attachPagerSnap() {
     PagerSnapHelper().attachToRecyclerView(this)

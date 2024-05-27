@@ -13,6 +13,9 @@ interface AgentDao {
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where id in (:id)")
     fun getLocalAgents(id: List<String>): List<AgentEntity>
 
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} order by favorite desc")
+    fun getLocalAgents(): List<AgentEntity>
+
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where favorite = 1")
     fun getFavoriteAgents(): List<AgentEntity>
 
