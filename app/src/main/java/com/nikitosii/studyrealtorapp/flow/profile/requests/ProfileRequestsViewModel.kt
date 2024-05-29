@@ -11,18 +11,11 @@ import javax.inject.Inject
 
 
 class ProfileRequestsViewModel @Inject constructor(
-    private val getLocalRequestsUseCase: GetLocalRequestsUseCase,
+    getLocalRequestsUseCase: GetLocalRequestsUseCase,
     private val updateRequestUseCase: UpdateRequestUseCase,
 ) : BaseViewModel() {
 
-    private val _properties = WorkLiveData<List<SearchRequest>>()
-    val properties: LiveData<WorkResult<List<SearchRequest>>>
-        get() = _properties
-
-    fun getLocalRequests() = ioToUiWorkData(
-        io = { getLocalRequestsUseCase.execute() },
-        ui = { _properties.postValue(it) }
-    )
+    val properties = getLocalRequestsUseCase.execute().toWorkLiveData()
 
     fun updateRequest(data: SearchRequest) {
         val params = UpdateRequestUseCase.Params.create(data.copy(favorite = !data.favorite))

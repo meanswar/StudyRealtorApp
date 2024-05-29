@@ -3,8 +3,9 @@ package com.nikitosii.studyrealtorapp.flow.profile.agents
 import android.view.View
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status
+import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.databinding.FragmentHistoryBinding
 import com.nikitosii.studyrealtorapp.flow.agent.homepage.adapter.AgentAdapter
@@ -26,8 +27,6 @@ class ProfileAgentsFragment : BaseFragment<FragmentHistoryBinding, ProfileAgents
         with(binding) {
             rvContent.adapter = adapter
         }
-
-        viewModel.getLocalAgents()
     }
 
     private val onItemClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
@@ -59,12 +58,12 @@ class ProfileAgentsFragment : BaseFragment<FragmentHistoryBinding, ProfileAgents
         viewModel.agents.observe(viewLifecycleOwner, agentsObserver)
     }
 
-    private val agentsObserver: Observer<WorkResult<List<Agent>>> = Observer {
-        onLoading(it.status == Status.LOADING)
+    private val agentsObserver: Observer<WorkResult<Status<List<Agent>>>> = Observer {
+        onLoading(it.status == LOADING)
         when (it.status) {
-            Status.SUCCESS -> adapter.submitList(it.data)
-            Status.ERROR -> handleException(it.exception)
-            Status.LOADING -> Timber.i("loading agents")
+            SUCCESS -> adapter.submitList(it.data?.obj)
+            ERROR -> handleException(it.exception)
+            LOADING -> Timber.i("loading agents")
         }
     }
 

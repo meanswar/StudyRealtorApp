@@ -14,5 +14,5 @@ class UpdateProfileUseCase @Inject constructor(private val repo: ProfileRepo) :
         }
     }
 
-    override suspend fun execute(data: Params) { repo.updateProfile(data.profile) }
+    override suspend fun execute(data: Params) { repo.updateProfile(data.profile); repo.refresh() }
 }

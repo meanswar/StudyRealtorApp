@@ -1,8 +1,6 @@
 package com.nikitosii.studyrealtorapp.core.source.repository.impl
 
 import android.content.Context
-import com.google.gson.Gson
-import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
@@ -11,26 +9,26 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.Pr
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
-import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseSinglePropertyResponseApi
 import com.nikitosii.studyrealtorapp.core.source.repository.PropertiesRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.BaseRepo
 import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
 import com.nikitosii.studyrealtorapp.core.source.repository.base.repoChannel
-import com.nikitosii.studyrealtorapp.util.JsonReader
-import com.squareup.moshi.Moshi
+import com.nikitosii.studyrealtorapp.util.Flow
 import kotlinx.coroutines.CoroutineDispatcher
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.io.StringWriter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class PropertiesRepoImpl @Inject constructor(
     private val api: PropertiesApi,
     private val dao: PropertyDao,
     networkErrorHandler: NetworkErrorHandler,
-    val context: Context
+    val context: Context,
+    io: CoroutineDispatcher,
+    connectivityProvider: ConnectivityProvider,
+    recreateObserver: ChannelRecreateObserver
 ) : BaseRepo(networkErrorHandler), PropertiesRepo {
 
     override suspend fun getPropertiesForSale(
@@ -57,6 +55,10 @@ class PropertiesRepoImpl @Inject constructor(
             .map { Property.from(it) }
     }
 
+    private val channel = repoChannel(io, connectivityProvider, recreateObserver) {
+        storageConfig { get = { dao.getProperties().map { Property.from(it) } } }
+    }
+
     override suspend fun saveProperties(properties: List<Property>) {
         dao.insertProperties(properties.map { PropertyEntity.from(it) })
     }
@@ -79,12 +81,15 @@ class PropertiesRepoImpl @Inject constructor(
     override suspend fun getLocalProperty(id: String): Property =
         Property.from(dao.getLocalProperty(id))
 
-    override suspend fun getAllLocalProperties(): List<Property> =
-        dao.getProperties().map { Property.from(it) }
+
+    override fun getAllLocalProperties(): Flow<List<Property>> = channel.value.flow
+
+    override suspend fun refreshProperties() = channel.value.refreshOnlyLocal()
+
+    override suspend fun removeData() { dao.deleteAllProperties() }
 
     override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler {
         PropertyDetails.from(api.getPropertyDetails(id).result)
-//        getLocalRentProperty()
     }
 
     override suspend fun getPropertiesForRent(data: SearchRequest, page: Int?): List<Property> =
@@ -109,8 +114,8 @@ class PropertiesRepoImpl @Inject constructor(
         }
 
     // Method to read local json data for emulating network data
-    private fun getLocalRentProperty(): PropertyDetails {
-       val data = JsonReader.readJson<BaseSinglePropertyResponseApi>(context, R.raw.rent)?.result
-        return PropertyDetails.from(data)
-    }
+//    private fun getLocalRentProperty(): PropertyDetails {
+//       val data = JsonReader.readJson<BaseSinglePropertyResponseApi>(context, R.raw.rent)?.result
+//        return PropertyDetails.from(data)
+//    }
 }

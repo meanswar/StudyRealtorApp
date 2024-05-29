@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.util.ext
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
@@ -59,6 +60,23 @@ fun Fragment.glideImage(uri: Uri?, view: ImageView, placeHolder: Int? = null) = 
     .apply(
         RequestOptions().dontTransform() // this line
     ).into(view)
+
+@SuppressLint("CheckResult")
+fun Fragment.glideImage(image: Bitmap?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
+    .load(image)
+    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    .apply { if (placeHolder != null) placeholder(placeHolder) }
+    .skipMemoryCache(false)
+    .apply(RequestOptions().dontTransform())
+    .into(view)
+
+fun Fragment.glideImage(image: ByteArray?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
+    .load(image)
+    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    .apply { if (placeHolder != null) placeholder(placeHolder) }
+    .skipMemoryCache(false)
+    .apply(RequestOptions().dontTransform())
+    .into(view)
 
 fun RecyclerView.attachPagerSnap() {
     PagerSnapHelper().attachToRecyclerView(this)

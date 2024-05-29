@@ -2,8 +2,9 @@ package com.nikitosii.studyrealtorapp.flow.profile.requests
 
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status
+import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentHistoryBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
@@ -28,20 +29,18 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
         with(binding) {
             rvContent.adapter = adapter
         }
-
-        viewModel.getLocalRequests()
     }
 
     override fun subscribe() {
         viewModel.properties.observe(viewLifecycleOwner, searchRequestsObserver)
     }
 
-    private val searchRequestsObserver: Observer<WorkResult<List<SearchRequest>>> = Observer {
-        onLoading(it.status == Status.LOADING)
+    private val searchRequestsObserver: Observer<WorkResult<Status<List<SearchRequest>>>> = Observer {
+        onLoading(it.status == LOADING)
         when (it.status) {
-            Status.SUCCESS -> adapter.submitList(it.data)
-            Status.ERROR -> handleException(it.exception)
-            Status.LOADING -> Timber.i("loading agents")
+            SUCCESS -> adapter.submitList(it.data?.obj)
+            ERROR -> handleException(it.exception)
+            LOADING -> Timber.i("loading agents")
         }
     }
 

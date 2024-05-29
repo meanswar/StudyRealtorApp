@@ -32,7 +32,6 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
         with(binding) {
             bottomNavigation.setMenuItems(getMenuItems())
 
-
             navController?.let {
                 bottomNavigation.setupWithNavController(it)
                 it.addOnDestinationChangedListener { _, destination, _ ->

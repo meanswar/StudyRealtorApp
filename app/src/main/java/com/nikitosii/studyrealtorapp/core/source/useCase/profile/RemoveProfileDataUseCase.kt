@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class RemoveProfileDataUseCase @Inject constructor(private val repo: ProfileRepo): UseCase<Unit>() {
 
-    override suspend fun execute() = run {  repo.removeProfileData() }
+    override suspend fun execute() = run {  repo.removeProfileData(); repo.refresh() }
 }

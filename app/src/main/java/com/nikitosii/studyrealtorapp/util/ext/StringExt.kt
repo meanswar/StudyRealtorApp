@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.util.ext
 
 import android.content.res.TypedArray
+import android.net.Uri
 import androidx.annotation.StyleableRes
 
 fun String.getStringOrNull(): String? = if (this.isNotNull()) this else null
@@ -29,9 +30,9 @@ fun String.formatPrice(): String {
     // Remove existing spaces and commas from the price string
     val price = this.toFloat()
     return when {
-        price / 1000000000 > 0.1f -> String.format("%.1fB", price / 1000000000)
-        price / 1000000 > 0.1f -> String.format("%.1fM", price / 1000000)
-        price / 1000 > 0.1f -> String.format("%.1fk", price / 1000)
+        price / 1000000000 > 0.6f -> String.format("%.1fB", price / 1000000000)
+        price / 1000000 > 0.6f -> String.format("%.1fM", price / 1000000)
+        price / 1000 > 0.6f -> String.format("%.1fK", price / 1000)
         else -> String.format("%f", price)
     }
 }
@@ -39,5 +40,7 @@ fun String.formatPrice(): String {
 fun String?.ifNull(default: String?): String? = this ?: default
 
 fun String?.ifNullOrEmpty(default: String?): String? = if (isNullOrEmpty()) default else this
+
+fun String.toUri(): Uri = Uri.parse(this)
 
 

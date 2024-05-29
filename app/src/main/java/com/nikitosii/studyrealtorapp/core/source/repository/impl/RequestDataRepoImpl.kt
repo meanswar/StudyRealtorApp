@@ -11,10 +11,9 @@ class RequestDataRepoImpl @Inject constructor(
 
     override suspend fun getData(requestId: Int): RequestDataEntity = dao.getData(requestId)
 
-    override suspend fun saveData(data: RequestDataEntity): RequestDataEntity {
-        dao.insert(data)
-        return data
-    }
+    override suspend fun saveData(data: RequestDataEntity) { dao.insert(data) }
 
     override suspend fun delete(requestId: Int) = dao.remove(requestId)
+
+    override suspend fun removeAll() { dao.removeAll() }
 }

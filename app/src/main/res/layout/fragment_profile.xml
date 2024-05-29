@@ -6,20 +6,27 @@
     android:layout_height="match_parent"
     tools:background="@drawable/bg_content">
 
-    <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:endBtnVisible="false"
-        app:firstBtnVisible="false"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:toolbar_title="Profile" />
+        app:title="Profile"
+        app:titleCentered="true" />
+
+    <androidx.appcompat.widget.ActionMenuView
+        android:id="@+id/vmTopMenu"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProfilePhoto"
         android:layout_width="@dimen/size_160dp"
         android:layout_height="@dimen/size_0dp"
         android:layout_marginTop="@dimen/size_40dp"
+        android:transitionName="profile.image"
         app:cardCornerRadius="@dimen/size_80dp"
         app:cardElevation="0dp"
         app:layout_constraintDimensionRatio="H,1:1"
@@ -42,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_10dp"
         android:gravity="center"
+        android:transitionName="profile.name"
         app:layout_constraintTop_toBottomOf="@id/cvProfilePhoto"
         tools:text="James Smith" />
 
@@ -52,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_5dp"
         android:drawablePadding="@dimen/size_5dp"
+        android:transitionName="profile.phone"
         app:drawableStartCompat="@drawable/ic_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +76,7 @@
         android:layout_marginTop="@dimen/size_5dp"
         android:layout_weight="3"
         android:drawablePadding="@dimen/size_5dp"
+        android:transitionName="profile.email"
         app:drawableStartCompat="@drawable/ic_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,10 +103,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabSelectedTextColor="@color/peach"
             app:tabIndicatorAnimationMode="elastic"
             app:tabIndicatorColor="@color/peach"
             app:tabSelectedTextAppearance="@style/AppTheme.Text.Bold.Headline2.Teflon"
+            app:tabSelectedTextColor="@color/peach"
             app:tabTextAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
             app:tabTextColor="@color/black" />
 

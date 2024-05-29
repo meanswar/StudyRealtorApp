@@ -14,5 +14,8 @@ class UpdateRequestUseCase @Inject constructor(private val repo: SearchRequestRe
         }
     }
 
-    override suspend fun execute(data: Params) = repo.updateSearchRequest(data.data)
+    override suspend fun execute(data: Params) {
+        repo.updateSearchRequest(data.data)
+        repo.refreshSearchRequests()
+    }
 }

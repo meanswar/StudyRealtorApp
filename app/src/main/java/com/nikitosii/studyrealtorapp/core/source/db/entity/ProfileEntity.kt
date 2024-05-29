@@ -12,5 +12,5 @@ data class ProfileEntity(
     val surname: String?,
     val email: String?,
     val phone: String?,
-    val image: Uri?
+    val photo: Uri?
 )

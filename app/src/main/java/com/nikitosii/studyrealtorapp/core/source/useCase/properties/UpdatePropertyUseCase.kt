@@ -16,5 +16,6 @@ class UpdatePropertyUseCase @Inject constructor(private val repo: PropertiesRepo
 
     override suspend fun execute(data: Params) {
         repo.updateProperty(data.data)
+        repo.refreshProperties()
     }
 }

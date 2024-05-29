@@ -27,7 +27,7 @@ class PropertyViewHolder(
 
             tvPropertyAddress.text = property.getAddress()
             tvPropertyName.showText(property.description?.name)
-            val price = property.getPriceStringFormat() + " approx."
+            val price = property.getPriceStringFormat()
             tvPropertyPrice.text = price
             tvPropertyBeds.showText(property.description?.beds?.toString())
             tvProperyBaths.showText(property.description?.baths?.toString())

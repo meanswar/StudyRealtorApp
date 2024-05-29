@@ -42,9 +42,20 @@ object RepoModule {
     internal fun providePropertiesRepo(
         api: PropertiesApi,
         dao: PropertyDao,
+        context: Context,
+        @Named(AppModule.IO_DISPATCHER) io: CoroutineDispatcher,
         networkErrorHandler: NetworkErrorHandler,
-        context: Context
-    ): PropertiesRepo = PropertiesRepoImpl(api, dao, networkErrorHandler, context)
+        recreateObserver: ChannelRecreateObserver,
+        connectivityProvider: ConnectivityProvider
+    ): PropertiesRepo = PropertiesRepoImpl(
+        api,
+        dao,
+        networkErrorHandler,
+        context,
+        io,
+        connectivityProvider,
+        recreateObserver
+    )
 
     @Provides
     @Singleton

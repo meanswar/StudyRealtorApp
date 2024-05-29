@@ -19,7 +19,6 @@ interface SearchRequestRepo {
      *
      * @param id The ID of the search request to be removed.
      */
-
     suspend fun removeSearchRequest(id: Int)
 
     /**
@@ -28,13 +27,27 @@ interface SearchRequestRepo {
      * @param type The type of the search request ([RequestType.SALE] or [RequestType.RENT]).
      * @return A list containing the last three recent search requests of the specified type.
      */
-
     fun getRecentSearchRequests(type: RequestType): Flow<List<SearchRequest>>
 
-    fun getLocalRequests(): List<SearchRequest>
+    /**
+     * Retrieves all local search requests from the local storage.
+     *
+     * @return A flow of lists containing all local search requests.
+     */
+    fun getLocalRequests(): Flow<List<SearchRequest>>
 
     /**
-     * Refreshers flow of recent search requests from the local storage.
+     * Removes all data from the local storage.
+     */
+    suspend fun removeData()
+
+    /**
+     * Refreshes all search requests in the local storage.
+     */
+    suspend fun refreshSearchRequests()
+
+    /**
+     * Refreshes the flow of recent search requests for a specified type from the local storage.
      *
      * @param type The type of the search request ([RequestType.SALE] or [RequestType.RENT]).
      */
@@ -45,6 +58,5 @@ interface SearchRequestRepo {
      *
      * @param request The [SearchRequest] model to be updated.
      */
-
     suspend fun updateSearchRequest(request: SearchRequest)
 }

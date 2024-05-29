@@ -1,6 +1,9 @@
 package com.nikitosii.studyrealtorapp.flow.profile
 
+import android.annotation.SuppressLint
+import android.view.MenuInflater
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nikitosii.studyrealtorapp.R
@@ -51,6 +54,16 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
                     else -> throw Exception("Invalid position: $position")
                 }
             }.attach()
+
+            MenuInflater(requireContext()).inflate(R.menu.menu_profile, vmTopMenu.menu)
+            vmTopMenu.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.actionEdit -> openEditProfileScreen()
+                    R.id.actionDeleteProfile -> viewModel.removeProfileData()
+                    R.id.actionDelete -> viewModel.removeData()
+                }
+                true
+            }
         }
     }
 
@@ -68,12 +81,24 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setProfileData(data: Profile) {
         with(binding) {
-            tvProfileName.text = data.name
+            tvProfileName.text = "${data.name} ${data.surname}"
             tvProfileEmail.showText(data.email)
             tvProfilePhone.showText(data.phone)
             glideImage(data.photo, ivProfilePhoto, R.drawable.ic_user_profile)
         }
+    }
+
+    private fun openEditProfileScreen() {
+        val profile = viewModel.profile.value?.data?.obj ?: return
+        val extras = FragmentNavigatorExtras(
+            binding.cvProfilePhoto to "profile.image",
+            binding.tvProfileName to "profile.name",
+            binding.tvProfileEmail to "profile.email",
+            binding.tvProfilePhone to "profile.phone")
+
+        ProfileViewPagerFragmentDirections.openEditProfileScreen(profile).navigate(extras)
     }
 }

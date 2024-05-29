@@ -12,6 +12,7 @@ import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.agents.ProfileAgentsViewModel
+import com.nikitosii.studyrealtorapp.flow.profile.edit.EditProfileViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.properties.ProfilePropertiesViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.requests.ProfileRequestsViewModel
 import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
@@ -78,4 +79,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileRequestsViewModel::class)
     fun bindAgentProfileRequestsViewModel(viewModel: ProfileRequestsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditProfileViewModel::class)
+    fun bindAgentEditProfileViewModel(viewModel: EditProfileViewModel): ViewModel
 }

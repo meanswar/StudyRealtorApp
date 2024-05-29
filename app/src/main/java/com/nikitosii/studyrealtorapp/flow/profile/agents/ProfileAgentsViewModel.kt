@@ -12,18 +12,11 @@ import javax.inject.Inject
 
 
 class ProfileAgentsViewModel @Inject constructor(
-    private val getAgentsUseCase: GetLocalAgentsUseCase,
+    getAgentsUseCase: GetLocalAgentsUseCase,
     private val updateAgentFavoriteStatusUseCase: UpdateAgentFavoriteStatusUseCase,
 ) : BaseViewModel() {
 
-    private val _agents = WorkLiveData<List<Agent>>()
-    val agents: LiveData<WorkResult<List<Agent>>>
-        get() = _agents
-
-    fun getLocalAgents() = ioToUiWorkData(
-        io = {  getAgentsUseCase.execute() },
-        ui = { _agents.postValue(it) }
-    )
+    val agents = getAgentsUseCase.execute().toWorkLiveData()
 
     fun updateAgentFavoriteStatus(agent: Agent) {
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(agent.copy(favorite = !agent.favorite))

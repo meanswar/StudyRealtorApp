@@ -36,6 +36,10 @@ class SearchRequestRepoImpl @Inject constructor(
         }
     }
 
+    val channelSearchRequests = repoChannel(io, connectivityProvider, recreateObserver) {
+        storageConfig { get = { dao.getAllSearchRequests().map { SearchRequest.from(it) } } }
+    }
+
     override suspend fun saveSearchRequest(request: SearchRequest): SearchRequest {
         val id = dao.insert(SearchRequest.toEntity(request))
         return request.copy(id = id.toInt())
@@ -48,8 +52,11 @@ class SearchRequestRepoImpl @Inject constructor(
     override fun getRecentSearchRequests(type: RequestType): Flow<List<SearchRequest>> =
         if (type == RequestType.RENT) channelRentSearchRequests.value.flow else channelSaleSearchRequests.value.flow
 
-    override fun getLocalRequests(): List<SearchRequest> =
-        dao.getAllSearchRequests().map { SearchRequest.from(it) }
+    override fun getLocalRequests(): Flow<List<SearchRequest>> = channelSearchRequests.value.flow
+
+    override suspend fun removeData() { dao.removeAll() }
+
+    override suspend fun refreshSearchRequests() = channelSearchRequests.value.refreshOnlyLocal()
 
     override suspend fun refreshRecentSearchRequests(type: RequestType) {
         if (type == RequestType.RENT) channelRentSearchRequests.value.refresh()

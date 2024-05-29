@@ -67,6 +67,7 @@ class PropertyDetailsFragment :
             TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initViews() {
         with(binding) {
             postponeEnterTransition()
@@ -74,7 +75,7 @@ class PropertyDetailsFragment :
             ivProperty.transitionName = args.property.propertyId
             glideImage(args.property.primaryPhoto.url, ivProperty)
             setPropertyDescriptionInfo(args.property.description)
-            setBrandingInfo(args.property.branding?.firstOrNull())
+            setBrandingInfo(args.property.branding.firstOrNull())
             setFavorite()
             tvPropertyAddress.text = "Address: ${args.property.getAddress()}"
             tvPropertyPrice.text = args.property.getPriceStringFormat()
@@ -174,7 +175,7 @@ class PropertyDetailsFragment :
 
     private val isMapReadyObserver: Observer<Boolean> = Observer {
         if (it) {
-            viewModel.coordinates.value?.let { moveToMapPosition(it) }
+            viewModel.coordinates.value?.let { coord -> moveToMapPosition(coord) }
         }
     }
 

@@ -17,4 +17,7 @@ interface RequestDataDao {
 
     @Query("DELETE FROM $DATABASE_TABLE_REQUEST_DATA where requestId = :requestId")
     fun remove(requestId: Int)
+
+    @Query("DELETE FROM $DATABASE_TABLE_REQUEST_DATA")
+    fun removeAll()
 }
