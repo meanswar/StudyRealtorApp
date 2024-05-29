@@ -20,6 +20,7 @@ import com.nikitosii.studyrealtorapp.flow.profile.properties.ProfilePropertiesFr
 import com.nikitosii.studyrealtorapp.flow.profile.requests.ProfileRequestsFragment
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
+import com.nikitosii.studyrealtorapp.util.ext.model.getFullName
 import com.nikitosii.studyrealtorapp.util.ext.showText
 import com.nikitosii.studyrealtorapp.util.view.viewpager.ViewPagerFragmentAdapter
 import timber.log.Timber
@@ -48,9 +49,9 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
             }
             TabLayoutMediator(tlContent, vpContent) { tab, position ->
                 tab.text = when (position) {
-                    0 -> ProfilePropertiesFragment.SCREEN_TITLE
-                    1 -> ProfileRequestsFragment.SCREEN_TITLE
-                    2 -> ProfileAgentsFragment.SCREEN_TITLE
+                    SCREEN_PROPERTIES_POSITION -> ProfilePropertiesFragment.SCREEN_TITLE
+                    SCREEN_REQUESTS_POSITION -> ProfileRequestsFragment.SCREEN_TITLE
+                    SCREEN_AGENTS_POSITION -> ProfileAgentsFragment.SCREEN_TITLE
                     else -> throw Exception("Invalid position: $position")
                 }
             }.attach()
@@ -84,7 +85,7 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
     @SuppressLint("SetTextI18n")
     private fun setProfileData(data: Profile) {
         with(binding) {
-            tvProfileName.text = "${data.name} ${data.surname}"
+            tvProfileName.text = data.getFullName()
             tvProfileEmail.showText(data.email)
             tvProfilePhone.showText(data.phone)
             glideImage(data.photo, ivProfilePhoto, R.drawable.ic_user_profile)
@@ -100,5 +101,11 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
             binding.tvProfilePhone to "profile.phone")
 
         ProfileViewPagerFragmentDirections.openEditProfileScreen(profile).navigate(extras)
+    }
+
+    companion object {
+        private const val SCREEN_PROPERTIES_POSITION = 0
+        private const val SCREEN_REQUESTS_POSITION = 1
+        private const val SCREEN_AGENTS_POSITION = 2
     }
 }

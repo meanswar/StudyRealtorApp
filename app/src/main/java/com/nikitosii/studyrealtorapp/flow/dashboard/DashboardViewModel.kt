@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
+import com.nikitosii.studyrealtorapp.core.source.useCase.profile.GetProfileFlowUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.request.GetRecentRentSearchRequestsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.request.GetRecentSaleSearchRequestsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.request.UpdateRequestUseCase
@@ -13,11 +14,13 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     getRecentSaleSearchRequestsUseCase: GetRecentSaleSearchRequestsUseCase,
     getRecentRentSearchRequestsUseCase: GetRecentRentSearchRequestsUseCase,
+    getProfileFlowUseCase: GetProfileFlowUseCase,
     private val updateSearchRequestUseCase: UpdateRequestUseCase
 ) : BaseViewModel() {
 
     val recentSaleRequests = getRecentSaleSearchRequestsUseCase.execute().toWorkLiveData()
     val recentRentRequests = getRecentRentSearchRequestsUseCase.execute().toWorkLiveData()
+    val profile = getProfileFlowUseCase.execute().toWorkLiveData()
 
     private val filterHouses = mutableListOf<HouseType>()
     val addressFilter by lazy { MutableLiveData<String>() }

@@ -12,12 +12,14 @@ import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
+import com.nikitosii.studyrealtorapp.core.source.local.model.profile.Profile
 import com.nikitosii.studyrealtorapp.databinding.FragmentHomePageAgentsBinding
 import com.nikitosii.studyrealtorapp.flow.agent.homepage.adapter.AgentAdapter
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.emailIntent
+import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.onChange
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
@@ -81,6 +83,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
             agents.observe(viewLifecycleOwner, agentsFromNetworkObserver)
             isFilterFilled.observe(viewLifecycleOwner, isFilterFilledObserver)
             isNetworkRequesting.observe(viewLifecycleOwner, isNetworkRequestingObserver)
+            profile.observe(viewLifecycleOwner, profileObserver)
         }
     }
 
@@ -113,6 +116,19 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
             grTopContent.show(!it)
             toolbar.show(!it)
         }
+    }
+
+    private val profileObserver: Observer<WorkResult<Status<Profile>>> =
+        Observer {
+            when (it.status) {
+                SUCCESS -> setProfileData(it.data?.obj)
+                ERROR -> handleException(it.exception) { openError() }
+                LOADING -> Timber.i("loading rent requests")
+            }
+        }
+
+    private fun setProfileData(data: Profile?) {
+        glideImage(data?.photo, binding.ivProfile, R.drawable.ic_user_profile)
     }
 
     private fun processAgents(data: List<Agent>?, isNetworkRequest: Boolean) {

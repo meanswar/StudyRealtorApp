@@ -3,9 +3,11 @@ package com.nikitosii.studyrealtorapp.flow.dashboard
 import android.widget.RadioButton
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status
+import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
+import com.nikitosii.studyrealtorapp.core.source.local.model.profile.Profile
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentDashboardBinding
@@ -13,7 +15,9 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
+import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.model.getFullName
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.view.PulseLayout
@@ -52,39 +56,6 @@ class DashboardFragment :
         binding.btnBuy.isChecked = true
     }
 
-    private fun onHouseFilterClick(house: HouseType): Boolean {
-        with(viewModel) {
-            val result = viewModel.setFilterHouse(house)
-            binding.ivHouse.setIsFilled(isFilterHousesFilled())
-            return result
-        }
-    }
-
-    override fun subscribe() {
-        with(viewModel) {
-            recentSaleRequests.observe(viewLifecycleOwner, recentSaleRequestsObserver)
-            recentRentRequests.observe(viewLifecycleOwner, recentRentRequestsObserver)
-        }
-    }
-
-    private val recentSaleRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> =
-        Observer {
-            when (it.status) {
-                Status.SUCCESS -> processRecentSaleRequests(it.data?.obj ?: listOf())
-                Status.ERROR -> handleException(it.exception) { openError() }
-                Status.LOADING -> Timber.i("loading sale requests")
-            }
-        }
-
-    private val recentRentRequestsObserver: Observer<WorkResult<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<SearchRequest>>>> =
-        Observer {
-            when (it.status) {
-                Status.SUCCESS -> processRecentRentRequests(it.data?.obj ?: listOf())
-                Status.ERROR -> handleException(it.exception) { openError() }
-                Status.LOADING -> Timber.i("loading rent requests")
-            }
-        }
-
     private fun onClick() {
         with(binding) {
             svSearch.setOnEndClick { svSearch.setIsFilled(viewModel.checkFilters()) }
@@ -101,6 +72,56 @@ class DashboardFragment :
             btnBuy.onCheck { onCheckCallback(it, btnRent, plBuy, plRent, RequestType.SALE) }
             btnRent.onCheck { onCheckCallback(it, btnBuy, plRent, plBuy, RequestType.RENT) }
             btnSearch.onClick { openSearchScreen() }
+        }
+    }
+
+    private fun onHouseFilterClick(house: HouseType): Boolean {
+        with(viewModel) {
+            val result = viewModel.setFilterHouse(house)
+            binding.ivHouse.setIsFilled(isFilterHousesFilled())
+            return result
+        }
+    }
+
+    override fun subscribe() {
+        with(viewModel) {
+            recentSaleRequests.observe(viewLifecycleOwner, recentSaleRequestsObserver)
+            recentRentRequests.observe(viewLifecycleOwner, recentRentRequestsObserver)
+            profile.observe(viewLifecycleOwner, profileObserver)
+        }
+    }
+
+    private val recentSaleRequestsObserver: Observer<WorkResult<Status<List<SearchRequest>>>> =
+        Observer {
+            when (it.status) {
+                SUCCESS -> processRecentSaleRequests(it.data?.obj ?: listOf())
+                ERROR -> handleException(it.exception) { openError() }
+                LOADING -> Timber.i("loading sale requests")
+            }
+        }
+
+    private val recentRentRequestsObserver: Observer<WorkResult<Status<List<SearchRequest>>>> =
+        Observer {
+            when (it.status) {
+                SUCCESS -> processRecentRentRequests(it.data?.obj ?: listOf())
+                ERROR -> handleException(it.exception) { openError() }
+                LOADING -> Timber.i("loading rent requests")
+            }
+        }
+
+    private val profileObserver: Observer<WorkResult<Status<Profile>>> =
+        Observer {
+            when (it.status) {
+                SUCCESS -> setProfileData(it.data?.obj)
+                ERROR -> handleException(it.exception) { openError() }
+                LOADING -> Timber.i("loading rent requests")
+            }
+        }
+
+    private fun setProfileData(data: Profile?) {
+        with(binding) {
+            glideImage(data?.photo, ivProfile, R.drawable.ic_user_profile)
+            tvUserWelcome.text = getString(R.string.screen_dashboard_welcome_user, data?.getFullName())
         }
     }
 

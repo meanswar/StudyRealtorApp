@@ -9,16 +9,19 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestA
 import com.nikitosii.studyrealtorapp.core.source.useCase.agent.GetAgentsFromNetworkUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.agent.GetRecentFavoriteAgentsUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.agent.UpdateAgentFavoriteStatusUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.profile.GetProfileFlowUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class AgentsViewModel @Inject constructor(
     getRecentFavoriteAgentsUseCase: GetRecentFavoriteAgentsUseCase,
+    getProfileFlowUseCase: GetProfileFlowUseCase,
     private val updateAgentFavoriteStatusUseCase: UpdateAgentFavoriteStatusUseCase,
     private val getAgentsFromNetworkUseCase: GetAgentsFromNetworkUseCase
 ) : BaseViewModel() {
 
     val favoriteAgents = getRecentFavoriteAgentsUseCase.execute().toWorkLiveData()
+    val profile = getProfileFlowUseCase.execute().toWorkLiveData()
     val isNetworkRequesting = MutableLiveData(false)
 
     private val _agents = WorkLiveData<List<Agent>>()

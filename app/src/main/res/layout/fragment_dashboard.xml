@@ -48,17 +48,18 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cvProfileImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/size_80dp"
+                    android:layout_height="@dimen/size_0dp"
                     android:background="@color/peach"
-                    app:cardCornerRadius="@dimen/size_10dp"
+                    app:layout_constraintDimensionRatio="H,1:1"
+                    app:cardCornerRadius="@dimen/size_40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvUserWelcome">
 
                     <ImageView
                         android:id="@+id/ivProfile"
-                        android:layout_width="@dimen/size_40dp"
-                        android:layout_height="@dimen/size_40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_user_profile" />
                 </com.google.android.material.card.MaterialCardView>
