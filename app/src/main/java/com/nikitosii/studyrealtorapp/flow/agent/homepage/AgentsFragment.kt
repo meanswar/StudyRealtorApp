@@ -25,6 +25,7 @@ import com.nikitosii.studyrealtorapp.util.ext.onChange
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
+import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.PulseLayout
 import timber.log.Timber
 
@@ -75,6 +76,9 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
                 ivPofilePhoto.initAnimation(clRadioPhoto)
                 plBtn.stopAnimation()
             }
+
+            clTopContent.showWithAnimation(R.anim.slide_in_anim_bottom)
+            clBottomContent.showWithAnimation(R.anim.slide_in_anim_top)
         }
     }
 
