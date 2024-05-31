@@ -233,6 +233,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabIndicatorColor="@color/peach"
+                app:tabRippleColor="@color/almost_white"
                 app:tabSelectedTextAppearance="@style/AppTheme.Text.Bold.Headline2.Teflon"
                 app:tabSelectedTextColor="@color/peach"
                 app:tabTextAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
