@@ -54,7 +54,7 @@ class SearchView @JvmOverloads constructor(
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setDrawableStart(resInt: Int) {
         if (resInt == DRAWABLE_NOTHING) {
-            binding.ivStart.hide()
+            binding.flStartImage.hide()
             return
         }
         val drawable = context.getDrawable(resInt)

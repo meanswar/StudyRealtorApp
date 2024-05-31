@@ -42,7 +42,7 @@ class RealtorToolbar @JvmOverloads constructor(
     }
 
     private fun setFirstBtnVisible(isVisible: Boolean) {
-        binding.btnBack.show(isVisible)
+        binding.btnBack.show(isVisible, false)
     }
 
     private fun setTitle(title: String) {

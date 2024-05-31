@@ -16,7 +16,7 @@ class ImageRepoImpl @Inject constructor(
 ) : BaseRepo(networkErrorHandler), ImageRepo {
 
     override suspend fun getImage(query: String): ImageData = runWithErrorHandler {
-        val url = api.getPhoto(query).results.first().url?.regular
+        val url = api.getPhoto(query).results.firstOrNull()?.url?.regular
         ImageData(query, url)
     }
 

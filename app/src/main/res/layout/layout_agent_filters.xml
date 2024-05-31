@@ -2,22 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clFilters"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:animateLayoutChanges="true"
-    android:paddingHorizontal="@dimen/size_20dp">
+    android:paddingHorizontal="@dimen/size_20dp"
+    tools:background="@drawable/bg_content">
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/grFilters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="svName, rvRangePrice, svLanguage, clRating, clRadioPhoto" />
+        android:visibility="gone"
+        app:constraint_referenced_ids="svName, svLanguage, rvRangePrice, clRating, clRadioPhoto"
+        tools:visibility="visible" />
 
     <com.nikitosii.studyrealtorapp.util.view.SearchView
         android:id="@+id/svName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
         android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
         app:drawableStart="@drawable/ic_search"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,13 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_10dp"
         android:background="@drawable/bg_content_almost_transparent_corners_10dp"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/svLanguage"
         app:maxValue="2000000"
         app:minValue="10000"
         app:rangeTitle="@string/layout_filters_filter_price_title"
-        app:rangeType="money"
-        tools:visibility="visible" />
+        app:rangeType="money" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clRating"
@@ -126,6 +126,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="@dimen/size_4dp"
             app:layout_constraintEnd_toStartOf="@id/glMid"
             app:layout_constraintStart_toStartOf="parent"
@@ -185,4 +186,24 @@
             </com.nikitosii.studyrealtorapp.util.view.PulseLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.nikitosii.studyrealtorapp.util.view.PulseLayout
+        android:id="@+id/plBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="@dimen/size_20dp"
+        app:animation_duration="2000"
+        app:layout_constraintTop_toBottomOf="@id/clRadioPhoto"
+        app:wave_color="@color/blue_end"
+        app:wave_count="1"
+        app:wave_start_alpha="0.7">
+
+        <Button
+            android:id="@+id/btnSearch"
+            style="@style/AppTheme.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48dp"
+            android:text="@string/search_field_hint" />
+    </com.nikitosii.studyrealtorapp.util.view.PulseLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

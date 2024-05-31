@@ -30,12 +30,14 @@
             android:layout_width="@dimen/size_0dp"
             android:layout_height="@dimen/size_0dp"
             app:cardCornerRadius="@dimen/size_20dp"
+            app:cardElevation="@dimen/size_0dp"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toStartOf="@id/glVerticalStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/ivAgent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"

@@ -44,7 +44,6 @@ class DashboardFragment :
             svSearch.initEndAnimation(clFilters)
 
             with(lFilterAttributes) {
-                grFilters.hide()
                 rvFilterTypes.adapter = filterHousesAdapter
                 rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
                 rvRangeBaths.onRangeChanged { first, second -> onBathsChanged(first, second) }

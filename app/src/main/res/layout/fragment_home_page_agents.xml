@@ -1,294 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:animationCache="true"
+    android:fillViewport="true"
     tools:background="@drawable/bg_content">
 
-    <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:toolbar_title="Search Agents"
-        tools:visibility="visible" />
+        android:layout_height="wrap_content">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clContent"
+        <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutAnimation="@anim/anim_top_content"
-            android:paddingTop="@dimen/size_20dp"
+            android:visibility="gone"
+            app:firstBtnVisible="false"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layoutAnimation="@null">
+            app:toolbar_title="Search Agents"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTopContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:paddingHorizontal="@dimen/size_20dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/grTopContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tvUserWelcome, tvDashboardTitle, cvProfileImage" />
+
+            <TextView
+                android:id="@+id/tvUserWelcome"
+                style="@style/AppTheme.Text.Paragraph3.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/screen_agent_home_page_user_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDashboardTitle"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:text="@string/screen_agent_home_page_title"
+                app:layout_constraintStart_toStartOf="@id/tvUserWelcome"
+                app:layout_constraintTop_toBottomOf="@id/tvUserWelcome" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvProfileImage"
+                android:layout_width="@dimen/size_80dp"
+                android:layout_height="@dimen/size_0dp"
+                android:background="@color/peach"
+                app:cardCornerRadius="@dimen/size_40dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvUserWelcome">
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user_profile" />
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clTopContent"
                 android:layout_width="match_parent"
+                android:id="@+id/clFilters"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/size_20dp"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/grTopContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="tvUserWelcome, tvDashboardTitle, cvProfileImage" />
-
-                <TextView
-                    android:id="@+id/tvUserWelcome"
-                    style="@style/AppTheme.Text.Paragraph3.Grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/screen_agent_home_page_user_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvDashboardTitle"
-                    style="@style/AppTheme.Text.Bold.Headline2.Teflon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:text="@string/screen_agent_home_page_title"
-                    app:layout_constraintStart_toStartOf="@id/tvUserWelcome"
-                    app:layout_constraintTop_toBottomOf="@id/tvUserWelcome" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cvProfileImage"
-                    android:layout_width="@dimen/size_80dp"
-                    android:layout_height="@dimen/size_0dp"
-                    android:background="@color/peach"
-                    app:layout_constraintDimensionRatio="H,1:1"
-                    app:cardCornerRadius="@dimen/size_40dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvUserWelcome">
-
-                    <ImageView
-                        android:id="@+id/ivProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_user_profile" />
-                </com.google.android.material.card.MaterialCardView>
+                android:layout_marginTop="@dimen/size_20dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDashboardTitle">
 
                 <com.nikitosii.studyrealtorapp.util.view.SearchView
                     android:id="@+id/svSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_30dp"
                     android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
                     app:drawableEnd="@drawable/ic_filters"
                     app:drawableStart="@drawable/ic_search"
-                    app:layout_constraintTop_toBottomOf="@id/tvDashboardTitle" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clFilters"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:padding="@dimen/size_10dp"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/svSearch"
-                    tools:visibility="visible">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/white_transparent"
-                        app:cardCornerRadius="@dimen/size_10dp"
-                        app:cardElevation="@dimen/size_0dp"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
-                                android:id="@+id/ivName"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:paddingVertical="@dimen/size_10dp"
-                                android:src="@drawable/ic_user"
-                                app:animDuration="300" />
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
-                                android:id="@+id/ivLanguage"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:paddingVertical="@dimen/size_10dp"
-                                android:src="@drawable/ic_language"
-                                app:animDuration="200" />
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
-                                android:id="@+id/ivPrice"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:paddingVertical="@dimen/size_10dp"
-                                android:src="@drawable/ic_price_24dp"
-                                app:animDuration="200" />
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
-                                android:id="@+id/ivRating"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:paddingVertical="@dimen/size_10dp"
-                                android:src="@drawable/ic_rating"
-                                app:animDuration="200" />
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
-                                android:id="@+id/ivPofilePhoto"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:paddingVertical="@dimen/size_10dp"
-                                android:src="@drawable/ic_photo"
-                                app:animDuration="200" />
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <include
-                        android:id="@+id/lFilterAttributes"
-                        layout="@layout/layout_agent_filters"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size_10dp"
-                        app:layout_constraintTop_toBottomOf="@id/clFilters"
-                        tools:visibility="gone" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <com.nikitosii.studyrealtorapp.util.view.PulseLayout
-                    android:id="@+id/plBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:animation_duration="2000"
-                    android:paddingHorizontal="@dimen/size_20dp"
-                    app:layout_constraintTop_toBottomOf="@id/clFilters"
-                    app:wave_color="@color/blue_end"
-                    app:wave_count="1"
-                    app:wave_start_alpha="0.7">
-                    <Button
-                        android:id="@+id/btnSearch"
-                        style="@style/AppTheme.Button.Primary"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_48dp"
-                        android:text="@string/search_field_hint" />
-                </com.nikitosii.studyrealtorapp.util.view.PulseLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_0dp"
-                android:layout_marginTop="@dimen/size_20dp"
-                android:background="@drawable/bg_white_top_20dp"
-                android:paddingHorizontal="@dimen/size_20dp"
-                android:paddingTop="@dimen/size_20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clTopContent">
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/grEmpty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    app:constraint_referenced_ids="lavEmpty, tvEmptyTitle" />
-
-                <TextView
-                    android:id="@+id/tvEmptyTitle"
-                    style="@style/AppTheme.Text.Paragraph3.Teflon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="@dimen/size_2dp"
-                    android:gravity="center"
-                    android:text="@string/screen_agent_home_page_empty_title"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.nikitosii.studyrealtorapp.util.view.AnimatedRecyclerView
-                    android:id="@+id/rvAgents"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvFilterButtons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_20dp"
-                    app:animationDuration="400"
-                    app:layoutAnimation="@anim/recycle_view_anim"
-                    app:layoutManagerOrientation="vertical"
-                    app:layoutManagerReverse="false"
-                    app:layoutManagerType="linear"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lavLoading"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="loading.json"
-                    app:lottie_loop="true"
-                    app:lottie_speed="1.5"
-                    tools:visibility="visible" />
+                    app:cardBackgroundColor="@color/white_transparent"
+                    app:cardCornerRadius="@dimen/size_10dp"
+                    app:cardElevation="@dimen/size_0dp"
+                    app:layout_constraintTop_toBottomOf="@id/svSearch">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lavEmpty"
+                    <LinearLayout
+                        android:id="@+id/llFilterButtons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
+                            android:id="@+id/ivName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:paddingVertical="@dimen/size_10dp"
+                            android:src="@drawable/ic_user"
+                            app:animDuration="300" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
+                            android:id="@+id/ivLanguage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:paddingVertical="@dimen/size_10dp"
+                            android:src="@drawable/ic_language"
+                            app:animDuration="200" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
+                            android:id="@+id/ivPrice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:paddingVertical="@dimen/size_10dp"
+                            android:src="@drawable/ic_price_24dp"
+                            app:animDuration="200" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
+                            android:id="@+id/ivRating"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:paddingVertical="@dimen/size_10dp"
+                            android:src="@drawable/ic_rating"
+                            app:animDuration="200" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
+                            android:id="@+id/ivPofilePhoto"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:paddingVertical="@dimen/size_10dp"
+                            android:src="@drawable/ic_photo"
+                            app:animDuration="200" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <include
+                    android:id="@+id/lFilterAttributes"
+                    layout="@layout/layout_agent_filters"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lottie_autoPlay="true"
-                    android:scaleY="0.5"
-                    android:scaleX="0.5"
-                    app:lottie_fileName="anim_empty.json"
-                    app:lottie_loop="true" />
+                    android:layout_marginTop="@dimen/size_20dp"
+                    app:layout_constraintTop_toBottomOf="@id/cvFilterButtons" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:background="@drawable/bg_white_top_20dp"
+            android:layoutAnimation="@anim/recycle_view_anim"
+            android:nestedScrollingEnabled="true"
+            android:paddingHorizontal="@dimen/size_20dp"
+            android:paddingTop="@dimen/size_20dp"
+            app:layout_constraintTop_toBottomOf="@id/clTopContent">
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/grEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="lavEmpty, tvEmptyTitle" />
+
+            <TextView
+                android:id="@+id/tvEmptyTitle"
+                style="@style/AppTheme.Text.Paragraph3.Teflon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/size_2dp"
+                android:gravity="center"
+                android:text="@string/screen_agent_home_page_empty_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.nikitosii.studyrealtorapp.util.view.AnimatedRecyclerView
+                android:id="@+id/rvAgents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                app:animationDuration="400"
+                app:layoutAnimation="@anim/recycle_view_anim"
+                app:layoutManagerOrientation="vertical"
+                app:layoutManagerReverse="false"
+                app:layoutManagerType="linear"
+                app:layout_constraintBottom_toTopOf="@+id/space"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lavLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="loading.json"
+                app:lottie_loop="true"
+                app:lottie_speed="1.5"
+                tools:visibility="visible" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lavEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="anim_empty.json"
+                app:lottie_loop="true" />
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_60dp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

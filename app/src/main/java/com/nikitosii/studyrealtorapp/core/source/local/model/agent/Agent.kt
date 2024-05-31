@@ -37,7 +37,7 @@ data class Agent(
             name = api.name,
             title = api.title,
             slogan = api.slogan,
-            photoUrl = api.photoUrl,
+            photoUrl = api.photoUrl?.url,
             backgroundPhotoUrl = api.backgroundPhotoUrl,
             address = Address.from(api.address),
             office = Office.from(api.office),

@@ -62,18 +62,19 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     override fun initViews() {
         with(binding) {
-            svSearch.initEndAnimation(clFilters)
-            ivLanguage.initAnimation(lFilterAttributes.svLanguage)
-            ivName.initAnimation(lFilterAttributes.svName)
-            ivPrice.initAnimation(lFilterAttributes.rvRangePrice)
-            ivRating.initAnimation(lFilterAttributes.clRating)
-            ivPofilePhoto.initAnimation(lFilterAttributes.clRadioPhoto)
-            plBtn.stopAnimation()
+            svSearch.initEndAnimation(cvFilterButtons)
+            toolbar.initEndBtnAnimation(clFilters)
 
             rvAgents.adapter = agentsAdapter
-            lFilterAttributes.grFilters.hide()
-            plBtn.show()
-            clFilters.hide()
+
+            with(lFilterAttributes) {
+                ivLanguage.initAnimation(svLanguage)
+                ivName.initAnimation(svName)
+                ivPrice.initAnimation(rvRangePrice)
+                ivRating.initAnimation(clRating)
+                ivPofilePhoto.initAnimation(clRadioPhoto)
+                plBtn.stopAnimation()
+            }
         }
     }
 
@@ -106,15 +107,16 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private val isFilterFilledObserver: Observer<Boolean> = Observer {
-        binding.plBtn.startAnimation()
-        binding.btnSearch.background =
+        binding.lFilterAttributes.plBtn.startAnimation()
+        binding.lFilterAttributes.btnSearch.background =
             context?.getDrawable(R.drawable.bg_radio_btn_active)
     }
 
     private val isNetworkRequestingObserver: Observer<Boolean> = Observer {
         with(binding) {
             grTopContent.show(!it)
-            toolbar.show(!it)
+            clFilters.show(!it)
+            toolbar.show(it)
         }
     }
 
@@ -146,8 +148,8 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
             grEmpty.hide()
             grTopContent.hide()
             lavLoading.show(isLoading)
-            if (isLoading) plBtn.stopAnimation() else plBtn.startAnimation()
-            btnSearch.isEnabled = !isLoading
+            lFilterAttributes.plBtn.run { if (isLoading) stopAnimation() else startAnimation() }
+            lFilterAttributes.btnSearch.isEnabled = !isLoading
         }
     }
 
@@ -167,7 +169,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         }
 
         with(binding) {
-            btnSearch.onClick { searchAgents() }
+            lFilterAttributes.btnSearch.onClick { searchAgents() }
             svSearch.setOnTextChanged { viewModel.setLocationFilter(it) }
         }
     }

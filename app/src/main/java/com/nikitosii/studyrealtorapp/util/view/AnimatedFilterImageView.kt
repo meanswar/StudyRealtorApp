@@ -107,6 +107,8 @@ class AnimatedFilterImageView @JvmOverloads constructor(
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     onSettingsAnimationEnd()
+                    if (targetView.alpha == 1f)
+                        targetView.updateLayoutParams { height = ViewGroup.LayoutParams.WRAP_CONTENT }
                 }
             })
         }

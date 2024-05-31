@@ -4,6 +4,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.AddressResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.office.OfficeResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.phone.PhoneResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.photo.PhotoResponseApi
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -16,8 +17,8 @@ data class AgentResponseApi(
     val name: String?,
     val title: String?,
     val slogan: String?,
-    @Json(name="photo_url")
-    val photoUrl: String?,
+    @Json(name="photo")
+    val photoUrl: PhotoResponseApi?,
     @Json(name="background_photo_url")
     val backgroundPhotoUrl: String?,
     val address: AddressResponseApi?,
