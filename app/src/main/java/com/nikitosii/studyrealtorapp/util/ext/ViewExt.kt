@@ -50,7 +50,7 @@ fun TextView.showText(text: String?, resString: Int) {
 }
 
 fun TextView.showText(number: Int?, resString: Int, isHidden: Boolean = true) {
-    if (!number.isNotNull())  if (isHidden) hide() else invisible()
+    if (!number.isNotNull()) if (isHidden) hide() else invisible()
     else {
         this.text = context.getString(resString, number)
         show()
@@ -166,10 +166,13 @@ inline fun RangeSlider.onChange(crossinline action: (RangeSlider, value: Float) 
     this.addOnChangeListener(RangeSlider.OnChangeListener { view, value, _ -> action(view, value) })
 }
 
-inline fun TabLayout.onTabClick(crossinline action: (TabLayout.Tab) -> Unit) {
+inline fun TabLayout.onTabClick(
+    crossinline onTabSelected: (TabLayout.Tab) -> Unit,
+    crossinline onTabReselected: () -> Unit
+) {
     this.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-        override fun onTabSelected(tab: TabLayout.Tab) = action(tab)
+        override fun onTabSelected(tab: TabLayout.Tab) = onTabSelected(tab)
         override fun onTabUnselected(tab: TabLayout.Tab) = Unit
-        override fun onTabReselected(tab: TabLayout.Tab) = Unit
+        override fun onTabReselected(tab: TabLayout.Tab) = onTabReselected()
     })
 }

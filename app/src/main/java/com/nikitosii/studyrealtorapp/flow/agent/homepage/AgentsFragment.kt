@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import android.widget.TableLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.google.android.material.tabs.TabLayout.Tab
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
 import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
@@ -36,6 +39,8 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 ) {
 
     private val agentsAdapter by lazy { AgentAdapter(onAgentClick) }
+    private val sortingMethod = MutableLiveData<String>()
+    private val isDescSorting = MutableLiveData<Boolean>()
 
     private val onAgentClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
         when (view.id) {
@@ -160,7 +165,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         with(binding) {
             lFilterAttributes.btnSearch.onClick { searchAgents() }
             svSearch.setOnTextChanged { viewModel.setLocationFilter(it) }
-            tlAgentSortingFilters.onTabClick { tab -> onTabClick(tab.text.toString()) }
+            tlAgentSortingFilters.onTabClick( { onTabClick(it) }, { onTabReselectedClick() })
         }
     }
 
@@ -192,10 +197,10 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         viewModel.getAgentsFromNetwork()
     }
 
-    private fun onTabClick(text: String) {
+    private fun onTabClick(tab: Tab) {
         val agents = viewModel.agents.value ?: return
 
-        processAgents(when (text) {
+        processAgents(when (tab.text.toString()) {
             TAB_NAME -> agents.sortedBy { it.name }
             TAB_RATING -> agents.sortedByDescending { it.reviewCount }
             TAB_PRICE -> agents.sortedBy { it.salePrice?.min }
@@ -204,10 +209,15 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         })
     }
 
+    private fun onTabReselectedClick() {
+        val agents = viewModel.agents.value?.reversed() ?: return
+        viewModel.agents.postValue(agents)
+    }
+
     companion object {
         private const val TAB_NAME = "Name"
         private const val TAB_RATING = "Rating"
         private const val TAB_PRICE = "Price"
-        private const val TAB_FAVORITE = "Favorite"
+        private const val TAB_FAVORITE = "Favorites"
     }
 }

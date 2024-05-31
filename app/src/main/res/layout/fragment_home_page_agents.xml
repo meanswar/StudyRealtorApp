@@ -97,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:visibility="gone"
+                    tools:visibility="visible"
                     app:cardBackgroundColor="@color/white_transparent"
                     app:cardCornerRadius="@dimen/size_10dp"
                     app:cardElevation="@dimen/size_0dp"
@@ -171,6 +172,20 @@
 
                         <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
                             android:id="@+id/ivPofilePhoto"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:paddingVertical="@dimen/size_10dp"
+                            android:src="@drawable/ic_photo"
+                            app:animDuration="200" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
+                            android:id="@+id/ivSort"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
