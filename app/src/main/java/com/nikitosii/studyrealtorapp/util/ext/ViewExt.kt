@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.slider.RangeSlider
+import com.google.android.material.tabs.TabLayout
 import com.nikitosii.studyrealtorapp.R
 
 fun View.show(show: Boolean = true, useGone: Boolean = true) {
@@ -163,4 +164,12 @@ inline fun RadioButton.onCheck(crossinline action: (Boolean) -> Unit) {
 
 inline fun RangeSlider.onChange(crossinline action: (RangeSlider, value: Float) -> Unit) {
     this.addOnChangeListener(RangeSlider.OnChangeListener { view, value, _ -> action(view, value) })
+}
+
+inline fun TabLayout.onTabClick(crossinline action: (TabLayout.Tab) -> Unit) {
+    this.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab) = action(tab)
+        override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+        override fun onTabReselected(tab: TabLayout.Tab) = Unit
+    })
 }

@@ -24,6 +24,7 @@ import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.onChange
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.onTabClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.PulseLayout
@@ -38,19 +39,11 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     private val onAgentClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
         when (view.id) {
-            R.id.cvFavorite -> onFavorite(agent)
+            R.id.cvFavorite -> viewModel.updateAgentFavoriteStatus(agent)
             R.id.cvEmail -> emailIntent(agent.office?.email)
             R.id.cvPhone -> callIntent(agent.phone)
-            R.id.clAgentContent -> onAgentClick(agent)
+            R.id.clAgentContent -> AgentsFragmentDirections.openAgentDetails(agent).navigate()
         }
-    }
-
-    private fun onFavorite(agent: Agent) {
-        viewModel.updateAgentFavoriteStatus(agent)
-    }
-
-    private fun onAgentClick(agent: Agent) {
-        AgentsFragmentDirections.openAgentDetails(agent).navigate()
     }
 
     override fun initViews() {
@@ -77,7 +70,8 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
     override fun subscribe() {
         with(viewModel) {
             favoriteAgents.observe(viewLifecycleOwner, favoriteAgentsObserver)
-            agents.observe(viewLifecycleOwner, agentsFromNetworkObserver)
+            agentsNetwork.observe(viewLifecycleOwner, agentsFromNetworkObserver)
+            agents.observe(viewLifecycleOwner) { processAgents(it) }
             isFilterFilled.observe(viewLifecycleOwner, isFilterFilledObserver)
             isNetworkRequesting.observe(viewLifecycleOwner, isNetworkRequestingObserver)
             profile.observe(viewLifecycleOwner, profileObserver)
@@ -88,7 +82,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         when (it.status) {
             ERROR -> handleException(it.exception) { openError() }
             LOADING -> Timber.i("loading agents")
-            SUCCESS -> processAgents(it.data?.obj, !viewModel.isNetworkRequest())
+            SUCCESS -> viewModel.agents.postValue(it.data?.obj)
         }
     }
 
@@ -97,7 +91,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         when (it.status) {
             ERROR -> handleException(it.exception) { openError() }
             LOADING -> Timber.i("loading agents")
-            SUCCESS -> processAgents(it.data, viewModel.isNetworkRequest())
+            SUCCESS -> viewModel.agents.postValue(it.data)
         }
     }
 
@@ -129,12 +123,10 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         glideImage(data?.photo, binding.ivProfile, R.drawable.ic_user_profile)
     }
 
-    private fun processAgents(data: List<Agent>?, isNetworkRequest: Boolean) {
+    private fun processAgents(data: List<Agent>?) {
         with(binding) {
-            if (isNetworkRequest) {
-                agentsAdapter.submitList(data)
-                rvAgents.notifyDataSetChanged()
-            }
+            agentsAdapter.submitList(data)
+            rvAgents.notifyDataSetChanged()
             grEmpty.show(data?.isEmpty() == true)
         }
     }
@@ -144,6 +136,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
             grEmpty.hide()
             grTopContent.hide()
             lavLoading.show(isLoading)
+            rvAgents.show(!isLoading)
             lFilterAttributes.plBtn.run { if (isLoading) stopAnimation() else startAnimation() }
             lFilterAttributes.btnSearch.isEnabled = !isLoading
         }
@@ -167,6 +160,7 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         with(binding) {
             lFilterAttributes.btnSearch.onClick { searchAgents() }
             svSearch.setOnTextChanged { viewModel.setLocationFilter(it) }
+            tlAgentSortingFilters.onTabClick { tab -> onTabClick(tab.text.toString()) }
         }
     }
 
@@ -196,5 +190,24 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     private fun searchAgents() {
         viewModel.getAgentsFromNetwork()
+    }
+
+    private fun onTabClick(text: String) {
+        val agents = viewModel.agents.value ?: return
+
+        processAgents(when (text) {
+            TAB_NAME -> agents.sortedBy { it.name }
+            TAB_RATING -> agents.sortedByDescending { it.reviewCount }
+            TAB_PRICE -> agents.sortedBy { it.salePrice?.min }
+            TAB_FAVORITE -> agents.sortedByDescending { it.favorite }
+            else -> return
+        })
+    }
+
+    companion object {
+        private const val TAB_NAME = "Name"
+        private const val TAB_RATING = "Rating"
+        private const val TAB_PRICE = "Price"
+        private const val TAB_FAVORITE = "Favorite"
     }
 }

@@ -25,8 +25,10 @@ class AgentsViewModel @Inject constructor(
     val isNetworkRequesting = MutableLiveData(false)
 
     private val _agents = WorkLiveData<List<Agent>>()
-    val agents: LiveData<WorkResult<List<Agent>>>
+    val agentsNetwork: LiveData<WorkResult<List<Agent>>>
         get() = _agents
+
+    val agents = MutableLiveData<List<Agent>>()
 
     private val locationFilter = MutableLiveData<String>()
     private val nameFilter = MutableLiveData<String>()

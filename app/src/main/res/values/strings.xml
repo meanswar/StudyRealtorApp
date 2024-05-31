@@ -115,4 +115,9 @@
     <string name="screen_edit_profile_parameter_phone_title">Phone</string>
     <string name="screen_edit_profile_btn_update_title">Update Profile</string>
 
+    <string name="tab_agent_favorites">Favorites</string>
+    <string name="tab_agent_name">Name</string>
+    <string name="tab_agent_Price">Price</string>
+    <string name="tab_agent_rating">Rating</string>
+
 </resources>
