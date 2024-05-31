@@ -39,8 +39,6 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 ) {
 
     private val agentsAdapter by lazy { AgentAdapter(onAgentClick) }
-    private val sortingMethod = MutableLiveData<String>()
-    private val isDescSorting = MutableLiveData<Boolean>()
 
     private val onAgentClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
         when (view.id) {
