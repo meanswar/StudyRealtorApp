@@ -3,7 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlSortingFilters"
+        style="@style/TabLayout.Child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:tabMode="auto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContent"
@@ -11,8 +22,8 @@
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tlSortingFilters"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
         app:reverseLayout="false"
         tools:listitem="@layout/item_sales" />
 
@@ -20,8 +31,8 @@
         android:id="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_40dp"
-        app:layout_constraintTop_toBottomOf="@id/rvContent"
-        android:layout_marginTop="@dimen/size_40dp" />
+        android:layout_marginTop="@dimen/size_40dp"
+        app:layout_constraintTop_toBottomOf="@id/rvContent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lavLoading"

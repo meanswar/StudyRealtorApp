@@ -97,11 +97,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:visibility="gone"
-                    tools:visibility="visible"
                     app:cardBackgroundColor="@color/white_transparent"
                     app:cardCornerRadius="@dimen/size_10dp"
                     app:cardElevation="@dimen/size_0dp"
-                    app:layout_constraintTop_toBottomOf="@id/svSearch">
+                    app:layout_constraintTop_toBottomOf="@id/svSearch"
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:id="@+id/llFilterButtons"
@@ -223,21 +223,10 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tlAgentSortingFilters"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/size_24dp"
-                android:textColor="@color/black"
-                app:ddAnimatedIndicator="lineMove"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                style="@style/TabLayout.Parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabIndicatorAnimationMode="elastic"
-                app:tabIndicatorColor="@color/peach"
-                app:tabRippleColor="@color/almost_white"
-                app:tabSelectedTextAppearance="@style/AppTheme.Text.Bold.Headline2.Teflon"
-                app:tabSelectedTextColor="@color/peach"
-                app:tabTextAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
-                app:tabTextColor="@color/black">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"

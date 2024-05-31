@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.profile.properties
 
+import androidx.lifecycle.MutableLiveData
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetAllLocalPropertiesUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
@@ -11,7 +12,9 @@ class ProfilePropertiesViewModel @Inject constructor(
     getLocalPropertiesUseCase: GetAllLocalPropertiesUseCase,
     private val updatePropertyUseCase: UpdatePropertyUseCase,
 ) : BaseViewModel() {
-    val properties = getLocalPropertiesUseCase.execute().toWorkLiveData()
+    val propertiesNetwork = getLocalPropertiesUseCase.execute().toWorkLiveData()
+
+    val properties = MutableLiveData<List<Property>>()
 
     fun updateProperty(data: Property) {
         val params = UpdatePropertyUseCase.Params.create(data.copy(favorite = !data.favorite))

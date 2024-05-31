@@ -176,3 +176,8 @@ inline fun TabLayout.onTabClick(
         override fun onTabReselected(tab: TabLayout.Tab) = onTabReselected()
     })
 }
+
+inline fun TabLayout.addTabs(data: List<String>) {
+    this.removeAllTabs()
+    data.forEach { this.addTab(this.newTab().setText(it)) }
+}

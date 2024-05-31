@@ -87,6 +87,26 @@
         <item name="cornerSize">18dp</item>
     </style>
 
+    <style name="TabLayout">
+        <item name="ddAnimatedIndicator">lineMove</item>
+        <item name="marginHorizontal">@dimen/size_24dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="tabSelectedTextColor">@color/peach</item>
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicatorColor">@color/peach</item>
+        <item name="tabRippleColor">@color/almost_white</item>
+    </style>
+
+    <style name="TabLayout.Parent" parent="TabLayout">
+        <item name="tabTextAppearance">@style/AppTheme.Text.Paragraph3.Teflon</item>
+        <item name="tabSelectedTextAppearance">@style/AppTheme.Text.Bold.Headline2.Teflon</item>
+    </style>
+
+    <style name="TabLayout.Child" parent="TabLayout">
+        <item name="tabTextAppearance">@style/AppTheme.Text.Paragraph5.Teflon</item>
+        <item name="tabSelectedTextAppearance">@style/AppTheme.Text.Bold.Headline4.Teflon</item>
+    </style>
+
     <style name="AppTheme.Splash">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>

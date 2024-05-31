@@ -22,6 +22,7 @@ import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.model.getFullName
 import com.nikitosii.studyrealtorapp.util.ext.showText
+import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.viewpager.ViewPagerFragmentAdapter
 import timber.log.Timber
 
@@ -65,6 +66,9 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
                 }
                 true
             }
+
+            clBottomContent.showWithAnimation(R.anim.slide_in_anim_top)
+            clTopContent.showWithAnimation(R.anim.slide_in_anim_bottom)
         }
     }
 

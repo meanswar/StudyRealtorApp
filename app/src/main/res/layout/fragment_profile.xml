@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:background="@drawable/bg_content">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/clTopContent">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -83,32 +89,25 @@
         app:layout_constraintTop_toBottomOf="@id/tvProfilePhone"
         tools:text="james.smith@realtorapp" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_0dp"
         android:layout_marginTop="@dimen/size_20dp"
+        android:id="@+id/clBottomContent"
         android:background="@drawable/bg_white_corners_top_15dp"
         android:paddingVertical="@dimen/size_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvProfileEmail">
+        app:layout_constraintTop_toBottomOf="@id/clTopContent">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tlContent"
+            style="@style/TabLayout.Parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/size_24dp"
-            android:paddingHorizontal="@dimen/size_20dp"
-            android:textColor="@color/black"
-            app:ddAnimatedIndicator="lineMove"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="@color/peach"
-            app:tabSelectedTextAppearance="@style/AppTheme.Text.Bold.Headline2.Teflon"
-            app:tabSelectedTextColor="@color/peach"
-            app:tabTextAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
-            app:tabTextColor="@color/black" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vpContent"
