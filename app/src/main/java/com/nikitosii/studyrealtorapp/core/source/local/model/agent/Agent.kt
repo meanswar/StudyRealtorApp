@@ -41,7 +41,7 @@ data class Agent(
             backgroundPhotoUrl = api.backgroundPhotoUrl,
             address = Address.from(api.address),
             office = Office.from(api.office),
-            phone = api.phone,
+            phone = api.phones?.first { it.number?.isNotBlank() == true }?.number,
             webUrl = api.webUrl,
             recentlySoldCount = api.recentlySoldCount,
             forSalePriceCount = api.forSalePriceCount,

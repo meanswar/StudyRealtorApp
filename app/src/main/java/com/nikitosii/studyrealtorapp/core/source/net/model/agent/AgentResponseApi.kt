@@ -23,7 +23,8 @@ data class AgentResponseApi(
     val backgroundPhotoUrl: String?,
     val address: AddressResponseApi?,
     val office: OfficeResponseApi?,
-    val phone: String?,
+    @Json(name="phones")
+    val phones: List<PhoneResponseApi>?,
     val webUrl: String?,
     @Json(name="recently_sold_count")
     val recentlySoldCount: Int?,

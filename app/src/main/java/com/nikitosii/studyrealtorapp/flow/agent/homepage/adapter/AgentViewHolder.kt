@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.agent.homepage.adapter
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ class AgentViewHolder(
             cvEmail.onClick { onClick(cvEmail, agent) }
             cvPhone.onClick { onClick(cvPhone, agent) }
             setImage(agent.photoUrl, ivAgent, R.drawable.agent)
+            setImage(agent.office?.image, ivOffice)
         }
     }
 
@@ -44,12 +46,13 @@ class AgentViewHolder(
         )
     }
 
-    private fun setImage(url: String?, view: ImageView, placeHolder: Int) {
+    @SuppressLint("CheckResult")
+    private fun setImage(url: String?, view: ImageView, placeHolder: Int? = null) {
         view.show()
         Glide.with(view)
             .load(url)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .placeholder(placeHolder)
+            .apply { if (placeHolder != null) placeholder(placeHolder) }
             .skipMemoryCache(false)
             .into(view)
     }

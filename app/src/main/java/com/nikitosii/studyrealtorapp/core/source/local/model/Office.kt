@@ -11,7 +11,8 @@ data class Office(
     val href: String?,
     val mls_set: String?,
     val name: String?,
-    val phones: List<Phone>
+    val phones: List<Phone>,
+    val image: String?
 ): Parcelable {
     companion object {
         fun from(api: OfficeResponseApi?) = Office(
@@ -20,7 +21,8 @@ data class Office(
             href = api?.href,
             mls_set = api?.mls_set,
             name = api?.name,
-            phones = api?.phones?.map { Phone.from(it) } ?: listOf()
+            phones = api?.phones?.map { Phone.from(it) } ?: listOf(),
+            image = api?.photo?.url
         )
     }
 }
