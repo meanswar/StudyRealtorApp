@@ -1,0 +1,47 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animationCache="true"
+    android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
+    android:padding="@dimen/size_5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_transparent_content_borders_2dp_corner_10dp"
+        app:cardBackgroundColor="@color/white_transparent_alpha_0.2"
+        app:cardCornerRadius="@dimen/size_10dp"
+        app:cardElevation="@dimen/size_0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/size_20dp">
+
+            <TextView
+                android:id="@+id/tvSortTitle"
+                style="@style/AppTheme.Text.Paragraph4.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_0dp"
+                android:gravity="center"
+                android:paddingVertical="@dimen/size_5dp"
+                android:text="Sort by:"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spSort"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/size_10dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSortTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
