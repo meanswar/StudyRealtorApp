@@ -39,22 +39,14 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
     private val onAgentClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
         when (view.id) {
             R.id.cvFavorite -> onFavorite(agent)
-            R.id.cvEmail -> onEmail(agent)
-            R.id.cvPhone -> onPhone(agent)
+            R.id.cvEmail -> emailIntent(agent.office?.email)
+            R.id.cvPhone -> callIntent(agent.phone)
             R.id.clAgentContent -> onAgentClick(agent)
         }
     }
 
     private fun onFavorite(agent: Agent) {
         viewModel.updateAgentFavoriteStatus(agent)
-    }
-
-    private fun onEmail(agent: Agent) {
-        emailIntent(agent.office?.email)
-    }
-
-    private fun onPhone(agent: Agent) {
-        callIntent(agent.phone)
     }
 
     private fun onAgentClick(agent: Agent) {
