@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.slider.RangeSlider
@@ -180,4 +182,39 @@ inline fun TabLayout.onTabClick(
 inline fun TabLayout.addTabs(data: List<String>) {
     this.removeAllTabs()
     data.forEach { this.addTab(this.newTab().setText(it)) }
+}
+
+inline fun MotionLayout.onAnimationRunning(
+    crossinline onStart: () -> Unit = {},
+    crossinline onComplete: () -> Unit = {},
+    crossinline onTrigger: () -> Unit = {},
+    crossinline onChange: () -> Unit = {}
+) {
+    setTransitionListener(object: TransitionListener {
+        override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {
+            onStart()
+        }
+
+        override fun onTransitionChange(
+            motionLayout: MotionLayout?,
+            startId: Int,
+            endId: Int,
+            progress: Float
+        ) {
+            onChange()
+        }
+
+        override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+            onComplete()
+        }
+
+        override fun onTransitionTrigger(
+            motionLayout: MotionLayout?,
+            triggerId: Int,
+            positive: Boolean,
+            progress: Float
+        ) {
+            onTrigger()
+        }
+    })
 }

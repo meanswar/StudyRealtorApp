@@ -45,7 +45,7 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
             )
             vpContent.apply {
                 adapter = viewPagerAdapter
-                isUserInputEnabled = true
+                isUserInputEnabled = false
                 orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
             TabLayoutMediator(tlContent, vpContent) { tab, position ->
@@ -68,7 +68,6 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
             }
 
             clBottomContent.showWithAnimation(R.anim.slide_in_anim_top)
-            clTopContent.showWithAnimation(R.anim.slide_in_anim_bottom)
         }
     }
 

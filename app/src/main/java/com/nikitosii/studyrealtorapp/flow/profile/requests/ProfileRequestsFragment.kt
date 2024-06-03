@@ -2,10 +2,13 @@ package com.nikitosii.studyrealtorapp.flow.profile.requests
 
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status.*
+import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
+import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
+import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
@@ -25,11 +28,16 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
     { FragmentHistoryBinding.bind(it) }, R.layout.fragment_history
 ) {
 
-    private val onFavoriteClick: (SearchRequest) -> Unit = { viewModel.updateRequest(it) }
+    private val adapter = SearchRequestAdapter({ view, data -> onRequestClick(view, data) }, true)
 
-    private val onRequestClick: (SearchRequest) -> Unit = { data -> openSearchRequestDetails(data) }
-
-    private val adapter = SearchRequestAdapter(onRequestClick, onFavoriteClick, true)
+    private fun onRequestClick(view: View, data: SearchRequest) {
+        when (view.id) {
+            R.id.cvFavorite -> viewModel.updateRequest(data)
+            R.id.cvContent -> openSearchRequestDetails(data)
+            R.id.cvTrash -> viewModel.removeRequest(data.id ?: return)
+            R.id.mlContent -> binding.rvContent.apply { isLayoutFrozen = !isLayoutFrozen }
+        }
+    }
 
     override fun initViews() {
         with(binding) {
@@ -84,7 +92,7 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
 
     private fun onDataSet(data: List<SearchRequest>) {
         adapter.submitList(data)
-        Handler(Looper.getMainLooper()).postDelayed({binding.rvContent.scrollToPosition(0)}, 500)
+        Handler(Looper.getMainLooper()).postDelayed({ binding.rvContent.scrollToPosition(0) }, 500)
     }
 
     private fun openSearchRequestDetails(request: SearchRequest) {

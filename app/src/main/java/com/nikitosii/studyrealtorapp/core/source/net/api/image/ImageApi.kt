@@ -11,6 +11,10 @@ interface ImageApi {
     suspend fun getPhoto(
         @Query("query") query: String,
         @Query("per_page") perPage: Int = 1,
-        @Query("orientation") orientation: String = "portrait",
+        @Query("orientation") orientation: String = ORIENTATION_LANDSCAPE,
     ): BaseResponseApi<ImageResponseApi>
+
+    companion object {
+        private const val ORIENTATION_LANDSCAPE = "landscape"
+    }
 }

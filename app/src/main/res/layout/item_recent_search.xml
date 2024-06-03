@@ -1,124 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/mlContent"
     android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/almost_white"
-    app:cardCornerRadius="@dimen/size_20dp"
-    app:cardElevation="@dimen/size_5dp"
-    app:cardUseCompatPadding="true"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layoutDescription="@xml/item_recent_search_scene"
+    tools:background="@color/peach">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvContent"
+        android:layout_width="@dimen/size_0dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/size_10dp">
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/almost_white"
+        app:cardCornerRadius="@dimen/size_20dp"
+        android:layout_marginEnd="@dimen/size_20dp"
+        app:cardElevation="@dimen/size_5dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toStartOf="@id/cvTrash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/ivSearch"
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/london"
-            app:layout_constraintDimensionRatio="V,1.6:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvRequestType"
-            style="@style/AppTheme.Text.Bold.Headline3.Teflon"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_10dp"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:background="@drawable/bg_content_almost_transparent_corners_10dp"
-            android:padding="@dimen/size_10dp"
-            android:textAllCaps="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Buy" />
-
-        <TextView
-            android:id="@+id/tvSearchPlace"
-            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_10dp"
-            android:layout_marginTop="@dimen/size_10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivSearch"
-            app:layout_goneMarginStart="@dimen/size_5dp"
-            tools:text="London" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvPrice"
-            style="@style/AppTheme.Text.Paragraph4.Teflon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_4dp"
-            android:drawableEnd="@drawable/ic_money"
-            app:layout_constraintStart_toStartOf="@id/tvSearchPlace"
-            app:layout_constraintTop_toBottomOf="@id/tvSearchPlace"
-            tools:text="max 1000" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvBeds"
-            style="@style/AppTheme.Text.Paragraph4.Teflon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_6dp"
-            android:drawableEnd="@drawable/ic_bed_24dp"
-            android:drawablePadding="@dimen/size_5dp"
-            app:layout_constraintStart_toEndOf="@id/tvPrice"
-            app:layout_constraintTop_toTopOf="@id/tvPrice"
-            tools:text="beds ( 3min)" />
-
-        <TextView
-            android:id="@+id/tvMoreFilters"
-            style="@style/AppTheme.Text.Paragraph5.Grey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_6dp"
-            app:layout_constraintStart_toEndOf="@id/tvBeds"
-            app:layout_constraintTop_toTopOf="@id/tvBeds"
-            tools:text="(+3 Filters)" />
-
-        <TextView
-            android:id="@+id/tvObjectsCount"
-            style="@style/AppTheme.Text.Bold.Headline3.Peach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/size_10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvSearchPlace"
-            tools:text="Obj: 54" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/size_50dp"
-            android:layout_height="@dimen/size_50dp"
-            android:id="@+id/cvFavorite"
-            app:cardCornerRadius="@dimen/size_25dp"
-            app:cardBackgroundColor="@color/white_transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardElevation="@dimen/size_0dp"
-            android:layout_marginTop="@dimen/size_15dp"
-            android:layout_marginEnd="@dimen/size_15dp"
-            app:layout_constraintTop_toTopOf="parent" >
+            android:paddingBottom="@dimen/size_10dp"
+            app:layoutDescription="@xml/item_recent_search_xml_constraintlayout_scene">
 
             <ImageView
+                android:id="@+id/ivSearch"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ivFavorite"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:scaleType="center"
-                android:src="@drawable/ic_favorite_active" />
+                android:layout_height="@dimen/size_200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/london"
+                app:layout_constraintDimensionRatio="V,1.6:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvRequestType"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+                android:padding="@dimen/size_10dp"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Buy" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvSearchPlace"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivSearch"
+                app:layout_goneMarginStart="@dimen/size_5dp"
+                tools:text="London" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
+                style="@style/AppTheme.Text.Paragraph4.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_4dp"
+                android:drawableEnd="@drawable/ic_money"
+                app:layout_constraintStart_toStartOf="@id/tvSearchPlace"
+                app:layout_constraintTop_toBottomOf="@id/tvSearchPlace"
+                tools:text="max 1000" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBeds"
+                style="@style/AppTheme.Text.Paragraph4.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_6dp"
+                android:drawableEnd="@drawable/ic_bed_24dp"
+                android:drawablePadding="@dimen/size_5dp"
+                app:layout_constraintStart_toEndOf="@id/tvPrice"
+                app:layout_constraintTop_toTopOf="@id/tvPrice"
+                tools:text="beds ( 3min)" />
+
+            <TextView
+                android:id="@+id/tvMoreFilters"
+                style="@style/AppTheme.Text.Paragraph5.Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_6dp"
+                app:layout_constraintStart_toEndOf="@id/tvBeds"
+                app:layout_constraintTop_toTopOf="@id/tvBeds"
+                tools:text="(+3 Filters)" />
+
+            <TextView
+                android:id="@+id/tvObjectsCount"
+                style="@style/AppTheme.Text.Bold.Headline3.Peach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/size_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvSearchPlace"
+                tools:text="Obj: 54" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvFavorite"
+                android:layout_width="@dimen/size_50dp"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginTop="@dimen/size_15dp"
+                android:layout_marginEnd="@dimen/size_15dp"
+                app:cardBackgroundColor="@color/white_transparent"
+                app:cardCornerRadius="@dimen/size_25dp"
+                app:cardElevation="@dimen/size_0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivFavorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_favorite_active" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvTrash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_10dp"
+        app:cardBackgroundColor="@color/ic_color_red"
+        app:cardCornerRadius="@dimen/size_100dp"
+        android:layout_marginEnd="@dimen/size_20dp"
+        app:cardElevation="@dimen/size_0dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp"
+            android:src="@drawable/ic_trashbox" />
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

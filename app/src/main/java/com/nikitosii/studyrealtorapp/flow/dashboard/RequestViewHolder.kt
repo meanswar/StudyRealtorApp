@@ -1,5 +1,7 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard
 
+import android.annotation.SuppressLint
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -7,19 +9,28 @@ import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 import com.nikitosii.studyrealtorapp.util.ext.model.getFiltersCount
+import com.nikitosii.studyrealtorapp.util.ext.onAnimationRunning
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.showText
 
 class RequestViewHolder(
     private val binding: ItemRecentSearchBinding,
-    private val onClick: (SearchRequest) -> Unit,
-    private val onFavoriteClick: (SearchRequest) -> Unit
+    private val onClick: (View, SearchRequest) -> Unit,
+    private val isMotionAvailable: Boolean
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("ClickableViewAccessibility")
     fun bind(data: SearchRequest) {
         with(binding) {
             cvFavorite.onClick { onFavoriteClicked(data) }
-            root.onClick { onClick(data) }
+            root.onClick { onClick(cvContent, data) }
+            cvTrash.onClick { onClick(cvTrash, data) }
+
+            if (isMotionAvailable)
+                mlContent.onAnimationRunning(
+                    onStart = { onClick(mlContent, data) },
+                    onComplete = { onClick(mlContent, data) })
+            else mlContent.getTransition(R.id.transitionRequest).isEnabled = false
 
             setFilters(data)
             setFavorite(data.favorite)
@@ -56,7 +67,7 @@ class RequestViewHolder(
     }
 
     private fun onFavoriteClicked(saleRequest: SearchRequest) {
-        onFavoriteClick(saleRequest)
+        onClick(binding.cvFavorite, saleRequest)
         bind(saleRequest.copy(favorite = !saleRequest.favorite))
     }
 }

@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:tabMode="auto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +21,6 @@
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tlSortingFilters"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:reverseLayout="false"
         tools:listitem="@layout/item_sales" />

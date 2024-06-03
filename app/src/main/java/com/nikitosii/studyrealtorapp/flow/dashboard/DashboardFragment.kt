@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard
 
+import android.view.View
 import android.widget.RadioButton
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
@@ -31,10 +32,17 @@ class DashboardFragment :
         R.layout.fragment_dashboard
     ) {
     private val recentSaleAdapter =
-        SearchRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
+        SearchRequestAdapter({ view, data -> onSearchRequestClick(view, data) })
     private val recentRentAdapter =
-        SearchRequestAdapter({ onSaleRequestClick(it) }, { onFavoriteClick(it) })
+        SearchRequestAdapter({ view, data -> onSearchRequestClick(view, data) })
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
+
+    private fun onSearchRequestClick(view: View, data: SearchRequest) {
+        when (view.id) {
+            R.id.cvContent -> onSaleRequestClick(data)
+            R.id.cvFavorite -> onFavoriteClick(data)
+        }
+    }
 
     override fun initViews() {
         with(binding) {

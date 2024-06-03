@@ -36,6 +36,7 @@ class GetPropertiesForSaleUseCase @Inject constructor(
         propertiesRepo.saveProperties(updatedProperties)
         val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl.url))
         searchRequestRepo.refreshRecentSearchRequests(RequestType.SALE)
+        searchRequestRepo.refreshSearchRequests()
         requestDataRepo.saveData(RequestDataEntity(request.id!!, updatedProperties.map { it.propertyId }))
 
         return Pair(request, updatedProperties)
