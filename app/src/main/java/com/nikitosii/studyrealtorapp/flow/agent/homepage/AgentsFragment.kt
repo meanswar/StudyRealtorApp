@@ -4,9 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
-import android.widget.TableLayout
-import androidx.lifecycle.MutableLiveData
+import androidx.cardview.widget.CardView
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.google.android.material.tabs.TabLayout.Tab
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
@@ -45,12 +46,16 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
             R.id.cvFavorite -> viewModel.updateAgentFavoriteStatus(agent)
             R.id.cvEmail -> emailIntent(agent.office?.email)
             R.id.cvPhone -> callIntent(agent.phone)
-            R.id.clAgentContent -> AgentsFragmentDirections.openAgentDetails(agent).navigate()
+            R.id.cvAgentContent -> openAgentDetails(agent, view as CardView)
         }
     }
 
     override fun initViews() {
         with(binding) {
+
+            postponeEnterTransition()
+            view?.doOnPreDraw { startPostponedEnterTransition() }
+
             svSearch.initEndAnimation(cvFilterButtons)
             toolbar.initEndBtnAnimation(clFilters)
 
@@ -162,8 +167,15 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
         with(binding) {
             lFilterAttributes.btnSearch.onClick { searchAgents() }
-            svSearch.setOnTextChanged { viewModel.setLocationFilter(it) }
-            tlAgentSortingFilters.onTabClick( { onTabClick(it) }, { onTabReselectedClick() })
+            svSearch.setOnTextChanged { onLocationTextChanged(it) }
+            tlAgentSortingFilters.onTabClick({ onTabClick(it) }, { onTabReselectedClick() })
+        }
+    }
+
+    private fun onLocationTextChanged(text: String) {
+        with(binding) {
+            viewModel.setLocationFilter(text)
+            tvLocationError.show(text.isEmpty())
         }
     }
 
@@ -192,7 +204,8 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
     }
 
     private fun searchAgents() {
-        viewModel.getAgentsFromNetwork()
+        if (viewModel.isLocationFilterSet())
+            viewModel.getAgentsFromNetwork()
     }
 
     private fun onTabClick(tab: Tab) {
@@ -210,6 +223,11 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
     private fun onTabReselectedClick() {
         val agents = viewModel.agents.value?.reversed() ?: return
         viewModel.agents.postValue(agents)
+    }
+
+    private fun openAgentDetails(data: Agent, view: CardView) {
+        val extra = FragmentNavigatorExtras(view to "agent_details")
+        AgentsFragmentDirections.openAgentDetails(data).navigate(extra)
     }
 
     companion object {

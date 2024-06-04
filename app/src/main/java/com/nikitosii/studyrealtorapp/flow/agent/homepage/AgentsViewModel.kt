@@ -46,6 +46,8 @@ class AgentsViewModel @Inject constructor(
         checkMainFilter()
     }
 
+    fun isLocationFilterSet(): Boolean = !locationFilter.value.isNullOrEmpty()
+
     fun setNameFilter(value: String) {
         nameFilter.value = value; checkMainFilter()
     }

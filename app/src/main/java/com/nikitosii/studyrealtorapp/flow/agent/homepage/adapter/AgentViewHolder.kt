@@ -20,11 +20,12 @@ class AgentViewHolder(
 
     fun bind(agent: Agent) {
         with(binding) {
+            cvAgentContent.transitionName = agent.id
             setFavorite(agent.favorite)
             tvAgentName.text = agent.name.ifNullOrEmpty(agent.nickname).ifNullOrEmpty(agent.fullName)
             tvAgentOffice.text = agent.office?.name
             tvAgentPhone.text = agent.phone
-            clAgentContent.onClick { onClick(clAgentContent, agent) }
+            cvAgentContent.onClick { onClick(cvAgentContent, agent) }
             cvFavorite.onClick { onClick(cvFavorite, agent); onFavoriteClicked(agent) }
             cvEmail.onClick { onClick(cvEmail, agent) }
             cvPhone.onClick { onClick(cvPhone, agent) }

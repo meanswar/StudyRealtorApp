@@ -207,6 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_48dp"
                     android:layout_weight="3"
+                    android:checked="true"
                     android:background="@drawable/radio"
                     android:text="@string/screen_dashboard_btn_buy_title" />
             </com.nikitosii.studyrealtorapp.util.view.PulseLayout>

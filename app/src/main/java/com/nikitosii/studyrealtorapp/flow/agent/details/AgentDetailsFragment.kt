@@ -2,9 +2,12 @@ package com.nikitosii.studyrealtorapp.flow.agent.details
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.transition.MaterialContainerTransform
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -36,6 +39,18 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
     private val marketingAreasAdapter by lazy { MarketingAreaAdapter() }
     private val languagesAdapter by lazy { LanguageAdapter() }
     private val servedAreaAdapter by lazy { ServedAreaAdapter() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            // Scope the transition to a view in the hierarchy so we know it will be added under
+            // the bottom app bar but over the elevation scale of the exiting HomeFragment.
+            drawingViewId = R.id.navFragment
+            duration = 400L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(Color.TRANSPARENT)
+        }
+    }
 
     override fun initViews() {
         setLocalAgentData()

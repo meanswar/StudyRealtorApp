@@ -13,6 +13,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.FragmentDashboardBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
+import com.nikitosii.studyrealtorapp.flow.dashboard.adapter.DashboardRequestAdapter
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
@@ -21,6 +22,7 @@ import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.model.getFullName
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.PulseLayout
 import com.nikitosii.studyrealtorapp.util.view.RangeView
 import timber.log.Timber
@@ -32,10 +34,12 @@ class DashboardFragment :
         R.layout.fragment_dashboard
     ) {
     private val recentSaleAdapter =
-        SearchRequestAdapter({ view, data -> onSearchRequestClick(view, data) })
+        DashboardRequestAdapter { view, data -> onSearchRequestClick(view, data) }
     private val recentRentAdapter =
-        SearchRequestAdapter({ view, data -> onSearchRequestClick(view, data) })
+        DashboardRequestAdapter { view, data -> onSearchRequestClick(view, data) }
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
+    private var isFirstRentLoad = true
+    private var isFirstSaleLoad = true
 
     private fun onSearchRequestClick(view: View, data: SearchRequest) {
         when (view.id) {
@@ -60,7 +64,7 @@ class DashboardFragment :
             }
         }
         onClick()
-        binding.btnBuy.isChecked = true
+        binding.clTopContent.showWithAnimation(R.anim.slide_in_anim_bottom)
     }
 
     private fun onClick() {
@@ -128,7 +132,8 @@ class DashboardFragment :
     private fun setProfileData(data: Profile?) {
         with(binding) {
             glideImage(data?.photo, ivProfile, R.drawable.ic_user_profile)
-            tvUserWelcome.text = getString(R.string.screen_dashboard_welcome_user, data?.getFullName())
+            tvUserWelcome.text =
+                getString(R.string.screen_dashboard_welcome_user, data?.getFullName())
         }
     }
 
@@ -176,7 +181,10 @@ class DashboardFragment :
         with(binding) {
             if (data.isNotEmpty()) {
                 recentSaleAdapter.submitList(data)
-                rvRecentSaleSearches.notifyDataSetChanged()
+                if (isFirstSaleLoad){
+                    isFirstSaleLoad = false
+                    rvRecentSaleSearches.notifyDataSetChanged()
+                }
             } else grRecentSaleContent.hide()
         }
     }
@@ -185,7 +193,10 @@ class DashboardFragment :
         with(binding) {
             if (data.isNotEmpty()) {
                 recentRentAdapter.submitList(data)
-                rvRecentRentSearches.notifyDataSetChanged()
+                if (isFirstRentLoad) {
+                    isFirstRentLoad = false
+                    rvRecentRentSearches.notifyDataSetChanged()
+                }
             } else grRecentRentContent.hide()
         }
     }

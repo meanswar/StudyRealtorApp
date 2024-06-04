@@ -119,5 +119,6 @@
     <string name="tab_agent_name">Name</string>
     <string name="tab_agent_Price">Price</string>
     <string name="tab_agent_rating">Rating</string>
+    <string name="error_empty_location">You must put a location to search!</string>
 
 </resources>

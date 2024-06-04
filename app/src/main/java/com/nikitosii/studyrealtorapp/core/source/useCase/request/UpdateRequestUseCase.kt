@@ -1,5 +1,6 @@
 package com.nikitosii.studyrealtorapp.core.source.useCase.request
 
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.core.source.repository.SearchRequestRepo
 import com.nikitosii.studyrealtorapp.core.source.useCase.base.UseCaseParams
@@ -17,5 +18,7 @@ class UpdateRequestUseCase @Inject constructor(private val repo: SearchRequestRe
     override suspend fun execute(data: Params) {
         repo.updateSearchRequest(data.data)
         repo.refreshSearchRequests()
+        repo.refreshRecentSearchRequests(RequestType.RENT)
+        repo.refreshRecentSearchRequests(RequestType.SALE)
     }
 }

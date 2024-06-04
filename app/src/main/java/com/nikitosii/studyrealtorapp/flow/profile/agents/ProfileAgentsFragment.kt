@@ -3,7 +3,10 @@ package com.nikitosii.studyrealtorapp.flow.profile.agents
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.cardview.widget.CardView
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.google.android.material.tabs.TabLayout
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.*
@@ -14,7 +17,6 @@ import com.nikitosii.studyrealtorapp.databinding.FragmentHistoryBinding
 import com.nikitosii.studyrealtorapp.flow.agent.homepage.adapter.AgentAdapter
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragmentDirections
-import com.nikitosii.studyrealtorapp.flow.profile.properties.ProfilePropertiesFragment
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.addTabs
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
@@ -30,6 +32,9 @@ class ProfileAgentsFragment : BaseFragment<FragmentHistoryBinding, ProfileAgents
 
     private val adapter = AgentAdapter { view, data -> onItemClick(view, data) }
     override fun initViews() {
+        postponeEnterTransition()
+        view?.doOnPreDraw { startPostponedEnterTransition() }
+
         with(binding) {
             rvContent.adapter = adapter
             tlSortingFilters.onTabClick({ onTabClick(it) }, { onTabReselectedClick() })
@@ -58,7 +63,7 @@ class ProfileAgentsFragment : BaseFragment<FragmentHistoryBinding, ProfileAgents
             R.id.cvFavorite -> onFavorite(agent)
             R.id.cvEmail -> onEmail(agent)
             R.id.cvPhone -> onPhone(agent)
-            R.id.clAgentContent -> onAgentClick(agent)
+            R.id.cvAgentContent -> onAgentClick(agent, view)
         }
     }
 
@@ -74,9 +79,12 @@ class ProfileAgentsFragment : BaseFragment<FragmentHistoryBinding, ProfileAgents
         callIntent(agent.phone)
     }
 
-    private fun onAgentClick(agent: Agent) {
-        ProfileViewPagerFragmentDirections.openAgentDetails(agent).navigate()
+    private fun onAgentClick(agent: Agent, view: View) {
+        val extras = FragmentNavigatorExtras(view as CardView to "agent_details")
+        ProfileViewPagerFragmentDirections.openAgentDetails(agent).navigate(extras)
     }
+
+
 
     override fun subscribe() {
         with(viewModel) {

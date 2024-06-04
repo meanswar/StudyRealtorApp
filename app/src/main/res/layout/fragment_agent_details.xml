@@ -5,13 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:layoutAnimation="@anim/anim_top_content"
-        tools:layoutAnimation="@null">
+        android:animateLayoutChanges="true" >
 
         <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
             android:id="@+id/toolbar"
@@ -52,9 +49,8 @@
                 android:id="@+id/clTopContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
-                tools:layoutAnimation="@null">
+                android:transitionName="agent_details"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                 <TextView
                     android:id="@+id/tvReview"
