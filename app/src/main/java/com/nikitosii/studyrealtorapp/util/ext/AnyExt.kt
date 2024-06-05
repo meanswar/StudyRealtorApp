@@ -3,7 +3,6 @@ package com.nikitosii.studyrealtorapp.util.ext
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.Toast
@@ -11,13 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
-import timber.log.Timber
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 fun Any?.isNotNull(): Boolean = this != null
 
@@ -40,43 +34,32 @@ fun Activity.string(id: Int) = resources.getString(id)
 @SuppressLint("CheckResult")
 fun Fragment.glideImage(url: String?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
     .load(url)
-    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    .diskCacheStrategy(DiskCacheStrategy.DATA)
+    .transition(DrawableTransitionOptions.withCrossFade(200))
     .apply {
         if (placeHolder != null) placeholder(placeHolder)
     }
     .skipMemoryCache(false)
-    .apply(
-        RequestOptions().dontTransform() // this line
-    ).into(view)
+    .into(view)
 
 @SuppressLint("CheckResult")
 fun Fragment.glideImage(uri: Uri?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
     .load(uri)
-    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-    .apply {
-        if (placeHolder != null) placeholder(placeHolder)
-    }
+    .diskCacheStrategy(DiskCacheStrategy.ALL)
+    .apply { if (placeHolder != null) placeholder(placeHolder) }
+    .transition(DrawableTransitionOptions.withCrossFade(200))
     .skipMemoryCache(false)
-    .apply(
-        RequestOptions().dontTransform() // this line
-    ).into(view)
+    .into(view)
 
 @SuppressLint("CheckResult")
-fun Fragment.glideImage(image: Bitmap?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
-    .load(image)
-    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-    .apply { if (placeHolder != null) placeholder(placeHolder) }
-    .skipMemoryCache(false)
-    .apply(RequestOptions().dontTransform())
-    .into(view)
-
-fun Fragment.glideImage(image: ByteArray?, view: ImageView, placeHolder: Int? = null) = Glide.with(view)
-    .load(image)
-    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-    .apply { if (placeHolder != null) placeholder(placeHolder) }
-    .skipMemoryCache(false)
-    .apply(RequestOptions().dontTransform())
-    .into(view)
+fun Fragment.glideImage(image: Bitmap?, view: ImageView, placeHolder: Int? = null) =
+    Glide.with(view)
+        .load(image)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .apply { if (placeHolder != null) placeholder(placeHolder) }
+        .skipMemoryCache(false)
+        .transition(DrawableTransitionOptions.withCrossFade(200))
+        .into(view)
 
 fun RecyclerView.attachPagerSnap() {
     PagerSnapHelper().attachToRecyclerView(this)

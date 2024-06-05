@@ -82,7 +82,7 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
             tvProfileName.text = agent.fullName
             tvProfileRole.text = agent.title
             tvProfileAddress.text = agent.address?.getAddress()
-            glideImage(agent.photoUrl, ivProfile, R.drawable.ic_user_profile)
+            glideImage(agent.photoUrl, ivProfile, R.drawable.agent)
             agent.salePrice?.lastListingDate?.let {
                 tvPriceTitle.text = getString(
                     R.string.screen_agent_details_about_price_last_time_update,

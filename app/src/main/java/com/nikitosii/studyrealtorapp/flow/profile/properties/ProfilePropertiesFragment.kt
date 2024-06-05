@@ -1,10 +1,12 @@
 package com.nikitosii.studyrealtorapp.flow.profile.properties
 
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.ImageView
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -27,8 +29,7 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
 
     private val onFavoriteClick: (Property) -> Unit = { viewModel.updateProperty(it) }
 
-    private val onPropertyClick: (Property, ImageView) -> Unit =
-        { data, view -> openPropertyDetails(data) }
+    private val onPropertyClick: (Property) -> Unit = { openPropertyDetails(it) }
 
     private val adapter = PropertyAdapter(onPropertyClick, onFavoriteClick)
 

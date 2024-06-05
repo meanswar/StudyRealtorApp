@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/cvContent"
     android:clipToPadding="true"
     app:cardCornerRadius="@dimen/size_20dp"
     app:cardElevation="@dimen/size_2dp"

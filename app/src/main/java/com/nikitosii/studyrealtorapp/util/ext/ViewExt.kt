@@ -35,10 +35,10 @@ fun TextView.showText(text: String?) {
     }
 }
 
-fun TextView.showText(textInt: Int?) {
-    if (text.isNullOrEmpty()) hide()
+fun TextView.showText(value: Int?) {
+    if (!value.isNotNull()) hide()
     else {
-        this.text = text.toString()
+        this.text = value.toString()
         show()
     }
 }

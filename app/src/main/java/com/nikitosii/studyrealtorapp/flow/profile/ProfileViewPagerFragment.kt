@@ -101,7 +101,8 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
             binding.cvProfilePhoto to "profile.image",
             binding.tvProfileName to "profile.name",
             binding.tvProfileEmail to "profile.email",
-            binding.tvProfilePhone to "profile.phone")
+            binding.tvProfilePhone to "profile.phone"
+        )
 
         ProfileViewPagerFragmentDirections.openEditProfileScreen(profile).navigate(extras)
     }

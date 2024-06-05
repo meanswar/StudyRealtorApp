@@ -1,10 +1,10 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 
 import android.widget.ImageView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
@@ -16,12 +16,11 @@ import com.nikitosii.studyrealtorapp.util.ext.showText
 
 class PropertyViewHolder(
     private val binding: ItemSalesBinding,
-    private val onItemClick: (Property, view: ImageView) -> Unit,
+    private val onItemClick: (Property) -> Unit,
     private val onFavoriteClick: (Property) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(property: Property) {
         with(binding) {
-            ViewCompat.setTransitionName(ivProperty, property.propertyId)
             setPropertyImage(property)
             initFavoriteView(property)
 
@@ -34,7 +33,7 @@ class PropertyViewHolder(
             tvPropertySqft.showText(property.description?.sqft?.toString())
             tvPropertyType.text = property.description?.type?.type
 
-            root.onClick { onItemClick(property, ivProperty) }
+            cvContent.onClick { onItemClick(property) }
             ivFavorite.onClick { onFavoriteClicked(property) }
         }
     }
@@ -58,7 +57,8 @@ class PropertyViewHolder(
         view.show()
         Glide.with(view)
             .load(url)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .transition(DrawableTransitionOptions.withCrossFade(200))
             .skipMemoryCache(false)
             .into(view)
     }

@@ -3,14 +3,12 @@ package com.nikitosii.studyrealtorapp.flow.details
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.transition.TransitionInflater
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
+import com.dingmouren.layoutmanagergroup.skidright.SkidRightLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,9 +18,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
-import com.nikitosii.studyrealtorapp.core.source.local.model.Branding
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Description
+import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
 import com.nikitosii.studyrealtorapp.databinding.FragmentPropertyDetailsBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
@@ -32,11 +30,9 @@ import com.nikitosii.studyrealtorapp.flow.details.adapter.schools.SchoolInfoAdap
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.DateExt.SERVER_YEAR_MONTH_DAY_TIME_PATTERN
 import com.nikitosii.studyrealtorapp.util.ext.DateExt.UI_DATE_PATTERN_WITH_TIME_AND_SPACE
-import com.nikitosii.studyrealtorapp.util.ext.attachPagerSnap
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.emailIntent
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
-import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.model.getAddress
 import com.nikitosii.studyrealtorapp.util.ext.model.getPriceStringFormat
 import com.nikitosii.studyrealtorapp.util.ext.onClick
@@ -54,55 +50,54 @@ class PropertyDetailsFragment :
 
     private val args: PropertyDetailsFragmentArgs by navArgs()
 
-    private val imageAdapter =
-        PropertyImageAdapter { id, view -> openPropertyPhotosScreen(id, view) }
+    private val imageAdapter = PropertyImageAdapter()
     private val propertyDetailsAdapter = PropertyDetailsAdapter()
     private val schoolInfoAdapter by lazy { SchoolInfoAdapter() }
 
     private lateinit var googleMap: GoogleMap
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
+    @SuppressLint("SetTextI18n")
+    override fun initViews() {
+        setKnownPropertyData(args.property)
+        with(binding) {
+            rvPropertyDetails.adapter = propertyDetailsAdapter
+            rvNearbyPlaces.adapter = schoolInfoAdapter
+            rvPropertyImage.adapter = imageAdapter
+            rvPropertyImage.layoutManager = SkidRightLayoutManager(0.9f, 0.8f)
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            viewModel.getPropertyDetails(args.property.propertyId)
+            viewModel.updateMapStatus(false)
+        }, 1000)
+
+        val mapFragment = childFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this@PropertyDetailsFragment)
+        onClick()
     }
 
     @SuppressLint("SetTextI18n")
-    override fun initViews() {
+    private fun setKnownPropertyData(data: Property) {
+        viewModel.setLocalProperty(data)
+        setPropertyDescriptionInfo(data.description)
+        imageAdapter.submitList(data.photos)
+        setFavorite()
         with(binding) {
-            postponeEnterTransition()
-            viewModel.setLocalProperty(args.property)
-            ivProperty.transitionName = args.property.propertyId
-            glideImage(args.property.primaryPhoto.url, ivProperty)
-            setPropertyDescriptionInfo(args.property.description)
-            setBrandingInfo(args.property.branding.firstOrNull())
-            setFavorite()
-            tvPropertyAddress.text = "Address: ${args.property.getAddress()}"
-            tvPropertyPrice.text = args.property.getPriceStringFormat()
+            tvPropertyAddress.text = "Address: ${data.getAddress()}"
+            tvPropertyPrice.text = data.getPriceStringFormat()
 
-            if (args.property.lastUpdateDate != null) {
+            if (data.lastUpdateDate != null) {
                 tvSalePropertyTime.text = getString(
                     R.string.screen_property_details_description_last_time_update,
-                    args.property.lastUpdateDate.toUiTime(
+                    data.lastUpdateDate.toUiTime(
                         SERVER_YEAR_MONTH_DAY_TIME_PATTERN,
                         UI_DATE_PATTERN_WITH_TIME_AND_SPACE
                     )
                 )
                 tvSalePropertyTime.show()
             }
-
-            rvPropertyDetails.adapter = propertyDetailsAdapter
-            rvNearbyPlaces.adapter = schoolInfoAdapter
-            rvPropertyImage.adapter = imageAdapter
-            rvPropertyImage.attachPagerSnap()
         }
-        viewModel.getPropertyDetails(args.property.propertyId)
-        viewModel.updateMapStatus(false)
-
-        val mapFragment = childFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this@PropertyDetailsFragment)
-        onClick()
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -142,17 +137,11 @@ class PropertyDetailsFragment :
             tvBeds.showText(data?.beds)
             tvRooms.showText(data?.rooms)
             tvPropertyDescription.text = data?.text
-            tvPropertyName.showText(data?.name)
+            tvPropertyName.text = data?.name
             tvPropertyType.showText(
                 data?.type?.type,
                 R.string.screen_property_details_description_type
             )
-        }
-    }
-
-    private fun setBrandingInfo(data: Branding?) {
-        with(binding) {
-            if (data?.photo?.isNotEmpty() == true) glideImage(data.photo, ivBrandingLogo)
         }
     }
 
@@ -209,10 +198,6 @@ class PropertyDetailsFragment :
             imageAdapter.submitList(data?.photos)
             schoolInfoAdapter.submitList(data?.schools?.schools)
             propertyDetailsAdapter.submitList(data?.details)
-            Handler(Looper.getMainLooper()).postDelayed(
-                { ivProperty.hide(); rvPropertyImage.show() },
-                ANIMATION_TIME
-            )
             rvPropertyDetails.notifyDataSetChanged()
         }
     }
@@ -274,11 +259,6 @@ class PropertyDetailsFragment :
     }
 
     private fun openPropertyPhotosScreen(id: Int, view: View) {
-        val extras = FragmentNavigatorExtras(
-            view to view.transitionName
-        )
-        val data = viewModel.buildPhotoContainer(id)
-        PropertyDetailsFragmentDirections.openPropertyPhotosScreen(data).navigate(extras)
     }
 
     companion object {

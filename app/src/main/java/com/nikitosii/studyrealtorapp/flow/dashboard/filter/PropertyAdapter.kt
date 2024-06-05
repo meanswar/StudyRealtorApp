@@ -3,14 +3,13 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.filter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.databinding.ItemSalesBinding
 
 class PropertyAdapter(
-    private val onItemClick: (Property, ImageView) -> Unit,
+    private val onItemClick: (Property) -> Unit,
     private val onFavoriteClick: (Property) -> Unit
 ) :
     ListAdapter<Property, PropertyViewHolder>(PropertyDiffUtil) {

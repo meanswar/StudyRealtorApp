@@ -237,4 +237,6 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     //TabLayout
     implementation("com.github.Andy671:Dachshund-Tab-Layout:v0.3.3")
+    //GroupLayoutManager
+    implementation("com.github.DingMouRen:LayoutManagerGroup:1e6f4f96eb")
 }

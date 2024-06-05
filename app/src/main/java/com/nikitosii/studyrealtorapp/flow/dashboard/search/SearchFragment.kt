@@ -1,11 +1,7 @@
 package com.nikitosii.studyrealtorapp.flow.dashboard.search
 
-import android.os.Bundle
-import android.transition.TransitionInflater
-import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
@@ -32,19 +28,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     FragmentSearchBinding.bind(it)
 }, R.layout.fragment_search) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(activity).inflateTransition(android.R.transition.move)
-    }
-
     private val args: SearchFragmentArgs by navArgs()
     private val propertiesAdapter by lazy {
-        PropertyAdapter({ data, view ->
-            openPropertyDetails(
-                data, view
-            )
-        }, { onFavoriteClick(it) })
+        PropertyAdapter(
+            { openPropertyDetails(it) },
+            { onFavoriteClick(it) }
+        )
     }
     private val filtersAdapter by lazy { FilterAdapter { onHouseFilterClick(it) } }
 
@@ -179,13 +168,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         }
     }
 
-    private fun openPropertyDetails(property: Property, view: ImageView) {
+    private fun openPropertyDetails(property: Property) {
         viewModel.openedPropertyId.value = property.propertyId
         viewModel.setNeedToUpdateLocalProperty(true)
-        val extras = FragmentNavigatorExtras(
-            view to view.transitionName
-        )
-        SearchFragmentDirections.openPropertyDetails(property).navigate(extras)
+        SearchFragmentDirections.openPropertyDetails(property).navigate()
     }
 
     private fun onFavoriteClick(property: Property) {

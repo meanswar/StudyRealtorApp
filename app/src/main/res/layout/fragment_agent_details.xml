@@ -82,7 +82,7 @@
                         android:layout_height="match_parent"
                         android:background="@color/blue_dark"
                         android:scaleType="centerCrop"
-                        tools:src="@drawable/ic_user_profile" />
+                        tools:src="@drawable/agent" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
