@@ -15,7 +15,7 @@ class PropertyPhotosViewHolder(private val binding: ItemPropertyPhotoBinding) :
             .with(binding.root)
             .load(data.url)
             .placeholder(R.drawable.london)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .skipMemoryCache(false)
             .into(binding.ivImage)
     }
