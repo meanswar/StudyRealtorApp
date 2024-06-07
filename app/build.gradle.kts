@@ -191,7 +191,7 @@ dependencies {
     implementation("np.com.susanthapa:curved_bottom_navigation:0.6.5")
 
     // lottie
-    implementation("com.airbnb.android:lottie:5.0.3")
+    implementation("com.airbnb.android:lottie:6.4.1")
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
     kapt("com.github.bumptech.glide:compiler:4.14.2")

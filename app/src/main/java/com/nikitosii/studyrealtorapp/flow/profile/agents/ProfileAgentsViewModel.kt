@@ -17,6 +17,9 @@ class ProfileAgentsViewModel @Inject constructor(
     val agents = MutableLiveData<List<Agent>>()
 
     fun updateAgentFavoriteStatus(agent: Agent) {
+        val list = agents.value?.toMutableList() ?: return
+        list.map { if (it.id == agent.id) it.copy(favorite = !agent.favorite) else it }
+        agents.postValue(list)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(agent.copy(favorite = !agent.favorite))
         ioToUnit { updateAgentFavoriteStatusUseCase.execute(params) }
     }

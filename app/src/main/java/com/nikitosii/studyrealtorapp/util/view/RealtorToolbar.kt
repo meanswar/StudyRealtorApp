@@ -52,7 +52,7 @@ class RealtorToolbar @JvmOverloads constructor(
     private fun onBackClick() {
         with(binding.btnBack) {
             onClick { playAnimation() }
-            onAnimCompleted { findNavController().navigateUp() }
+            onAnimCompleted({ findNavController().navigateUp() })
         }
     }
 

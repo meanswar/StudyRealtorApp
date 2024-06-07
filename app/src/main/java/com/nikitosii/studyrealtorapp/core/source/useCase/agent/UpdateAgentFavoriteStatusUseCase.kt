@@ -18,6 +18,5 @@ class UpdateAgentFavoriteStatusUseCase @Inject constructor(
     override suspend fun execute(data: Params) {
         repo.updateAgent(data.agent)
         repo.refreshRecentFavoriteAgents()
-        repo.refreshAgents()
     }
 }

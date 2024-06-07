@@ -1,11 +1,15 @@
 package com.nikitosii.studyrealtorapp.flow.profile
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.MenuInflater
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
 import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
@@ -18,9 +22,11 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.profile.agents.ProfileAgentsFragment
 import com.nikitosii.studyrealtorapp.flow.profile.properties.ProfilePropertiesFragment
 import com.nikitosii.studyrealtorapp.flow.profile.requests.ProfileRequestsFragment
+import com.nikitosii.studyrealtorapp.util.Constants.TRANSITION_DURATION
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.model.getFullName
+import com.nikitosii.studyrealtorapp.util.ext.onAnimationRunning
 import com.nikitosii.studyrealtorapp.util.ext.showText
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.viewpager.ViewPagerFragmentAdapter
@@ -32,9 +38,23 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
 ) {
 
     private lateinit var viewPagerAdapter: ViewPagerFragmentAdapter
+    private var isScrolled = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialFadeThrough().apply {
+            duration = TRANSITION_DURATION
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = TRANSITION_DURATION
+        }
+    }
 
     override fun initViews() {
         with(binding) {
+            if (isScrolled) mlContent.transitionToEnd()
+            mlContent.onAnimationRunning(
+                onComplete = { isScrolled = mlContent.currentState == mlContent.endState })
             viewPagerAdapter = ViewPagerFragmentAdapter(
                 this@ProfileViewPagerFragment,
                 listOf(

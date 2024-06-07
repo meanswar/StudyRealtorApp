@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.transition.MaterialContainerTransform
@@ -18,6 +20,7 @@ import com.nikitosii.studyrealtorapp.flow.agent.details.adapter.language.Languag
 import com.nikitosii.studyrealtorapp.flow.agent.details.adapter.marketing.MarketingAreaAdapter
 import com.nikitosii.studyrealtorapp.flow.agent.details.adapter.serving_area.ServedAreaAdapter
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
+import com.nikitosii.studyrealtorapp.util.Constants.TRANSITION_DURATION
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.formatPrice
@@ -46,7 +49,7 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
             // Scope the transition to a view in the hierarchy so we know it will be added under
             // the bottom app bar but over the elevation scale of the exiting HomeFragment.
             drawingViewId = R.id.navFragment
-            duration = 400L
+            duration = TRANSITION_DURATION
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(Color.TRANSPARENT)
         }
@@ -57,8 +60,10 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
         onClick()
 
         viewModel.agent.postValue(args.agent)
-        viewModel.getAgentDetails(args.agent.id)
-
+        Handler(Looper.getMainLooper()).postDelayed(
+            { viewModel.getAgentDetails(args.agent.id) },
+            800
+        )
         with(binding) {
             rvMarketingAreas.adapter = marketingAreasAdapter
             rvLanguages.adapter = languagesAdapter

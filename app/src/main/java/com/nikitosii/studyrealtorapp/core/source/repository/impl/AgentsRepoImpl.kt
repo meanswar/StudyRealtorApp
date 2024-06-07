@@ -33,7 +33,7 @@ class AgentsRepoImpl @Inject constructor(
     }
 
     private val channelAgents = repoChannel(io, connectivityProvider, recreateObserver) {
-        storageConfig { get = { dao.getLocalAgents().map { Agent.from(it) } } }
+        storageConfig { get = { dao.getLocalAgents().map { Agent.from(it) }.sortedBy { it.name } } }
     }
 
     override suspend fun getAgents(data: AgentRequestApi): List<Agent> = runWithErrorHandler {
@@ -50,7 +50,7 @@ class AgentsRepoImpl @Inject constructor(
     }
 
     override suspend fun getLocalAgents(id: List<String>): List<Agent> =
-        dao.getLocalAgents(id).map { Agent.from(it) }
+        dao.getLocalAgents(id).map { Agent.from(it) }.sortedBy { it.name }
 
     override fun getLocalAgents(): Flow<List<Agent>> = channelAgents.value.flow
 

@@ -41,9 +41,9 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     private val agentsAdapter by lazy { AgentAdapter(onAgentClick) }
 
-    private val onAgentClick: (view: View, agent: Agent) -> Unit = { view: View, agent: Agent ->
+    private val onAgentClick: (view: View, agent: Agent) -> Unit = { view, agent ->
         when (view.id) {
-            R.id.cvFavorite -> viewModel.updateAgentFavoriteStatus(agent)
+            R.id.lavFavorite -> viewModel.updateAgentFavoriteStatus(agent)
             R.id.cvEmail -> emailIntent(agent.office?.email)
             R.id.cvPhone -> callIntent(agent.phone)
             R.id.cvAgentContent -> openAgentDetails(agent, view as CardView)
@@ -52,10 +52,6 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     override fun initViews() {
         with(binding) {
-
-            postponeEnterTransition()
-            view?.doOnPreDraw { startPostponedEnterTransition() }
-
             svSearch.initEndAnimation(cvFilterButtons)
             toolbar.initEndBtnAnimation(clFilters)
 

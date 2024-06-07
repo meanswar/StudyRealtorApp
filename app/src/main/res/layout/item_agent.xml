@@ -32,6 +32,7 @@
             android:layout_width="@dimen/size_0dp"
             android:layout_height="@dimen/size_0dp"
             android:background="@color/almost_white"
+            android:transitionGroup="true"
             app:cardCornerRadius="@dimen/size_20dp"
             app:cardElevation="@dimen/size_0dp"
             app:layout_constraintDimensionRatio="H,1:1"
@@ -48,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/london" />
+                    android:src="@drawable/agent" />
 
                 <ImageView
                     android:id="@+id/ivOffice"
@@ -57,7 +58,7 @@
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="H,3.5:1"
-                    tools:src="@drawable/london" />
+                    tools:src="@drawable/logo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -67,7 +68,7 @@
             android:layout_marginStart="@dimen/size_10dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@id/cvPhoto"
-            app:layout_constraintEnd_toStartOf="@id/cvFavorite"
+            app:layout_constraintEnd_toStartOf="@id/lavFavorite"
             app:layout_constraintStart_toEndOf="@id/cvPhoto"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -117,24 +118,17 @@
                 android:layout_weight="5" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvFavorite"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavFavorite"
             android:layout_width="@dimen/size_40dp"
             android:layout_height="@dimen/size_40dp"
-            android:background="@color/almost_white"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/size_20dp"
-            app:cardElevation="@dimen/size_0dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivFavorite"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_favorite" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_asyncUpdates="automatic"
+            app:lottie_fileName="anim_favorite.json"
+            app:lottie_renderMode="software" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvPhone"

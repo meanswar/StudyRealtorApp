@@ -32,6 +32,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/cvTopContent"
             app:lottie_autoPlay="true"
+            android:scaleY="0.5"
+            android:scaleX="0.5"
             app:lottie_fileName="loading.json"
             app:lottie_loop="true"
             app:lottie_speed="1.5" />

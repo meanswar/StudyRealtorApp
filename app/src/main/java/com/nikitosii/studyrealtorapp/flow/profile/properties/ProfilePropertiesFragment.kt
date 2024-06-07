@@ -1,12 +1,8 @@
 package com.nikitosii.studyrealtorapp.flow.profile.properties
 
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.Observer
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.transition.MaterialElevationScale
-import com.google.android.material.transition.MaterialFadeThrough
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -17,8 +13,6 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertyAdapter
 import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragmentDirections
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.addTabs
-import com.nikitosii.studyrealtorapp.util.ext.onTabClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import timber.log.Timber
 
@@ -36,29 +30,7 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
     override fun initViews() {
         with(binding) {
             rvContent.adapter = adapter
-            tlSortingFilters.onTabClick({ onTabClick(it) }, { onTabReselectedClick() })
-            tlSortingFilters.addTabs(TABS)
         }
-    }
-
-    private fun onTabClick(tab: TabLayout.Tab) {
-        val properties = viewModel.properties.value ?: return
-        viewModel.properties.postValue(
-            when (tab.text.toString()) {
-                TAB_NAME -> properties.sortedBy { it.description?.name }
-                TAB_TYPE -> properties.sortedBy { it.description?.type }
-                TAB_PRICE -> properties.sortedBy { it.listPrice }
-                TAB_BEDS -> properties.sortedBy { it.description?.beds }
-                TAB_SQFT -> properties.sortedBy { it.description?.sqft }
-                TAB_FAVORITE -> properties.sortedByDescending { it.favorite }
-                else -> return
-            }
-        )
-    }
-
-    private fun onTabReselectedClick() {
-        val properties = viewModel.properties.value?.reversed() ?: return
-        viewModel.properties.postValue(properties)
     }
 
     override fun subscribe() {
@@ -79,13 +51,14 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
 
     private fun setProperties(data: List<Property>) {
         adapter.submitList(data)
-        Handler(Looper.getMainLooper()).postDelayed({ binding.rvContent.scrollToPosition(0) },
-            500)
+        Handler(Looper.getMainLooper()).postDelayed(
+            { binding.rvContent.scrollToPosition(0) },
+            500
+        )
     }
 
     private fun onLoading(isLoading: Boolean) {
         binding.lavLoading.show(isLoading)
-        binding.tlSortingFilters.show(!isLoading)
     }
 
     private fun openPropertyDetails(property: Property) {
@@ -94,20 +67,5 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
 
     companion object {
         const val SCREEN_TITLE = "Properties"
-        private const val TAB_NAME = "Name"
-        private const val TAB_TYPE = "Type"
-        private const val TAB_PRICE = "Price"
-        private const val TAB_BEDS = "Beds"
-        private const val TAB_FAVORITE = "Favorite"
-        private const val TAB_SQFT = "Sqft"
-
-        private val TABS = listOf(
-            TAB_NAME,
-            TAB_TYPE,
-            TAB_PRICE,
-            TAB_BEDS,
-            TAB_SQFT,
-            TAB_FAVORITE
-        )
     }
 }

@@ -30,6 +30,8 @@ object Constants {
         "0a82a2bf4dmsh014e001d009ea20p19f58ejsn537f184943af",
         "e6c765de7bmshfa2b0ca40c83ea1p188000jsnccf09040ffed"
     )
+
+    const val TRANSITION_DURATION = 500L
 }
 
 typealias Flow<T> = SharedFlow<Status<T>>

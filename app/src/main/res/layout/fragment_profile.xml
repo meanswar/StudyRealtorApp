@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/mlContent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_profile_scene"
-    tools:background="@drawable/bg_content">
+    android:background="@drawable/bg_content"
+    app:layoutDescription="@xml/fragment_profile_scene">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glMiddle"
@@ -45,6 +46,7 @@
         android:transitionName="profile.image"
         app:cardCornerRadius="@dimen/size_80dp"
         app:cardElevation="0dp"
+        android:transitionGroup="true"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +124,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_0dp"
             android:layout_marginTop="@dimen/size_10dp"
-            android:transitionGroup="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tlContent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
