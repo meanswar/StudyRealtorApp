@@ -30,4 +30,7 @@ interface PropertyDao {
     @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY}")
     fun deleteAllProperties()
 
+    @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_PROPERTY} where `propertyId` = :id")
+    fun remove(id: String)
+
 }

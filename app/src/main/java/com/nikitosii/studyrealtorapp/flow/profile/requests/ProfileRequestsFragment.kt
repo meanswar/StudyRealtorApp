@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
 import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
@@ -16,6 +17,7 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.SearchRequestAdapter
 import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragmentDirections
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
+import com.nikitosii.studyrealtorapp.util.ext.onItemSwipe
 import com.nikitosii.studyrealtorapp.util.ext.show
 import timber.log.Timber
 
@@ -24,20 +26,27 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
     { FragmentHistoryBinding.bind(it) }, R.layout.fragment_history
 ) {
 
-    private val adapter = SearchRequestAdapter({ view, data -> onRequestClick(view, data) }, true)
+    private val adapter = SearchRequestAdapter { view, data -> onRequestClick(view, data) }
 
     private fun onRequestClick(view: View, data: SearchRequest) {
         when (view.id) {
             R.id.cvFavorite -> viewModel.updateRequest(data)
             R.id.cvContent -> openSearchRequestDetails(data)
             R.id.cvTrash -> viewModel.removeRequest(data.id ?: return)
-            R.id.mlContent -> binding.rvContent.apply { isLayoutFrozen = !isLayoutFrozen }
         }
     }
 
     override fun initViews() {
         with(binding) {
             rvContent.adapter = adapter
+            rvContent.onItemSwipe(ItemTouchHelper.LEFT) {
+                val list = adapter.currentList.toMutableList()
+                val id = it.adapterPosition
+                val removedRequest = adapter.currentList[id]
+                list.removeAt(id)
+                adapter.submitList(list)
+                viewModel.removeRequest(removedRequest.id ?: return@onItemSwipe)
+            }
         }
     }
 

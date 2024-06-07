@@ -85,6 +85,13 @@ interface PropertiesRepo {
     suspend fun removeData()
 
     /**
+     * Removes a property from the local storage based on the provided ID.
+     *
+     * @param id The ID of the property to remove.
+     */
+    suspend fun remove(id: String)
+
+    /**
      * Retrieves detailed information of a property based on the provided ID.
      *
      * @param id The ID of the property to retrieve details for.

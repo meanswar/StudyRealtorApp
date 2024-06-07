@@ -86,7 +86,9 @@ class PropertiesRepoImpl @Inject constructor(
 
     override suspend fun refreshProperties() = channel.value.refreshOnlyLocal()
 
-    override suspend fun removeData() { dao.deleteAllProperties() }
+    override suspend fun removeData() = dao.deleteAllProperties()
+
+    override suspend fun remove(id: String) = dao.deleteAllProperties()
 
     override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler {
         PropertyDetails.from(api.getPropertyDetails(id).result)

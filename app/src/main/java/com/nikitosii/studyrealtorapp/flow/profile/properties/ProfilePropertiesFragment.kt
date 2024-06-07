@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.flow.profile.properties
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -13,6 +14,7 @@ import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertyAdapter
 import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragmentDirections
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
+import com.nikitosii.studyrealtorapp.util.ext.onItemSwipe
 import com.nikitosii.studyrealtorapp.util.ext.show
 import timber.log.Timber
 
@@ -30,6 +32,14 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
     override fun initViews() {
         with(binding) {
             rvContent.adapter = adapter
+            rvContent.onItemSwipe(ItemTouchHelper.LEFT) {
+                val list = adapter.currentList.toMutableList()
+                val id = it.adapterPosition
+                val removedProperty = adapter.currentList[id]
+                list.removeAt(id)
+                adapter.submitList(list)
+                viewModel.removePropertyById(removedProperty.propertyId)
+            }
         }
     }
 

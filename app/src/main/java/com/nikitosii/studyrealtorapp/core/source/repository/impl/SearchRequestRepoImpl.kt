@@ -24,19 +24,23 @@ class SearchRequestRepoImpl @Inject constructor(
     networkErrorHandler: NetworkErrorHandler
 ) : SearchRequestRepo, BaseRepo(networkErrorHandler) {
 
-    val channelSaleSearchRequests = repoChannel(io, connectivityProvider, recreateObserver) {
-        storageConfig {
-            get = { dao.getRecentSearchRequests(RequestType.SALE).map { SearchRequest.from(it) } }
+    private val channelSaleSearchRequests =
+        repoChannel(io, connectivityProvider, recreateObserver) {
+            storageConfig {
+                get =
+                    { dao.getRecentSearchRequests(RequestType.SALE).map { SearchRequest.from(it) } }
+            }
         }
-    }
 
-    val channelRentSearchRequests = repoChannel(io, connectivityProvider, recreateObserver) {
-        storageConfig {
-            get = { dao.getRecentSearchRequests(RequestType.RENT).map { SearchRequest.from(it) } }
+    private val channelRentSearchRequests =
+        repoChannel(io, connectivityProvider, recreateObserver) {
+            storageConfig {
+                get =
+                    { dao.getRecentSearchRequests(RequestType.RENT).map { SearchRequest.from(it) } }
+            }
         }
-    }
 
-    val channelSearchRequests = repoChannel(io, connectivityProvider, recreateObserver) {
+    private val channelSearchRequests = repoChannel(io, connectivityProvider, recreateObserver) {
         storageConfig { get = { dao.getAllSearchRequests().map { SearchRequest.from(it) } } }
     }
 
@@ -54,9 +58,15 @@ class SearchRequestRepoImpl @Inject constructor(
 
     override fun getLocalRequests(): Flow<List<SearchRequest>> = channelSearchRequests.value.flow
 
-    override suspend fun removeData() { dao.removeAll() }
+    override suspend fun removeData() {
+        dao.removeAll()
+    }
 
-    override suspend fun refreshSearchRequests() = channelSearchRequests.value.refreshOnlyLocal()
+    override suspend fun refreshSearchRequests() {
+        channelRentSearchRequests.value.refreshOnlyLocal()
+        channelSaleSearchRequests.value.refreshOnlyLocal()
+        channelSearchRequests.value.refreshOnlyLocal()
+    }
 
     override suspend fun refreshRecentSearchRequests(type: RequestType) {
         if (type == RequestType.RENT) channelRentSearchRequests.value.refresh()
