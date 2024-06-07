@@ -5,12 +5,11 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemPropertyRequestBinding
-import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 import com.nikitosii.studyrealtorapp.util.ext.model.getFiltersCount
-import com.nikitosii.studyrealtorapp.util.ext.onAnimationRunning
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.showText
 
@@ -32,8 +31,8 @@ class RequestViewHolder(
             Glide
                 .with(ivSearch)
                 .load(data.imageUrl)
-                .placeholder(R.drawable.london)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .transition(DrawableTransitionOptions.withCrossFade(200))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true)
                 .into(ivSearch)
         }
