@@ -54,9 +54,13 @@ class AgentsRepoImpl @Inject constructor(
 
     override fun getLocalAgents(): Flow<List<Agent>> = channelAgents.value.flow
 
-    override suspend fun refreshAgents() { channelAgents.value.refresh() }
+    override suspend fun refreshAgents() {
+        channelAgents.value.refresh()
+    }
 
-    override suspend fun removeData() { dao.deleteAllAgents() }
+    override suspend fun removeData() {
+        dao.deleteAllAgents()
+    }
 
     override suspend fun getAgentDetails(id: String): AgentDetails = runWithErrorHandler {
         AgentDetails.from(api.getAgentDetails(id).agentDetails)
@@ -70,13 +74,15 @@ class AgentsRepoImpl @Inject constructor(
 
     override fun getRecentFavoriteAgents(): Flow<List<Agent>> = channelFavoriteAgents.value.flow
 
-    override suspend fun refreshRecentFavoriteAgents() = channelFavoriteAgents.value.refreshOnlyLocal()
+    override suspend fun refreshRecentFavoriteAgents() =
+        channelFavoriteAgents.value.refreshOnlyLocal()
 
-    override suspend fun updateAgent(agent: Agent) {
-        dao.insertAgent(AgentEntity.from(agent))
-    }
+    override suspend fun updateAgent(agent: Agent) = dao.insertAgent(AgentEntity.from(agent))
 
-    override suspend fun saveAgents(agents: List<Agent>) {
+
+    override suspend fun saveAgents(agents: List<Agent>) =
         dao.insertAgents(agents.map { AgentEntity.from(it) })
-    }
+
+
+    override suspend fun remove(id: String) = dao.deleteAgent(id)
 }

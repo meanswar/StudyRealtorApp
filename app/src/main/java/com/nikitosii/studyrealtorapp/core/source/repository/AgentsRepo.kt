@@ -88,4 +88,11 @@ interface AgentsRepo {
      * @param agents The list of [Agent] models to be saved.
      */
     suspend fun saveAgents(agents: List<Agent>)
+
+    /**
+     * Removes an agent from the local storage based on the provided ID.
+     *
+     * @param id The ID of the agent to be removed.
+     */
+    suspend fun remove(id: String)
 }

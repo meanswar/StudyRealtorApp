@@ -4,6 +4,8 @@ import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.*
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -16,6 +18,7 @@ import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragmentDirect
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.callIntent
 import com.nikitosii.studyrealtorapp.util.ext.emailIntent
+import com.nikitosii.studyrealtorapp.util.ext.onItemSwipe
 import com.nikitosii.studyrealtorapp.util.ext.show
 import timber.log.Timber
 
@@ -29,6 +32,14 @@ class ProfileAgentsFragment : BaseFragment<FragmentHistoryBinding, ProfileAgents
     override fun initViews() {
         with(binding) {
             rvContent.adapter = adapter
+            rvContent.onItemSwipe(ItemTouchHelper.LEFT) {
+                val list = adapter.currentList.toMutableList()
+                val id = it.adapterPosition
+                val removedAgent = adapter.currentList[id]
+                list.removeAt(id)
+                adapter.submitList(list)
+                viewModel.removeAgent(removedAgent.id)
+            }
         }
     }
 

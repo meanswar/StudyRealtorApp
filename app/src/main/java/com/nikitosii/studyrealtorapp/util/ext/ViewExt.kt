@@ -15,6 +15,9 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.tabs.TabLayout
 import com.nikitosii.studyrealtorapp.R
@@ -217,4 +220,14 @@ inline fun MotionLayout.onAnimationRunning(
             onTrigger()
         }
     })
+}
+
+inline fun RecyclerView.onItemSwipe(direction: Int, crossinline onSwipe: (ViewHolder) -> Unit) {
+    ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, direction) {
+        override fun onMove(p0: RecyclerView, p1: ViewHolder, p2: ViewHolder): Boolean = false
+
+        override fun onSwiped(p0: ViewHolder, p1: Int) {
+            onSwipe(p0)
+        }
+    }).attachToRecyclerView(this)
 }
