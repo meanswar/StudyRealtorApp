@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.flow.dashboard.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -21,6 +22,7 @@ import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.RangeView
+import com.nikitosii.studyrealtorapp.util.view.recyclerview.PaginatingScrollListener
 import timber.log.Timber
 
 @RequiresViewModel(SearchViewModel::class)
@@ -29,6 +31,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 }, R.layout.fragment_search) {
 
     private val args: SearchFragmentArgs by navArgs()
+    private val isFirstItemsLoading = MutableLiveData(true)
+    private val isLoadingData = MutableLiveData(false)
+
     private val propertiesAdapter by lazy {
         PropertyAdapter(
             { openPropertyDetails(it) },
@@ -42,8 +47,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     override fun initViews() {
         onClick()
         initRangeValues()
+        initRecyclerViewSettings()
         with(binding) {
-            rvProperties.adapter = propertiesAdapter
             toolbar.showEndButton()
             toolbar.initEndBtnAnimation(clFilters)
             svProperty.setText(args.propertyRequest.address)
@@ -61,7 +66,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private fun onClick() {
         with(binding) {
-            btnAccept.onClick { viewModel.getPropertiesForSale() }
+            btnAccept.onClick { viewModel.getPropertiesFromNetwork() }
             svProperty.setOnTextChanged { viewModel.addressFilter.value = it }
             with(lFilters) {
                 rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
@@ -69,6 +74,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
                 rvRangeBeds.onRangeChanged { first, second -> onBedsChanged(first, second) }
                 rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
             }
+        }
+    }
+
+    private fun initRecyclerViewSettings() {
+        with(binding) {
+            rvProperties.adapter = propertiesAdapter
+            rvProperties.addOnScrollListener(object :
+                PaginatingScrollListener(rvProperties.layoutManager as LinearLayoutManager) {
+                override fun loadMoreItems() = viewModel.getPropertiesFromNetwork()
+
+
+                override fun isLoading(): Boolean = isLoadingData.value == true
+
+                override fun isLastPage(): Boolean = viewModel.isEmptyResponse()
+            })
         }
     }
 
@@ -111,7 +131,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         with(viewModel) {
             if (isDataAlreadyUploaded.value == false) {
                 if (args.localRequest) getLocalProperties(args.propertyRequest)
-                else getPropertiesByRequest()
+                else getPropertiesFromNetwork()
                 isDataAlreadyUploaded.postValue(true)
             }
         }
@@ -149,6 +169,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private fun showLoading(isLoading: Boolean) {
         with(binding) {
+            isLoadingData.postValue(isLoading)
             if (isLoading) lavLoading.showWithAnimation(R.anim.scale_in)
             else lavLoading.hideWithScaleOut()
             btnAccept.isEnabled = !isLoading
@@ -162,9 +183,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private fun observeProperties(data: List<Property>?) {
         with(binding) {
-            lavLoading.hide()
-            propertiesAdapter.submitList(data)
-            rvProperties.notifyDataSetChanged()
+            if (data?.isEmpty() == true) viewModel.setIsEmptyResponse(true)
+            else viewModel.incrementPage()
+
+            val newList = mutableListOf<Property>().apply {
+                addAll(propertiesAdapter.currentList)
+                addAll(data ?: emptyList())
+            }
+            propertiesAdapter.submitList(newList)
+            if (isFirstItemsLoading.value == true) {
+                rvProperties.notifyDataSetChanged()
+                isFirstItemsLoading.postValue(false)
+            }
         }
     }
 

@@ -23,7 +23,7 @@ data class SearchRequest(
     val favorite: Boolean = false,
     val cats: Boolean? = null,
     val dogs: Boolean? = null,
-    val sort: SearchSortType? = null
+    val sort: SearchSortType? = null,
 ): Parcelable {
     companion object {
         fun toEntity(request: SearchRequest) = SearchRequestEntity.from(request)

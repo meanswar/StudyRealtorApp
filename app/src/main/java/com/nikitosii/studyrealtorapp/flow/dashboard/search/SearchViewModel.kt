@@ -11,14 +11,12 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchReque
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertiesUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.rent.GetPropertiesForRentUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesForSaleUseCase
+import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesFromNetworkUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val getPropertiesForSaleUseCase: GetPropertiesForSaleUseCase,
-    private val getPropertiesForRentUseCase: GetPropertiesForRentUseCase,
+    private val getPropertiesForSaleUseCase: GetPropertiesFromNetworkUseCase,
     private val getLocalPropertiesUseCase: GetLocalPropertiesUseCase,
     private val updatePropertyUseCase: UpdatePropertyUseCase,
     private val getLocalPropertyUseCase: GetLocalPropertyUseCase
@@ -49,6 +47,18 @@ class SearchViewModel @Inject constructor(
     val localProperties = WorkLiveData<List<Property>>()
     val openedPropertyId = MutableLiveData<String>()
     val updatedProperty = MutableLiveData<Property>()
+    private val page = MutableLiveData(1)
+    private val isEmptyResponse = MutableLiveData(false)
+
+    fun setIsEmptyResponse(isLast: Boolean) {
+        isEmptyResponse.value = isLast
+    }
+
+    fun incrementPage() {
+        page.value = page.value?.plus(1)
+    }
+
+    fun isEmptyResponse(): Boolean = isEmptyResponse.value ?: false
 
     fun setSearchRequest(request: SearchRequest) {
         this.request.value = request
@@ -98,29 +108,13 @@ class SearchViewModel @Inject constructor(
             ?: 0) > 0 || (sqftMaxFilter.value ?: 0) > 0)
     }
 
-    fun getPropertiesByRequest() {
-        val request = request.value?.requestType
-        if (request == RequestType.SALE) getPropertiesForSale()
-        else getPropertiesForRent()
-    }
-
-    fun getPropertiesForSale() {
+    fun getPropertiesFromNetwork() {
         if (checkFilters()) {
             val data = request.value ?: return
-            val params = GetPropertiesForSaleUseCase.Params.create(data)
+            val requestPage = page.value ?: return
+            val params = GetPropertiesFromNetworkUseCase.Params.create(data, requestPage)
             ioToUiWorkData(
                 io = { getPropertiesForSaleUseCase.execute(params) },
-                ui = { _properties.postValue(it) }
-            )
-        }
-    }
-
-    fun getPropertiesForRent() {
-        if (checkFilters()) {
-            val data = request.value ?: return
-            val params = GetPropertiesForRentUseCase.Params.create(data)
-            ioToUiWorkData(
-                io = { getPropertiesForRentUseCase.execute(params) },
                 ui = { _properties.postValue(it) }
             )
         }

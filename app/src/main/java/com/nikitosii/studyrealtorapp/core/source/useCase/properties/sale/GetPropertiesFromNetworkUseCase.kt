@@ -12,32 +12,41 @@ import com.nikitosii.studyrealtorapp.core.source.repository.SearchRequestRepo
 import com.nikitosii.studyrealtorapp.core.source.useCase.base.UseCaseParams
 import javax.inject.Inject
 
-class GetPropertiesForSaleUseCase @Inject constructor(
+class GetPropertiesFromNetworkUseCase @Inject constructor(
     private val searchRequestRepo: SearchRequestRepo,
     private val propertiesRepo: PropertiesRepo,
     private val requestDataRepo: RequestDataRepo,
     private val imageRepo: ImageRepo
-) : UseCaseParams<Pair<SearchRequest, List<Property>>, GetPropertiesForSaleUseCase.Params>() {
+) : UseCaseParams<Pair<SearchRequest, List<Property>>, GetPropertiesFromNetworkUseCase.Params>() {
 
-    class Params private constructor(val request: SearchRequest) {
+    class Params private constructor(val request: SearchRequest, val page: Int) {
         companion object {
-            fun create(request: SearchRequest) = Params(request)
+            fun create(request: SearchRequest, page: Int) = Params(request, page)
         }
     }
 
     override suspend fun execute(data: Params): Pair<SearchRequest, List<Property>> {
-        val properties = propertiesRepo.getPropertiesForSale(data.request)
-        val requestImageUrl = getImageData(data.request)
+        val properties =
+            if (data.request.requestType == RequestType.SALE)
+                propertiesRepo.getPropertiesForSale(data.request, data.page)
+            else
+                propertiesRepo.getPropertiesForRent(data.request, data.page)
+        val requestImage = getImageData(data.request)
 
         val favoriteProperties =
             propertiesRepo.getFavoritePropertiesIds(properties.map { it.propertyId })
         val updatedProperties = properties
             .map { it.copy(favorite = favoriteProperties.contains(it.propertyId)) }
         propertiesRepo.saveProperties(updatedProperties)
-        val request = searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImageUrl.url))
+        val request =
+            searchRequestRepo.saveSearchRequest(data.request.copy(imageUrl = requestImage.url))
         searchRequestRepo.refreshRecentSearchRequests(RequestType.SALE)
         searchRequestRepo.refreshSearchRequests()
-        requestDataRepo.saveData(RequestDataEntity(request.id!!, updatedProperties.map { it.propertyId }))
+        requestDataRepo.saveData(
+            RequestDataEntity(
+                request.id!!,
+                updatedProperties.map { it.propertyId })
+        )
 
         return Pair(request, updatedProperties)
     }

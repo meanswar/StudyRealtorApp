@@ -32,7 +32,7 @@ class DashboardViewModel @Inject constructor(
     val bathsMaxFilter by lazy { MutableLiveData<Int>() }
     val sqftMinFilter by lazy { MutableLiveData<Int>() }
     val sqftMaxFilter by lazy { MutableLiveData<Int>() }
-    val requestType = MutableLiveData<RequestType>()
+    val requestType = MutableLiveData(RequestType.SALE)
 
     fun isFilterHousesFilled(): Boolean = run { filterHouses.isNotEmpty() }
 
