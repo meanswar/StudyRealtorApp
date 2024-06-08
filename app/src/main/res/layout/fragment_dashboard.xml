@@ -255,11 +255,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_20dp"
-            android:layoutAnimation="@anim/anim_hide_to_top_content"
             android:paddingHorizontal="@dimen/size_20dp"
             app:layout_constraintBottom_toTopOf="@id/space"
-            app:layout_constraintTop_toBottomOf="@id/clTopContent"
-            tools:layoutAnimation="@null">
+            app:layout_constraintTop_toBottomOf="@id/clTopContent">
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/grRecentSaleContent"

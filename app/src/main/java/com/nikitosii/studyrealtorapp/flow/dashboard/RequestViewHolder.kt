@@ -9,12 +9,13 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemPropertyRequestBinding
+import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 import com.nikitosii.studyrealtorapp.util.ext.model.getFiltersCount
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.showText
 
 class RequestViewHolder(
-    private val binding: ItemPropertyRequestBinding,
+    private val binding: ItemRecentSearchBinding,
     private val onClick: (View, SearchRequest) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 

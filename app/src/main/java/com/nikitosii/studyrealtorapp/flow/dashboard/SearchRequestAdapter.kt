@@ -4,21 +4,20 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
-import com.nikitosii.studyrealtorapp.databinding.ItemPropertyRequestBinding
 import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 
 class SearchRequestAdapter(
-    private val onClick: (View, SearchRequest) -> Unit) :
+    private val onClick: (View, SearchRequest) -> Unit
+) :
     ListAdapter<SearchRequest, RequestViewHolder>(SaleRequestDiffCallback) {
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemPropertyRequestBinding.inflate(inflater, parent, false)
+        val binding = ItemRecentSearchBinding.inflate(inflater, parent, false)
         return RequestViewHolder(binding, onClick)
     }
 

@@ -4,27 +4,24 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.databinding.ItemPropertyRequestBinding
-import com.nikitosii.studyrealtorapp.databinding.ItemRecentSearchBinding
 
 class DashboardRequestAdapter(
     private val onClick: (View, SearchRequest) -> Unit
 ) :
-    ListAdapter<SearchRequest, DashboarRequestViewHolder>(SaleRequestDiffCallback) {
+    ListAdapter<SearchRequest, DashboardRequestViewHolder>(SaleRequestDiffCallback) {
 
     @SuppressLint("SuspiciousIndentation")
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboarRequestViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardRequestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemPropertyRequestBinding.inflate(inflater, parent, false)
-        binding.root.updateLayoutParams { width = (parent.width * 0.8).toInt()}
-        return DashboarRequestViewHolder(binding, onClick)
+        return DashboardRequestViewHolder(binding, onClick)
     }
 
-    override fun onBindViewHolder(holder: DashboarRequestViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DashboardRequestViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

@@ -13,7 +13,7 @@ import com.nikitosii.studyrealtorapp.util.ext.model.getFiltersCount
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.showText
 
-class DashboarRequestViewHolder(
+class DashboardRequestViewHolder(
     private val binding: ItemPropertyRequestBinding,
     private val onClick: (View, SearchRequest) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {

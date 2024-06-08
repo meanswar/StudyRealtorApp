@@ -65,6 +65,7 @@ class DashboardFragment :
         }
         onClick()
         binding.clTopContent.showWithAnimation(R.anim.slide_in_anim_bottom)
+        binding.clBottomContent.showWithAnimation(R.anim.slide_in_anim_top)
     }
 
     private fun onClick() {
