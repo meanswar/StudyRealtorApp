@@ -39,7 +39,23 @@ class AgentsViewModel @Inject constructor(
 
     val isFilterFilled = MutableLiveData(false)
 
-    fun isNetworkRequest(): Boolean = isNetworkRequesting.value == true
+    private val page = MutableLiveData(1)
+    private val isEmptyResponse = MutableLiveData(false)
+    val oldRequest = MutableLiveData<AgentRequestApi>()
+
+    fun incrementPage() {
+        page.value = page.value?.plus(1)
+    }
+
+    private fun resetPageCounter() {
+        page.value = 1
+    }
+
+    fun setIsEmptyResponse(isLast: Boolean) {
+        isEmptyResponse.value = isLast
+    }
+
+    fun isEmptyResponse(): Boolean = isEmptyResponse.value ?: false
 
     fun setLocationFilter(value: String) {
         locationFilter.value = value
@@ -79,7 +95,6 @@ class AgentsViewModel @Inject constructor(
         price = priceFilter.value,
         photo = photoFilter.value,
         lang = langFilter.value,
-        page = 1
     )
 
     fun updateAgentFavoriteStatus(agent: Agent) {
@@ -89,7 +104,13 @@ class AgentsViewModel @Inject constructor(
 
     fun getAgentsFromNetwork() {
         isNetworkRequesting.postValue(true)
-        val params = GetAgentsFromNetworkUseCase.Params.from(buildAgentRequest())
+        val newRequest = buildAgentRequest()
+        if (oldRequest.value?.equals(newRequest) == false) {
+            resetPageCounter()
+            oldRequest.postValue(newRequest)
+        }
+        val currentPage = page.value ?: return
+        val params = GetAgentsFromNetworkUseCase.Params.from(newRequest, currentPage)
         ioToUiWorkData(
             io = { getAgentsFromNetworkUseCase.execute(params) },
             ui = { _agents.postValue(it) })

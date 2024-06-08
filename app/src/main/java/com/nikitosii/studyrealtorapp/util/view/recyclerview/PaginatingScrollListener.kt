@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.util.view.recyclerview
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 
 abstract class PaginatingScrollListener(private val layoutManager: LinearLayoutManager) :
     RecyclerView.OnScrollListener() {
@@ -15,7 +16,8 @@ abstract class PaginatingScrollListener(private val layoutManager: LinearLayoutM
 
         if (!isLoading() && !isLastPage()) {
             if (visibleCount + firstVisibleItem >= totalItemCount && firstVisibleItem >= 0) {
-                loadMoreItems()
+                Timber.i("Load more items\nvisibleCount: $visibleCount, totalItemCount: $totalItemCount, firstVisibleItem: $firstVisibleItem")
+//                loadMoreItems()
             }
         }
     }

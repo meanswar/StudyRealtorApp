@@ -8,5 +8,5 @@ data class SalePriceResponseApi(
     val min: Int,
     val max: Int,
     @Json(name = "last_listing_date")
-    val lastListingDate: String
+    val lastListingDate: String? = null
 )

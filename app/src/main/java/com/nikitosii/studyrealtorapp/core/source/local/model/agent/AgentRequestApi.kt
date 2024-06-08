@@ -7,5 +7,4 @@ data class AgentRequestApi(
     val rating: Int? = null,
     val agentName: String? = null,
     val location: String,
-    val page: Int = 1,
 )

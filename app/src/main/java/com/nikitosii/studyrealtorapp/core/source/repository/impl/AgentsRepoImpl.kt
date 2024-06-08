@@ -36,7 +36,7 @@ class AgentsRepoImpl @Inject constructor(
         storageConfig { get = { dao.getLocalAgents().map { Agent.from(it) }.sortedBy { it.name } } }
     }
 
-    override suspend fun getAgents(data: AgentRequestApi): List<Agent> = runWithErrorHandler {
+    override suspend fun getAgents(data: AgentRequestApi, page: Int): List<Agent> = runWithErrorHandler {
         val result = api.getAgents(
             data.location,
             data.agentName,
@@ -44,7 +44,7 @@ class AgentsRepoImpl @Inject constructor(
             data.photo,
             data.lang,
             data.price,
-            data.page
+            page
         ).agents
         result.map { Agent.from(it) }
     }

@@ -11,9 +11,12 @@ interface AgentsRepo {
      * Retrieves a list of agents based on the provided search criteria.
      *
      * @param data The [AgentRequestApi] model containing search criteria for agents.
+     *
+     * @param page The page number to retrieve.
+     *
      * @return A list of [Agent] matching the search criteria.
      */
-    suspend fun getAgents(data: AgentRequestApi): List<Agent>
+    suspend fun getAgents(data: AgentRequestApi, page: Int): List<Agent>
 
     /**
      * Retrieves a list of local agents based on the provided IDs.

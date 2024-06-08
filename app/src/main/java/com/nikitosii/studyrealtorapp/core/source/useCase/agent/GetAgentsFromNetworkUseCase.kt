@@ -11,14 +11,14 @@ class GetAgentsFromNetworkUseCase @Inject constructor(
 
 ) : UseCaseParams<List<Agent>, GetAgentsFromNetworkUseCase.Params>() {
 
-    class Params private constructor(val params: AgentRequestApi) {
+    class Params private constructor(val params: AgentRequestApi, val page: Int) {
         companion object {
-            fun from(params: AgentRequestApi) = Params(params)
+            fun from(params: AgentRequestApi, page: Int) = Params(params, page)
         }
     }
 
     override suspend fun execute(data: Params): List<Agent> {
-        val networkAgents = agentsRepo.getAgents(data.params)
+        val networkAgents = agentsRepo.getAgents(data.params, data.page)
         val localFavoriteAgentIds = agentsRepo
             .getFavoriteAgentsFromList(networkAgents.map { it.id })
             .map { it.id }

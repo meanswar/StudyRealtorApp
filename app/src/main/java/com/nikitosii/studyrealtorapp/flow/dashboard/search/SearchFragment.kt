@@ -16,7 +16,6 @@ import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterAdapter
 import com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertyAdapter
 import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
-import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.hideWithScaleOut
 import com.nikitosii.studyrealtorapp.util.ext.onClick
 import com.nikitosii.studyrealtorapp.util.ext.show
@@ -66,7 +65,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private fun onClick() {
         with(binding) {
-            btnAccept.onClick { viewModel.getPropertiesFromNetwork() }
+            btnAccept.onClick { onSearch() }
             svProperty.setOnTextChanged { viewModel.addressFilter.value = it }
             with(lFilters) {
                 rvRangePrice.onRangeChanged { first, second -> onPriceChanged(first, second) }
@@ -75,6 +74,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
                 rvRangeSqft.onRangeChanged { first, second -> onSqftChanged(first, second) }
             }
         }
+    }
+
+    private fun onSearch() {
+        propertiesAdapter.submitList(listOf())
+        isFirstItemsLoading.value = true
+        viewModel.getPropertiesFromNetwork()
     }
 
     private fun initRecyclerViewSettings() {
@@ -178,7 +183,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
 
     private fun observeProperties(data: Pair<SearchRequest, List<Property>>?) {
         observeProperties(data?.second)
-        viewModel.updateSaleRequest(data?.first?.id)
+        viewModel.setRequestId(data?.first?.id)
     }
 
     private fun observeProperties(data: List<Property>?) {

@@ -22,7 +22,7 @@ class SearchViewModel @Inject constructor(
     private val getLocalPropertyUseCase: GetLocalPropertyUseCase
 ) : BaseViewModel() {
 
-    private val request = MutableLiveData<SearchRequest>()
+    private val oldRequest = MutableLiveData<SearchRequest>()
 
     private val filterHouses = mutableListOf<HouseType>()
     val addressFilter by lazy { MutableLiveData<String>() }
@@ -50,18 +50,20 @@ class SearchViewModel @Inject constructor(
     private val page = MutableLiveData(1)
     private val isEmptyResponse = MutableLiveData(false)
 
-    fun setIsEmptyResponse(isLast: Boolean) {
-        isEmptyResponse.value = isLast
-    }
-
     fun incrementPage() {
         page.value = page.value?.plus(1)
     }
 
+    private fun resetPage() {
+        page.value = 1
+    }
+
+    fun setIsEmptyResponse(isLast: Boolean) { isEmptyResponse.value = isLast }
+
     fun isEmptyResponse(): Boolean = isEmptyResponse.value ?: false
 
     fun setSearchRequest(request: SearchRequest) {
-        this.request.value = request
+        this.oldRequest.value = request
         addressFilter.value = request.address
         priceMinFilter.value = request.priceMin
         priceMaxFilter.value = request.priceMax
@@ -79,10 +81,14 @@ class SearchViewModel @Inject constructor(
         isNeedToUpdateLocalPropertyData.value = isNeed
     }
 
+    fun setRequestId(id: Int?) {
+        val updatedRequest = oldRequest.value?.copy(id = id) ?: return
+        oldRequest.postValue(updatedRequest)
+    }
 
-    fun updateSaleRequest(id: Int? = null): SearchRequest {
-        val newRequest = request.value?.copy(
-            id = id,
+
+    fun updateSaleRequest(): SearchRequest {
+        return oldRequest.value?.copy(
             address = addressFilter.value?.replaceFirstChar(Char::titlecase) ?: "",
             houses = filterHouses,
             priceMin = priceMinFilter.value,
@@ -95,8 +101,6 @@ class SearchViewModel @Inject constructor(
             sqftMax = sqftMaxFilter.value,
             requestType = requestType.value!!,
         ) ?: SearchRequest.emptyInstance()
-        request.postValue(newRequest)
-        return newRequest
     }
 
     private fun checkFilters(): Boolean {
@@ -110,7 +114,11 @@ class SearchViewModel @Inject constructor(
 
     fun getPropertiesFromNetwork() {
         if (checkFilters()) {
-            val data = request.value ?: return
+            val data = updateSaleRequest()
+            if (data.equals(oldRequest.value) == false) {
+                resetPage()
+                oldRequest.value = data
+            }
             val requestPage = page.value ?: return
             val params = GetPropertiesFromNetworkUseCase.Params.create(data, requestPage)
             ioToUiWorkData(

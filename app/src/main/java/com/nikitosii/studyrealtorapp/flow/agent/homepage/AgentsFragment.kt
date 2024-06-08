@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import androidx.cardview.widget.CardView
-import androidx.core.view.doOnPreDraw
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout.Tab
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
@@ -32,6 +33,7 @@ import com.nikitosii.studyrealtorapp.util.ext.onTabClick
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.PulseLayout
+import com.nikitosii.studyrealtorapp.util.view.recyclerview.PaginatingScrollListener
 import timber.log.Timber
 
 @RequiresViewModel(AgentsViewModel::class)
@@ -40,6 +42,8 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 ) {
 
     private val agentsAdapter by lazy { AgentAdapter(onAgentClick) }
+    private val isFirstItemsLoading = MutableLiveData(true)
+    private val isLoadingData = MutableLiveData(true)
 
     private val onAgentClick: (view: View, agent: Agent) -> Unit = { view, agent ->
         when (view.id) {
@@ -51,11 +55,10 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
     }
 
     override fun initViews() {
+        initRecyclerViewSettings()
         with(binding) {
             svSearch.initEndAnimation(cvFilterButtons)
             toolbar.initEndBtnAnimation(clFilters)
-
-            rvAgents.adapter = agentsAdapter
 
             with(lFilterAttributes) {
                 ivLanguage.initAnimation(svLanguage)
@@ -68,6 +71,20 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
             clTopContent.showWithAnimation(R.anim.slide_in_anim_bottom)
             clBottomContent.showWithAnimation(R.anim.slide_in_anim_top)
+        }
+    }
+
+    private fun initRecyclerViewSettings() {
+        with(binding) {
+            rvAgents.adapter = agentsAdapter
+            rvAgents.addOnScrollListener(object :
+                PaginatingScrollListener(rvAgents.layoutManager as LinearLayoutManager) {
+                override fun loadMoreItems() = viewModel.getAgentsFromNetwork()
+
+                override fun isLoading(): Boolean = isLoadingData.value == true
+
+                override fun isLastPage(): Boolean = viewModel.isEmptyResponse()
+            })
         }
     }
 
@@ -95,8 +112,16 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         when (it.status) {
             ERROR -> handleException(it.exception) { openError() }
             LOADING -> Timber.i("loading agents")
-            SUCCESS -> viewModel.agents.postValue(it.data)
+            SUCCESS -> setAgentsData(it.data)
         }
+    }
+
+    private fun setAgentsData(data: List<Agent>?) {
+        if (data?.isEmpty() == true) viewModel.setIsEmptyResponse(true)
+        else viewModel.incrementPage()
+
+        val newData = viewModel.agents.value?.toMutableList()?.apply { addAll(data ?: emptyList()) }
+        viewModel.agents.postValue(newData)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -129,14 +154,22 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
 
     private fun processAgents(data: List<Agent>?) {
         with(binding) {
-            agentsAdapter.submitList(data)
-            rvAgents.notifyDataSetChanged()
+            val newList = mutableListOf<Agent>().apply {
+                addAll(agentsAdapter.currentList)
+                addAll(data ?: emptyList())
+            }
+            agentsAdapter.submitList(newList)
+            if (isFirstItemsLoading.value == true) {
+                rvAgents.notifyDataSetChanged()
+                isFirstItemsLoading.value = false
+            }
             grEmpty.show(data?.isEmpty() == true)
         }
     }
 
     private fun onLoading(isLoading: Boolean) {
         with(binding) {
+            isLoadingData.postValue(isLoading)
             grEmpty.hide()
             grTopContent.hide()
             lavLoading.show(isLoading)
@@ -164,7 +197,6 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
         with(binding) {
             lFilterAttributes.btnSearch.onClick { searchAgents() }
             svSearch.setOnTextChanged { onLocationTextChanged(it) }
-            tlAgentSortingFilters.onTabClick({ onTabClick(it) }, { onTabReselectedClick() })
         }
     }
 
@@ -200,36 +232,14 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
     }
 
     private fun searchAgents() {
+        isFirstItemsLoading.value = false
+        agentsAdapter.submitList(listOf())
         if (viewModel.isLocationFilterSet())
             viewModel.getAgentsFromNetwork()
-    }
-
-    private fun onTabClick(tab: Tab) {
-        val agents = viewModel.agents.value ?: return
-
-        processAgents(when (tab.text.toString()) {
-            TAB_NAME -> agents.sortedBy { it.name }
-            TAB_RATING -> agents.sortedByDescending { it.reviewCount }
-            TAB_PRICE -> agents.sortedBy { it.salePrice?.min }
-            TAB_FAVORITE -> agents.sortedByDescending { it.favorite }
-            else -> return
-        })
-    }
-
-    private fun onTabReselectedClick() {
-        val agents = viewModel.agents.value?.reversed() ?: return
-        viewModel.agents.postValue(agents)
     }
 
     private fun openAgentDetails(data: Agent, view: CardView) {
         val extra = FragmentNavigatorExtras(view to "agent_details")
         AgentsFragmentDirections.openAgentDetails(data).navigate(extra)
-    }
-
-    companion object {
-        private const val TAB_NAME = "Name"
-        private const val TAB_RATING = "Rating"
-        private const val TAB_PRICE = "Price"
-        private const val TAB_FAVORITE = "Favorites"
     }
 }
