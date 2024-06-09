@@ -93,31 +93,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivSearch"
+            android:layout_marginBottom="@dimen/size_5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvSearchPlace"
-            tools:text="Obj: 54" />
+            tools:text="Properties: 54" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvFavorite"
-            android:layout_width="@dimen/size_50dp"
-            android:layout_height="@dimen/size_50dp"
-            android:layout_marginTop="@dimen/size_15dp"
-            android:layout_marginEnd="@dimen/size_15dp"
-            app:cardBackgroundColor="@color/white_transparent"
-            app:cardCornerRadius="@dimen/size_25dp"
-            app:cardElevation="@dimen/size_0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivFavorite"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:scaleType="center"
-                android:src="@drawable/ic_favorite_active" />
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>>
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="@dimen/size_50dp"
+                android:layout_height="@dimen/size_50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/size_10dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:id="@+id/lavFavorite"
+                app:lottie_fileName="anim_favorite.json" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

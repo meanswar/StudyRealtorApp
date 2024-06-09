@@ -1,7 +1,5 @@
 package com.nikitosii.studyrealtorapp.flow.profile.requests
 
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -30,7 +28,7 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
 
     private fun onRequestClick(view: View, data: SearchRequest) {
         when (view.id) {
-            R.id.cvFavorite -> viewModel.updateRequest(data)
+            R.id.lavFavorite -> viewModel.updateRequest(data)
             R.id.cvContent -> openSearchRequestDetails(data)
             R.id.cvTrash -> viewModel.removeRequest(data.id ?: return)
         }
@@ -53,7 +51,7 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
     override fun subscribe() {
         with(viewModel) {
             requestsNetwork.observe(viewLifecycleOwner, searchRequestsObserver)
-            requests.observe(viewLifecycleOwner) { onDataSet(it) }
+            requests.observe(viewLifecycleOwner) { adapter.submitList(it) }
         }
     }
 
@@ -71,11 +69,6 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
         with(binding) {
             lavLoading.show(isLoading)
         }
-    }
-
-    private fun onDataSet(data: List<SearchRequest>) {
-        adapter.submitList(data)
-        Handler(Looper.getMainLooper()).postDelayed({ binding.rvContent.scrollToPosition(0) }, 500)
     }
 
     private fun openSearchRequestDetails(request: SearchRequest) {

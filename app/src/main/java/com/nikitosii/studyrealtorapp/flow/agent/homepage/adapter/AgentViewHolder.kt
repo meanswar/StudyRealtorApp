@@ -1,19 +1,14 @@
 package com.nikitosii.studyrealtorapp.flow.agent.homepage.adapter
 
-import android.annotation.SuppressLint
 import android.view.View
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.databinding.ItemAgentBinding
+import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.ifNullOrEmpty
-import com.nikitosii.studyrealtorapp.util.ext.onAnimCompleted
 import com.nikitosii.studyrealtorapp.util.ext.onClick
-import com.nikitosii.studyrealtorapp.util.ext.show
+import com.nikitosii.studyrealtorapp.util.ext.onFavorite
 
 class AgentViewHolder(
     private val binding: ItemAgentBinding,
@@ -27,8 +22,8 @@ class AgentViewHolder(
             setFavorite(agent)
             onClicks(agent)
             setTexts(agent)
-            setImage(agent.photoUrl, ivAgent, R.drawable.agent)
-            setImage(agent.office?.image, ivOffice)
+            glideImage(ivAgent, agent.photoUrl, R.drawable.agent)
+            glideImage(ivOffice, agent.office?.image)
         }
     }
 
@@ -50,31 +45,9 @@ class AgentViewHolder(
         }
     }
 
-    private fun setFavorite(agent: Agent) {
-        with(binding.lavFavorite) {
-            if (isFavorite(agent)) {
-                frame = maxFrame.toInt()
-                speed = -6.0f
-            } else {
-                frame = minFrame.toInt()
-                speed = 6.0f
-            }
-            onAnimCompleted(onCompleted = {
-                speed *= -1
-                onClick(this, agent)
-            })
-        }
+    private fun setFavorite(data: Agent) {
+        binding.lavFavorite.onFavorite(
+            { isFavorite(data) },
+            { onClick(binding.lavFavorite, data) })
     }
-
-        @SuppressLint("CheckResult")
-        private fun setImage(url: String?, view: ImageView, placeHolder: Int? = null) {
-            view.show()
-            Glide.with(view)
-                .load(url)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transition(DrawableTransitionOptions.withCrossFade(200))
-                .apply { if (placeHolder != null) placeholder(placeHolder) }
-                .skipMemoryCache(false)
-                .into(view)
-        }
-    }
+}

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -63,4 +64,32 @@ fun Fragment.glideImage(image: Bitmap?, view: ImageView, placeHolder: Int? = nul
 
 fun RecyclerView.attachPagerSnap() {
     PagerSnapHelper().attachToRecyclerView(this)
+}
+
+@SuppressLint("CheckResult")
+fun RecyclerView.ViewHolder.glideImage(view: ImageView, url: String?, placeHolder: Int? = null) {
+    Glide.with(itemView)
+        .load(url)
+        .diskCacheStrategy(DiskCacheStrategy.DATA)
+        .transition(DrawableTransitionOptions.withCrossFade(200))
+        .apply { if (placeHolder != null) placeholder(placeHolder) }
+        .skipMemoryCache(false)
+        .into(view)
+}
+
+inline fun LottieAnimationView.onFavorite(
+    crossinline checked: () -> Boolean,
+    crossinline onAnimFinished: () -> Unit
+) {
+    if (checked()) {
+        frame = maxFrame.toInt()
+        speed = -6.0f
+    } else {
+        frame = minFrame.toInt()
+        speed = 6.0f
+    }
+    onAnimCompleted(onCompleted = {
+        speed *= -1
+        onAnimFinished()
+    })
 }
