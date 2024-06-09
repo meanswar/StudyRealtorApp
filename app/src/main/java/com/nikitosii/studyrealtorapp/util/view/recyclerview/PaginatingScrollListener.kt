@@ -16,8 +16,7 @@ abstract class PaginatingScrollListener(private val layoutManager: LinearLayoutM
 
         if (!isLoading() && !isLastPage()) {
             if (visibleCount + firstVisibleItem >= totalItemCount && firstVisibleItem >= 0) {
-                Timber.i("Load more items\nvisibleCount: $visibleCount, totalItemCount: $totalItemCount, firstVisibleItem: $firstVisibleItem")
-//                loadMoreItems()
+                loadMoreItems()
             }
         }
     }

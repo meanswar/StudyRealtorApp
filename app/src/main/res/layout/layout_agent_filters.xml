@@ -126,7 +126,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="@dimen/size_4dp"
             app:layout_constraintEnd_toStartOf="@id/glMid"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +135,6 @@
                 android:id="@+id/plYes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_4dp"
                 android:layout_marginEnd="@dimen/size_10dp"
                 app:animation_duration="2000"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -169,6 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:animation_duration="2000"
+                android:layout_marginStart="@dimen/size_10dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:wave_color="@color/blue_end"
                 app:wave_count="1"

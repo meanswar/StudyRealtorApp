@@ -173,7 +173,6 @@ class AgentsFragment : BaseFragment<FragmentHomePageAgentsBinding, AgentsViewMod
             grEmpty.hide()
             grTopContent.hide()
             lavLoading.show(isLoading)
-            rvAgents.show(!isLoading)
             lFilterAttributes.plBtn.run { if (isLoading) stopAnimation() else startAnimation() }
             lFilterAttributes.btnSearch.isEnabled = !isLoading
         }

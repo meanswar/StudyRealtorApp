@@ -10,7 +10,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
 @Dao
 interface RequestDataDao {
     @Query("SELECT * FROM $DATABASE_TABLE_REQUEST_DATA where requestId = :requestId")
-    fun getData(requestId: Int): RequestDataEntity
+    fun getData(requestId: Int): RequestDataEntity?
 
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     fun insert(requestData: RequestDataEntity)

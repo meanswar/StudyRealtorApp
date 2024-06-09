@@ -23,7 +23,7 @@ class RealtorToolbar @JvmOverloads constructor(
 
     init {
         context.withStyledAttributes(attrs, R.styleable.RealtorToolbar) {
-            getFloat(R.styleable.RealtorToolbar_startAnimationSpeed, 3.0f).run {
+            getFloat(R.styleable.RealtorToolbar_startAnimationSpeed, 6.0f).run {
                 setStartAnimationSpeed(this)
             }
             getStringOrNull(R.styleable.RealtorToolbar_toolbar_title)?.run { setTitle(this) }

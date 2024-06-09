@@ -1,7 +1,5 @@
 package com.nikitosii.studyrealtorapp.flow.profile.properties
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.nikitosii.studyrealtorapp.R
@@ -46,7 +44,7 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
     override fun subscribe() {
         with(viewModel) {
             propertiesNetwork.observe(viewLifecycleOwner, propertiesNetworkObserver)
-            properties.observe(viewLifecycleOwner) { setProperties(it) }
+            properties.observe(viewLifecycleOwner) { adapter.submitList(it) }
         }
     }
 
@@ -57,14 +55,6 @@ class ProfilePropertiesFragment : BaseFragment<FragmentHistoryBinding, ProfilePr
             ERROR -> handleException(it.exception)
             LOADING -> Timber.i("loading agents")
         }
-    }
-
-    private fun setProperties(data: List<Property>) {
-        adapter.submitList(data)
-        Handler(Looper.getMainLooper()).postDelayed(
-            { binding.rvContent.scrollToPosition(0) },
-            500
-        )
     }
 
     private fun onLoading(isLoading: Boolean) {

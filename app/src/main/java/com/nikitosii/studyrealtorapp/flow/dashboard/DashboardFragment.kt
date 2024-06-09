@@ -44,7 +44,7 @@ class DashboardFragment :
     private fun onSearchRequestClick(view: View, data: SearchRequest) {
         when (view.id) {
             R.id.cvContent -> onSaleRequestClick(data)
-            R.id.cvFavorite -> onFavoriteClick(data)
+            R.id.lavFavorite -> onFavoriteClick(data)
         }
     }
 
