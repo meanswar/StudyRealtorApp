@@ -57,10 +57,10 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
         onClick()
 
         viewModel.agent.postValue(args.agent)
-//        Handler(Looper.getMainLooper()).postDelayed(
-//            { viewModel.getAgentDetails(args.agent.id) },
-//            800
-//        )
+        Handler(Looper.getMainLooper()).postDelayed(
+            { viewModel.getAgentDetails(args.agent.id) },
+            800
+        )
         with(binding) {
             rvMarketingAreas.adapter = marketingAreasAdapter
             rvLanguages.adapter = languagesAdapter
