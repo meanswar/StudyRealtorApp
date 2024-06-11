@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true" >
+        android:animateLayoutChanges="true">
 
         <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
             android:id="@+id/toolbar"
@@ -30,10 +31,10 @@
             android:id="@+id/lavLoading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
             app:layout_constraintTop_toBottomOf="@id/cvTopContent"
             app:lottie_autoPlay="true"
-            android:scaleY="0.5"
-            android:scaleX="0.5"
             app:lottie_fileName="loading.json"
             app:lottie_loop="true"
             app:lottie_speed="1.5" />
@@ -92,6 +93,7 @@
                     style="@style/AppTheme.Text.Bold.Headline2.Teflon"
                     android:layout_width="@dimen/size_0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5dp"
                     android:layout_marginStart="@dimen/size_10dp"
                     app:layout_constraintStart_toEndOf="@id/cvImageProfile"
                     app:layout_constraintTop_toTopOf="@id/cvImageProfile"
@@ -146,40 +148,31 @@
                     android:id="@+id/tvAgentWebsite"
                     android:layout_width="@dimen/size_0dp"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_website"
                     android:drawablePadding="@dimen/size_5dp"
                     android:ellipsize="end"
+                    android:layout_marginBottom="@dimen/size_5dp"
                     android:lines="1"
                     android:linksClickable="true"
                     android:textAppearance="@style/AppTheme.Text.Paragraph3.Teflon"
                     android:textColor="@color/blue_dark"
                     android:textStyle="normal"
-                    app:layout_constraintEnd_toStartOf="@id/cvFavorite"
+                    app:layout_constraintEnd_toStartOf="@id/lavFavorite"
                     app:layout_constraintStart_toStartOf="@id/tvAgentPhone"
                     app:layout_constraintTop_toBottomOf="@id/tvAgentPhone"
-                    tools:text="Click to open the Website" />
+                    tools:text="Click to open the Website"
+                    app:drawableStartCompat="@drawable/ic_website" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvFavorite"
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lavFavorite"
                     android:layout_width="@dimen/size_40dp"
                     android:layout_height="@dimen/size_40dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
                     android:layout_marginEnd="@dimen/size_10dp"
-                    android:layout_marginBottom="@dimen/size_10dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardCornerRadius="@dimen/size_20dp"
-                    app:cardElevation="@dimen/size_0dp"
+                    android:layout_marginBottom="@dimen/size_5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <ImageView
-                        android:id="@+id/ivFavorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_favorite" />
-
-                </androidx.cardview.widget.CardView>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:lottie_fileName="anim_favorite.json" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -220,8 +213,8 @@
                 android:id="@+id/tvPriceTitle"
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/size_10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
                 android:text="Price range: "
                 app:layout_constraintTop_toBottomOf="@id/tvAbout" />
 
@@ -230,15 +223,15 @@
                 style="@style/AppTheme.Text.Paragraph4.Teflon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="$775K-$1.99M"
-                app:layout_constraintTop_toBottomOf="@id/tvPriceTitle" />
+                app:layout_constraintTop_toBottomOf="@id/tvPriceTitle"
+                tools:text="$775K-$1.99M" />
 
             <TextView
                 android:id="@+id/tvLanguagesTitle"
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/size_10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
                 android:text="@string/screen_agent_details_about_languages_title"
                 app:layout_constraintTop_toBottomOf="@id/tvAgentPrice" />
 

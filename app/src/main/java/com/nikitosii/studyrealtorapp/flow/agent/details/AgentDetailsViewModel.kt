@@ -29,8 +29,8 @@ class AgentDetailsViewModel @Inject constructor(
         )
     }
 
-    fun updateAgentFavoriteStatus() {
-        val agent = agent.value ?: return
+    fun updateAgentFavoriteStatus(agent: Agent) {
+        this.agent.postValue(agent)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(agent)
         ioToUnit { updateAgentFavoriteStatusUseCase.execute(params) }
     }

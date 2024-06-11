@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.transition.MaterialContainerTransform
@@ -27,6 +25,7 @@ import com.nikitosii.studyrealtorapp.util.ext.formatPrice
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.model.getAddress
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.onFavorite
 import com.nikitosii.studyrealtorapp.util.ext.openWebsite
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
@@ -46,8 +45,6 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            // Scope the transition to a view in the hierarchy so we know it will be added under
-            // the bottom app bar but over the elevation scale of the exiting HomeFragment.
             drawingViewId = R.id.navFragment
             duration = TRANSITION_DURATION
             scrimColor = Color.TRANSPARENT
@@ -60,10 +57,10 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
         onClick()
 
         viewModel.agent.postValue(args.agent)
-        Handler(Looper.getMainLooper()).postDelayed(
-            { viewModel.getAgentDetails(args.agent.id) },
-            800
-        )
+//        Handler(Looper.getMainLooper()).postDelayed(
+//            { viewModel.getAgentDetails(args.agent.id) },
+//            800
+//        )
         with(binding) {
             rvMarketingAreas.adapter = marketingAreasAdapter
             rvLanguages.adapter = languagesAdapter
@@ -73,12 +70,7 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
     }
 
     private fun initFavoriteView(isFavorite: Boolean) {
-        with(binding) {
-            ivFavorite.setImageResource(
-                if (isFavorite) R.drawable.ic_favorite_active
-                else R.drawable.ic_favorite
-            )
-        }
+        binding.lavFavorite.onFavorite({ isFavorite }, { onFavoriteClick() })
     }
 
     private fun setLocalAgentData() {
@@ -159,14 +151,13 @@ class AgentDetailsFragment : BaseFragment<FragmentAgentDetailsBinding, AgentDeta
             tvAgentWebsite.onClick { openWebsite(tvAgentWebsite.text.toString()) }
             tvAgentPhone.onClick { callIntent(tvAgentPhone.text.toString()) }
             clMapContent.onClick { openMap(tvProfileAddress.text.toString(), null) }
-            cvFavorite.onClick { onFavoriteClick() }
+            lavFavorite.onClick { lavFavorite.playAnimation() }
         }
     }
 
     private fun onFavoriteClick() {
         val agent = viewModel.agent.value?.let { it.copy(favorite = !it.favorite) } ?: return
-        viewModel.agent.postValue(agent)
-        initFavoriteView(agent.favorite)
+        viewModel.updateAgentFavoriteStatus(agent)
     }
 
     private fun openMap(address: String, coord: Coordinate?) {
