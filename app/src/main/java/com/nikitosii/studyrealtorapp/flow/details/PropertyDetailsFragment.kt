@@ -36,6 +36,7 @@ import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.model.getAddress
 import com.nikitosii.studyrealtorapp.util.ext.model.getPriceStringFormat
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.onFavorite
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showText
 import com.nikitosii.studyrealtorapp.util.ext.toUiTime
@@ -68,13 +69,11 @@ class PropertyDetailsFragment :
 
         Handler(Looper.getMainLooper()).postDelayed({
             viewModel.getPropertyDetails(args.property.propertyId)
-            viewModel.updateMapStatus(false)
         }, 1000)
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this@PropertyDetailsFragment)
-        onClick()
     }
 
     @SuppressLint("SetTextI18n")
@@ -82,8 +81,12 @@ class PropertyDetailsFragment :
         viewModel.setLocalProperty(data)
         setPropertyDescriptionInfo(data.description)
         imageAdapter.submitList(data.photos)
-        setFavorite()
         with(binding) {
+            lavFavorite.onFavorite(
+                { viewModel.localProperty.value?.favorite == true },
+                { viewModel.onFavoriteClick() }
+            )
+            lavFavorite.onClick { lavFavorite.playAnimation() }
             tvPropertyAddress.text = "Address: ${data.getAddress()}"
             tvPropertyPrice.text = data.getPriceStringFormat()
 
@@ -99,35 +102,6 @@ class PropertyDetailsFragment :
             }
         }
     }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun setFavorite() {
-        with(binding) {
-            with(viewModel) {
-                when (localProperty.value?.favorite == true) {
-                    true -> {
-                        cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.peach))
-                        ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite_active))
-                    }
-
-                    false -> {
-                        cvFavorite.setCardBackgroundColor(requireContext().getColor(R.color.primary_white))
-                        ivFavorite.setImageDrawable(requireContext().getDrawable(R.drawable.ic_favorite))
-                    }
-                }
-            }
-        }
-    }
-
-    private fun onClick() {
-        with(binding) {
-            cvFavorite.onClick {
-                viewModel.onFavoriteClick()
-                setFavorite()
-            }
-        }
-    }
-
 
     private fun setPropertyDescriptionInfo(data: Description?) {
         with(binding) {
@@ -190,6 +164,7 @@ class PropertyDetailsFragment :
             setAdaptersData(property)
             setAgentData(property)
             tvPropertyStatus.text = property?.status
+            viewModel.coordinates.value = property?.location?.address?.coordinate
         }
     }
 
@@ -258,12 +233,8 @@ class PropertyDetailsFragment :
         startActivity(intent)
     }
 
-    private fun openPropertyPhotosScreen(id: Int, view: View) {
-    }
-
     companion object {
         private const val MAP_PACKAGE = "com.google.android.apps.maps"
         private const val EMAIL = "randomEmail@Gmail.com"
-        private const val ANIMATION_TIME = 500L
     }
 }

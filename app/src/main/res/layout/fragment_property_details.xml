@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/size_2dp"
+        android:elevation="@dimen/size_20dp"
         app:endBtnVisible="false"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,41 +19,40 @@
         android:id="@+id/rvPropertyImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_0dp"
-        android:clipToPadding="false"
-        android:elevation="@dimen/size_1dp"
         android:layout_marginEnd="@dimen/size_20dp"
+        android:elevation="@dimen/size_1dp"
         app:layout_constraintDimensionRatio="H,1.2:1"
         app:layout_constraintTop_toTopOf="parent"
-        app:reverseLayout="false"
+        app:reverseLayout="true"
         tools:listitem="@layout/item_photo" />
 
     <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/size_100dp"
         android:id="@+id/cvFavorite"
-        android:layout_width="@dimen/size_50dp"
-        android:layout_height="@dimen/size_50dp"
-        android:layout_marginEnd="@dimen/size_20dp"
-        android:layout_marginBottom="@dimen/size_25dp"
-        android:elevation="@dimen/size_20dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/peach"
-        app:cardCornerRadius="@dimen/size_25dp"
+        app:cardCornerRadius="@dimen/size_10dp"
+        app:cardBackgroundColor="@color/white_transparent_alpha_0.2"
+        android:layout_height="@dimen/size_100dp"
         app:layout_constraintBottom_toBottomOf="@id/rvPropertyImage"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/ivFavorite"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavFavorite"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_favorite_active" />
+            android:background="@color/transparent"
+            android:elevation="@dimen/size_10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:tint="@color/transparent"
+            app:lottie_fileName="anim_favorite.json" />
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:id="@+id/llPropertyFilters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/size_20dp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/rvPropertyImage">
 
         <Space
@@ -141,8 +140,8 @@
         android:id="@+id/clContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/size_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llPropertyFilters">
 

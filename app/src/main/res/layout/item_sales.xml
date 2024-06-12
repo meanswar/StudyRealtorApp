@@ -100,6 +100,8 @@
                 android:id="@+id/tvPropertyName"
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="0dp"
+                android:ellipsize="end"
+                android:lines="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +114,8 @@
                 android:id="@+id/tvPropertyAddress"
                 style="@style/AppTheme.Text.Paragraph4.Teflon"
                 android:layout_width="0dp"
+                android:ellipsize="end"
+                android:lines="1"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -124,7 +128,6 @@
                 style="@style/AppTheme.Text.Bold.Headline3.Teflon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_10dp"
                 android:drawablePadding="@dimen/size_5dp"
                 app:drawableStartCompat="@drawable/ic_bed_24dp_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -141,7 +144,6 @@
                 app:drawableStartCompat="@drawable/ic_bath_24dp_blue"
                 app:layout_constraintBottom_toBottomOf="@id/tvPropertyBeds"
                 app:layout_constraintStart_toEndOf="@id/tvPropertyBeds"
-                app:layout_constraintTop_toTopOf="@id/tvPropertyBeds"
                 tools:text="3" />
 
             <TextView
@@ -153,7 +155,6 @@
                 app:drawableStartCompat="@drawable/ic_sqft_blue"
                 app:layout_constraintBottom_toBottomOf="@id/tvProperyBaths"
                 app:layout_constraintStart_toEndOf="@id/tvProperyBaths"
-                app:layout_constraintTop_toTopOf="@id/tvProperyBaths"
                 tools:text="1200 ft" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
