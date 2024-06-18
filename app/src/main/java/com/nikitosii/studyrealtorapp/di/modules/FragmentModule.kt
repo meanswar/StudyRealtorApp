@@ -11,7 +11,6 @@ import com.nikitosii.studyrealtorapp.flow.profile.edit.EditProfileFragment
 import com.nikitosii.studyrealtorapp.flow.profile.properties.ProfilePropertiesFragment
 import com.nikitosii.studyrealtorapp.flow.profile.requests.ProfileRequestsFragment
 import com.nikitosii.studyrealtorapp.flow.property_photos.PropertyPhotosFragment
-import com.nikitosii.studyrealtorapp.flow.rents.RentsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -19,10 +18,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeSalesFragment(): DashboardFragment
-
-
-    @ContributesAndroidInjector
-    abstract fun contributeRentsFragment(): RentsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeSalePropertyDetailsFragment(): PropertyDetailsFragment

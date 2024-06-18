@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.GetLocalPropertiesUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.GetLocalPropertyUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.UpdatePropertyUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.sale.GetPropertiesFromNetworkUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertiesUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetLocalPropertyUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.sale.GetPropertiesFromNetworkUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
@@ -58,7 +58,9 @@ class SearchViewModel @Inject constructor(
         page.value = 1
     }
 
-    fun setIsEmptyResponse(isLast: Boolean) { isEmptyResponse.value = isLast }
+    fun setIsEmptyResponse(isLast: Boolean) {
+        isEmptyResponse.value = isLast
+    }
 
     fun isEmptyResponse(): Boolean = isEmptyResponse.value ?: false
 
@@ -87,7 +89,7 @@ class SearchViewModel @Inject constructor(
     }
 
 
-    fun updateSaleRequest(): SearchRequest {
+    private fun updateSaleRequest(): SearchRequest {
         return oldRequest.value?.copy(
             address = addressFilter.value?.replaceFirstChar(Char::titlecase) ?: "",
             houses = filterHouses,
@@ -115,7 +117,7 @@ class SearchViewModel @Inject constructor(
     fun getPropertiesFromNetwork() {
         if (checkFilters()) {
             val data = updateSaleRequest()
-            if (data.equals(oldRequest.value) == false) {
+            if (data != oldRequest.value) {
                 resetPage()
                 oldRequest.value = data
             }

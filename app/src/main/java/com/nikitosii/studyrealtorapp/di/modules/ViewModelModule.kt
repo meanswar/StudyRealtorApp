@@ -15,7 +15,6 @@ import com.nikitosii.studyrealtorapp.flow.profile.agents.ProfileAgentsViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.edit.EditProfileViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.properties.ProfilePropertiesViewModel
 import com.nikitosii.studyrealtorapp.flow.profile.requests.ProfileRequestsViewModel
-import com.nikitosii.studyrealtorapp.flow.rents.RentsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -34,11 +33,6 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(DashboardViewModel::class)
     fun bindSalesViewModel(viewModel: DashboardViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RentsViewModel::class)
-    fun bindRentsViewModel(viewModel: RentsViewModel): ViewModel
 
     @Binds
     @IntoMap

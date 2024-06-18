@@ -17,7 +17,7 @@ class GetAgentDetailsUseCase @Inject constructor(
         }
     }
 
-    override suspend fun execute(data: _root_ide_package_.com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetAgentDetailsUseCase.Params): AgentDetails {
+    override suspend fun execute(data: Params): AgentDetails {
         val result = repo.getAgentDetails(data.id)
         val marketingAreas = result.marketingArea.map {
             val image = getImage(it.name)
