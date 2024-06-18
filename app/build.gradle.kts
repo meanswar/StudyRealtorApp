@@ -111,9 +111,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
@@ -239,4 +236,21 @@ dependencies {
     implementation("com.github.Andy671:Dachshund-Tab-Layout:v0.3.3")
     //GroupLayoutManager
     implementation("com.github.DingMouRen:LayoutManagerGroup:1e6f4f96eb")
+
+    //Unit Tests Libraries
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    testImplementation ("org.assertj:assertj-core:3.12.2")
+    testImplementation ("org.mockito:mockito-inline:4.11.0")
+    androidTestImplementation ("org.mockito:mockito-android:4.11.0")
+    testImplementation ("com.squareup.okhttp3:mockwebserver:4.7.2")
+    testImplementation ("org.mockito:mockito-core:4.11.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
+    testImplementation ("io.mockk:mockk:1.10.6")
+    testImplementation ("org.robolectric:robolectric:4.10.3")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation ("com.github.ologe:flow-test-observer:1.4.1")
+    kaptTest("com.google.dagger:dagger-compiler:$dagger")
 }
