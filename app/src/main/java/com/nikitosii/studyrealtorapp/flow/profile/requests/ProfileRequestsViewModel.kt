@@ -1,10 +1,10 @@
 package com.nikitosii.studyrealtorapp.flow.profile.requests
 
 import androidx.lifecycle.MutableLiveData
+import com.nikitosii.studyrealtorapp.core.domain.useCase.request.GetLocalRequestsUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.request.RemoveSearchRequestUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.request.UpdateRequestUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
-import com.nikitosii.studyrealtorapp.core.source.useCase.request.GetLocalRequestsUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.request.RemoveSearchRequestUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.request.UpdateRequestUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 

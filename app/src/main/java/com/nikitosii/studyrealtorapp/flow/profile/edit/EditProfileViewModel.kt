@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.UpdateProfileUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.profile.Profile
-import com.nikitosii.studyrealtorapp.core.source.useCase.profile.UpdateProfileUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class EditProfileViewModel @Inject constructor(
 
     private val _updateProfileStatus = WorkLiveData<Unit>()
     val updateProfileStatus: LiveData<WorkResult<Unit>>
-    get() = _updateProfileStatus
+        get() = _updateProfileStatus
 
     private fun buildProfile(): Profile {
         return Profile(

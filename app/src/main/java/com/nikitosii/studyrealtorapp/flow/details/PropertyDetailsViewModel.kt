@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.GetPropertyDetailsUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Photo
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.parcelize.PhotoContainer
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetPropertyDetailsUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 

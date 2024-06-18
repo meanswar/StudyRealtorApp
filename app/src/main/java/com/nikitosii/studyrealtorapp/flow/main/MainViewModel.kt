@@ -1,10 +1,10 @@
 package com.nikitosii.studyrealtorapp.flow.main
 
-import com.nikitosii.studyrealtorapp.core.source.useCase.agent.GetLocalAgentsUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.agent.GetRecentFavoriteAgentsUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.profile.RemoveProfileDataUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetAllLocalPropertiesUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.request.GetLocalRequestsUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetLocalAgentsUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetRecentFavoriteAgentsUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.RemoveProfileDataUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.GetAllLocalPropertiesUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.request.GetLocalRequestsUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class MainViewModel @Inject constructor(
     getLocalPropertiesUseCase: GetAllLocalPropertiesUseCase,
     getLocalRequestsUseCase: GetLocalRequestsUseCase,
     getLocalAgentsUseCase: GetLocalAgentsUseCase
-    ) : BaseViewModel() {
+) : BaseViewModel() {
 
     private val recentFavoriteAgents = getRecentFavoriteAgentsUseCase.execute()
     private val properties = getLocalPropertiesUseCase.execute()

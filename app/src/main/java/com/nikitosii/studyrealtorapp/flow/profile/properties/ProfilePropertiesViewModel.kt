@@ -1,10 +1,10 @@
 package com.nikitosii.studyrealtorapp.flow.profile.properties
 
 import androidx.lifecycle.MutableLiveData
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.GetAllLocalPropertiesUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.RemovePropertyUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.GetAllLocalPropertiesUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.RemovePropertyUseCase
-import com.nikitosii.studyrealtorapp.core.source.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
 import javax.inject.Inject
 
