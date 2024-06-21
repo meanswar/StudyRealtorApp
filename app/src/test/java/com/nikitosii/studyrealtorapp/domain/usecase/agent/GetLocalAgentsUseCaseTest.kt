@@ -35,9 +35,6 @@ class GetLocalAgentsUseCaseTest : BaseUseCaseTest<GetLocalAgentsUseCase>() {
 
     private val testDispatcher = TestCoroutineDispatcher()
 
-    @MockK
-    private lateinit var dao: AgentDao
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -48,8 +45,6 @@ class GetLocalAgentsUseCaseTest : BaseUseCaseTest<GetLocalAgentsUseCase>() {
         DaggerTestAppComponent.builder()
             .build()
             .inject(this)
-
-        dao.getDefaultData()
     }
 
     @After
