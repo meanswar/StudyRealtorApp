@@ -1,36 +1,45 @@
 package com.nikitosii.studyrealtorapp.domain.usecase.agent
 
 import android.annotation.SuppressLint
-import com.nikitosii.studyrealtorapp.TestConstants
-import com.nikitosii.studyrealtorapp.TestConstants.ANY_DIGITS
-import com.nikitosii.studyrealtorapp.TestConstants.ANY_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.EMAIL_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.EMPTY_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.EXCEPTION_WRONG_PARAMS
-import com.nikitosii.studyrealtorapp.TestConstants.ID_VALID_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.LATITUDE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.LOCATION_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.LOCATION_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.LONGITUDE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_EXT_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHOTO_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.REQUEST_DIGITS_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.REQUEST_DIGITS_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.REQUEST_TEXT_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.REQUEST_TEXT_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.SERVER_DATE_PATTERN
+import com.nikitosii.studyrealtorapp.util.TestConstants
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.EMAIL_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.EMPTY_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.EXCEPTION_WRONG_PARAMS
+import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.LATITUDE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LOCATION_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LOCATION_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LONGITUDE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_EXT_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHOTO_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_DIGITS_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_DIGITS_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_TEXT_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_TEXT_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.SERVER_DATE_PATTERN
+import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetAgentsFromNetworkUseCase
+import com.nikitosii.studyrealtorapp.core.source.local.model.Address
+import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
+import com.nikitosii.studyrealtorapp.core.source.local.model.Office
+import com.nikitosii.studyrealtorapp.core.source.local.model.Phone
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
-import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetAgentsFromNetworkUseCase
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.di.DaggerTestAppComponent
 import com.nikitosii.studyrealtorapp.domain.usecase.base.BaseUseCaseTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
+@RunWith(MockitoJUnitRunner::class)
 class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseCase>() {
 
     @Before
@@ -39,46 +48,63 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             .build()
             .inject(this)
     }
-    private fun checkResult(result: Agent) {
-        assert(
-            result.fullName == ANY_TEXT &&
-                    result.nickname == ANY_TEXT &&
-                    result.name == ANY_TEXT &&
-                    result.title == ANY_TEXT &&
-                    result.slogan == ANY_TEXT &&
-                    result.photoUrl == PHOTO_VALID &&
-                    result.backgroundPhotoUrl == PHOTO_VALID &&
-                    result.address?.city == ANY_TEXT &&
-                    result.address?.coordinate?.latitude == LATITUDE_VALID &&
-                    result.address?.coordinate?.longitude == LONGITUDE_VALID &&
-                    result.address?.line == ANY_TEXT &&
-                    result.address?.postalCode == ANY_TEXT &&
-                    result.address?.state == ANY_TEXT &&
-                    result.address?.stateCode == ANY_TEXT &&
-                    result.office?.email == EMAIL_VALID &&
-                    result.office?.id == ID_VALID_TEXT &&
-                    result.office?.href == ANY_TEXT &&
-                    result.office?.mls_set == ANY_TEXT &&
-                    result.office?.name == ANY_TEXT &&
-                    result.office?.phones?.size == 1 &&
-                    result.office?.phones?.get(0)?.ext == PHONE_EXT_VALID &&
-                    result.office?.phones?.get(0)?.number == PHONE_VALID &&
-                    result.office?.phones?.get(0)?.primary == true &&
-                    result.office?.phones?.get(0)?.trackable == true &&
-                    result.office?.phones?.get(0)?.type == ANY_TEXT &&
-                    result.office?.image == PHOTO_VALID &&
-                    result.phone == PHONE_VALID &&
-                    result.webUrl == ANY_TEXT &&
-                    result.recentlySoldCount == ANY_DIGITS &&
-                    result.forSalePriceCount == ANY_DIGITS &&
-                    result.minForSalePrice == ANY_DIGITS &&
-                    result.maxForSalePrice == ANY_DIGITS &&
-                    result.reviewCount == ANY_DIGITS &&
-                    result.recommendationsCount == ANY_DIGITS &&
-                    result.id == ID_VALID_TEXT &&
-                    result.salePrice?.min == ANY_DIGITS &&
-                    result.salePrice?.max == ANY_DIGITS &&
-                    result.salePrice?.lastListingDate == SERVER_DATE_PATTERN
+
+    private fun checkResult(result: List<Agent>) {
+        assertThat(result).isEqualTo(
+            listOf(
+            Agent(
+                fullName = ANY_TEXT,
+                nickname = ANY_TEXT,
+                name = ANY_TEXT,
+                title = ANY_TEXT,
+                slogan = ANY_TEXT,
+                photoUrl = PHOTO_VALID,
+                backgroundPhotoUrl = PHOTO_VALID,
+                address = Address(
+                    city = ANY_TEXT,
+                    coordinate = Coordinate(
+                        LATITUDE_VALID,
+                        LONGITUDE_VALID
+                    ),
+                    line = ANY_TEXT,
+                    postalCode = ANY_TEXT,
+                    state = ANY_TEXT,
+                    stateCode = ANY_TEXT
+                ),
+                office = Office(
+                    email = EMAIL_VALID,
+                    id = ID_VALID_TEXT,
+                    href = ANY_TEXT,
+                    mls_set = ANY_TEXT,
+                    name = ANY_TEXT,
+                    phones = listOf(
+                        Phone(
+                            ext = PHONE_EXT_VALID,
+                            number = PHONE_VALID,
+                            primary = true,
+                            trackable = true,
+                            type = ANY_TEXT
+                        )
+                    ),
+                    image = PHOTO_VALID
+                ),
+                phone = PHONE_VALID,
+                webUrl = ANY_TEXT,
+                recentlySoldCount = ANY_DIGITS,
+                forSalePriceCount = ANY_DIGITS,
+                minForSalePrice = ANY_DIGITS,
+                maxForSalePrice = ANY_DIGITS,
+                reviewCount = ANY_DIGITS,
+                recommendationsCount = ANY_DIGITS,
+                id = ID_VALID_TEXT,
+                salePrice = SalePrice(
+                    min = ANY_DIGITS,
+                    max = ANY_DIGITS,
+                    lastListingDate = SERVER_DATE_PATTERN
+                ),
+                favorite = true
+            )
+        )
         )
     }
 
@@ -95,8 +121,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -570,8 +596,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -586,8 +612,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -602,8 +628,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -618,8 +644,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -634,8 +660,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -650,8 +676,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -666,8 +692,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -682,8 +708,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -698,9 +724,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        val result = data.first()
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 
     @Test
@@ -715,8 +740,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assert(data.size == 1)
-        val result = data.first()
-        checkResult(data.first())
+        assertThat(data.size).isEqualTo(1)
+        checkResult(data)
     }
 }

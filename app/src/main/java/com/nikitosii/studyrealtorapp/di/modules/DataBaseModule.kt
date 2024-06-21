@@ -9,7 +9,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.ProfileDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchPropertiesDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
 import dagger.Module
 import dagger.Provides
@@ -35,8 +35,8 @@ object DataBaseModule {
 
     @Provides
     @Singleton
-    internal fun providesSalePropertiesSearchDao(db: RealtorDataBase): SalePropertiesSearchDao =
-        db.salePropertiesSearchDao()
+    internal fun providesSalePropertiesSearchDao(db: RealtorDataBase): SearchPropertiesDao =
+        db.searchPropertiesDao()
 
     @Provides
     @Singleton

@@ -1,22 +1,22 @@
 package com.nikitosii.studyrealtorapp.di.api
 
-import com.nikitosii.studyrealtorapp.TestConstants.ANY_DIGITS
-import com.nikitosii.studyrealtorapp.TestConstants.ANY_FLOAT
-import com.nikitosii.studyrealtorapp.TestConstants.ANY_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.EMAIL_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.ID_VALID_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.LATITUDE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.LOCATION_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.LONGITUDE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PAGE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_EXT_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_START_WITH_PLUS_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHOTO_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.REQUEST_DIGITS_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.REQUEST_TEXT_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.SERVER_DATE_PATTERN
-import com.nikitosii.studyrealtorapp.TestConstants.URL_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_FLOAT
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.EMAIL_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.EXCEPTION_WRONG_PARAMS
+import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.LATITUDE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LOCATION_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LONGITUDE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PAGE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_EXT_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHOTO_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_DIGITS_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_TEXT_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.SERVER_DATE_PATTERN
+import com.nikitosii.studyrealtorapp.util.TestConstants.URL_VALID
 import com.nikitosii.studyrealtorapp.core.source.net.api.AgentsApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentDetailsResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentResponseApi
@@ -104,7 +104,7 @@ object AgentsApiTest {
                                 ),
                                 PhoneResponseApi(
                                     ext = null,
-                                    number = PHONE_START_WITH_PLUS_VALID,
+                                    number = PHONE_VALID,
                                     primary = false,
                                     trackable = true,
                                     type = ANY_TEXT
@@ -131,7 +131,7 @@ object AgentsApiTest {
         }
 
         override suspend fun getAgentDetails(id: String): BaseAgentDetailsResponse {
-            if (id != ID_VALID_TEXT) throw Exception("wrong agent id")
+            if (id != ID_VALID_TEXT) throw Exception(EXCEPTION_WRONG_PARAMS)
             return BaseAgentDetailsResponse(
                 AgentDetailsResponseApi(
                     firstName = ANY_TEXT,
@@ -202,7 +202,7 @@ object AgentsApiTest {
                         ),
                         PhoneResponseApi(
                             ext = null,
-                            number = PHONE_START_WITH_PLUS_VALID,
+                            number = PHONE_VALID,
                             primary = false,
                             trackable = true,
                             type = ANY_TEXT

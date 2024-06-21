@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Property(
-    val adverisers: List<Advertiser>,
+    val advertisers: List<Advertiser>,
     val branding: List<Branding>,
     val comingSoonDate: String? = null,
     val description: Description? = null,

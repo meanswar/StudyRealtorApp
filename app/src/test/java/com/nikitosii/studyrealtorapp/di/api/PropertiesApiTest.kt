@@ -1,33 +1,38 @@
 package com.nikitosii.studyrealtorapp.di.api
 
-import com.nikitosii.studyrealtorapp.TestConstants.ADDRESS_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.ADDRESS_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.ANY_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.DEEP_LINK_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.DEEP_LINK_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.EMAIL_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.EMAIL_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.ID_INVALID_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.ID_VALID_TEXT
-import com.nikitosii.studyrealtorapp.TestConstants.IMAGE_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.IMAGE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.LATITUDE_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.LATITUDE_UKRAINE
-import com.nikitosii.studyrealtorapp.TestConstants.LATITUDE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.LONGITUDE_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.LONGITUDE_UKRAINE
-import com.nikitosii.studyrealtorapp.TestConstants.LONGITUDE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.NAME_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.NAME_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHONE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PHOTO_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.PRICE_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.PRICE_VALID
-import com.nikitosii.studyrealtorapp.TestConstants.STATUS_FOR_RENT
-import com.nikitosii.studyrealtorapp.TestConstants.STATUS_FOR_SALE
-import com.nikitosii.studyrealtorapp.TestConstants.VALUE_INVALID
-import com.nikitosii.studyrealtorapp.TestConstants.VALUE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants
+import com.nikitosii.studyrealtorapp.util.TestConstants.ADDRESS_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.ADDRESS_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DOUBLE
+import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.DEEP_LINK_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.DEEP_LINK_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.EMAIL_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.EMAIL_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.ID_INVALID_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
+import com.nikitosii.studyrealtorapp.util.TestConstants.IMAGE_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.IMAGE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LATITUDE_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LATITUDE_UKRAINE
+import com.nikitosii.studyrealtorapp.util.TestConstants.LATITUDE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LONGITUDE_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.LONGITUDE_UKRAINE
+import com.nikitosii.studyrealtorapp.util.TestConstants.LONGITUDE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.NAME_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.NAME_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_EXT_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHOTO_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PRICE_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PRICE_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.SERVER_DATE_PATTERN
+import com.nikitosii.studyrealtorapp.util.TestConstants.STATUS_FOR_RENT
+import com.nikitosii.studyrealtorapp.util.TestConstants.STATUS_FOR_SALE
+import com.nikitosii.studyrealtorapp.util.TestConstants.URL_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.VALUE_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.VALUE_VALID
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.net.api.PropertiesApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.advertiser.AdvertiserResponseApi
@@ -207,7 +212,7 @@ object PropertiesApiTest {
                                         phones = listOf(
                                             PhoneResponseApi(
                                                 ext = "456",
-                                                number = PHONE_INVALID,
+                                                number = PHONE_VALID,
                                                 primary = false,
                                                 trackable = false,
                                                 type = "home"
@@ -220,7 +225,7 @@ object PropertiesApiTest {
                                     phones = listOf(
                                         PhoneResponseApi(
                                             ext = "456",
-                                            number = PHONE_INVALID,
+                                            number = PHONE_VALID,
                                             primary = false,
                                             trackable = false,
                                             type = "home"
@@ -234,7 +239,7 @@ object PropertiesApiTest {
                                     photo = IMAGE_INVALID,
                                     type = ANY_TEXT,
                                     accentColor = VALUE_INVALID,
-                                    phone = PHONE_INVALID
+                                    phone = PHONE_VALID
                                 )
                             ),
                             comingSoonDate = "2022-11-12T00:00:00",
@@ -414,8 +419,9 @@ object PropertiesApiTest {
             )
         }
 
-        override suspend fun getPropertyDetails(id: String): BaseSinglePropertyResponseApi =
-            BaseSinglePropertyResponseApi(
+        override suspend fun getPropertyDetails(id: String): BaseSinglePropertyResponseApi {
+            if (id != ID_VALID_TEXT) throw Exception(TestConstants.EXCEPTION_WRONG_PARAMS)
+            return BaseSinglePropertyResponseApi(
                 result = PropertyDetailsResponseApi(
                     branding = listOf(
                         BrandingResponseApi(
@@ -426,76 +432,83 @@ object PropertiesApiTest {
                             phone = PHONE_VALID
                         )
                     ),
-                    comingSoonDate = "2022-12-12T00:00:00",
+                    comingSoonDate = SERVER_DATE_PATTERN,
                     description = DescriptionResponseApi(
-                        baths = 3,
-                        bathsGtr1 = 2,
-                        bathsGtr3 = 2,
-                        bathsFull = 2,
-                        bathsHalf = 1,
-                        beds = 4,
-                        garage = 3,
-                        lotSqft = 3000,
+                        baths = ANY_DIGITS,
+                        bathsGtr1 = ANY_DIGITS,
+                        bathsGtr3 = ANY_DIGITS,
+                        bathsFull = ANY_DIGITS,
+                        bathsHalf = ANY_DIGITS,
+                        beds = ANY_DIGITS,
+                        garage = ANY_DIGITS,
+                        lotSqft = ANY_DIGITS,
                         name = NAME_VALID,
-                        sqft = 2000,
-                        pool = "None",
-                        text = "Spacious townhouse with modern amenities",
+                        sqft = ANY_DIGITS,
+                        pool = ANY_TEXT,
+                        text = ANY_TEXT,
                         type = HouseType.TOWNHOMES,
-                        rooms = 8
+                        rooms = ANY_DIGITS
                     ),
                     details = listOf(
                         DetailsResponseApi(
-                            category = "Interior Features",
-                            parentCategory = "Property Details",
+                            category = ANY_TEXT,
+                            parentCategory = ANY_TEXT,
                             text = listOf(
-                                "Hardwood floors",
-                                "Granite countertops",
-                                "Walk-in closets"
+                                ANY_TEXT,
+                                ANY_TEXT,
+                                ANY_TEXT
                             )
                         )
                     ),
-                    lastUpdateDate = "2022-12-12T00:00:00",
-                    listDate = "2022-12-12T00:00:00",
-                    listPrice = 550000,
-                    listingId = "12345ABC",
+                    lastUpdateDate = SERVER_DATE_PATTERN,
+                    listDate = SERVER_DATE_PATTERN,
+                    listPrice = ANY_DIGITS,
+                    listingId = ANY_TEXT,
                     location = DetailedLocationResponseApi(
                         address = AddressResponseApi(
-                            city = "New York",
-                            coordinate = CoordinateApi(lat = 40.7128, lon = -74.0060),
-                            line = "123 Main St",
-                            postalCode = "10001",
-                            state = "New York",
-                            stateCode = "NY"
+                            city = ANY_TEXT,
+                            coordinate = CoordinateApi(lat = LATITUDE_VALID, lon = LONGITUDE_VALID),
+                            line = ANY_TEXT,
+                            postalCode = ANY_TEXT,
+                            state = ANY_TEXT,
+                            stateCode = ANY_TEXT
                         ),
-                        country = "USA",
-                        line = "123 Main St",
-                        state = "New York",
-                        stateCode = "NY",
+                        country = ANY_TEXT,
+                        line = ANY_TEXT,
+                        state = ANY_TEXT,
+                        stateCode = ANY_TEXT,
                         county = CountyResponseApi(
-                            fipsCode = "36061",
-                            name = "New York"
+                            fipsCode = ANY_TEXT,
+                            name = ANY_TEXT
                         )
                     ),
                     photos = listOf(
-                        PhotoResponseApi(url = "https://photo3.com"),
-                        PhotoResponseApi(url = "https://photo4.com")
+                        PhotoResponseApi(url = PHOTO_VALID),
+                        PhotoResponseApi(url = PHOTO_VALID)
                     ),
                     schools = EducationFacilitiesResponseApi(
                         schools = listOf(
                             SchoolResponseApi(
-                                id = "school1",
-                                name = "PS 123",
-                                distanceInMiles = 0.5,
-                                educationLevels = listOf("Elementary"),
-                                fundingType = "Public",
-                                grades = listOf("K", "1", "2", "3", "4", "5"),
-                                studentCount = 500,
-                                studentTeacherRatio = 15.0,
-                                parentRating = 4,
-                                rating = 5,
-                                reviewCount = 100,
-                                slug = "ps-123",
-                                slugId = "ps-123-id"
+                                id = ID_VALID_TEXT,
+                                name = ANY_TEXT,
+                                distanceInMiles = ANY_DOUBLE,
+                                educationLevels = listOf(ANY_TEXT),
+                                fundingType = ANY_TEXT,
+                                grades = listOf(
+                                    ANY_TEXT,
+                                    ANY_TEXT,
+                                    ANY_TEXT,
+                                    ANY_TEXT,
+                                    ANY_TEXT,
+                                    ANY_TEXT
+                                ),
+                                studentCount = ANY_DIGITS,
+                                studentTeacherRatio = ANY_DOUBLE,
+                                parentRating = ANY_DIGITS,
+                                rating = ANY_DIGITS,
+                                reviewCount = ANY_DIGITS,
+                                slug = ANY_TEXT,
+                                slugId = ANY_TEXT
                             )
                         ),
                         total = 1
@@ -503,25 +516,26 @@ object PropertiesApiTest {
                     source = SourceResponseApi(
                         agents = listOf(
                             AgentResponseApi(
-                                officeName = "Real Estate Agency"
+                                officeName = ANY_TEXT
                             )
                         ),
-                        id = "source123",
-                        planId = "plan123",
-                        specId = "spec123",
-                        type = "MLS"
+                        id = ANY_TEXT,
+                        planId = ANY_TEXT,
+                        specId = ANY_TEXT,
+                        type = ANY_TEXT
                     ),
-                    propertyId = "PROP123",
-                    status = "Active",
-                    tags = listOf("new", "luxury", "spacious"),
+                    propertyId = ANY_TEXT,
+                    status = ANY_TEXT,
+                    tags = listOf(ANY_TEXT, ANY_TEXT, ANY_TEXT),
                     virtualTours = listOf(
                         VrTourResponseApi(
-                            href = "https://virtualtour3.com",
-                            type = "3D"
+                            href = URL_VALID,
+                            type = ANY_TEXT
                         )
                     )
                 )
             )
+        }
 
         override suspend fun getPropertiesForRent(
             location: String?,
@@ -547,21 +561,21 @@ object PropertiesApiTest {
                             AdvertiserResponseApi(
                                 email = EMAIL_VALID,
                                 fulfillment_id = ID_VALID_TEXT,
-                                href = "https://advertiser1.com",
+                                href = URL_VALID,
                                 mls_set = ANY_TEXT,
                                 name = NAME_VALID,
                                 nrds_id = ID_VALID_TEXT,
                                 office = OfficeResponseApi(
                                     name = NAME_VALID,
-                                    href = "https://office1.com",
+                                    href = URL_VALID,
                                     fulfillment_id = ID_VALID_TEXT,
                                     phones = listOf(
                                         PhoneResponseApi(
-                                            ext = "123",
+                                            ext = PHONE_EXT_VALID,
                                             number = PHONE_VALID,
                                             primary = true,
                                             trackable = true,
-                                            type = "mobile"
+                                            type = ANY_TEXT
                                         )
                                     ),
                                     photo = PhotoResponseApi(url = PHOTO_VALID),
@@ -570,11 +584,11 @@ object PropertiesApiTest {
                                 ),
                                 phones = listOf(
                                     PhoneResponseApi(
-                                        ext = "123",
+                                        ext = PHONE_EXT_VALID,
                                         number = PHONE_VALID,
                                         primary = true,
                                         trackable = true,
-                                        type = "mobile"
+                                        type = ANY_TEXT
                                     )
                                 )
                             )
@@ -588,7 +602,7 @@ object PropertiesApiTest {
                                 phone = PHONE_VALID
                             )
                         ),
-                        comingSoonDate = "2022-10-12T00:00:00",
+                        comingSoonDate = SERVER_DATE_PATTERN,
                         description = DescriptionResponseApi(
                             baths = 2,
                             bathsGtr1 = 1,
@@ -667,7 +681,7 @@ object PropertiesApiTest {
                                     phones = listOf(
                                         PhoneResponseApi(
                                             ext = "456",
-                                            number = PHONE_INVALID,
+                                            number = PHONE_VALID,
                                             primary = false,
                                             trackable = false,
                                             type = "home"
@@ -680,7 +694,7 @@ object PropertiesApiTest {
                                 phones = listOf(
                                     PhoneResponseApi(
                                         ext = "456",
-                                        number = PHONE_INVALID,
+                                        number = PHONE_VALID,
                                         primary = false,
                                         trackable = false,
                                         type = "home"
@@ -694,7 +708,7 @@ object PropertiesApiTest {
                                 photo = IMAGE_INVALID,
                                 type = ANY_TEXT,
                                 accentColor = VALUE_INVALID,
-                                phone = PHONE_INVALID
+                                phone = PHONE_VALID
                             )
                         ),
                         comingSoonDate = "2022-11-12T00:00:00",

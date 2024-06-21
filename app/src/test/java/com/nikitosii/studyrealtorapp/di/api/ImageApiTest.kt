@@ -1,6 +1,6 @@
 package com.nikitosii.studyrealtorapp.di.api
 
-import com.nikitosii.studyrealtorapp.TestConstants.PHOTO_VALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.PHOTO_VALID
 import com.nikitosii.studyrealtorapp.core.source.net.api.image.ImageApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.image.ImageResponseApi

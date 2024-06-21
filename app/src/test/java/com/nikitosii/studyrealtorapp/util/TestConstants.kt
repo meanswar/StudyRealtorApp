@@ -1,19 +1,23 @@
-package com.nikitosii.studyrealtorapp
+package com.nikitosii.studyrealtorapp.util
 
 object TestConstants {
 
     const val EMPTY_TEXT: String = ""
+    const val BOOLEAN_VALID: Boolean = true
+    const val BOOLEAN_INVALID: Boolean = false
     const val PHOTO_VALID =
         "https://images.pexels.com/photos/1045535/pexels-photo-1045535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
     const val ANY_TEXT = "TEXT"
     const val ANY_DIGITS = 120
     const val ANY_FLOAT = 1.0f
+    const val ANY_DOUBLE = 1.0
+
+    const val REQUEST_ID_VALID = 1
+    const val REQUEST_ID_INVALID = 0
 
     const val PHONE_EXT_VALID = "+122"
-    const val PHONE_VALID = "380990000000"
-    const val PHONE_START_WITH_PLUS_VALID = "+380990000000"
-    const val PHONE_INVALID = "+380990000001"
+    const val PHONE_VALID = "8745624"
 
     const val STATUS_FOR_RENT = "rent"
     const val STATUS_FOR_SALE = "sale"
@@ -30,7 +34,11 @@ object TestConstants {
     const val PAGE_VALID = 2
     const val PAGE_INVALID = 0
 
+    const val ID_VALID = 1
+    const val ID_INVALID = 0
+
     const val ID_VALID_TEXT = "id_valid"
+    const val ID_VALID_FOR_REMOVING = "id_valid_for_removing"
     const val ID_INVALID_TEXT = "id_invalid"
 
     const val URL_VALID = "url_valid"
@@ -38,6 +46,7 @@ object TestConstants {
 
     const val IMAGE_VALID = "image_id_valid"
     const val IMAGE_INVALID = "image_id_invalid"
+    const val IMAGE_TEXT = "https://images.pexels.com/photos/1045535/pexels-photo-1045535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
     const val VALUE_VALID = "value_valid"
     const val VALUE_INVALID = "value_invalid"
@@ -69,4 +78,5 @@ object TestConstants {
     const val SERVER_DATE_PATTERN = "2022-10-12T00:00:00"
 
     const val EXCEPTION_WRONG_PARAMS = "wrong params"
+    const val EXCEPTION_ITEM_NOT_EXISTS = "item not exists"
 }

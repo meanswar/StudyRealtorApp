@@ -3,7 +3,7 @@ package com.nikitosii.studyrealtorapp.di
 import android.content.Context
 import android.content.res.Resources
 import android.net.NetworkCapabilities
-import com.nikitosii.studyrealtorapp.TestConstants
+import com.nikitosii.studyrealtorapp.util.TestConstants
 import com.nikitosii.studyrealtorapp.core.connectivity.TestConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.domain.repository.base.ChannelRecreateObserver

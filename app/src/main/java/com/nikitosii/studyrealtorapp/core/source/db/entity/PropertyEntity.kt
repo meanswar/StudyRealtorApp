@@ -12,7 +12,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.VrTour
 
 @Entity(tableName = "property")
-class PropertyEntity(
+data class PropertyEntity(
     val advertisers: List<Advertiser> = listOf(),
     val branding: List<Branding>,
     val comingSoonDate: String?,
@@ -35,7 +35,7 @@ class PropertyEntity(
 ) {
     companion object {
         fun from(data: Property): PropertyEntity = PropertyEntity(
-            data.adverisers,
+            data.advertisers,
             data.branding,
             data.comingSoonDate,
             data.description,
