@@ -19,10 +19,10 @@ interface AgentDao {
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where favorite = 1")
     fun getFavoriteAgents(): List<AgentEntity>
 
-    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where favorite = 1 & id in (:ids)")
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where favorite == 1 AND id in (:ids)")
     fun getFavoriteAgentsListFromList(ids: List<String>): List<AgentEntity>
 
-    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where favorite = 1 order by id desc limit 3")
+    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_AGENT} where favorite == 1 order by id desc limit 3")
     fun getRecentFavoriteAgents(): List<AgentEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

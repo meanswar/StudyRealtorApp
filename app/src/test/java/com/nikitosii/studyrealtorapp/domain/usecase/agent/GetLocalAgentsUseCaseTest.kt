@@ -2,7 +2,6 @@ package com.nikitosii.studyrealtorapp.domain.usecase.agent
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetLocalAgentsUseCase
-import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.local.model.Address
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Office
@@ -12,10 +11,8 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.di.DaggerTestAppComponent
 import com.nikitosii.studyrealtorapp.domain.usecase.base.BaseUseCaseTest
 import com.nikitosii.studyrealtorapp.util.TestConstants
-import com.nikitosii.studyrealtorapp.util.Utils.getDefaultData
 import dev.olog.flow.test.observer.test
 import io.mockk.MockKAnnotations
-import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher

@@ -31,7 +31,7 @@ object TestConstants {
     const val LOCATION_VALID = "location_valid"
     const val LOCATION_INVALID = "test"
 
-    const val PAGE_VALID = 2
+    const val PAGE_VALID = 1
     const val PAGE_INVALID = 0
 
     const val ID_VALID = 1

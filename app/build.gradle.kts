@@ -96,6 +96,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
     val dagger = "2.50"
     val hawk = "2.0.1"
     val timber = "4.7.1"
