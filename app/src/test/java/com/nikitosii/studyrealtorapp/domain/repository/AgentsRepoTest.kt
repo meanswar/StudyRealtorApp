@@ -14,42 +14,40 @@ import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
 import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
 import com.nikitosii.studyrealtorapp.util.TestConstants.BOOLEAN_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.PAGE_VALID
+import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
+import javax.inject.Inject
 
 @RunWith(MockitoJUnitRunner::class)
 class AgentsRepoTest {
 
     private lateinit var repo: AgentsRepo
 
-    @Mock
     private lateinit var dao: AgentDao
-
-    @Mock
     private lateinit var api: AgentsApi
-
-    @Mock
     private lateinit var networkErrorHandler: NetworkErrorHandler
-
-    @Mock
-    private lateinit var io: CoroutineDispatcher
-
-    @Mock
+    @MockK
+    private  lateinit var io: CoroutineDispatcher
+    @MockK
     private lateinit var connectivityProvider: ConnectivityProvider
-
-    @Mock
+    @MockK
     private lateinit var recreateObserver: ChannelRecreateObserver
 
     @Before
     fun setup() {
+        MockKAnnotations.init(this)
+        dao = mockk(relaxed = true)
+        api = mockk(relaxed = true)
+        networkErrorHandler = NetworkErrorHandler(mockk(relaxed = true))
         repo = AgentsRepoImpl(
             api,
             dao,
@@ -62,9 +60,10 @@ class AgentsRepoTest {
 
     @SuppressLint("CheckResult")
     @Test
-    fun `get agents test`() {
+    fun `get agents test`() = runTest {
         val request = AgentTestUtils.getAgentRequest()
-        val mockedData = Mockito.mock(BaseAgentsSearch::class.java)
+        val data = mockk<BaseAgentsSearch>(relaxed = true)
+
         coEvery {
             api.getAgents(
                 ANY_TEXT,
@@ -75,8 +74,8 @@ class AgentsRepoTest {
                 ANY_TEXT,
                 PAGE_VALID
             )
-        } returns mockedData
-        runBlocking { repo.getAgents(request, PAGE_VALID) }
+        } returns data
+        repo.getAgents(request, PAGE_VALID)
         coVerify {
             api.getAgents(
                 address = request.location,

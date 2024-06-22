@@ -3,13 +3,14 @@ package com.nikitosii.studyrealtorapp.di
 import android.content.Context
 import android.content.res.Resources
 import android.net.NetworkCapabilities
-import com.nikitosii.studyrealtorapp.util.TestConstants
 import com.nikitosii.studyrealtorapp.core.connectivity.TestConnectivityProvider
-import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.core.domain.repository.base.ChannelRecreateObserver
+import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
 import com.nikitosii.studyrealtorapp.di.db.TestDataBaseModule
 import com.nikitosii.studyrealtorapp.di.modules.AppModule
+import com.nikitosii.studyrealtorapp.di.modules.NetworkErrorModule
 import com.nikitosii.studyrealtorapp.di.modules.RepoModule
+import com.nikitosii.studyrealtorapp.util.TestConstants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -31,7 +32,8 @@ import javax.inject.Singleton
         RepoModule::class,
         TestStorageModule::class,
         TestDataBaseModule::class,
-        TestNetModule::class
+        TestNetModule::class,
+        NetworkErrorModule::class,
     ]
 )
 class TestAppModule {
