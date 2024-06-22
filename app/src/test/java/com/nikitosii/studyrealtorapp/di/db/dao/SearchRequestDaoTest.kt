@@ -8,9 +8,6 @@ object SearchRequestDaoTest : SearchRequestDao {
 
     private val searchRequestList = mutableListOf<SearchRequestEntity>()
 
-    override fun getSearchRequest(requestType: RequestType): List<SearchRequestEntity> =
-        searchRequestList.filter { it.requestType == requestType }
-
     override fun getAllSearchRequests(): List<SearchRequestEntity> = searchRequestList
 
     override fun getRecentSearchRequests(requestType: RequestType): List<SearchRequestEntity> =
@@ -27,9 +24,5 @@ object SearchRequestDaoTest : SearchRequestDao {
 
     override fun remove(id: Int) {
         searchRequestList.removeIf { it.id == id }
-    }
-
-    override fun removeNot(id: Int) {
-        searchRequestList.removeIf { it.id != id }
     }
 }

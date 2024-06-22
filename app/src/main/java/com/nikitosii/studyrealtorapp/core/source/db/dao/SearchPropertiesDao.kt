@@ -17,17 +17,11 @@ interface SearchPropertiesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(entity: List<SearchPropertiesDataEntity>)
 
-    @Query("SELECT * FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH")
-    fun getAll(): List<SearchPropertiesDataEntity>
-
     @Query("SELECT * FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH WHERE id = :id")
     fun getById(id: Int): SearchPropertiesDataEntity
 
     @Query("SELECT * FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH WHERE `query` = :query")
     fun getByQuery(query: SearchRequest): SearchPropertiesDataEntity
-
-    @Query("SELECT `query` FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH ORDER BY id Desc LIMIT 3")
-    fun getLastSaleRequests(): List<SearchRequest>
 
     @Query("SELECT `query` FROM $DATABASE_TABLE_SALE_PROPERTIES_SEARCH ORDER BY id Desc")
     fun getSearchRequests(): List<SearchRequest>

@@ -1,10 +1,14 @@
 package com.nikitosii.studyrealtorapp.util
 
+import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
+
 object TestConstants {
 
     const val EMPTY_TEXT: String = ""
     const val BOOLEAN_VALID: Boolean = true
     const val BOOLEAN_INVALID: Boolean = false
+    val SEARCH_TYPE_RENT: RequestType = RequestType.RENT
+    val SEARCH_TYPE_SALE: RequestType = RequestType.SALE
     const val PHOTO_VALID =
         "https://images.pexels.com/photos/1045535/pexels-photo-1045535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
@@ -36,6 +40,7 @@ object TestConstants {
 
     const val ID_VALID = 1
     const val ID_INVALID = 0
+    const val ID_FOR_CHANGES = 0
 
     const val ID_VALID_TEXT = "id_valid"
     const val ID_VALID_FOR_REMOVING = "id_valid_for_removing"

@@ -16,19 +16,12 @@ object SearchPropertiesDaoTest: SearchPropertiesDao {
         searchPropertiesList.addAll(entities)
     }
 
-    override fun getAll(): List<SearchPropertiesDataEntity> = searchPropertiesList
-
     override fun getById(id: Int): SearchPropertiesDataEntity {
         return searchPropertiesList.first { it.id == id }
     }
 
     override fun getByQuery(query: SearchRequest): SearchPropertiesDataEntity {
         return searchPropertiesList.first { it.query == query }
-    }
-
-    override fun getLastSaleRequests(): List<SearchRequest> {
-        val saleRequests = searchPropertiesList.filter { it.query.requestType == RequestType.SALE }
-        return saleRequests.takeLast(3).map { it.query }
     }
 
     override fun getSearchRequests(): List<SearchRequest> = searchPropertiesList.map { it.query }
