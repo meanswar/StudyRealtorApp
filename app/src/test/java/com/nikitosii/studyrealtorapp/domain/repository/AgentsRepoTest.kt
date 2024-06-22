@@ -9,7 +9,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.net.NetworkErrorHandler
 import com.nikitosii.studyrealtorapp.core.source.net.api.AgentsApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseAgentsSearch
-import com.nikitosii.studyrealtorapp.util.AgentUtils
+import com.nikitosii.studyrealtorapp.util.AgentTestUtils
 import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
 import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
 import com.nikitosii.studyrealtorapp.util.TestConstants.BOOLEAN_VALID
@@ -63,7 +63,7 @@ class AgentsRepoTest {
     @SuppressLint("CheckResult")
     @Test
     fun `get agents test`() {
-        val request = AgentUtils.getAgentRequest()
+        val request = AgentTestUtils.getAgentRequest()
         val mockedData = Mockito.mock(BaseAgentsSearch::class.java)
         coEvery {
             api.getAgents(

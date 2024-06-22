@@ -2,11 +2,11 @@ package com.nikitosii.studyrealtorapp.di.db.dao
 
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
-import com.nikitosii.studyrealtorapp.util.AgentUtils
+import com.nikitosii.studyrealtorapp.util.AgentTestUtils
 
 object AgentDaoTest : AgentDao {
 
-    private val data = AgentUtils.getExpectedAgentsList().toMutableList()
+    private val data = AgentTestUtils.getExpectedAgentsList().toMutableList()
 
     override fun getLocalAgents(id: List<String>): List<AgentEntity> = data.filter { it.id in id }
 

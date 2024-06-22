@@ -6,7 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
-import com.nikitosii.studyrealtorapp.util.AgentUtils
+import com.nikitosii.studyrealtorapp.util.AgentTestUtils
 import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers.IO
@@ -30,7 +30,7 @@ class AgentsDaoTest {
             RealtorDataBase::class.java
         ).build()
         dao = database.agentsDao()
-        withContext(IO) { dao.insertAgents(AgentUtils.getExpectedAgentsList()) }
+        withContext(IO) { dao.insertAgents(AgentTestUtils.getExpectedAgentsList()) }
     }
 
     @After
@@ -44,7 +44,7 @@ class AgentsDaoTest {
     @Test
     fun `get agents test`() = runTest {
         withContext(IO) {
-            val expected = AgentUtils.getExpectedAgentsList()
+            val expected = AgentTestUtils.getExpectedAgentsList()
 
             assertEquals(expected, dao.getLocalAgents())
         }
@@ -53,7 +53,7 @@ class AgentsDaoTest {
     @Test
     fun `get agents which are in list test`() = runTest {
         withContext(IO) {
-            val expected = AgentUtils.getExpectedAgentsList().first()
+            val expected = AgentTestUtils.getExpectedAgentsList().first()
 
             val retrievedData = dao.getLocalAgents(listOf(ID_VALID_TEXT))
             assertEquals(expected, retrievedData.first())
@@ -63,7 +63,7 @@ class AgentsDaoTest {
     @Test
     fun `insert agents test`() = runTest {
         withContext(IO) {
-            val initialData = AgentUtils.getExpectedAgentsList()
+            val initialData = AgentTestUtils.getExpectedAgentsList()
             val expected = initialData.map { it.copy(id = ID_VALID_TEXT + 1) } + initialData
             dao.insertAgents(expected)
 
@@ -74,7 +74,7 @@ class AgentsDaoTest {
     @Test
     fun `get favorite agents test`() = runTest {
         withContext(IO) {
-            val initialData = AgentUtils.getExpectedAgentsList().first()
+            val initialData = AgentTestUtils.getExpectedAgentsList().first()
             val additionalData = listOf(
                 initialData.copy(id = ID_VALID_TEXT + 1),
                 initialData.copy(id = ID_VALID_TEXT + 2),
@@ -93,7 +93,7 @@ class AgentsDaoTest {
     @Test
     fun `get favorite agents from id list test`() = runTest {
         withContext(IO) {
-            val expected = AgentUtils.getExpectedAgentsList()
+            val expected = AgentTestUtils.getExpectedAgentsList()
             val initialData = expected.first().copy(id = ID_VALID_TEXT + 1)
 
             dao.insertAgent(initialData)
@@ -106,7 +106,7 @@ class AgentsDaoTest {
     @Test
     fun `get recent favorite agents test`() = runTest {
         withContext(IO) {
-            val initialData = AgentUtils.getExpectedAgentsList().first()
+            val initialData = AgentTestUtils.getExpectedAgentsList().first()
             val additionalData = listOf(
                 initialData.copy(id = ID_VALID_TEXT + 1),
                 initialData.copy(id = ID_VALID_TEXT + 2),
@@ -124,7 +124,7 @@ class AgentsDaoTest {
     @Test
     fun `delete all agents test`() = runTest {
         withContext(IO) {
-            val initialData = AgentUtils.getExpectedAgentsList().first()
+            val initialData = AgentTestUtils.getExpectedAgentsList().first()
             val additionalData = listOf(
                 initialData.copy(id = ID_VALID_TEXT + 1),
                 initialData.copy(id = ID_VALID_TEXT + 2),
@@ -144,7 +144,7 @@ class AgentsDaoTest {
     @Test
     fun `delete agent test`() = runTest {
         withContext(IO) {
-            val initialData = AgentUtils.getExpectedAgentsList().first()
+            val initialData = AgentTestUtils.getExpectedAgentsList().first()
             val additionalData = listOf(
                 initialData.copy(id = ID_VALID_TEXT + 1),
                 initialData.copy(id = ID_VALID_TEXT + 2),

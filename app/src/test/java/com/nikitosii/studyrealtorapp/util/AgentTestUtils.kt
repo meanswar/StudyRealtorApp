@@ -16,7 +16,7 @@ import com.nikitosii.studyrealtorapp.core.source.net.model.office.OfficeResponse
 import com.nikitosii.studyrealtorapp.core.source.net.model.phone.PhoneResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.photo.PhotoResponseApi
 
-object AgentUtils {
+object AgentTestUtils {
     fun getExpectedAgentsList(): List<AgentEntity> = listOf(
         AgentEntity(
             id = TestConstants.ID_VALID_TEXT,
