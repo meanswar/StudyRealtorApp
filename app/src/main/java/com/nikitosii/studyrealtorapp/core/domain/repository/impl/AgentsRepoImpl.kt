@@ -49,9 +49,6 @@ class AgentsRepoImpl @Inject constructor(
         result.map { Agent.from(it) }
     }
 
-    override suspend fun getLocalAgents(id: List<String>): List<Agent> =
-        dao.getLocalAgents(id).map { Agent.from(it) }.sortedBy { it.name }
-
     override fun getLocalAgents(): Flow<List<Agent>> = channelAgents.value.flow
 
     override suspend fun refreshAgents() {

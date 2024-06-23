@@ -8,8 +8,6 @@ object AgentDaoTest : AgentDao {
 
     private val data = AgentTestUtils.getExpectedAgentsList().toMutableList()
 
-    override fun getLocalAgents(id: List<String>): List<AgentEntity> = data.filter { it.id in id }
-
     override fun getLocalAgents(): List<AgentEntity> = data
 
     override fun getFavoriteAgents(): List<AgentEntity> = data.filter { it.favorite }

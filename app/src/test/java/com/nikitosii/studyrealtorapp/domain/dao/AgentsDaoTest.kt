@@ -51,16 +51,6 @@ class AgentsDaoTest {
     }
 
     @Test
-    fun `get agents which are in list test`() = runTest {
-        withContext(IO) {
-            val expected = AgentTestUtils.getExpectedAgentsList().first()
-
-            val retrievedData = dao.getLocalAgents(listOf(ID_VALID_TEXT))
-            assertEquals(expected, retrievedData.first())
-        }
-    }
-
-    @Test
     fun `insert agents test`() = runTest {
         withContext(IO) {
             val initialData = AgentTestUtils.getExpectedAgentsList()

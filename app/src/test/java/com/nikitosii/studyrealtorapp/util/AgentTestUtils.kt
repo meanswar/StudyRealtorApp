@@ -5,6 +5,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Address
 import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Office
 import com.nikitosii.studyrealtorapp.core.source.local.model.Phone
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentResponseApi
@@ -321,4 +322,6 @@ object AgentTestUtils {
             )
         )
     )
+
+    fun getAgent(): AgentEntity = getExpectedAgentsList().first()
 }

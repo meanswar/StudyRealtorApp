@@ -5,7 +5,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nikitosii.studyrealtorapp.core.source.db.RealtorDataBase
 import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
-import com.nikitosii.studyrealtorapp.core.source.db.entity.ImageDataEntity
 import com.nikitosii.studyrealtorapp.util.ImageDataTestUtils
 import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
 import junit.framework.TestCase.assertEquals
@@ -30,7 +29,7 @@ class ImageDataDaoTest {
             RealtorDataBase::class.java
         ).build()
         dao = database.imageDataDao()
-        withContext(IO) { dao.insertImageData(ImageDataTestUtils.getExpectedImageData()) }
+        withContext(IO) { dao.insertImageData(ImageDataTestUtils.getExpectedLocalImageData()) }
     }
 
     @After
@@ -44,7 +43,7 @@ class ImageDataDaoTest {
     @Test
     fun `get image test`() = runBlocking {
         withContext(IO) {
-            val expected = ImageDataTestUtils.getExpectedImageData()
+            val expected = ImageDataTestUtils.getExpectedLocalImageData()
 
             assertEquals(expected, dao.getImage(expected.id))
         }

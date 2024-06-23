@@ -19,14 +19,6 @@ interface AgentsRepo {
     suspend fun getAgents(data: AgentRequestApi, page: Int): List<Agent>
 
     /**
-     * Retrieves a list of local agents based on the provided IDs.
-     *
-     * @param id A list of agent IDs to retrieve.
-     * @return A list of [Agent] with the specified IDs from the local storage.
-     */
-    suspend fun getLocalAgents(id: List<String>): List<Agent>
-
-    /**
      * Retrieves all local agents from the local storage.
      *
      * @return A flow of lists containing all local agents.

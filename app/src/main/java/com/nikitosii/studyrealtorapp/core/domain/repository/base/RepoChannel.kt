@@ -14,7 +14,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -45,7 +44,6 @@ fun <T : Any> repoChannel(
             }
 
         override fun isInitialized() = repoChannel != null
-
     }
 }
 
@@ -106,12 +104,6 @@ class RepoChannel<T : Any>(
         return storageConfig as StorageConfig<T>
     }
 
-    fun networkConfig(init: NetworkConfig<T>.() -> Unit): NetworkConfig<T> {
-        networkConfig = NetworkConfig()
-        init(networkConfig)
-        return networkConfig
-    }
-
     fun refreshOnlyNetwork() {
         launch(io) {
             internalRefreshOnlyNetwork(true)
@@ -120,9 +112,8 @@ class RepoChannel<T : Any>(
 
     fun refresh() {
         launch(io) {
-            val res = storageConfig?.get?.invoke()
-            val res2 = res?.asRefreshing()
-            res2?.sendToChannel(channel)
+            val res = storageConfig?.get?.invoke()?.asRefreshing()
+            res?.sendToChannel(channel)
             internalRefreshOnlyNetwork(false)
         }
     }
@@ -133,10 +124,6 @@ class RepoChannel<T : Any>(
                 ?.asUpToDate()
                 ?.sendToChannel(channel)
         }
-    }
-
-    fun recreateChannel() {
-        refresh = true
     }
 
     private suspend fun internalRefreshOnlyNetwork(setRefreshingBeforeCall: Boolean) {
@@ -177,14 +164,11 @@ class NetworkConfig<T> {
     lateinit var get: (suspend () -> T)
 }
 
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class ChannelRecreateObserver {
     private val observers = mutableListOf<RepoChannel<*>?>()
 
     fun observe(repoChannel: RepoChannel<*>) {
         observers.add(repoChannel)
-    }
-
-    fun recreateChannel() {
-        observers.forEach { it?.recreateChannel() }
     }
 }
