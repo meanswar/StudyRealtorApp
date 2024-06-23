@@ -21,7 +21,6 @@ import org.mockito.junit.MockitoJUnitRunner
 class RequestDataRepoTest {
 
     private lateinit var repo: RequestDataRepo
-
     private lateinit var dao: RequestDataDao
 
     @Before
