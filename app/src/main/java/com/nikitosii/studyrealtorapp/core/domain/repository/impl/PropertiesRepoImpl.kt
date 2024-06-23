@@ -88,7 +88,7 @@ class PropertiesRepoImpl @Inject constructor(
 
     override suspend fun removeData() = dao.deleteAllProperties()
 
-    override suspend fun remove(id: String) = dao.deleteAllProperties()
+    override suspend fun remove(id: String) = dao.remove(id)
 
     override suspend fun getPropertyDetails(id: String): PropertyDetails = runWithErrorHandler {
         PropertyDetails.from(api.getPropertyDetails(id).result)

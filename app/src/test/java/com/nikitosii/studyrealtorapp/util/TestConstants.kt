@@ -14,6 +14,7 @@ object TestConstants {
 
     const val ANY_TEXT = "TEXT"
     const val ANY_DIGITS = 120
+    const val ANY_LONG = 1L
     const val ANY_FLOAT = 1.0f
     const val ANY_DOUBLE = 1.0
 

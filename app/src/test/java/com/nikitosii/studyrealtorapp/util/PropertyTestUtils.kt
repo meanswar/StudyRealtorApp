@@ -454,4 +454,8 @@ object PropertyTestUtils {
             favorite = TestConstants.BOOLEAN_VALID
         )
     )
+
+    fun getPropertyId(): String = getExpectedProperty().propertyId
+
+    fun getExpectedProperty(): PropertyEntity = getExpectedProperties().first()
 }
