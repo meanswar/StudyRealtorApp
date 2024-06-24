@@ -2,10 +2,11 @@ package com.nikitosii.studyrealtorapp.di.db.dao
 
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
+import com.nikitosii.studyrealtorapp.util.RequestDataTestUtils
 
 object RequestDataDaoTest : RequestDataDao {
 
-    private val requestDataList = mutableListOf<RequestDataEntity>()
+    private val requestDataList = mutableListOf(RequestDataTestUtils.getExpectedRequestData())
 
     override fun getData(requestId: Int): RequestDataEntity? =
         requestDataList.firstOrNull { it.requestId == requestId }

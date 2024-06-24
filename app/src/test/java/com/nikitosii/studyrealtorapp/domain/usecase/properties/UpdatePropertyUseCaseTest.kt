@@ -1,22 +1,25 @@
 package com.nikitosii.studyrealtorapp.domain.usecase.properties
 
-import com.nikitosii.studyrealtorapp.util.TestConstants
 import com.nikitosii.studyrealtorapp.core.domain.useCase.properties.UpdatePropertyUseCase
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.di.DaggerTestAppComponent
 import com.nikitosii.studyrealtorapp.domain.usecase.base.BaseUseCaseTest
+import com.nikitosii.studyrealtorapp.util.PropertyTestUtils
+import com.nikitosii.studyrealtorapp.util.TestConstants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.internal.runners.JUnit4ClassRunner
 import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-@RunWith(JUnit4ClassRunner::class)
+@RunWith(JUnit4::class)
 class UpdatePropertyUseCaseTest : BaseUseCaseTest<UpdatePropertyUseCase>() {
 
     @Inject
@@ -27,6 +30,14 @@ class UpdatePropertyUseCaseTest : BaseUseCaseTest<UpdatePropertyUseCase>() {
         DaggerTestAppComponent.builder()
             .build()
             .inject(this)
+
+        dao.deleteAllProperties()
+        dao.insertProperties(PropertyTestUtils.getExpectedProperties())
+    }
+
+    @After
+    fun tearDown() {
+        dao.deleteAllProperties()
     }
 
     @Test

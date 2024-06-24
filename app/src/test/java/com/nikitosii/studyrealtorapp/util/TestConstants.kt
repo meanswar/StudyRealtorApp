@@ -44,6 +44,7 @@ object TestConstants {
     const val ID_FOR_CHANGES = 0
 
     const val ID_VALID_TEXT = "id_valid"
+    const val ID_VALID_TEXT_FOR_CHANGES = "id_valid_for_changes"
     const val ID_VALID_FOR_REMOVING = "id_valid_for_removing"
     const val ID_INVALID_TEXT = "id_invalid"
 

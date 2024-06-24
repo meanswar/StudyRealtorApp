@@ -226,7 +226,7 @@ object PropertyTestUtils {
             ),
             priceReducedAmount = TestConstants.ANY_TEXT,
             primaryPhoto = Photo(url = TestConstants.PHOTO_VALID),
-            propertyId = TestConstants.ID_VALID_TEXT + 1,
+            propertyId = TestConstants.ID_VALID_TEXT_FOR_CHANGES,
             status = TestConstants.STATUS_FOR_RENT,
             tags = listOf(TestConstants.ANY_TEXT, TestConstants.ANY_TEXT),
             virtualTours = listOf(
