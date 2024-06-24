@@ -1,18 +1,17 @@
 package com.nikitosii.studyrealtorapp.domain.usecase.profile
 
-import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
-import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID
-import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
 import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.UpdateProfileUseCase
 import com.nikitosii.studyrealtorapp.core.source.db.dao.ProfileDao
-import com.nikitosii.studyrealtorapp.core.source.db.entity.ProfileEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.profile.Profile
 import com.nikitosii.studyrealtorapp.di.DaggerTestAppComponent
 import com.nikitosii.studyrealtorapp.domain.usecase.base.BaseUseCaseTest
+import com.nikitosii.studyrealtorapp.util.ProfileTestUtils
+import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,17 +34,23 @@ class UpdateProfileDataUseCaseTest : BaseUseCaseTest<UpdateProfileUseCase>() {
         DaggerTestAppComponent.builder()
             .build()
             .inject(this)
+        dao.deleteProfile()
+        dao.insertProfile(ProfileTestUtils.getExpectedProfile())
+    }
+
+    @After
+    fun tearDown() {
+        dao.deleteProfile()
     }
 
     @Test
     fun updateProfile() = runTest {
-        val oldProfile = ProfileEntity(ID_VALID, ANY_TEXT, ANY_TEXT, ANY_TEXT, ANY_TEXT, Uri.EMPTY)
-        assert(dao.getProfile()?.equals(oldProfile) == true)
+        val oldProfile = dao.getProfile()
+        val expected = oldProfile?.copy(name = ID_VALID_TEXT)
 
-        val updatedProfile = oldProfile.copy(name = ID_VALID_TEXT)
-        val params = UpdateProfileUseCase.Params.create(Profile.from(updatedProfile))
+        val params = UpdateProfileUseCase.Params.create(Profile.from(expected))
         useCase.execute(params)
 
-        assert(dao.getProfile()?.equals(updatedProfile) == true)
+        assertEquals(expected, dao.getProfile())
     }
 }

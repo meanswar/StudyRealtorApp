@@ -8,8 +8,13 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Phone
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
+import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentDetailsResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AreaResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.agent.BrokerResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.agent.ReviewResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.SalePriceResponseApi
+import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseAgentDetailsResponse
 import com.nikitosii.studyrealtorapp.core.source.net.model.base.BaseAgentsSearch
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.AddressResponseApi
 import com.nikitosii.studyrealtorapp.core.source.net.model.location.address.CoordinateApi
@@ -72,6 +77,8 @@ object AgentTestUtils {
             )
         )
     )
+
+    fun getExpectedLocalAgents(): List<Agent> = getExpectedAgentsList().map { Agent.from(it) }
 
     fun getAgentRequest(): AgentRequestApi = AgentRequestApi(
         TestConstants.ANY_TEXT,
@@ -324,4 +331,86 @@ object AgentTestUtils {
     )
 
     fun getAgent(): AgentEntity = getExpectedAgentsList().first()
+
+    fun getAgentDetails(): BaseAgentDetailsResponse = BaseAgentDetailsResponse(
+        AgentDetailsResponseApi(
+            firstName = TestConstants.ANY_TEXT,
+            lastName = TestConstants.ANY_TEXT,
+            fullName = TestConstants.ANY_TEXT,
+            description = TestConstants.ANY_TEXT,
+            agentRating = TestConstants.ANY_DIGITS,
+            phone = TestConstants.PHONE_VALID,
+            email = TestConstants.EMAIL_VALID,
+            website = TestConstants.ANY_TEXT,
+            photo = PhotoResponseApi(url = TestConstants.PHOTO_VALID),
+            address = AddressResponseApi(
+                city = TestConstants.ANY_TEXT,
+                coordinate = CoordinateApi(
+                    lat = TestConstants.LATITUDE_VALID,
+                    lon = TestConstants.LONGITUDE_VALID
+                ),
+                line = TestConstants.ANY_TEXT,
+                postalCode = TestConstants.ANY_TEXT,
+                state = TestConstants.ANY_TEXT,
+                stateCode = TestConstants.ANY_TEXT
+            ),
+            broker = BrokerResponseApi(
+                name = TestConstants.ANY_TEXT,
+                photo = PhotoResponseApi(url = TestConstants.URL_VALID)
+            ),
+            specialization = listOf(TestConstants.ANY_TEXT, TestConstants.ANY_TEXT),
+            language = listOf(TestConstants.ANY_TEXT, TestConstants.ANY_TEXT),
+            reviewCount = TestConstants.ANY_DIGITS,
+            recommendationsCount = TestConstants.ANY_DIGITS,
+            averageRating = TestConstants.ANY_FLOAT,
+            reviews = listOf(
+                ReviewResponseApi(
+                    author = TestConstants.ANY_TEXT,
+                    description = TestConstants.ANY_TEXT,
+                    ratingValue = TestConstants.ANY_DIGITS
+                ),
+                ReviewResponseApi(
+                    author = TestConstants.ANY_TEXT,
+                    description = TestConstants.ANY_TEXT,
+                    ratingValue = TestConstants.ANY_DIGITS
+                )
+            ),
+            marketingArea = listOf(
+                AreaResponseApi(
+                    name = TestConstants.ANY_TEXT,
+                    stateCode = TestConstants.ANY_TEXT
+                ),
+                AreaResponseApi(
+                    name = TestConstants.ANY_TEXT,
+                    stateCode = TestConstants.ANY_TEXT
+                )
+            ),
+            servedAreas = listOf(
+                AreaResponseApi(
+                    name = TestConstants.ANY_TEXT,
+                    stateCode = TestConstants.ANY_TEXT
+                ),
+                AreaResponseApi(
+                    name = TestConstants.ANY_TEXT,
+                    stateCode = TestConstants.ANY_TEXT
+                )
+            ),
+            phones = listOf(
+                PhoneResponseApi(
+                    ext = TestConstants.PHONE_EXT_VALID,
+                    number = TestConstants.PHONE_VALID,
+                    primary = true,
+                    trackable = true,
+                    type = TestConstants.ANY_TEXT
+                ),
+                PhoneResponseApi(
+                    ext = null,
+                    number = TestConstants.PHONE_VALID,
+                    primary = false,
+                    trackable = true,
+                    type = TestConstants.ANY_TEXT
+                )
+            )
+        )
+    )
 }

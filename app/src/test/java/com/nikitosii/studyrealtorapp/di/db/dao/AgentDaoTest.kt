@@ -2,11 +2,10 @@ package com.nikitosii.studyrealtorapp.di.db.dao
 
 import com.nikitosii.studyrealtorapp.core.source.db.dao.AgentDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
-import com.nikitosii.studyrealtorapp.util.AgentTestUtils
 
 object AgentDaoTest : AgentDao {
 
-    private val data = AgentTestUtils.getExpectedAgentsList().toMutableList()
+    private val data = mutableListOf<AgentEntity>()
 
     override fun getLocalAgents(): List<AgentEntity> = data
 
@@ -23,7 +22,11 @@ object AgentDaoTest : AgentDao {
     }
 
     override fun insertAgent(agent: AgentEntity) {
-       data.add(agent)
+        if (!data.any { it.id == agent.id }) data.add(agent)
+        else {
+            data.removeIf { it.id == agent.id }
+            data.add(agent)
+        }
     }
 
     override fun deleteAllAgents() {

@@ -1,38 +1,24 @@
 package com.nikitosii.studyrealtorapp.domain.usecase.agent
 
 import android.annotation.SuppressLint
+import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetAgentsFromNetworkUseCase
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
+import com.nikitosii.studyrealtorapp.di.DaggerTestAppComponent
+import com.nikitosii.studyrealtorapp.domain.usecase.base.BaseUseCaseTest
+import com.nikitosii.studyrealtorapp.util.AgentTestUtils
 import com.nikitosii.studyrealtorapp.util.TestConstants
-import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
-import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
-import com.nikitosii.studyrealtorapp.util.TestConstants.EMAIL_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.EMPTY_TEXT
 import com.nikitosii.studyrealtorapp.util.TestConstants.EXCEPTION_WRONG_PARAMS
-import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT
-import com.nikitosii.studyrealtorapp.util.TestConstants.LATITUDE_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.LOCATION_INVALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.LOCATION_VALID
-import com.nikitosii.studyrealtorapp.util.TestConstants.LONGITUDE_VALID
-import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_EXT_VALID
-import com.nikitosii.studyrealtorapp.util.TestConstants.PHONE_VALID
-import com.nikitosii.studyrealtorapp.util.TestConstants.PHOTO_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_DIGITS_INVALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_DIGITS_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_TEXT_INVALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.REQUEST_TEXT_VALID
-import com.nikitosii.studyrealtorapp.util.TestConstants.SERVER_DATE_PATTERN
-import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetAgentsFromNetworkUseCase
-import com.nikitosii.studyrealtorapp.core.source.local.model.Address
-import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
-import com.nikitosii.studyrealtorapp.core.source.local.model.Office
-import com.nikitosii.studyrealtorapp.core.source.local.model.Phone
-import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
-import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
-import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
-import com.nikitosii.studyrealtorapp.di.DaggerTestAppComponent
-import com.nikitosii.studyrealtorapp.domain.usecase.base.BaseUseCaseTest
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,62 +36,8 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
     }
 
     private fun checkResult(result: List<Agent>) {
-        assertThat(result).isEqualTo(
-            listOf(
-            Agent(
-                fullName = ANY_TEXT,
-                nickname = ANY_TEXT,
-                name = ANY_TEXT,
-                title = ANY_TEXT,
-                slogan = ANY_TEXT,
-                photoUrl = PHOTO_VALID,
-                backgroundPhotoUrl = PHOTO_VALID,
-                address = Address(
-                    city = ANY_TEXT,
-                    coordinate = Coordinate(
-                        LATITUDE_VALID,
-                        LONGITUDE_VALID
-                    ),
-                    line = ANY_TEXT,
-                    postalCode = ANY_TEXT,
-                    state = ANY_TEXT,
-                    stateCode = ANY_TEXT
-                ),
-                office = Office(
-                    email = EMAIL_VALID,
-                    id = ID_VALID_TEXT,
-                    href = ANY_TEXT,
-                    mls_set = ANY_TEXT,
-                    name = ANY_TEXT,
-                    phones = listOf(
-                        Phone(
-                            ext = PHONE_EXT_VALID,
-                            number = PHONE_VALID,
-                            primary = true,
-                            trackable = true,
-                            type = ANY_TEXT
-                        )
-                    ),
-                    image = PHOTO_VALID
-                ),
-                phone = PHONE_VALID,
-                webUrl = ANY_TEXT,
-                recentlySoldCount = ANY_DIGITS,
-                forSalePriceCount = ANY_DIGITS,
-                minForSalePrice = ANY_DIGITS,
-                maxForSalePrice = ANY_DIGITS,
-                reviewCount = ANY_DIGITS,
-                recommendationsCount = ANY_DIGITS,
-                id = ID_VALID_TEXT,
-                salePrice = SalePrice(
-                    min = ANY_DIGITS,
-                    max = ANY_DIGITS,
-                    lastListingDate = SERVER_DATE_PATTERN
-                ),
-                favorite = true
-            )
-        )
-        )
+        val expected = AgentTestUtils.getAgentsFromNetwork().agents.map { Agent.from(it) }
+        assertEquals(expected, result)
     }
 
     @SuppressLint("CheckResult")
@@ -120,9 +52,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -596,7 +526,6 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
         checkResult(data)
     }
 
@@ -612,7 +541,6 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
         val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
         checkResult(data)
     }
 
@@ -627,9 +555,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -643,9 +569,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -659,9 +583,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -675,9 +597,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -691,9 +611,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -707,9 +625,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -723,9 +639,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 
     @Test
@@ -739,8 +653,6 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
             location = LOCATION_VALID
         )
         val params = GetAgentsFromNetworkUseCase.Params.from(request, TestConstants.PAGE_VALID)
-        val data = useCase.execute(params)
-        assertThat(data.size).isEqualTo(1)
-        checkResult(data)
+        checkResult(useCase.execute(params))
     }
 }
