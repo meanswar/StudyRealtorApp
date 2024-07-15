@@ -11,13 +11,19 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Photo
 import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.parcelize.PhotoContainer
 import com.nikitosii.studyrealtorapp.core.source.local.model.property_details.PropertyDetails
+import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
+import javax.inject.Named
 
 class PropertyDetailsViewModel @Inject constructor(
     private val getPropertyDetailsUseCase: GetPropertyDetailsUseCase,
-    private val updatePropertyUseCase: UpdatePropertyUseCase
-) : BaseViewModel() {
+    private val updatePropertyUseCase: UpdatePropertyUseCase,
+    @Named(AppModule.IO_DISPATCHER) ioDispatcher: CoroutineDispatcher,
+    @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
+) : BaseViewModel(ioDispatcher, uiDispatcher) {
     private val _property = WorkLiveData<PropertyDetails>()
     val property: LiveData<WorkResult<PropertyDetails>>
         get() = _property

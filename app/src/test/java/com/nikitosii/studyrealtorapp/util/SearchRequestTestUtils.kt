@@ -4,7 +4,7 @@ import com.nikitosii.studyrealtorapp.core.source.db.entity.SearchRequestEntity
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_DIGITS
 import com.nikitosii.studyrealtorapp.util.TestConstants.ANY_TEXT
-import com.nikitosii.studyrealtorapp.util.TestConstants.BOOLEAN_INVALID
+import com.nikitosii.studyrealtorapp.util.TestConstants.BOOLEAN_FALSE
 import com.nikitosii.studyrealtorapp.util.TestConstants.BOOLEAN_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.SEARCH_TYPE_RENT
@@ -25,8 +25,8 @@ object SearchRequestTestUtils {
         sqftMax = ANY_DIGITS,
         imageUrl = ANY_TEXT,
         favorite = BOOLEAN_VALID,
-        cats = BOOLEAN_INVALID,
-        dogs = BOOLEAN_INVALID
+        cats = BOOLEAN_FALSE,
+        dogs = BOOLEAN_FALSE
     )
 
     fun getExpectedEntity(): SearchRequestEntity = SearchRequestEntity.from(getExpectedSearchRequest())

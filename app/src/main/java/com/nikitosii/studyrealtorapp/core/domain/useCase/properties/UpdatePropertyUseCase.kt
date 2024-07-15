@@ -8,7 +8,7 @@ import javax.inject.Inject
 class UpdatePropertyUseCase @Inject constructor(private val repo: PropertiesRepo) :
     UseCaseParams<Unit, UpdatePropertyUseCase.Params>() {
 
-    class Params private constructor(val data: Property) {
+    data class Params private constructor(val data: Property) {
         companion object {
             fun create(data: Property) = Params(data)
         }

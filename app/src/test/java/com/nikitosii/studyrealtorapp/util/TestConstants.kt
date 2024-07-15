@@ -6,7 +6,7 @@ object TestConstants {
 
     const val EMPTY_TEXT: String = ""
     const val BOOLEAN_VALID: Boolean = true
-    const val BOOLEAN_INVALID: Boolean = false
+    const val BOOLEAN_FALSE: Boolean = false
     val SEARCH_TYPE_RENT: RequestType = RequestType.RENT
     val SEARCH_TYPE_SALE: RequestType = RequestType.SALE
     const val PHOTO_VALID =
