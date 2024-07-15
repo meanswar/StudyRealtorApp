@@ -11,7 +11,7 @@ class GetAgentDetailsUseCase @Inject constructor(
     private val repo: AgentsRepo,
     private val imageRepo: ImageRepo
 ) : UseCaseParams<AgentDetails, GetAgentDetailsUseCase.Params>() {
-    class Params private constructor(val id: String) {
+    data class Params(val id: String) {
         companion object {
             fun create(id: String) = Params(id)
         }

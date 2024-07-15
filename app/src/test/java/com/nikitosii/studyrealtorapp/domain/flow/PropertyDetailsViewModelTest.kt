@@ -119,7 +119,7 @@ class PropertyDetailsViewModelTest {
     }
 
     @Test
-    fun `onFavoriteClick toggles favorite status and calls use case`() = runTest {
+    fun `toogle property favorite status`() = runTest {
         val property = Property.from(PropertyTestUtils.getExpectedProperty())
         val updatedProperty = property.copy(favorite = TestConstants.BOOLEAN_FALSE)
         val params = UpdatePropertyUseCase.Params.create(updatedProperty)

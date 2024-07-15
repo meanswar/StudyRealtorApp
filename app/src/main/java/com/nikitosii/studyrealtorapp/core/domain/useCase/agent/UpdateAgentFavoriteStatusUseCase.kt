@@ -9,7 +9,7 @@ class UpdateAgentFavoriteStatusUseCase @Inject constructor(
     private val repo: AgentsRepo
 ) : UseCaseParams<Unit, UpdateAgentFavoriteStatusUseCase.Params>() {
 
-    class Params private constructor(val agent: Agent) {
+    data class Params(val agent: Agent) {
         companion object {
             fun create(agent: Agent) = Params(agent)
         }

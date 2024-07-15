@@ -6,6 +6,7 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Coordinate
 import com.nikitosii.studyrealtorapp.core.source.local.model.Office
 import com.nikitosii.studyrealtorapp.core.source.local.model.Phone
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
+import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentDetails
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.SalePrice
 import com.nikitosii.studyrealtorapp.core.source.net.model.agent.AgentDetailsResponseApi
@@ -332,6 +333,8 @@ object AgentTestUtils {
 
     fun getAgent(): AgentEntity = getExpectedAgentsList().first()
 
+    fun getLocalAgent(): Agent = getExpectedLocalAgents().first()
+
     fun getAgentDetails(): BaseAgentDetailsResponse = BaseAgentDetailsResponse(
         AgentDetailsResponseApi(
             firstName = TestConstants.ANY_TEXT,
@@ -413,4 +416,6 @@ object AgentTestUtils {
             )
         )
     )
+
+    fun getLocalAgentDetails(): AgentDetails = AgentDetails.from(getAgentDetails().agentDetails)
 }

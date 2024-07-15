@@ -8,13 +8,18 @@ import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.GetAgentDetailsUs
 import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.UpdateAgentFavoriteStatusUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentDetails
+import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
+import javax.inject.Named
 
 class AgentDetailsViewModel @Inject constructor(
     private val getAgentDetailsUseCase: GetAgentDetailsUseCase,
     private val updateAgentFavoriteStatusUseCase: UpdateAgentFavoriteStatusUseCase,
-) : BaseViewModel() {
+    @Named(AppModule.IO_DISPATCHER) ioDispatcher: CoroutineDispatcher,
+    @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
+) : BaseViewModel(ioDispatcher, uiDispatcher) {
 
     private val _agentDetails = WorkLiveData<AgentDetails>()
     val agent = MutableLiveData<Agent>()
