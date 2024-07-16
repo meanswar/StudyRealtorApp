@@ -9,7 +9,7 @@ import javax.inject.Inject
 class UpdateRequestUseCase @Inject constructor(private val repo: SearchRequestRepo) :
     UseCaseParams<Unit, UpdateRequestUseCase.Params>() {
 
-    class Params(val data: SearchRequest) {
+    data class Params(val data: SearchRequest) {
         companion object {
             fun create(data: SearchRequest) = Params(data)
         }

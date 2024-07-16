@@ -8,15 +8,20 @@ import com.nikitosii.studyrealtorapp.core.domain.useCase.request.UpdateRequestUs
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
+import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
+import javax.inject.Named
 
 class DashboardViewModel @Inject constructor(
     getRecentSaleSearchRequestsUseCase: GetRecentSaleSearchRequestsUseCase,
     getRecentRentSearchRequestsUseCase: GetRecentRentSearchRequestsUseCase,
     getProfileFlowUseCase: GetProfileFlowUseCase,
-    private val updateSearchRequestUseCase: UpdateRequestUseCase
-) : BaseViewModel() {
+    private val updateSearchRequestUseCase: UpdateRequestUseCase,
+    @Named(AppModule.IO_DISPATCHER) ioDispatcher: CoroutineDispatcher,
+    @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
+) : BaseViewModel(ioDispatcher, uiDispatcher) {
 
     val recentSaleRequests = getRecentSaleSearchRequestsUseCase.execute().toWorkLiveData()
     val recentRentRequests = getRecentRentSearchRequestsUseCase.execute().toWorkLiveData()
