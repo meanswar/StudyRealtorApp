@@ -89,9 +89,9 @@ class DashboardViewModelTest {
     @Test
     fun `checkFilters returns true when filters are set`() {
         val expected = true
-        viewModel.addressFilter.value = "123 Main St"
-        viewModel.priceMinFilter.value = 100000
-        viewModel.priceMaxFilter.value = 500000
+        viewModel.addressFilter.value = ANY_TEXT
+        viewModel.priceMinFilter.value = ANY_DIGITS
+        viewModel.priceMaxFilter.value = ANY_DIGITS
 
         val result = viewModel.checkFilters()
 
