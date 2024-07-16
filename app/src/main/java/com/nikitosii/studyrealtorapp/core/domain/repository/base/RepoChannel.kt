@@ -58,7 +58,7 @@ class RepoChannel<T : Any>(
 
     private var channel = MutableSharedFlow<Status<T>>(
         replay = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        onBufferOverflow = BufferOverflow.DROP_LATEST,
         extraBufferCapacity = 1
     )
 

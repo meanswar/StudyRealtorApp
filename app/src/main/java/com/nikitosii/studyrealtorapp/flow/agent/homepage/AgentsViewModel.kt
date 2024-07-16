@@ -10,15 +10,20 @@ import com.nikitosii.studyrealtorapp.core.domain.useCase.agent.UpdateAgentFavori
 import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.GetProfileFlowUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent
 import com.nikitosii.studyrealtorapp.core.source.local.model.agent.AgentRequestApi
+import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
+import javax.inject.Named
 
 class AgentsViewModel @Inject constructor(
     getRecentFavoriteAgentsUseCase: GetRecentFavoriteAgentsUseCase,
     getProfileFlowUseCase: GetProfileFlowUseCase,
     private val updateAgentFavoriteStatusUseCase: UpdateAgentFavoriteStatusUseCase,
-    private val getAgentsFromNetworkUseCase: GetAgentsFromNetworkUseCase
-) : BaseViewModel() {
+    private val getAgentsFromNetworkUseCase: GetAgentsFromNetworkUseCase,
+    @Named(AppModule.IO_DISPATCHER) ioDispatcher: CoroutineDispatcher,
+    @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
+) : BaseViewModel(ioDispatcher, uiDispatcher) {
 
     val favoriteAgents = getRecentFavoriteAgentsUseCase.execute().toWorkLiveData()
     val profile = getProfileFlowUseCase.execute().toWorkLiveData()
@@ -42,6 +47,16 @@ class AgentsViewModel @Inject constructor(
     private val page = MutableLiveData(1)
     private val isEmptyResponse = MutableLiveData(false)
     val oldRequest = MutableLiveData<AgentRequestApi>()
+
+    fun setOldRequest(oldRequest: AgentRequestApi) {
+        this.oldRequest.value = oldRequest
+        setLocationFilter(oldRequest.location)
+        oldRequest.agentName?.let { setNameFilter(it) }
+        oldRequest.rating?.let { setRatingFilter(it) }
+        oldRequest.price?.let { setPriceFilter(it) }
+        oldRequest.photo?.let { setPhotoFilter(it) }
+        oldRequest.lang?.let { setLangFilter(it) }
+    }
 
     fun incrementPage() {
         page.value = page.value?.plus(1)
