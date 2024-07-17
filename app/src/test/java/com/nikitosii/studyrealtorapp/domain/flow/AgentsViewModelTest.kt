@@ -1,6 +1,5 @@
 package com.nikitosii.studyrealtorapp.domain.flow
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -14,8 +13,6 @@ import com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsViewModel
 import com.nikitosii.studyrealtorapp.util.AgentTestUtils
 import com.nikitosii.studyrealtorapp.util.ProfileTestUtils
 import com.nikitosii.studyrealtorapp.util.TestConstants
-import com.nikitosii.studyrealtorapp.util.TestConstants.EXCEPTION_WRONG_PARAMS
-import com.nikitosii.studyrealtorapp.util.TestConstants.PAGE_INVALID
 import com.nikitosii.studyrealtorapp.util.TestConstants.PAGE_VALID
 import com.nikitosii.studyrealtorapp.util.ext.asUpToDate
 import junit.framework.TestCase.assertEquals
@@ -26,26 +23,18 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-class AgentsViewModelTest {
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
-
-    private val testDispatcher = TestCoroutineDispatcher()
-
+class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
     @Mock
     private lateinit var getRecentFavoriteAgentsUseCase: GetRecentFavoriteAgentsUseCase
 
@@ -58,7 +47,6 @@ class AgentsViewModelTest {
     @Mock
     private lateinit var getAgentsFromNetworkUseCase: GetAgentsFromNetworkUseCase
 
-    private lateinit var viewModel: AgentsViewModel
     private lateinit var favoriteAgentsFlow: SharedFlow<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<Agent>>>
     private lateinit var profileFlow: SharedFlow<com.nikitosii.studyrealtorapp.core.source.channel.Status<Profile>>
 
@@ -141,7 +129,7 @@ class AgentsViewModelTest {
         `when`(updateAgentFavoriteStatusUseCase.execute(params)).thenReturn(Unit)
 
         viewModel.updateAgentFavoriteStatus(agent)
-
+        Thread.sleep(TestConstants.THREAD_SLEEP_TIME)
         verify(updateAgentFavoriteStatusUseCase).execute(params)
     }
 }

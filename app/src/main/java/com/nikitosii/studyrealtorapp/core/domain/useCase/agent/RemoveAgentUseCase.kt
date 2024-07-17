@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RemoveAgentUseCase @Inject constructor(private val repo: AgentsRepo) :
     UseCaseParams<Unit, RemoveAgentUseCase.Params>() {
-    class Params private constructor(val id: String) {
+    data class Params (val id: String) {
         companion object {
             fun create(id: String): Params = Params(id)
         }

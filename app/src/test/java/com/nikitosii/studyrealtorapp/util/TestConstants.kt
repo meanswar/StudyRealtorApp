@@ -86,4 +86,6 @@ object TestConstants {
 
     const val EXCEPTION_WRONG_PARAMS = "wrong params"
     const val EXCEPTION_ITEM_NOT_EXISTS = "item not exists"
+
+    const val THREAD_SLEEP_TIME = 100L
 }

@@ -1,6 +1,5 @@
 package com.nikitosii.studyrealtorapp.domain.flow
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -13,33 +12,24 @@ import com.nikitosii.studyrealtorapp.util.TestConstants
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-class AgentDetailsViewModelTest {
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
-
-    private val testDispatcher = TestCoroutineDispatcher()
+class AgentDetailsViewModelTest : BaseViewModelTest<AgentDetailsViewModel>() {
 
     @Mock
     private lateinit var getAgentDetailsUseCase: GetAgentDetailsUseCase
 
     @Mock
     private lateinit var updateAgentStatusUseCase: UpdateAgentFavoriteStatusUseCase
-
-    private lateinit var viewModel: AgentDetailsViewModel
 
     @Before
     fun setUp() {
@@ -107,7 +97,7 @@ class AgentDetailsViewModelTest {
 
         `when`(updateAgentStatusUseCase.execute(params)).thenReturn(Unit)
         viewModel.updateAgentFavoriteStatus(updatedAgent)
-
+        Thread.sleep(TestConstants.THREAD_SLEEP_TIME)
         assertEquals(updatedAgent, viewModel.agent.value)
         verify(updateAgentStatusUseCase).execute(params)
     }

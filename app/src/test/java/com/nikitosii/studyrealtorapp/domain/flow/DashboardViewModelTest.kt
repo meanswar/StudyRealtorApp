@@ -1,6 +1,5 @@
 package com.nikitosii.studyrealtorapp.domain.flow
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.GetProfileFlowUseCase
 import com.nikitosii.studyrealtorapp.core.domain.useCase.request.GetRecentRentSearchRequestsUseCase
 import com.nikitosii.studyrealtorapp.core.domain.useCase.request.GetRecentSaleSearchRequestsUseCase
@@ -21,26 +20,18 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-class DashboardViewModelTest {
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
-
-    private val testDispatcher = TestCoroutineDispatcher()
-
+class DashboardViewModelTest: BaseViewModelTest<DashboardViewModel>() {
     @Mock
     private lateinit var getRecentSaleRequestsUseCase: GetRecentSaleSearchRequestsUseCase
 
@@ -53,7 +44,6 @@ class DashboardViewModelTest {
     @Mock
     private lateinit var updateSearchRequestUseCase: UpdateRequestUseCase
 
-    private lateinit var viewModel: DashboardViewModel
     private lateinit var recentSaleRequestsFlow: SharedFlow<Status<List<SearchRequest>>>
     private lateinit var recentRentRequestsFlow: SharedFlow<Status<List<SearchRequest>>>
     private lateinit var profileFlow: SharedFlow<Status<Profile>>
