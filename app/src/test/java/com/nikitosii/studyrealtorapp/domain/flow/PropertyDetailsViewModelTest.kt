@@ -1,6 +1,5 @@
 package com.nikitosii.studyrealtorapp.domain.flow
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
@@ -14,33 +13,23 @@ import com.nikitosii.studyrealtorapp.util.TestConstants
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-class PropertyDetailsViewModelTest {
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
-
-    private val testDispatcher = TestCoroutineDispatcher()
-
+class PropertyDetailsViewModelTest : BaseViewModelTest<PropertyDetailsViewModel>() {
     @Mock
     private lateinit var getPropertyDetailsUseCase: GetPropertyDetailsUseCase
 
     @Mock
     private lateinit var updatePropertyUseCase: UpdatePropertyUseCase
-
-    private lateinit var viewModel: PropertyDetailsViewModel
 
     @Before
     fun setUp() {
