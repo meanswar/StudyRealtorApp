@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -69,7 +70,7 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
     }
 
     @Test
-    fun `remove agent calls`() = runTest {
+    fun `remove agent calls`() = runBlockingTest {
         val expected = AgentTestUtils.getLocalAgent()
         val params = RemoveAgentUseCase.Params.create(expected.id)
 
@@ -82,7 +83,7 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
 
     // TODO (check what is wrong with this code, problem with parallel work of coroutines)
     @Test
-    fun `update agent favorite status`() = runTest {
+    fun `update agent favorite status`() = runBlockingTest {
         val agent = AgentTestUtils.getLocalAgent()
         val updatedAgent = agent.copy(favorite = !agent.favorite)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(updatedAgent)
@@ -92,7 +93,7 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
         assertTrue(viewModel.agents.value?.first { it.id == agent.id }?.favorite == agent.favorite)
 
         viewModel.updateAgentFavoriteStatus(agent)
-        Thread.sleep(THREAD_SLEEP_TIME)
+
         assertTrue(viewModel.agents.value?.first { it.id == agent.id }?.favorite == updatedAgent.favorite)
         verify(updateAgentFavoriteStatusUseCase).execute(params)
     }

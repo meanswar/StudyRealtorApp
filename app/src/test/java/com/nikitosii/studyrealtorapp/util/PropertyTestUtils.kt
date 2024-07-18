@@ -13,7 +13,9 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.Location
 import com.nikitosii.studyrealtorapp.core.source.local.model.Office
 import com.nikitosii.studyrealtorapp.core.source.local.model.Phone
 import com.nikitosii.studyrealtorapp.core.source.local.model.Photo
+import com.nikitosii.studyrealtorapp.core.source.local.model.Property
 import com.nikitosii.studyrealtorapp.core.source.local.model.VrTour
+import com.nikitosii.studyrealtorapp.util.TestConstants.ID_VALID_TEXT_FOR_CHANGES
 
 object PropertyTestUtils {
     fun getExpectedProperties(): List<PropertyEntity> = listOf(
@@ -457,5 +459,11 @@ object PropertyTestUtils {
 
     fun getPropertyId(): String = getExpectedProperty().propertyId
 
-    fun getExpectedProperty(): PropertyEntity = getExpectedProperties().first()
+    fun getExpectedProperty(): PropertyEntity =
+        getExpectedProperties().first { it.propertyId == ID_VALID_TEXT_FOR_CHANGES }
+
+    fun getExpectedLocalProperty(): Property = Property.from(getExpectedProperty())
+
+    fun getExpectedLocalProperties(): List<Property> =
+        getExpectedProperties().map { Property.from(it) }
 }

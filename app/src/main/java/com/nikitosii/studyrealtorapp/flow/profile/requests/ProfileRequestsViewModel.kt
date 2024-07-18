@@ -5,15 +5,19 @@ import com.nikitosii.studyrealtorapp.core.domain.useCase.request.GetLocalRequest
 import com.nikitosii.studyrealtorapp.core.domain.useCase.request.RemoveSearchRequestUseCase
 import com.nikitosii.studyrealtorapp.core.domain.useCase.request.UpdateRequestUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
+import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class ProfileRequestsViewModel @Inject constructor(
     getLocalRequestsUseCase: GetLocalRequestsUseCase,
     private val updateRequestUseCase: UpdateRequestUseCase,
-    private val removeSearchRequestUseCase: RemoveSearchRequestUseCase
-) : BaseViewModel() {
+    private val removeSearchRequestUseCase: RemoveSearchRequestUseCase,
+    @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
+) : BaseViewModel(uiDispatcher = uiDispatcher) {
 
     val requestsNetwork = getLocalRequestsUseCase.execute().toWorkLiveData()
     val requests = MutableLiveData<List<SearchRequest>>()

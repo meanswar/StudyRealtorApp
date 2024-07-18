@@ -9,7 +9,7 @@ class RemoveSearchRequestUseCase @Inject constructor(
     private val requestRepo: SearchRequestRepo,
     private val searchDataRepo: RequestDataRepo
 ) : UseCaseParams<Unit, RemoveSearchRequestUseCase.Params>() {
-    class Params private constructor(val id: Int) {
+    data class Params (val id: Int) {
         companion object {
             fun create(id: Int): Params = Params(id)
         }

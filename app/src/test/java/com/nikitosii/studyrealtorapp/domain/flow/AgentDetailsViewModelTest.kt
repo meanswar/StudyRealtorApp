@@ -13,7 +13,7 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -49,7 +49,7 @@ class AgentDetailsViewModelTest : BaseViewModelTest<AgentDetailsViewModel>() {
     }
 
     @Test
-    fun `get agent details live data valid`() = runTest {
+    fun `get agent details live data valid`() = runBlockingTest {
         val params = GetAgentDetailsUseCase.Params.create(TestConstants.ID_VALID_TEXT)
         val expected = AgentTestUtils.getLocalAgentDetails()
         val expectedStatus = Status.SUCCESS
@@ -69,7 +69,7 @@ class AgentDetailsViewModelTest : BaseViewModelTest<AgentDetailsViewModel>() {
     }
 
     @Test
-    fun `get agent details live data invalid`() = runTest {
+    fun `get agent details live data invalid`() = runBlockingTest {
         val params = GetAgentDetailsUseCase.Params.create(TestConstants.ID_INVALID_TEXT)
         val expected = Exception(TestConstants.EXCEPTION_WRONG_PARAMS)
         val expectedStatus = Status.ERROR
@@ -89,7 +89,7 @@ class AgentDetailsViewModelTest : BaseViewModelTest<AgentDetailsViewModel>() {
 
 
     @Test
-    fun `toggle agent's favorite status`() = runTest {
+    fun `toggle agent's favorite status`() = runBlockingTest {
         val agent = AgentTestUtils.getLocalAgent()
         val updatedAgent = agent.copy(favorite = TestConstants.BOOLEAN_FALSE)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(updatedAgent)
@@ -97,7 +97,7 @@ class AgentDetailsViewModelTest : BaseViewModelTest<AgentDetailsViewModel>() {
 
         `when`(updateAgentStatusUseCase.execute(params)).thenReturn(Unit)
         viewModel.updateAgentFavoriteStatus(updatedAgent)
-        Thread.sleep(TestConstants.THREAD_SLEEP_TIME)
+
         assertEquals(updatedAgent, viewModel.agent.value)
         verify(updateAgentStatusUseCase).execute(params)
     }

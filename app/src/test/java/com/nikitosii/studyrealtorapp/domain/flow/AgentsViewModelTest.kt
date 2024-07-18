@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -97,7 +97,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
     }
 
     @Test
-    fun `get agents from network`() = runTest {
+    fun `get agents from network`() = runBlockingTest {
         val request = AgentTestUtils.getAgentRequest()
         val params = GetAgentsFromNetworkUseCase.Params.from(request, PAGE_VALID)
         val expectedAgents = listOf(AgentTestUtils.getLocalAgent())
@@ -121,7 +121,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
     }
 
     @Test
-    fun `update agent favorite status`() = runTest {
+    fun `update agent favorite status`() = runBlockingTest {
         val agent = AgentTestUtils.getLocalAgent()
         val updatedAgent = agent.copy(favorite = !agent.favorite)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(updatedAgent)
@@ -129,7 +129,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
         `when`(updateAgentFavoriteStatusUseCase.execute(params)).thenReturn(Unit)
 
         viewModel.updateAgentFavoriteStatus(agent)
-        Thread.sleep(TestConstants.THREAD_SLEEP_TIME)
+
         verify(updateAgentFavoriteStatusUseCase).execute(params)
     }
 }
