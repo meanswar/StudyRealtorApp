@@ -29,13 +29,14 @@ class EditProfileViewModelTest : BaseViewModelTest<EditProfileViewModel>() {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-
+        viewModel.updateProfileStatus.observeForever(observer)
         viewModel = EditProfileViewModel(updateProfileUseCase, testDispatcher)
     }
 
     @After
     fun teardown() {
         Dispatchers.resetMain()
+        viewModel.updateProfileStatus.removeObserver(observer)
         testDispatcher.cleanupTestCoroutines()
     }
 
