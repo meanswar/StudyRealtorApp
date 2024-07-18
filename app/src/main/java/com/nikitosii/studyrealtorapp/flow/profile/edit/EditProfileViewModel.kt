@@ -7,12 +7,16 @@ import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.UpdateProfileUseCase
 import com.nikitosii.studyrealtorapp.core.source.local.model.profile.Profile
+import com.nikitosii.studyrealtorapp.di.modules.AppModule
 import com.nikitosii.studyrealtorapp.flow.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
+import javax.inject.Named
 
 class EditProfileViewModel @Inject constructor(
-    private val updateProfileUseCase: UpdateProfileUseCase
-) : BaseViewModel() {
+    private val updateProfileUseCase: UpdateProfileUseCase,
+    @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
+) : BaseViewModel(uiDispatcher = uiDispatcher) {
 
     val profileName = MutableLiveData<String>()
     val profileLastName = MutableLiveData<String>()
