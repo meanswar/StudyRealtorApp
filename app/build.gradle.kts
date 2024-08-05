@@ -73,6 +73,7 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -97,6 +98,8 @@ android {
 
 dependencies {
     implementation("androidx.test.ext:junit-ktx:1.1.5")
+    implementation("androidx.navigation:navigation-testing:2.7.7")
+    androidTestImplementation(project(":app"))
     val dagger = "2.50"
     val hawk = "2.0.1"
     val timber = "4.7.1"
@@ -112,6 +115,8 @@ dependencies {
     val moshiConverter = "2.6.2"
     val navVersion = "2.3.3"
     val room = "2.3.0"
+    val fragmentVersion = "1.4.0"
+    val espresso = "3.5.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -245,17 +250,30 @@ dependencies {
     //Unit Tests Libraries
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso")
+    androidTestImplementation ("androidx.test.espresso:espresso-contrib:$espresso")
+    androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation ("org.mockito:mockito-android:4.11.0")
+    androidTestImplementation ("androidx.test.espresso:espresso-intents:$espresso")
+    androidTestImplementation ("androidx.test:rules:1.4.0")
+    implementation ("androidx.test.espresso:espresso-idling-resource:$espresso")
+    androidTestImplementation("androidx.test.espresso:espresso-idling-resource:$espresso")
+    debugImplementation ("androidx.fragment:fragment-testing:$fragmentVersion")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+//    androidTestImplementation ("com.linkedin.dexmaker:dexmaker-mockito:2.28.1")
+    androidTestImplementation ("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
+    androidTestImplementation ("org.hamcrest:hamcrest:2.2")
 
     testImplementation ("org.assertj:assertj-core:3.12.2")
     testImplementation ("org.mockito:mockito-inline:4.11.0")
-    androidTestImplementation ("org.mockito:mockito-android:4.11.0")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
     testImplementation ("com.squareup.okhttp3:mockwebserver:4.7.2")
     testImplementation ("org.mockito:mockito-core:4.11.0")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     testImplementation ("io.mockk:mockk:1.12.0")
     testImplementation ("org.robolectric:robolectric:4.10.3")
-    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+
     testImplementation ("com.github.ologe:flow-test-observer:1.4.1")
     kaptTest("com.google.dagger:dagger-compiler:$dagger")
 }

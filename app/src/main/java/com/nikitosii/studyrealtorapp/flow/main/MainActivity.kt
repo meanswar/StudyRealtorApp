@@ -5,6 +5,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.WindowManager
+import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
 import com.nikitosii.studyrealtorapp.flow.base.InjectableActivity
@@ -25,7 +27,12 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-        checkNotificationPermission()
+        // TODO checking permission has been disabled for the time of making ui tests
+//        checkNotificationPermission()
+
+        if(BuildConfig.DEBUG){
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 
     private fun initViews() {

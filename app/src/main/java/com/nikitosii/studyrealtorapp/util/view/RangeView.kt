@@ -51,6 +51,10 @@ class RangeView @JvmOverloads constructor(
         binding.rsEditor.setValues(0f, 100f)
     }
 
+    fun setRange(min: Int, max: Int) {
+        binding.rsEditor.setValues(min.toFloat(), max.toFloat())
+    }
+
     fun onRangeChanged(action: (Int, Int) -> Unit) {
         binding.rsEditor.onChange { view, _ ->
             _onRangeChanged(view)
