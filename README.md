@@ -7,7 +7,7 @@ An Android App for searching properties and property agents in the USA. This app
 ## Screenshots
 
 <p>
-  <img src="https://i.postimg.cc/sQmsHWsx/dashboard.jpg" alt="Dashboard Screenshot" width="200"/>
+  <img src="https://iili.io/d7mc6qF.jpg" alt="Dashboard Screenshot" width="200"/>
   <img src="https://i.postimg.cc/z3DJbxFg/agents.jpg" alt="Agents Screenshot" width="200"/>
   <img src="https://i.postimg.cc/7bBqgSKQ/profile.jpg" alt="Profile Screenshot" width="200"/>
   <img src="https://i.postimg.cc/5Qt1ht23/profile-2.jpg" alt="Profile 2 Screenshot" width="200"/>
