@@ -3,11 +3,13 @@ package com.nikitosii.studyrealtorapp.flow.dashboard
 import android.os.Bundle
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -15,7 +17,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.nikitosii.studyrealtorapp.R
+import com.nikitosii.studyrealtorapp.flow.dashboard.filter.FilterViewHolder
 import com.nikitosii.studyrealtorapp.flow.main.MainActivity
+import com.nikitosii.studyrealtorapp.util.view.AnimatedFilterImageView
 import com.nikitosii.studyrealtorapp.util.view.SearchView
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -76,14 +80,22 @@ class DashboardFragmentTest {
             assertEquals(R.id.searchFragment, activity.navController?.currentDestination?.id)
         }
     }
-//
-//    @Test
-//    fun testHouseFilterClick() {
+
+    @Test
+    fun testHouseFilterClick() {
+        val filtersView = MutableLiveData<AnimatedFilterImageView>()
+        activityRule.scenario.onActivity { activity ->
+            val view = activity
+                .findViewById<FragmentContainerView>(R.id.navFragment)
+                .findViewById<SearchView>(R.id.svSearch)
+
+            val filterView = view.findViewById<AnimatedFilterImageView>(R.id.ivEnd)
+            filterView.performClick()
+            filtersView.postValue(view.findViewById(R.id.ivEnd))
+        }
 //        onView(withId(R.id.rvFilterTypes))
 //            .perform(RecyclerViewActions.actionOnItemAtPosition<FilterViewHolder>(0, click()))
-//
-//        // Verify the expected outcome, e.g., filter state changed
-//    }
+    }
 //
 //    @Test
 //    fun testFavoriteClick() {
