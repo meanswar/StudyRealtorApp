@@ -108,7 +108,7 @@ class ProfileViewPagerFragment : BaseFragment<FragmentProfileBinding, ProfileVie
     @SuppressLint("SetTextI18n")
     private fun setProfileData(data: Profile) {
         with(binding) {
-            tvProfileName.text = data.getFullName()
+            tvProfileName.showText(data.getFullName())
             tvProfileEmail.showText(data.email)
             tvProfilePhone.showText(data.phone)
             glideImage(data.photo, ivProfilePhoto, R.drawable.ic_user_profile)

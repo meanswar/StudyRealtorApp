@@ -271,6 +271,12 @@
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="tvRecentRentSearches, rvRecentRentSearches" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/grEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tvEmpty, lavEmpty" />
+
             <TextView
                 android:id="@+id/tvRecentSaleSearches"
                 style="@style/AppTheme.Text.Bold.Headline2.Teflon"
@@ -330,6 +336,28 @@
                 app:pagerSnap="true"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_recent_search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:id="@+id/tvEmpty"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/fragment_dashboard_empty_requests" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                android:id="@+id/lavEmpty"
+                app:lottie_fileName="lottie_empty.json"
+                app:layout_constraintTop_toBottomOf="@id/tvEmpty"
+                android:layout_marginTop="@dimen/size_20dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Space

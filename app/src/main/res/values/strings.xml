@@ -120,5 +120,6 @@
     <string name="tab_agent_Price">Price</string>
     <string name="tab_agent_rating">Rating</string>
     <string name="error_empty_location">You must put a location to search!</string>
+    <string name="fragment_dashboard_empty_requests">Oops, looks like You haven`t made any property requests yet\ntry to find something that suits you well</string>
 
 </resources>
