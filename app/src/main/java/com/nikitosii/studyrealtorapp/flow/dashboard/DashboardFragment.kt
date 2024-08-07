@@ -2,6 +2,7 @@ package com.nikitosii.studyrealtorapp.flow.dashboard
 
 import android.view.View
 import android.widget.RadioButton
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status.*
@@ -19,9 +20,11 @@ import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.hide
+import com.nikitosii.studyrealtorapp.util.ext.isNotNull
 import com.nikitosii.studyrealtorapp.util.ext.model.getFullName
 import com.nikitosii.studyrealtorapp.util.ext.onCheck
 import com.nikitosii.studyrealtorapp.util.ext.onClick
+import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.showWithAnimation
 import com.nikitosii.studyrealtorapp.util.view.PulseLayout
 import com.nikitosii.studyrealtorapp.util.view.RangeView
@@ -40,6 +43,7 @@ class DashboardFragment :
     private val filterHousesAdapter = FilterAdapter { onHouseFilterClick(it) }
     private var isFirstRentLoad = true
     private var isFirstSaleLoad = true
+    private val isEmptyDashboard = MutableLiveData(true)
 
     private fun onSearchRequestClick(view: View, data: SearchRequest) {
         when (view.id) {
@@ -100,6 +104,7 @@ class DashboardFragment :
             recentSaleRequests.observe(viewLifecycleOwner, recentSaleRequestsObserver)
             recentRentRequests.observe(viewLifecycleOwner, recentRentRequestsObserver)
             profile.observe(viewLifecycleOwner, profileObserver)
+            isEmptyDashboard.observe(viewLifecycleOwner) { binding.grEmpty.show(it) }
         }
     }
 
@@ -134,7 +139,11 @@ class DashboardFragment :
         with(binding) {
             glideImage(data?.photo, ivProfile, R.drawable.ic_user_profile)
             tvUserWelcome.text =
-                getString(R.string.screen_dashboard_welcome_user, data?.getFullName())
+                if (data?.name.isNotNull()) getString(
+                    R.string.screen_dashboard_welcome_user,
+                    data?.getFullName()
+                )
+                else getString(R.string.screen_dashboard_welcome_title)
         }
     }
 
@@ -181,8 +190,9 @@ class DashboardFragment :
     private fun processRecentSaleRequests(data: List<SearchRequest>) {
         with(binding) {
             if (data.isNotEmpty()) {
+                isEmptyDashboard.postValue(false)
                 recentSaleAdapter.submitList(data)
-                if (isFirstSaleLoad){
+                if (isFirstSaleLoad) {
                     isFirstSaleLoad = false
                     rvRecentSaleSearches.notifyDataSetChanged()
                 }
@@ -193,6 +203,7 @@ class DashboardFragment :
     private fun processRecentRentRequests(data: List<SearchRequest>) {
         with(binding) {
             if (data.isNotEmpty()) {
+                isEmptyDashboard.postValue(false)
                 recentRentAdapter.submitList(data)
                 if (isFirstRentLoad) {
                     isFirstRentLoad = false
