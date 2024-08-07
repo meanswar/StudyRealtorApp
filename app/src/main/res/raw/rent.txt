@@ -1,0 +1,839 @@
+{
+  "home": {
+    "advertisers": [
+      {
+        "builder": null,
+        "office": {
+          "phones": [
+            {
+              "ext": null,
+              "number": null,
+              "primary": false,
+              "trackable": null,
+              "type": "office"
+            },
+            {
+              "ext": null,
+              "number": "5167011796",
+              "primary": false,
+              "trackable": null,
+              "type": "primary"
+            },
+            {
+              "ext": null,
+              "number": "8882497819",
+              "primary": false,
+              "trackable": true,
+              "type": "primary"
+            }
+          ]
+        },
+        "state_license": null,
+        "team": null,
+        "team_name": null,
+        "type": "management"
+      },
+      {
+        "builder": null,
+        "office": {
+          "phones": [
+            {
+              "ext": null,
+              "number": "5167011796",
+              "primary": false,
+              "trackable": null,
+              "type": "office"
+            },
+            {
+              "ext": null,
+              "number": "8882497819",
+              "primary": false,
+              "trackable": true,
+              "type": "primary"
+            }
+          ]
+        },
+        "state_license": null,
+        "team": null,
+        "team_name": null,
+        "type": "community"
+      }
+    ],
+    "branding": [],
+    "builder": null,
+    "coming_soon_date": null,
+    "community": null,
+    "consumer_advertisers": [
+      {
+        "address": null,
+        "advertiser_id": null,
+        "agent_id": null,
+        "broker_id": null,
+        "contact_name": null,
+        "hours": null,
+        "href": null,
+        "name": null,
+        "phone": null,
+        "photo": {
+          "description": null,
+          "href": null,
+          "type": null
+        },
+        "show_realtor_logo": null,
+        "slogan": null,
+        "type": "Office"
+      }
+    ],
+    "description": {
+      "baths": null,
+      "baths_1qtr": null,
+      "baths_3qtr": null,
+      "baths_consolidated": null,
+      "baths_full": null,
+      "baths_half": null,
+      "baths_max": 2,
+      "baths_min": 1,
+      "beds": null,
+      "beds_max": 2,
+      "beds_min": 1,
+      "garage": null,
+      "lot_sqft": null,
+      "name": "The Reserve at the Boulevard",
+      "pool": null,
+      "rooms": null,
+      "sqft": null,
+      "sqft_max": 1310,
+      "sqft_min": 885,
+      "stories": null,
+      "sub_type": null,
+      "text": "Welcome to The Reserve at the Boulevard. Natural Charm, Sustainable Lifestyle. Simple pleasures. Sustainable style. Timeless appeal. Nestled in nature and imbued with elegance, The Reserve at the Boulevard feels like a peaceful haven in the woods. Discover a dynamic, active oasis that is thoughtfully designed to satisfy and inspire. Every home is tailored to perfection with elements of refinement, including dark woods, earthy tones, cool stones, and warm organic textures. Experience life in a tranquil rural enclave, nestled between the classic coastal beauty of the Hamptons and the vivid culture of New York City. Enjoy natural charm and a sustainable lifestyle at The Reserve at the Boulevard.",
+      "type": "apartment",
+      "unit_type": null,
+      "units": 240,
+      "year_built": null
+    },
+    "details": [
+      {
+        "category": "Community Features",
+        "parent_category": "Community",
+        "text": [
+          "Business Center",
+          "Club House",
+          "Fitness Center",
+          "Package Receiving",
+          "Play Ground",
+          "Pool",
+          "Barbecue Area",
+          "Off Street",
+          "Rec Room",
+          "Dogs Allowed",
+          "Cats Allowed"
+        ]
+      }
+    ],
+    "flags": {
+      "is_coming_soon": null,
+      "is_contingent": null,
+      "is_deal_available": null,
+      "is_foreclosure": null,
+      "is_new_construction": null,
+      "is_new_listing": false,
+      "is_pending": null,
+      "is_price_excludes_land": null,
+      "is_price_reduced": null,
+      "is_senior_community": null,
+      "is_short_sale": null,
+      "is_subdivision": null
+    },
+    "floorplans": {
+      "floorplan_2d": [],
+      "floorplan_3d": [],
+      "floorplan_interactive": []
+    },
+    "hoa": null,
+    "home_tours": {
+      "virtual_tours": []
+    },
+    "href": "https://www.realtor.com/rentals/details/1-Reserve-Dr_Yaphank_NY_11980_M32172-35441",
+    "last_price_change_amount": null,
+    "lead_attributes": {
+      "disclaimer_text": null,
+      "is_tcpa_message_enabled": null,
+      "lead_type": "rental_go_direct",
+      "opcity_lead_attributes": {
+        "cashback_enabled": false,
+        "flip_the_market_enabled": false,
+        "phones": null,
+        "smarthome_enabled": false
+      },
+      "ready_connect_mortgage": {
+        "show_contact_a_lender": false,
+        "show_veterans_united": false
+      },
+      "show_contact_an_agent": true,
+      "show_lead_form": true,
+      "show_text_leads": true
+    },
+    "list_date": "2024-04-12T18:14:55Z",
+    "list_price": null,
+    "list_price_max": 3896,
+    "list_price_min": 2615,
+    "listing_id": "2966781028",
+    "local": {
+      "flood": {
+        "fema_zone": [
+          "X (unshaded)"
+        ],
+        "flood_factor_score": 9
+      }
+    },
+    "location": {
+      "address": {
+        "city": "Yaphank",
+        "coordinate": {
+          "lat": 40.85064,
+          "lon": -72.89892
+        },
+        "country": "USA",
+        "line": "1 Reserve Dr",
+        "postal_code": "11980",
+        "state": "New York",
+        "state_code": "NY",
+        "street_direction": null,
+        "street_name": "Reserve",
+        "street_number": "1",
+        "street_post_direction": null,
+        "street_suffix": "Dr",
+        "unit": null,
+        "validation_code": "121"
+      },
+      "city": {
+        "county": "Suffolk",
+        "county_needed_for_uniq": false,
+        "slug_id": "Yaphank_NY"
+      },
+      "county": {
+        "fips_code": "36103",
+        "name": "Suffolk"
+      },
+      "cross_street": null,
+      "driving_directions": null,
+      "neighborhoods": [
+        {
+          "geo_statistics": {
+            "housing_market": {
+              "by_prop_type": [
+                {
+                  "attributes": {
+                    "median_days_on_market": 37,
+                    "median_listing_price": 550000,
+                    "median_lot_size": 11761,
+                    "median_price_per_sqft": 327,
+                    "median_sold_price": 525000
+                  },
+                  "type": "home"
+                }
+              ],
+              "hot_market_badge": null,
+              "local_hotness_score": null,
+              "median_days_on_market": 40,
+              "median_listing_price": 495000,
+              "median_price_per_sqft": 291,
+              "median_sold_price": 517500,
+              "national_hotness_score": null
+            }
+          },
+          "level": "macro_neighborhood",
+          "name": "Brookhaven",
+          "recommended": {
+            "geos": [
+              {
+                "city": "East Setauket",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 749000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 659000
+                  }
+                },
+                "name": "Setauket-East Setauket",
+                "slug_id": "Setauket-East-Setauket_East-Setauket_NY"
+              },
+              {
+                "city": "Milford",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 622000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 510000
+                  }
+                },
+                "name": "Woodmont",
+                "slug_id": "Woodmont_Milford_CT"
+              },
+              {
+                "city": "Bridgeport",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 225000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 302500
+                  }
+                },
+                "name": "Brooklawn - St. Vincent",
+                "slug_id": "Brooklawn-St.-Vincent_Bridgeport_CT"
+              },
+              {
+                "city": "West Haven",
+                "geo_statistics": {
+                  "housing_market": {
+                    "by_prop_type": [
+                      {
+                        "attributes": {
+                          "median_listing_price": 325000
+                        },
+                        "type": "home"
+                      }
+                    ],
+                    "median_listing_price": 315000
+                  }
+                },
+                "name": "West Haven Center",
+                "slug_id": "West-Haven-Center_West-Haven_CT"
+              }
+            ]
+          },
+          "slug_id": "Brookhaven_Manorville_NY"
+        }
+      ],
+      "postal_code": {
+        "geo_statistics": {
+          "housing_market": {
+            "hot_market_badge": null
+          }
+        },
+        "slug_id": "11980"
+      },
+      "street_view_metadata_url": "https://maps.googleapis.com/maps/api/streetview/metadata?channel=rdc-streetview&client=gme-movesalesinc&location=1%20Reserve%20Dr%2C%20Yaphank%2C%20NY%2011980&size=640x480&source=outdoor&signature=DwEefKPAiCUltDJqIMY1-89flqg=",
+      "street_view_url": "https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=1%20Reserve%20Dr%2C%20Yaphank%2C%20NY%2011980&size=640x480&source=outdoor&signature=kOJeUPI1QRVnfQI8h2-gFMPw01Q="
+    },
+    "matterport": null,
+    "move_in_date": null,
+    "open_houses": null,
+    "other_listings": {
+      "rdc": [
+        {
+          "listing_id": "2966781028",
+          "status": "for_rent"
+        },
+        {
+          "listing_id": "605668341",
+          "status": "off_market"
+        },
+        {
+          "listing_id": "2950272882",
+          "status": "off_market"
+        }
+      ]
+    },
+    "permalink": "1-Reserve-Dr_Yaphank_NY_11980_M32172-35441",
+    "photo_count": 15,
+    "photos": [
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f2115857585s.jpg",
+        "tags": [
+          {
+            "label": "kitchen",
+            "probability": 0.9913169145584106
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f4194317756s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.9999986886978149
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f2247986741s.jpg",
+        "tags": [
+          {
+            "label": "dining_room",
+            "probability": 0.9999935626983643
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f1730595337s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.9999998807907104
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f1523552551s.jpg",
+        "tags": [
+          {
+            "label": "bedroom",
+            "probability": 1
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f2358334044s.jpg",
+        "tags": [
+          {
+            "label": "bedroom",
+            "probability": 0.9999978542327881
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f214914622s.jpg",
+        "tags": [
+          {
+            "label": "bathroom",
+            "probability": 1
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f849816450s.jpg",
+        "tags": [
+          {
+            "label": "house_view",
+            "probability": 0.99216628074646
+          },
+          {
+            "label": "porch",
+            "probability": 0.9867889285087585
+          },
+          {
+            "label": "swimming_pool",
+            "probability": 0.9998196959495544
+          },
+          {
+            "label": "back_side",
+            "probability": 0.999872088432312
+          },
+          {
+            "label": "complete",
+            "probability": 0.6630234718322754
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f3767769647s.jpg",
+        "tags": [
+          {
+            "label": "patio",
+            "probability": 0.9129995703697205
+          },
+          {
+            "label": "swimming_pool",
+            "probability": 0.9999146461486816
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f3329461238s.jpg",
+        "tags": [
+          {
+            "label": "living_room",
+            "probability": 0.9999710321426392
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f3796123357s.jpg",
+        "tags": [
+          {
+            "label": "other_interiors",
+            "probability": 0.7162185311317444
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f4174268237s.jpg",
+        "tags": [
+          {
+            "label": "recreation_room",
+            "probability": 0.9998629093170166
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f275325096s.jpg",
+        "tags": [
+          {
+            "label": "gymnasium",
+            "probability": 1
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f2292614264s.jpg",
+        "tags": [
+          {
+            "label": "condo",
+            "probability": 0.9854264259338379
+          },
+          {
+            "label": "yard",
+            "probability": 0.9837521314620972
+          }
+        ],
+        "title": null,
+        "type": null
+      },
+      {
+        "description": null,
+        "href": "https://ar.rdcpix.com/6289ea45247d87b7b69a205b6643f7c5c-f3609818516s.jpg",
+        "tags": [
+          {
+            "label": "patio",
+            "probability": 0.6194257140159607
+          }
+        ],
+        "title": null,
+        "type": null
+      }
+    ],
+    "price_per_sqft": null,
+    "products": {
+      "brand_name": "basic_opt_in",
+      "products": [
+        "co_broke",
+        "rentals_cost_per_lead_hybrid"
+      ]
+    },
+    "property_history": [
+      {
+        "date": "2022-12-03",
+        "event_name": "Listing removed",
+        "price": 0,
+        "price_sqft": null,
+        "source_name": "Zumper"
+      },
+      {
+        "date": "2022-11-28",
+        "event_name": "Listed for rent",
+        "price": 1950,
+        "price_sqft": 1.6115702479338843,
+        "source_name": "Zumper"
+      }
+    ],
+    "property_id": "3217235441",
+    "provider_url": {
+      "href": "https://www.zillow.com/b/-65grN7"
+    },
+    "schools": {
+      "schools": [
+        {
+          "assigned": true,
+          "distance_in_miles": 1.2,
+          "education_levels": [
+            "middle"
+          ],
+          "funding_type": "public",
+          "grades": [
+            "7",
+            "8"
+          ],
+          "id": "0751452041",
+          "name": "Longwood Junior High School",
+          "parent_rating": 4,
+          "rating": 5,
+          "review_count": 5,
+          "slug": "Longwood-Junior-High-School-0751452041",
+          "slug_id": "Longwood-Junior-High-School-0751452041",
+          "student_count": 1411,
+          "student_teacher_ratio": 12
+        },
+        {
+          "assigned": true,
+          "distance_in_miles": 1.7,
+          "education_levels": [
+            "high"
+          ],
+          "funding_type": "public",
+          "grades": [
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "id": "0751452031",
+          "name": "Longwood High School",
+          "parent_rating": 3,
+          "rating": 5,
+          "review_count": 13,
+          "slug": "Longwood-High-School-0751452031",
+          "slug_id": "Longwood-High-School-0751452031",
+          "student_count": 2994,
+          "student_teacher_ratio": 13.2
+        },
+        {
+          "assigned": true,
+          "distance_in_miles": 2.8,
+          "education_levels": [
+            "elementary"
+          ],
+          "funding_type": "public",
+          "grades": [
+            "5",
+            "6"
+          ],
+          "id": "0751452101",
+          "name": "Longwood Middle School",
+          "parent_rating": 4,
+          "rating": 2,
+          "review_count": 14,
+          "slug": "Longwood-Middle-School-0751452101",
+          "slug_id": "Longwood-Middle-School-0751452101",
+          "student_count": 1381,
+          "student_teacher_ratio": 14.1
+        }
+      ],
+      "total": 3
+    },
+    "source": {
+      "disclaimer": null,
+      "id": "ZILL",
+      "listing_id": "1dkn1qtsbpdxj",
+      "name": "Zillow",
+      "plan_id": null,
+      "raw": null,
+      "spec_id": null,
+      "type": "community"
+    },
+    "status": "for_rent",
+    "suppression_flags": {
+      "has_suppress_management_company_logo": true,
+      "has_suppress_management_company_name": true,
+      "has_suppress_management_company_other_listings": true,
+      "has_suppress_management_company_url": true
+    },
+    "tags": [
+      "pets_allowed",
+      "community_no_fee"
+    ],
+    "tax_history": null,
+    "unit_count": 6,
+    "units": [
+      {
+        "description": {
+          "baths": 1,
+          "baths_full_calc": null,
+          "baths_partial_calc": 0,
+          "beds": 1,
+          "garage": null,
+          "name": "E",
+          "sqft": 1044,
+          "stories": null,
+          "type": null
+        },
+        "href": null,
+        "list_date": null,
+        "list_price": 3062,
+        "location": null,
+        "matterport": null,
+        "permalink": null,
+        "plan_id": "7270592",
+        "primary": null,
+        "primary_photo": null,
+        "property_id": "",
+        "status": null
+      },
+      {
+        "description": {
+          "baths": 2,
+          "baths_full_calc": null,
+          "baths_partial_calc": 0,
+          "beds": 2,
+          "garage": null,
+          "name": "I",
+          "sqft": 1310,
+          "stories": null,
+          "type": null
+        },
+        "href": null,
+        "list_date": null,
+        "list_price": 3896,
+        "location": null,
+        "matterport": null,
+        "permalink": null,
+        "plan_id": "7270596",
+        "primary": null,
+        "primary_photo": null,
+        "property_id": "",
+        "status": null
+      },
+      {
+        "description": {
+          "baths": 1,
+          "baths_full_calc": null,
+          "baths_partial_calc": 0,
+          "beds": 1,
+          "garage": null,
+          "name": "D1",
+          "sqft": 885,
+          "stories": null,
+          "type": null
+        },
+        "href": null,
+        "list_date": null,
+        "list_price": 2640,
+        "location": null,
+        "matterport": null,
+        "permalink": null,
+        "plan_id": "7271586",
+        "primary": null,
+        "primary_photo": null,
+        "property_id": "",
+        "status": null
+      },
+      {
+        "description": {
+          "baths": 1,
+          "baths_full_calc": null,
+          "baths_partial_calc": 0,
+          "beds": 1,
+          "garage": null,
+          "name": "J",
+          "sqft": 1084,
+          "stories": null,
+          "type": null
+        },
+        "href": null,
+        "list_date": null,
+        "list_price": 3062,
+        "location": null,
+        "matterport": null,
+        "permalink": null,
+        "plan_id": "7271597",
+        "primary": null,
+        "primary_photo": null,
+        "property_id": "",
+        "status": null
+      },
+      {
+        "description": {
+          "baths": 1,
+          "baths_full_calc": null,
+          "baths_partial_calc": 0,
+          "beds": 1,
+          "garage": null,
+          "name": "B1",
+          "sqft": 892,
+          "stories": null,
+          "type": null
+        },
+        "href": null,
+        "list_date": null,
+        "list_price": 2615,
+        "location": null,
+        "matterport": null,
+        "permalink": null,
+        "plan_id": "7615790",
+        "primary": null,
+        "primary_photo": null,
+        "property_id": "",
+        "status": null
+      },
+      {
+        "description": {
+          "baths": 2,
+          "baths_full_calc": null,
+          "baths_partial_calc": 0,
+          "beds": 2,
+          "garage": null,
+          "name": "C1",
+          "sqft": 1171,
+          "stories": null,
+          "type": null
+        },
+        "href": null,
+        "list_date": null,
+        "list_price": 3286,
+        "location": null,
+        "matterport": null,
+        "permalink": null,
+        "plan_id": "7760119",
+        "primary": null,
+        "primary_photo": null,
+        "property_id": "",
+        "status": null
+      }
+    ],
+    "videos": [
+      {
+        "href": "org.mozilla.javascript.UniqueTag@252ca33f: NOT_FOUND"
+      }
+    ],
+    "virtual_tours": null
+  }
+}

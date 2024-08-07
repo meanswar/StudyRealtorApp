@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="400">
+        <KeyFrameSet />
+        <OnSwipe motion:touchAnchorId="@+id/clBottomContent" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start" />
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/glMiddle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintGuide_percent="0.14" />
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/vmTopMenu"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:visibility="invisible"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/cvProfilePhoto"
+            android:layout_width="@dimen/size_80dp"
+            android:layout_height="@dimen/size_0dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            motion:layout_constraintDimensionRatio="H,1:1"
+            motion:layout_constraintEnd_toEndOf="@id/glPhotoVertical"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/tvProfilePhone"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="@id/tvProfileName"
+            motion:layout_constraintTop_toBottomOf="@id/tvProfileName" />
+        <Constraint
+            android:id="@+id/tvProfileEmail"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="@id/tvProfileName"
+            motion:layout_constraintTop_toBottomOf="@id/tvProfilePhone" />
+        <Constraint
+            android:id="@+id/tvProfileName"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/cvProfilePhoto"
+            motion:layout_constraintTop_toTopOf="@id/cvProfilePhoto" />
+    </ConstraintSet>
+
+</MotionScene>

@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_content"
+    app:layoutDescription="@xml/fragment_property_details_scene">
+
+    <com.nikitosii.studyrealtorapp.util.view.RealtorToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/size_20dp"
+        app:endBtnVisible="false"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPropertyImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_0dp"
+        android:layout_marginEnd="@dimen/size_20dp"
+        android:elevation="@dimen/size_1dp"
+        app:layout_constraintDimensionRatio="H,1.2:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:reverseLayout="true"
+        tools:listitem="@layout/item_photo" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/size_100dp"
+        android:id="@+id/cvFavorite"
+        app:cardCornerRadius="@dimen/size_10dp"
+        app:cardBackgroundColor="@color/white_transparent_alpha_0.2"
+        android:layout_height="@dimen/size_100dp"
+        app:layout_constraintBottom_toBottomOf="@id/rvPropertyImage"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:elevation="@dimen/size_10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:tint="@color/transparent"
+            app:lottie_fileName="anim_favorite.json" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/llPropertyFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/rvPropertyImage">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6" />
+
+        <TextView
+            android:id="@+id/tvGarage"
+            style="@style/AppTheme.Text.Bold.Headline4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:drawablePadding="@dimen/size_5dp"
+            app:drawableStartCompat="@drawable/ic_garage_24dp"
+            tools:text="2" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvRooms"
+            style="@style/AppTheme.Text.Bold.Headline4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:drawablePadding="@dimen/size_5dp"
+            app:drawableStartCompat="@drawable/ic_room"
+            tools:text="2" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvBeds"
+            style="@style/AppTheme.Text.Bold.Headline4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:drawablePadding="@dimen/size_5dp"
+            app:drawableStartCompat="@drawable/ic_bed_24dp_blue"
+            tools:text="2" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvFilterBaths"
+            style="@style/AppTheme.Text.Bold.Headline4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:drawablePadding="@dimen/size_5dp"
+            app:drawableStartCompat="@drawable/ic_bath_24dp_blue"
+            tools:text="2" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvFilterSqft"
+            style="@style/AppTheme.Text.Bold.Headline4.Teflon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:drawablePadding="@dimen/size_5dp"
+            app:drawableStartCompat="@drawable/ic_sqft_blue"
+            tools:text="200" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llPropertyFilters">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_0dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/size_20dp"
+                android:paddingVertical="@dimen/size_20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPropertyName"
+                    style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="New York, USA" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPropertyPrice"
+                    style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_content_corners_10dp"
+                    android:drawableStart="@drawable/ic_money"
+                    android:paddingHorizontal="@dimen/size_10dp"
+                    android:paddingVertical="@dimen/size_5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvPropertyName"
+                    tools:text="150 000" />
+
+                <TextView
+                    android:id="@+id/tvSalePropertyTime"
+                    style="@style/AppTheme.Text.Paragraph4.Teflon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPropertyPrice"
+                    tools:text="Last Update: 15 Jan 2022, 15:00"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clAgentProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:background="@drawable/bg_peach_corners_60dp"
+                    android:paddingHorizontal="@dimen/size_20dp"
+                    android:paddingVertical="@dimen/size_10dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvSalePropertyTime">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvAgentImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5dp"
+                        app:cardCornerRadius="@dimen/size_40dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivAgentImage"
+                            android:layout_width="@dimen/size_80dp"
+                            android:layout_height="@dimen/size_80dp"
+                            android:scaleType="fitCenter"
+                            tools:src="@drawable/ic_user_profile" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvAgentName"
+                        style="@style/AppTheme.Text.Bold.Headline2.White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_5dp"
+                        android:text="Agent Smith"
+                        app:layout_constraintStart_toEndOf="@id/cvAgentImage"
+                        app:layout_constraintTop_toTopOf="@id/cvAgentImage" />
+
+                    <TextView
+                        android:id="@+id/tvAgentType"
+                        style="@style/AppTheme.Text.Paragraph4.White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/tvAgentName"
+                        app:layout_constraintTop_toBottomOf="@id/tvAgentName"
+                        tools:text="California, CA" />
+
+                    <TextView
+                        android:id="@+id/tvAgencyName"
+                        style="@style/AppTheme.Text.Paragraph3.White"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size_5dp"
+                        app:layout_constraintEnd_toStartOf="@id/cvPhone"
+                        app:layout_constraintStart_toStartOf="@id/tvAgentType"
+                        app:layout_constraintTop_toBottomOf="@id/tvAgentType"
+                        tools:text="Agency Inc." />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvEmail"
+                        android:layout_width="@dimen/size_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size_10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/white_transparent"
+                        app:cardCornerRadius="@dimen/size_15dp"
+                        app:cardElevation="@dimen/size_0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white_transparent"
+                            android:drawablePadding="@dimen/size_5dp"
+                            android:paddingHorizontal="@dimen/size_10dp"
+                            android:paddingVertical="@dimen/size_5dp"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_email" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvPhone"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10dp"
+                        android:layout_marginEnd="@dimen/size_10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/white_transparent"
+                        app:cardCornerRadius="@dimen/size_15dp"
+                        app:cardElevation="@dimen/size_0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/cvEmail"
+                        app:layout_constraintTop_toBottomOf="@id/cvEmail">
+
+                        <ImageView
+                            style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/size_5dp"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/size_10dp"
+                            android:paddingVertical="@dimen/size_5dp"
+                            android:src="@drawable/ic_phone" />
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.nikitosii.studyrealtorapp.util.view.AnimatedRecyclerView
+                    android:id="@+id/rvPropertyDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:clipToPadding="false"
+                    android:descendantFocusability="blocksDescendants"
+                    app:animationDuration="500"
+                    app:layoutAnimation="@anim/recycle_view_from_end"
+                    app:layoutManagerOrientation="horizontal"
+                    app:layoutManagerType="linear"
+                    app:layout_constraintTop_toBottomOf="@id/clAgentProfile"
+                    app:pagerSnap="true" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clContentDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:background="@drawable/bg_content_almost_transparent_corners_20dp"
+                    android:padding="@dimen/size_10dp"
+                    app:layout_constraintTop_toBottomOf="@id/rvPropertyDetails">
+
+                    <TextView
+                        android:id="@+id/tvPropertyDescriptionTitle"
+                        style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/screen_property_details_description_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPropertyType"
+                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyDescriptionTitle"
+                        tools:text="Type: Single Family" />
+
+                    <TextView
+                        android:id="@+id/tvPropertyStatus"
+                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_4dp"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyType"
+                        tools:text="Sale Type: For Sale"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvPropertyDescription"
+                        style="@style/AppTheme.Text.Paragraph4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_4dp"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyStatus"
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clAddressContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:background="@drawable/bg_content_almost_transparent_corners_20dp"
+                    android:padding="@dimen/size_10dp"
+                    app:layout_constraintTop_toBottomOf="@id/clContentDescription">
+
+                    <TextView
+                        android:id="@+id/tvAddressTitle"
+                        style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address Information"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPropertyAddress"
+                        style="@style/AppTheme.Text.Paragraph3.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddressTitle"
+                        tools:text="Address: New York, USA" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvMapContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:cardCornerRadius="@dimen/size_30dp"
+                        app:cardElevation="@dimen/size_5dp"
+                        app:cardUseCompatPadding="true"
+                        app:layout_constraintDimensionRatio="H,1.9:1"
+                        app:layout_constraintTop_toBottomOf="@id/tvPropertyAddress">
+
+
+                        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            map:cameraZoom="4" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvSchoolsTitle"
+                        style="@style/AppTheme.Text.Bold.Headline4.Teflon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:text="Schools nearby"
+                        app:layout_constraintTop_toBottomOf="@id/cvMapContainer" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvNearbyPlaces"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/tvSchoolsTitle"
+                        app:reverseLayout="false"
+                        tools:listitem="@layout/item_text_info" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_20dp"
+                        app:layout_constraintTop_toBottomOf="@id/rvNearbyPlaces" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

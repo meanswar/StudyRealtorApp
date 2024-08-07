@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+       <KeyFrameSet>
+       </KeyFrameSet>
+        <OnSwipe motion:touchAnchorId="@+id/clContent" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/cvFavorite"
+            android:elevation="@dimen/size_20dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            motion:layout_constraintBottom_toBottomOf="@id/rvPropertyImage"
+            android:layout_marginBottom="@dimen/size_25dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:visibility="visible" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/toolbar"
+            android:elevation="@dimen/size_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/rvPropertyImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_0dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:scaleY="0.1"
+            android:scaleX="0.1"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/cvFavorite"
+            android:elevation="@dimen/size_4dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/scrollView"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/llPropertyFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/rvPropertyImage"
+            android:visibility="invisible" />
+    </ConstraintSet>
+</MotionScene>

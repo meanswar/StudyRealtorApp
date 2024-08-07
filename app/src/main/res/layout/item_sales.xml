@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    app:cardCornerRadius="@dimen/size_20dp"
+    app:cardElevation="@dimen/size_2dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glStartVertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPropertyImageContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            app:cardCornerRadius="@dimen/size_20dp"
+            app:cardElevation="@dimen/size_0dp"
+            app:layout_constraintDimensionRatio="H,1:1.05"
+            app:layout_constraintEnd_toEndOf="@id/glStartVertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivProperty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/london" />
+        </androidx.cardview.widget.CardView>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavSoldProperty"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="@dimen/size_0dp"
+            android:elevation="@dimen/size_4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/cvPropertyImageContainer"
+            app:layout_constraintEnd_toEndOf="@id/cvPropertyImageContainer"
+            app:layout_constraintStart_toStartOf="@id/cvPropertyImageContainer"
+            app:layout_constraintTop_toTopOf="@id/cvPropertyImageContainer"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="anim_sold.json"
+            app:lottie_loop="true" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white_transparent"
+            android:paddingHorizontal="@dimen/size_10dp"
+            android:paddingVertical="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@id/cvPropertyImageContainer"
+            app:layout_constraintTop_toTopOf="@id/cvPropertyImageContainer">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glMidVertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <TextView
+                android:id="@+id/tvPropertyPrice"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/size_5dp"
+                app:drawableEndCompat="@drawable/ic_money"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="500 000" />
+
+            <TextView
+                android:id="@+id/tvPropertyType"
+                style="@style/AppTheme.Text.Bold.Headline2.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_5dp"
+                android:background="@drawable/bg_content_orange_corners_20dp"
+                android:paddingHorizontal="@dimen/size_10dp"
+                android:paddingVertical="@dimen/size_5dp"
+                app:layout_constraintStart_toEndOf="@id/glMidVertical"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="single family" />
+
+            <TextView
+                android:id="@+id/tvPropertyName"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="0dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/tvPropertyType"
+                app:layout_constraintTop_toBottomOf="@id/tvPropertyType"
+                tools:text="The Lofts on Saw mill River" />
+
+            <TextView
+                android:id="@+id/tvPropertyAddress"
+                style="@style/AppTheme.Text.Paragraph4.Teflon"
+                android:layout_width="0dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/tvPropertyType"
+                app:layout_constraintTop_toBottomOf="@id/tvPropertyName"
+                tools:text="22 street, New York, USA" />
+
+            <TextView
+                android:id="@+id/tvPropertyBeds"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/size_5dp"
+                app:drawableStartCompat="@drawable/ic_bed_24dp_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvPropertyType"
+                tools:text="4" />
+
+            <TextView
+                android:id="@+id/tvProperyBaths"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:drawablePadding="@dimen/size_5dp"
+                app:drawableStartCompat="@drawable/ic_bath_24dp_blue"
+                app:layout_constraintBottom_toBottomOf="@id/tvPropertyBeds"
+                app:layout_constraintStart_toEndOf="@id/tvPropertyBeds"
+                tools:text="3" />
+
+            <TextView
+                android:id="@+id/tvPropertySqft"
+                style="@style/AppTheme.Text.Bold.Headline3.Teflon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10dp"
+                app:drawableStartCompat="@drawable/ic_sqft_blue"
+                app:layout_constraintBottom_toBottomOf="@id/tvProperyBaths"
+                app:layout_constraintStart_toEndOf="@id/tvProperyBaths"
+                tools:text="1200 ft" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavFavorite"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginEnd="@dimen/size_10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottie_fileName="anim_favorite.json" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clFilters"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/size_20dp"
+    android:paddingVertical="@dimen/size_5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glVersticalMidStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glVersticalMidEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/grFilters"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:constraint_referenced_ids="rvFilterTypes, rvRangePrice, rvRangeBeds, rvRangeBaths, rvRangeSqft" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFilterTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_bottom_content_corners_20dp"
+        android:paddingBottom="@dimen/size_20dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:reverseLayout="false"
+        app:spanCount="3"
+        tools:itemCount="9"
+        tools:listitem="@layout/item_filter_house"
+        tools:visibility="visible" />
+
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
+        android:id="@+id/rvRangePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        app:layout_constraintTop_toBottomOf="@id/rvFilterTypes"
+        app:maxValue="2000000"
+        app:minValue="100"
+        app:rangeTitle="@string/layout_filters_filter_price_title"
+        app:rangeType="money"
+        tools:visibility="visible" />
+
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
+        android:id="@+id/rvRangeBeds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/rvRangePrice"
+        app:maxValue="10"
+        app:minValue="1"
+        app:rangeTitle="@string/layout_filters_filter_beds_title"
+        tools:visibility="visible" />
+
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
+        android:id="@+id/rvRangeBaths"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/rvRangeBeds"
+        app:maxValue="10"
+        app:minValue="1"
+        app:rangeTitle="@string/layout_filters_filter_baths_title"
+        tools:visibility="visible" />
+
+    <com.nikitosii.studyrealtorapp.util.view.RangeView
+        android:id="@+id/rvRangeSqft"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_content_almost_transparent_corners_10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/rvRangeBaths"
+        app:maxValue="10000"
+        app:minValue="10"
+        app:rangeTitle="@string/layout_filters_filter_sqft_title"
+        tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

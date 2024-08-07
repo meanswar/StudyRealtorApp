@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.DashboardFragment"
+        android:label="SalesFragment"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/openSearchScreen"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/openPropertyDetails"
+            app:destination="@id/propertyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchFragment"
+        android:label="Search Fragment"
+        tools:layout="@layout/fragment_search">
+        <argument
+            android:name="propertyRequest"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest"
+            app:nullable="false" />
+        <argument
+            android:name="localRequest"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/openPropertyDetails"
+            app:destination="@id/propertyDetailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/propertyDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsFragment"
+        android:label="Sale Property Details Fragment"
+        tools:layout="@layout/fragment_property_details">
+        <argument
+            android:name="property"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.Property"
+            app:nullable="false" />
+        <action
+            android:id="@+id/openPropertyPhotosScreen"
+            app:destination="@id/propertyPhotosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/propertyPhotosFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.property_photos.PropertyPhotosFragment"
+        android:label="Property Photos Fragment"
+        tools:layout="@layout/fragment_property_photos">
+        <argument
+            android:name="container"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.parcelize.PhotoContainer"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileViewPagerFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/openAgentDetails"
+            app:destination="@id/agentDetailsFragment" />
+        <action
+            android:id="@+id/openPropertyDetails"
+            app:destination="@id/propertyDetailsFragment" />
+        <action
+            android:id="@+id/openSearchRequestDetails"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/openEditProfileScreen"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/agentsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsFragment"
+        android:label="RentsFragment"
+        tools:layout="@layout/fragment_home_page_agents">
+        <action
+            android:id="@+id/openAgentDetails"
+            app:destination="@id/agentDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agentDetailsFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.agent.details.AgentDetailsFragment"
+        android:label="Agent Details Screen"
+        tools:layout="@layout/fragment_agent_details">
+        <argument
+            android:name="agent"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.agent.Agent"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.nikitosii.studyrealtorapp.flow.profile.edit.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="profile"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.profile.Profile"
+            app:nullable="false" />
+    </fragment>
+</navigation>
