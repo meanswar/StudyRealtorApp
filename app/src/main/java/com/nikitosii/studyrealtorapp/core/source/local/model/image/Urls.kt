@@ -6,8 +6,8 @@ data class Urls(
     val regular: String? = null
 ) {
     companion object {
-        fun from(response: UrlsResponseApi?): Urls {
-            return Urls(response?.regular)
-        }
+        fun from(response: UrlsResponseApi?): Urls =Urls(response?.regular)
+
+        fun from(response: Urls?): Urls =Urls(response?.regular)
     }
 }

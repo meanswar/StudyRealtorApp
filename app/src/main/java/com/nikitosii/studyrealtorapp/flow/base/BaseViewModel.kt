@@ -8,7 +8,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
-import com.nikitosii.studyrealtorapp.core.source.useCase.token.GenerateNewTokenUseCase
+import com.nikitosii.studyrealtorapp.core.domain.useCase.token.GenerateNewTokenUseCase
 import com.nikitosii.studyrealtorapp.util.ext.add
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ import javax.inject.Inject
 open class BaseViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main,
-): ViewModel() {
+) : ViewModel() {
 
     @Inject
     lateinit var generateNewTokenUseCase: GenerateNewTokenUseCase
@@ -37,12 +37,16 @@ open class BaseViewModel(
 
     fun generateNewToken() = ioToUi(
         io = { generateNewTokenUseCase.execute() },
-        ui = {  _token.postValue(it) }
+        ui = { _token.postValue(it) }
     )
 
     fun ioToUnit(io: suspend () -> Unit) = ioToUi(io, {})
 
-    fun <T> ioToUi(io: suspend () -> T, ui: suspend (T) -> Unit, error: (suspend (error: Throwable) -> Unit)? = null) =
+    fun <T> ioToUi(
+        io: suspend () -> T,
+        ui: suspend (T) -> Unit,
+        error: (suspend (error: Throwable) -> Unit)? = null
+    ) =
         viewModelScope.launch(ioDispatcher) {
             try {
                 val result = io()
@@ -188,12 +192,14 @@ open class BaseViewModel(
                         liveData.add(it.data)
                     }
                 }
+
                 Status.ERROR -> liveData.value =
                     WorkResult.error(
                         it.message ?: "",
                         liveData.value?.data,
                         it.exception
                     )
+
                 Status.LOADING -> liveData.value =
                     WorkResult.loading(liveData.value?.data)
             }
@@ -215,12 +221,14 @@ open class BaseViewModel(
                         liveData.add(it.data)
                     }
                 }
+
                 Status.ERROR -> liveData.value =
                     WorkResult.error(
                         it.message ?: "",
                         liveData.value?.data,
                         it.exception
                     )
+
                 Status.LOADING -> liveData.value =
                     WorkResult.loading(liveData.value?.data)
             }

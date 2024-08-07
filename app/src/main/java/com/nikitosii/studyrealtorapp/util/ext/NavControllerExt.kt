@@ -16,8 +16,8 @@ fun NavController.safeNavigation(navDirections: NavDirections) {
         val options by lazy {
             navOptions {
                 launchSingleTop = action?.navOptions?.shouldLaunchSingleTop() ?: false
-                popUpTo(action?.navOptions?.popUpTo ?: -1) {
-                    inclusive = action?.navOptions?.isPopUpToInclusive ?: false
+                popUpTo(action?.navOptions?.popUpToId ?: -1) {
+                    inclusive = action?.navOptions?.isPopUpToInclusive() ?: false
                 }
             }
         }

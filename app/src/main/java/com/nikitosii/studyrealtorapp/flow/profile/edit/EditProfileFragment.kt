@@ -7,11 +7,14 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.databinding.FragmentEditProfileBinding
 import com.nikitosii.studyrealtorapp.flow.base.BaseFragment
+import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.annotation.RequiresViewModel
 import com.nikitosii.studyrealtorapp.util.ext.glideImage
 import com.nikitosii.studyrealtorapp.util.ext.onClick
@@ -29,8 +32,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        exitTransition = MaterialFadeThrough().apply {
+            duration = Constants.TRANSITION_DURATION
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = Constants.TRANSITION_DURATION
+        }
 
         registerActivity = registerForActivityResult<String, Uri>(
             ActivityResultContracts.GetContent()

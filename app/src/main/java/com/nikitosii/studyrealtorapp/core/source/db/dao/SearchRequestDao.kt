@@ -11,9 +11,6 @@ import com.nikitosii.studyrealtorapp.core.source.local.model.request.RequestType
 @Dao
 interface SearchRequestDao {
 
-    @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} where requestType = :requestType")
-    fun getSearchRequest(requestType: RequestType): List<SearchRequestEntity>
-
     @Query("SELECT * FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} order by id desc")
     fun getAllSearchRequests(): List<SearchRequestEntity>
 
@@ -28,7 +25,4 @@ interface SearchRequestDao {
 
     @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} WHERE id = :id")
     fun remove(id: Int)
-
-    @Query("DELETE FROM ${RealtorDataBase.DATABASE_TABLE_SEARCH_REQUEST} WHERE id != :id")
-    fun removeNot(id: Int = 1)
 }

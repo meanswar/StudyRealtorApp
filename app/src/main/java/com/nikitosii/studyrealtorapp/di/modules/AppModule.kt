@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import com.google.gson.Gson
 import com.nikitosii.studyrealtorapp.core.source.connectivity.ConnectivityProvider
-import com.nikitosii.studyrealtorapp.core.source.repository.base.ChannelRecreateObserver
+import com.nikitosii.studyrealtorapp.core.domain.repository.base.ChannelRecreateObserver
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

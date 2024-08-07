@@ -37,21 +37,21 @@ import com.nikitosii.studyrealtorapp.core.source.db.dao.ImageDataDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.ProfileDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.PropertyDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.RequestDataDao
-import com.nikitosii.studyrealtorapp.core.source.db.dao.SalePropertiesSearchDao
+import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchPropertiesDao
 import com.nikitosii.studyrealtorapp.core.source.db.dao.SearchRequestDao
 import com.nikitosii.studyrealtorapp.core.source.db.entity.AgentEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.ImageDataEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.ProfileEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.PropertyEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.RequestDataEntity
-import com.nikitosii.studyrealtorapp.core.source.db.entity.SalePropertiesSearchEntity
+import com.nikitosii.studyrealtorapp.core.source.db.entity.SearchPropertiesDataEntity
 import com.nikitosii.studyrealtorapp.core.source.db.entity.SearchRequestEntity
 import dev.matrix.roomigrant.GenerateRoomMigrations
 
 @Database(
     entities = [
         PropertyEntity::class,
-        SalePropertiesSearchEntity::class,
+        SearchPropertiesDataEntity::class,
         RequestDataEntity::class,
         SearchRequestEntity::class,
         AgentEntity::class,
@@ -95,7 +95,7 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
 abstract class RealtorDataBase : RoomDatabase() {
 
     abstract fun propertyDao(): PropertyDao
-    abstract fun salePropertiesSearchDao(): SalePropertiesSearchDao
+    abstract fun searchPropertiesDao(): SearchPropertiesDao
     abstract fun searchRequestDao(): SearchRequestDao
     abstract fun requestDataDao(): RequestDataDao
     abstract fun agentsDao(): AgentDao

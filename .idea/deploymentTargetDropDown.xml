@@ -5,6 +5,12 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="testHouseFilterClick()">
+        <State />
+      </entry>
+      <entry key="testSearchButtonFunctionality()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
