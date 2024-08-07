@@ -272,7 +272,7 @@ dependencies {
     testImplementation ("org.mockito:mockito-core:4.11.0")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     testImplementation ("io.mockk:mockk:1.12.0")
-    testImplementation ("org.robolectric:robolectric:4.10.3")
+    testImplementation ("org.robolectric:robolectric:4.11")
 
     testImplementation ("com.github.ologe:flow-test-observer:1.4.1")
     kaptTest("com.google.dagger:dagger-compiler:$dagger")
