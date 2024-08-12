@@ -24,8 +24,8 @@ android {
         applicationId = "com.nikitosii.studyrealtorapp"
         minSdk = 29
         targetSdk = 34
-        versionCode = 5
-        versionName = "1.0.4"
+        versionCode = 7
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
@@ -58,7 +58,7 @@ android {
         }
         release {
             isMinifyEnabled = false
-            isDebuggable = true
+            isDebuggable = false
             signingConfig = signingConfigs["release"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
