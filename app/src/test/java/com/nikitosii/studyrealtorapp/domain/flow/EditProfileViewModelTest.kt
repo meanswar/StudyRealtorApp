@@ -1,6 +1,7 @@
 package com.nikitosii.studyrealtorapp.domain.flow
 
 import androidx.lifecycle.Observer
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.UpdateProfileUseCase
 import com.nikitosii.studyrealtorapp.flow.profile.edit.EditProfileViewModel
@@ -13,12 +14,14 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
+@RunWith(AndroidJUnit4::class)
 class EditProfileViewModelTest : BaseViewModelTest<EditProfileViewModel>() {
 
     @Mock

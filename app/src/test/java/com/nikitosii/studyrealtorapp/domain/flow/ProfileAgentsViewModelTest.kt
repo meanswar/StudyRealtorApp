@@ -14,6 +14,7 @@ import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
@@ -83,7 +84,7 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
 
     // TODO (check what is wrong with this code, problem with parallel work of coroutines)
     @Test
-    fun `update agent favorite status`() = runBlockingTest {
+    fun `update agent favorite status`() = runBlocking {
         val agent = AgentTestUtils.getLocalAgent()
         val updatedAgent = agent.copy(favorite = !agent.favorite)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(updatedAgent)

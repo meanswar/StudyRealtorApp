@@ -5,7 +5,9 @@ import android.widget.RadioButton
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nikitosii.studyrealtorapp.R
-import com.nikitosii.studyrealtorapp.core.domain.Status.*
+import com.nikitosii.studyrealtorapp.core.domain.Status.ERROR
+import com.nikitosii.studyrealtorapp.core.domain.Status.LOADING
+import com.nikitosii.studyrealtorapp.core.domain.Status.SUCCESS
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
@@ -105,6 +107,7 @@ class DashboardFragment :
             recentRentRequests.observe(viewLifecycleOwner, recentRentRequestsObserver)
             profile.observe(viewLifecycleOwner, profileObserver)
             isEmptyDashboard.observe(viewLifecycleOwner) { binding.grEmpty.show(it) }
+            addressFilter.observe(viewLifecycleOwner) { binding.btnSearch.show(!it.isNullOrEmpty()) }
         }
     }
 
@@ -223,8 +226,6 @@ class DashboardFragment :
 
     private fun openSearchScreen() {
         val request = viewModel.buildSaleRequest()
-        if (viewModel.checkFilters())
-            DashboardFragmentDirections.openSearchScreen(request, false)
-                .navigate()
+        DashboardFragmentDirections.openSearchScreen(request, false).navigate()
     }
 }

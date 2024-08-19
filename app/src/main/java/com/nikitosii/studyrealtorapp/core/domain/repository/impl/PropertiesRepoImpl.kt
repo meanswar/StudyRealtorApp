@@ -51,8 +51,8 @@ class PropertiesRepoImpl @Inject constructor(
             data.sort?.type
         )
             .homeSearch
-            .results
-            .map { Property.from(it) }
+            ?.results
+            ?.map { Property.from(it) } ?: emptyList()
     }
 
     private val channel = repoChannel(io, connectivityProvider, recreateObserver) {

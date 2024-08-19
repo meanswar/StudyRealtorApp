@@ -1,6 +1,3 @@
-import java.util.regex.Pattern.compile
-
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -24,8 +21,8 @@ android {
         applicationId = "com.nikitosii.studyrealtorapp"
         minSdk = 29
         targetSdk = 34
-        versionCode = 5
-        versionName = "1.0.4"
+        versionCode = 9
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"https://realtor16.p.rapidapi.com/\"")
@@ -58,7 +55,7 @@ android {
         }
         release {
             isMinifyEnabled = false
-            isDebuggable = true
+            isDebuggable = false
             signingConfig = signingConfigs["release"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -206,8 +203,8 @@ dependencies {
     implementation("androidx.room:room-runtime:$room")
     kapt("androidx.room:room-compiler:$room")
     implementation("androidx.room:room-ktx:$room")
-    implementation ("com.github.MatrixDev.Roomigrant:RoomigrantLib:0.3.4")
-    kapt ("com.github.MatrixDev.Roomigrant:RoomigrantCompiler:0.3.4")
+    implementation("com.github.MatrixDev.Roomigrant:RoomigrantLib:0.3.4")
+    kapt("com.github.MatrixDev.Roomigrant:RoomigrantCompiler:0.3.4")
     //Picasso
     implementation("com.squareup.picasso:picasso:2.71828")
     //Swipe Refresh
@@ -234,8 +231,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     //Stetho
-    implementation ("com.facebook.stetho:stetho:1.6.0")
-    implementation ("com.facebook.stetho:stetho-okhttp3:1.6.0")
+    implementation("com.facebook.stetho:stetho:1.6.0")
+    implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
 
     //Pulse animation
     implementation("pl.bclogic:pulsator4droid:1.0.3")
@@ -251,29 +248,29 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:$espresso")
-    androidTestImplementation ("androidx.test.espresso:espresso-contrib:$espresso")
-    androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
-    androidTestImplementation ("org.mockito:mockito-android:4.11.0")
-    androidTestImplementation ("androidx.test.espresso:espresso-intents:$espresso")
-    androidTestImplementation ("androidx.test:rules:1.4.0")
-    implementation ("androidx.test.espresso:espresso-idling-resource:$espresso")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espresso")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("org.mockito:mockito-android:4.11.0")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:$espresso")
+    androidTestImplementation("androidx.test:rules:1.4.0")
+    implementation("androidx.test.espresso:espresso-idling-resource:$espresso")
     androidTestImplementation("androidx.test.espresso:espresso-idling-resource:$espresso")
-    debugImplementation ("androidx.fragment:fragment-testing:$fragmentVersion")
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    debugImplementation("androidx.fragment:fragment-testing:$fragmentVersion")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 //    androidTestImplementation ("com.linkedin.dexmaker:dexmaker-mockito:2.28.1")
-    androidTestImplementation ("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
     androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
-    androidTestImplementation ("org.hamcrest:hamcrest:2.2")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
 
-    testImplementation ("org.assertj:assertj-core:3.12.2")
-    testImplementation ("org.mockito:mockito-inline:4.11.0")
-    testImplementation ("androidx.arch.core:core-testing:2.1.0")
-    testImplementation ("com.squareup.okhttp3:mockwebserver:4.7.2")
-    testImplementation ("org.mockito:mockito-core:4.11.0")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
-    testImplementation ("io.mockk:mockk:1.12.0")
-    testImplementation ("org.robolectric:robolectric:4.11")
+    testImplementation("org.assertj:assertj-core:3.12.2")
+    testImplementation("org.mockito:mockito-inline:4.11.0")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
+    testImplementation("org.mockito:mockito-core:4.11.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("org.robolectric:robolectric:4.11")
 
-    testImplementation ("com.github.ologe:flow-test-observer:1.4.1")
+    testImplementation("com.github.ologe:flow-test-observer:1.4.1")
     kaptTest("com.google.dagger:dagger-compiler:$dagger")
 }
