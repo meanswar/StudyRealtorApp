@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -56,7 +57,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
         favoriteAgentsFlow =
             MutableSharedFlow<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<Agent>>>(
                 replay = 1,
-                onBufferOverflow = BufferOverflow.DROP_LATEST,
+                onBufferOverflow = BufferOverflow.DROP_OLDEST,
                 extraBufferCapacity = 1
             ).asSharedFlow()
 
@@ -97,7 +98,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
     }
 
     @Test
-    fun `get agents from network`() = runBlockingTest {
+    fun `get agents from network`() = runBlocking {
         val request = AgentTestUtils.getAgentRequest()
         val params = GetAgentsFromNetworkUseCase.Params.from(request, PAGE_VALID)
         val expectedAgents = listOf(AgentTestUtils.getLocalAgent())
@@ -121,7 +122,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
     }
 
     @Test
-    fun `update agent favorite status`() = runBlockingTest {
+    fun `update agent favorite status`() = runBlocking {
         val agent = AgentTestUtils.getLocalAgent()
         val updatedAgent = agent.copy(favorite = !agent.favorite)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(updatedAgent)

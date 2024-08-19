@@ -20,6 +20,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -144,7 +145,7 @@ class DashboardViewModelTest: BaseViewModelTest<DashboardViewModel>() {
     }
 
     @Test
-    fun `updateRequest calls updateSearchRequestUseCase with correct params`() = runTest {
+    fun `updateRequest calls updateSearchRequestUseCase with correct params`() = runBlocking {
         val searchRequest = SearchRequest(
             address = ANY_TEXT,
             houses = listOf(HouseType.TOWNHOMES),

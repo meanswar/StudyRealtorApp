@@ -77,10 +77,6 @@ abstract class BaseFragment<B: ViewBinding, VM : BaseViewModel>(
             is UnknownHostException,
             is InterruptedIOException,
             is EOFException -> showDialogNoConnection()
-            is WrongTokenException -> {
-                viewModel.generateNewToken()
-                elseBlock?.invoke(e)
-            }
             else -> elseBlock?.invoke(e)
         }
     }

@@ -39,7 +39,7 @@ object Constants {
         "e6c765de7bmshfa2b0ca40c83ea1p188000jsnccf09040ffed",
         "819c966ebcmsh2c71a43b316f87dp11d763jsne2d7b5d67916"
     )
-
+    const val ERROR_WRONG_TOKEN_429 = "429"
     const val TRANSITION_DURATION = 500L
 }
 
