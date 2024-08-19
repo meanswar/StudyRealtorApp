@@ -9,13 +9,19 @@ import com.nikitosii.studyrealtorapp.core.domain.Status
 import com.nikitosii.studyrealtorapp.core.domain.WorkLiveData
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.domain.useCase.token.GenerateNewTokenUseCase
+import com.nikitosii.studyrealtorapp.core.source.net.exceptions.WrongTokenException
+import com.nikitosii.studyrealtorapp.util.Constants
 import com.nikitosii.studyrealtorapp.util.ext.add
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.retryWhen
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -66,19 +72,29 @@ open class BaseViewModel(
         also: (suspend (T) -> Unit)? = null
     ) = viewModelScope.launch(uiDispatcher) {
         ui(WorkResult.loading())
-        withContext(ioDispatcher) {
-            val result = try {
-                WorkResult.success(io().also {
-                    also?.invoke(it)
-                })
-            } catch (e: Exception) {
-                Timber.e(e)
-                recordExceptionToFirebase(e)
-                WorkResult.error<T>(e.message ?: "", exception = e)
-            }
-            withContext(uiDispatcher) {
-                ui(result)
-            }
+        flowToUi(io, ui)
+    }
+
+    private fun <T> flowToUi(io: suspend () -> T, ui: suspend (WorkResult<T>) -> Unit) {
+        viewModelScope.launch {
+            flow { emit(io()) }
+                .flowOn(ioDispatcher)
+                .retryWhen { cause, attempt ->
+                    Timber.i("attempt: $attempt")
+                    if (cause is WrongTokenException && attempt < Constants.tokensList.size) {
+                        delay(2000)
+                        generateNewTokenUseCase.execute()
+                        return@retryWhen true
+                    } else {
+                        val exception = cause as Exception
+                        Timber.e(cause)
+                        recordExceptionToFirebase(exception)
+                        withContext(uiDispatcher) {
+                            ui(WorkResult.error(exception.message ?: "", exception = exception))
+                        }
+                        return@retryWhen false
+                    }
+                }.collect { result -> withContext(uiDispatcher) { ui(WorkResult.success(result)) } }
         }
     }
 
