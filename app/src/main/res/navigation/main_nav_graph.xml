@@ -11,28 +11,40 @@
         android:label="SalesFragment"
         tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/openSearchScreen"
-            app:destination="@id/searchFragment" />
+            android:id="@+id/openPropertySearchFilterScreen"
+            app:destination="@id/propertySearchFilterScreen" />
         <action
             android:id="@+id/openPropertyDetails"
             app:destination="@id/propertyDetailsFragment" />
+        <action
+            android:id="@+id/openSearchScreen"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchFragment"
         android:label="Search Fragment"
         tools:layout="@layout/fragment_search">
-        <argument
-            android:name="propertyRequest"
-            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest"
-            app:nullable="false" />
-        <argument
-            android:name="localRequest"
-            app:argType="boolean" />
         <action
             android:id="@+id/openPropertyDetails"
             app:destination="@id/propertyDetailsFragment" />
-
+        <argument
+            android:name="isLocalSearch"
+            android:defaultValue="true"
+            app:argType="boolean" />
+        <argument
+            android:name="searchSettings"
+            app:argType="com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/propertySearchFilterScreen"
+        android:name="com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertySearchFilterFragment"
+        android:label="Property Search Filter Fragment"
+        tools:layout="@layout/fragment_property_search_filter">
+        <action
+            android:id="@+id/openSearchScreen"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/propertyDetailsFragment"

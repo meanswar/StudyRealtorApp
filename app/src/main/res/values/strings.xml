@@ -45,7 +45,7 @@
 
     <string name="screen_dashboard_welcome_title">Welcome user!</string>
     <string name="screen_dashboard_welcome_user">Welcome %s!</string>
-    <string name="screen_dashboard_description_title">Find Your\nDream Home</string>
+    <string name="screen_dashboard_description_title">Find Your\nPerfect Home</string>
     <string name="screen_dashboard_btn_buy_title">Buy</string>
     <string name="screen_dashboard_btn_rent_title">Rent</string>
     <string name="screen_dashboard_recent_sale_requests">Recent Sale Searches</string>

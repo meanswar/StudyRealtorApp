@@ -16,8 +16,9 @@ class ProfileRequestsViewModel @Inject constructor(
     getLocalRequestsUseCase: GetLocalRequestsUseCase,
     private val updateRequestUseCase: UpdateRequestUseCase,
     private val removeSearchRequestUseCase: RemoveSearchRequestUseCase,
+    @Named(AppModule.IO_DISPATCHER) ioDispatcher: CoroutineDispatcher,
     @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
-) : BaseViewModel(uiDispatcher = uiDispatcher) {
+) : BaseViewModel(ioDispatcher, uiDispatcher) {
 
     val requestsNetwork = getLocalRequestsUseCase.execute().toWorkLiveData()
     val requests = MutableLiveData<List<SearchRequest>>()

@@ -1,7 +1,5 @@
 package com.nikitosii.studyrealtorapp.core.source.net.model.description
 
-import com.nikitosii.studyrealtorapp.core.source.local.model.HouseType
-import com.nikitosii.studyrealtorapp.core.source.local.model.Other
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

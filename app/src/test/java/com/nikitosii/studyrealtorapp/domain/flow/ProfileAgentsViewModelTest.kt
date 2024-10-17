@@ -18,6 +18,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -47,15 +48,15 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-
+        Dispatchers.setMain(testDispatcher)
         `when`(getLocalAgentsUseCase.execute()).thenReturn(agentsFlow)
 
         viewModel = ProfileAgentsViewModel(
             getLocalAgentsUseCase,
             removeAgentUseCase,
             updateAgentFavoriteStatusUseCase,
-            Dispatchers.IO,
-            testDispatcher
+            testDispatcher,
+            Dispatchers.Main
         )
 
         observer = Observer {}
@@ -84,7 +85,7 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
 
     // TODO (check what is wrong with this code, problem with parallel work of coroutines)
     @Test
-    fun `update agent favorite status`() = runBlocking {
+    fun `update agent favorite status`() = runTest(testDispatcher) {
         val agent = AgentTestUtils.getLocalAgent()
         val updatedAgent = agent.copy(favorite = !agent.favorite)
         val params = UpdateAgentFavoriteStatusUseCase.Params.create(updatedAgent)

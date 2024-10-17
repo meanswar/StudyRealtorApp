@@ -72,7 +72,7 @@ class ProfileRequestsFragment : BaseFragment<FragmentHistoryBinding, ProfileRequ
     }
 
     private fun openSearchRequestDetails(request: SearchRequest) {
-        ProfileViewPagerFragmentDirections.openSearchRequestDetails(request, true).navigate()
+        ProfileViewPagerFragmentDirections.openSearchRequestDetails(request).navigate()
     }
 
     companion object {
