@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/dashboardFragment"
+    android:title="@string/properties"
+    android:icon="@drawable/ic_menu_sale_peach" />
+    <item
+        android:id="@+id/agentsFragment"
+        android:title="@string/agents"
+        android:icon="@drawable/ic_menu_agent" />
+    <item
+        android:id="@+id/profileViewPagerFragment"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_menu_profile" />
+</menu>

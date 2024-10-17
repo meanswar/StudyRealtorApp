@@ -3,29 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@drawable/bg_content">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/size_0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_nav_graph" />
 
-    <np.com.susanthapa.curved_bottom_navigation.CurvedBottomNavigationView
+    <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cbn_animDuration="200"
+        android:layout_height="@dimen/size_70dp"
         android:elevation="@dimen/size_4dp"
-        app:cbn_bg="@color/blue_end"
-        app:cbn_unSelectedColor="@color/content_peach"
-        app:cbn_fabBg="@color/content_peach"
-        app:cbn_selectedColor="@color/peach"
-        app:itemIconSize="25dp"
+        app:menu="@menu/menu_main"
+        app:backgroundColor="@color/blue_dark"
+        app:indicatorColor="@color/blue_center"
+        app:indicatorRadius="@dimen/size_20dp"
+        app:corners="all"
+        app:cornerRadius="@dimen/size_8dp"
+        app:textColor="@color/content_peach"
+        app:textSize="@dimen/text_size_16sp"
+        app:barrierMargin="@dimen/size_10dp"
+        android:paddingHorizontal="@dimen/size_20dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

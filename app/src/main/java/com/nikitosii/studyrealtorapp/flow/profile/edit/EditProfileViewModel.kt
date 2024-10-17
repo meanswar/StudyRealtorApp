@@ -15,8 +15,9 @@ import javax.inject.Named
 
 class EditProfileViewModel @Inject constructor(
     private val updateProfileUseCase: UpdateProfileUseCase,
+    @Named(AppModule.IO_DISPATCHER) ioDispatcher: CoroutineDispatcher,
     @Named(AppModule.MAIN_DISPATCHER) uiDispatcher: CoroutineDispatcher
-) : BaseViewModel(uiDispatcher = uiDispatcher) {
+) : BaseViewModel(ioDispatcher = ioDispatcher, uiDispatcher = uiDispatcher) {
 
     val profileName = MutableLiveData<String>()
     val profileLastName = MutableLiveData<String>()

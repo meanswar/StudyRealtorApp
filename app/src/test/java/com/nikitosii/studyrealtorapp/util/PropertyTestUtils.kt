@@ -462,6 +462,8 @@ object PropertyTestUtils {
     fun getExpectedProperty(): PropertyEntity =
         getExpectedProperties().first { it.propertyId == ID_VALID_TEXT_FOR_CHANGES }
 
+    fun getExpectedProperty(id: String): PropertyEntity = getExpectedProperties().first { it.propertyId == id }
+
     fun getExpectedLocalProperty(): Property = Property.from(getExpectedProperty())
 
     fun getExpectedLocalProperties(): List<Property> =

@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -41,14 +42,14 @@ class ProfilePropertiesViewModelTests : BaseViewModelTest<ProfilePropertiesViewM
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-
+        Dispatchers.setMain(testDispatcher)
         `when`(getLocalPropertiesUseCase.execute()).thenReturn(flow)
         viewModel = ProfilePropertiesViewModel(
             getLocalPropertiesUseCase,
             removePropertyUseCase,
             updatePropertyUseCase,
-            Dispatchers.IO,
-            testDispatcher
+            testDispatcher,
+            Dispatchers.Main
         )
 
         observer = Observer {}

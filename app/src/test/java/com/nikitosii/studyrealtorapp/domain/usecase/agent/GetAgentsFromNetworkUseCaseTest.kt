@@ -36,7 +36,7 @@ class GetAgentsFromNetworkUseCaseTest : BaseUseCaseTest<GetAgentsFromNetworkUseC
     }
 
     private fun checkResult(result: List<Agent>) {
-        val expected = AgentTestUtils.getAgentsFromNetwork().agents.map { Agent.from(it) }
+        val expected = AgentTestUtils.getAgentsFromNetwork().agents?.map { Agent.from(it) }
         assertEquals(expected, result)
     }
 

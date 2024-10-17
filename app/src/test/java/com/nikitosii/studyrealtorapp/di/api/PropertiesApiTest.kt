@@ -147,7 +147,7 @@ object PropertiesApiTest {
                                 sqft = 1500,
                                 pool = ANY_TEXT,
                                 text = ANY_TEXT,
-                                type = HouseType.APARTMENT,
+                                type = HouseType.APARTMENT.apiType,
                                 rooms = 6
                             ),
                             flags = FlagsResponseApi(
@@ -256,7 +256,7 @@ object PropertiesApiTest {
                                 sqft = 1000,
                                 pool = ANY_TEXT,
                                 text = ANY_TEXT,
-                                type = HouseType.CONDOS,
+                                type = HouseType.CONDOS.apiType,
                                 rooms = 4
                             ),
                             flags = FlagsResponseApi(
@@ -365,7 +365,7 @@ object PropertiesApiTest {
                                 sqft = 2000,
                                 pool = ANY_TEXT,
                                 text = ANY_TEXT,
-                                type = HouseType.TOWNHOMES,
+                                type = HouseType.TOWNHOMES.apiType,
                                 rooms = 8
                             ),
                             flags = FlagsResponseApi(
@@ -446,7 +446,7 @@ object PropertiesApiTest {
                         sqft = ANY_DIGITS,
                         pool = ANY_TEXT,
                         text = ANY_TEXT,
-                        type = HouseType.TOWNHOMES,
+                        type = HouseType.TOWNHOMES.apiType,
                         rooms = ANY_DIGITS
                     ),
                     details = listOf(
@@ -616,7 +616,7 @@ object PropertiesApiTest {
                             sqft = 1500,
                             pool = ANY_TEXT,
                             text = ANY_TEXT,
-                            type = HouseType.APARTMENT,
+                            type = HouseType.APARTMENT.apiType,
                             rooms = 6
                         ),
                         flags = FlagsResponseApi(
@@ -725,7 +725,7 @@ object PropertiesApiTest {
                             sqft = 1000,
                             pool = ANY_TEXT,
                             text = ANY_TEXT,
-                            type = HouseType.CONDOS,
+                            type = HouseType.CONDOS.apiType,
                             rooms = 4
                         ),
                         flags = FlagsResponseApi(
@@ -834,7 +834,7 @@ object PropertiesApiTest {
                             sqft = 2000,
                             pool = ANY_TEXT,
                             text = ANY_TEXT,
-                            type = HouseType.TOWNHOMES,
+                            type = HouseType.TOWNHOMES.apiType,
                             rooms = 8
                         ),
                         flags = FlagsResponseApi(

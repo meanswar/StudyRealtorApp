@@ -1,7 +1,6 @@
 package com.nikitosii.studyrealtorapp.domain.flow
 
 import androidx.lifecycle.Observer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nikitosii.studyrealtorapp.core.domain.WorkResult
 import com.nikitosii.studyrealtorapp.core.domain.useCase.profile.UpdateProfileUseCase
 import com.nikitosii.studyrealtorapp.flow.profile.edit.EditProfileViewModel
@@ -10,18 +9,17 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 class EditProfileViewModelTest : BaseViewModelTest<EditProfileViewModel>() {
 
     @Mock
@@ -31,9 +29,10 @@ class EditProfileViewModelTest : BaseViewModelTest<EditProfileViewModel>() {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
+        Dispatchers.setMain(testDispatcher)
+        viewModel = EditProfileViewModel(updateProfileUseCase, testDispatcher, Dispatchers.Main)
         viewModel.updateProfileStatus.observeForever(observer)
-        viewModel = EditProfileViewModel(updateProfileUseCase, testDispatcher)
     }
 
     @After
@@ -44,7 +43,7 @@ class EditProfileViewModelTest : BaseViewModelTest<EditProfileViewModel>() {
     }
 
     @Test
-    fun `update profile test`() = runBlockingTest {
+    fun `update profile test`() = runTest(testDispatcher) {
         val profile = ProfileTestUtils.getLocalProfile()
         val expected = WorkResult.success(Unit)
         val params = UpdateProfileUseCase.Params.create(profile)

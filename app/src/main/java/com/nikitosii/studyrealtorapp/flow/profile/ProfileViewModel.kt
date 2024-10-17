@@ -21,5 +21,5 @@ class ProfileViewModel @Inject constructor(
 
     fun removeProfileData() = ioToUnit { removeProfileDataUseCase.execute() }
 
-    fun removeData() = ioToUnit { removeDataUseCase.execute() }
+    fun removeData() = ioToUi(io = { removeDataUseCase.execute() }, ui = {})
 }

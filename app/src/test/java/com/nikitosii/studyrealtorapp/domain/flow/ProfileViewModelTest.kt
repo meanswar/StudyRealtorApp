@@ -11,6 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -35,15 +36,15 @@ class ProfileViewModelTest : BaseViewModelTest<ProfileViewModel>() {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-
+        Dispatchers.setMain(testDispatcher)
         `when`(getProfileFlowUseCase.execute()).thenReturn(profileFlow)
 
         viewModel = ProfileViewModel(
             getProfileFlowUseCase,
             removeProfileDataUseCase,
             removeDataUseCase,
-            Dispatchers.IO,
-            testDispatcher
+            testDispatcher,
+            Dispatchers.Main
         )
     }
 

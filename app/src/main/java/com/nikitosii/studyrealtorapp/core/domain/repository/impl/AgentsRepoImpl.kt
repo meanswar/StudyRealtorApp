@@ -46,7 +46,7 @@ class AgentsRepoImpl @Inject constructor(
             data.price,
             page
         ).agents
-        result.map { Agent.from(it) }
+        result?.map { Agent.from(it) } ?: listOf()
     }
 
     override fun getLocalAgents(): Flow<List<Agent>> = channelAgents.value.flow

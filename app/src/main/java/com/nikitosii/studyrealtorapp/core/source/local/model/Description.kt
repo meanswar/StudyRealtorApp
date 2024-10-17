@@ -20,7 +20,7 @@ data class Description(
     val rooms: Int? = null,
     val pool: String? = null,
     val text: String? = null,
-): Parcelable {
+) : Parcelable {
     companion object {
         fun from(data: DescriptionResponseApi?): Description = Description(
             baths = data?.baths,
@@ -33,10 +33,25 @@ data class Description(
             lotSqft = data?.lotSqft,
             name = data?.name,
             sqft = data?.sqft,
-            type = data?.type,
+            type = getType(data?.type),
             text = data?.text,
             pool = data?.pool,
             rooms = data?.rooms
         )
+
+        private fun getType(text: String?): HouseType = when (text) {
+            "single_family" -> HouseType.SINGLE_FAMILY
+            "multi_family" -> HouseType.MULTI_FAMILY
+            "condos" -> HouseType.CONDOS
+            "townhomes" -> HouseType.TOWNHOMES
+            "land" -> HouseType.LAND
+            "duplex_triplex" -> HouseType.DUPLEX
+            "mobile" -> HouseType.MOBILE
+            "apartment" -> HouseType.APARTMENT
+            "cottage" -> HouseType.COTTAGE
+            "coop" -> HouseType.COOP
+            "farms" -> HouseType.FARM
+            else -> HouseType.OTHER
+        }
     }
 }

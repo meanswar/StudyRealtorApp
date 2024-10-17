@@ -238,6 +238,7 @@
             app:layoutAnimation="@anim/recycle_view_anim"
             app:layoutManagerOrientation="vertical"
             app:layoutManagerReverse="false"
+            android:paddingTop="@dimen/size_20dp"
             app:layoutManagerType="linear"
             app:layout_constraintBottom_toTopOf="@+id/space"
             app:layout_constraintTop_toTopOf="parent" />

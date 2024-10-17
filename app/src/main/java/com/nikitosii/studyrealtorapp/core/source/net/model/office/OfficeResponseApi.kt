@@ -12,5 +12,5 @@ data class OfficeResponseApi(
     val mls_set: String?,
     val name: String?,
     val phones: List<PhoneResponseApi>?,
-    val photo: PhotoResponseApi
+    val photo: PhotoResponseApi?
 )

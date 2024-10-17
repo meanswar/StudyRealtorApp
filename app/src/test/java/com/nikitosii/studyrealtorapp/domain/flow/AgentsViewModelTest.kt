@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -54,6 +55,7 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        Dispatchers.setMain(testDispatcher)
         favoriteAgentsFlow =
             MutableSharedFlow<com.nikitosii.studyrealtorapp.core.source.channel.Status<List<Agent>>>(
                 replay = 1,
@@ -86,8 +88,8 @@ class AgentsViewModelTest : BaseViewModelTest<AgentsViewModel>() {
             getProfileFlowUseCase,
             updateAgentFavoriteStatusUseCase,
             getAgentsFromNetworkUseCase,
-            Dispatchers.IO,
-            testDispatcher
+            testDispatcher,
+            Dispatchers.Main
         )
     }
 

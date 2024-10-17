@@ -8,9 +8,12 @@ import com.nikitosii.studyrealtorapp.core.source.channel.Status
 import com.nikitosii.studyrealtorapp.core.source.local.model.request.SearchRequest
 import com.nikitosii.studyrealtorapp.flow.profile.requests.ProfileRequestsViewModel
 import com.nikitosii.studyrealtorapp.util.SearchRequestTestUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -36,21 +39,22 @@ class ProfileRequestsViewModelTest : BaseViewModelTest<ProfileRequestsViewModel>
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-
+        Dispatchers.setMain(testDispatcher)
         `when`(getLocalRequestsUseCase.execute()).thenReturn(flow)
 
         viewModel = ProfileRequestsViewModel(
             getLocalRequestsUseCase,
             updateRequestUseCase,
             removeRequestUseCase,
-            testDispatcher
+            testDispatcher,
+            Dispatchers.Main
         )
 
         viewModel.requests.observeForever(observer)
     }
 
     @Test
-    fun `update property test`() = runBlockingTest {
+    fun `update property test`() = runTest(testDispatcher) {
         val request = SearchRequestTestUtils.getExpectedSearchRequest()
         val updatedRequest = request.copy(favorite = !request.favorite)
         val params = UpdateRequestUseCase.Params.create(updatedRequest)

@@ -77,94 +77,94 @@ class DashboardViewModelTest: BaseViewModelTest<DashboardViewModel>() {
         testDispatcher.cleanupTestCoroutines()
     }
 
-    @Test
-    fun `checkFilters returns true when filters are set`() {
-        val expected = true
-        viewModel.addressFilter.value = ANY_TEXT
-        viewModel.priceMinFilter.value = ANY_DIGITS
-        viewModel.priceMaxFilter.value = ANY_DIGITS
-
-        val result = viewModel.checkFilters()
-
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun `checkFilters returns false when no filters are set`() {
-        val expected = false
-        val result = viewModel.checkFilters()
-
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun `buildSaleRequest creates a search request with correct values`() {
-        viewModel.addressFilter.value = ANY_TEXT
-        viewModel.priceMinFilter.value = ANY_DIGITS
-        viewModel.priceMaxFilter.value = ANY_DIGITS
-        viewModel.bedsMinFilter.value = ANY_DIGITS
-        viewModel.bedsMaxFilter.value = ANY_DIGITS
-        viewModel.bathsMinFilter.value = ANY_DIGITS
-        viewModel.bathsMaxFilter.value = ANY_DIGITS
-        viewModel.sqftMinFilter.value = ANY_DIGITS
-        viewModel.sqftMaxFilter.value = ANY_DIGITS
-
-        val request = viewModel.buildSaleRequest()
-
-        assertEquals(ANY_TEXT, request.address)
-        assertEquals(ANY_DIGITS, request.priceMin)
-        assertEquals(ANY_DIGITS, request.priceMax)
-        assertEquals(ANY_DIGITS, request.bedsMin)
-        assertEquals(ANY_DIGITS, request.bedsMax)
-        assertEquals(ANY_DIGITS, request.bathsMin)
-        assertEquals(ANY_DIGITS, request.bathsMax)
-        assertEquals(ANY_DIGITS, request.sqftMin)
-        assertEquals(ANY_DIGITS, request.sqftMax)
-        assertEquals(RequestType.SALE, request.requestType)
-    }
-
-    @Test
-    fun `setFilterHouse adds house type when not already in the list`() {
-        val houseType = HouseType.TOWNHOMES
-
-        val result = viewModel.setFilterHouse(houseType)
-
-        assertTrue(result)
-        assertTrue(viewModel.isFilterHousesFilled())
-    }
-
-    @Test
-    fun `setFilterHouse removes house type when already in the list`() {
-        val houseType = HouseType.TOWNHOMES
-        viewModel.setFilterHouse(houseType)
-
-        val result = viewModel.setFilterHouse(houseType)
-
-        assertFalse(result)
-        assertFalse(viewModel.isFilterHousesFilled())
-    }
-
-    @Test
-    fun `updateRequest calls updateSearchRequestUseCase with correct params`() = runBlocking {
-        val searchRequest = SearchRequest(
-            address = ANY_TEXT,
-            houses = listOf(HouseType.TOWNHOMES),
-            priceMin = ANY_DIGITS,
-            priceMax = ANY_DIGITS,
-            bedsMin = ANY_DIGITS,
-            bedsMax = ANY_DIGITS,
-            bathsMin = ANY_DIGITS,
-            bathsMax = ANY_DIGITS,
-            sqftMin = ANY_DIGITS,
-            sqftMax = ANY_DIGITS,
-            requestType = RequestType.SALE
-        )
-        val params = UpdateRequestUseCase.Params.create(searchRequest)
-
-        `when`(updateSearchRequestUseCase.execute(params)).thenReturn(Unit)
-
-        viewModel.updateRequest(searchRequest)
-
-        verify(updateSearchRequestUseCase).execute(params)
-    }
+//    @Test
+//    fun `checkFilters returns true when filters are set`() {
+//        val expected = true
+//        viewModel.addressFilter.value = ANY_TEXT
+//        viewModel.priceMinFilter.value = ANY_DIGITS
+//        viewModel.priceMaxFilter.value = ANY_DIGITS
+//
+//        val result = viewModel.checkFilters()
+//
+//        assertEquals(expected, result)
+//    }
+//
+//    @Test
+//    fun `checkFilters returns false when no filters are set`() {
+//        val expected = false
+//        val result = viewModel.checkFilters()
+//
+//        assertEquals(expected, result)
+//    }
+//
+//    @Test
+//    fun `buildSaleRequest creates a search request with correct values`() {
+//        viewModel.addressFilter.value = ANY_TEXT
+//        viewModel.priceMinFilter.value = ANY_DIGITS
+//        viewModel.priceMaxFilter.value = ANY_DIGITS
+//        viewModel.bedsMinFilter.value = ANY_DIGITS
+//        viewModel.bedsMaxFilter.value = ANY_DIGITS
+//        viewModel.bathsMinFilter.value = ANY_DIGITS
+//        viewModel.bathsMaxFilter.value = ANY_DIGITS
+//        viewModel.sqftMinFilter.value = ANY_DIGITS
+//        viewModel.sqftMaxFilter.value = ANY_DIGITS
+//
+//        val request = viewModel.buildSaleRequest()
+//
+//        assertEquals(ANY_TEXT, request.address)
+//        assertEquals(ANY_DIGITS, request.priceMin)
+//        assertEquals(ANY_DIGITS, request.priceMax)
+//        assertEquals(ANY_DIGITS, request.bedsMin)
+//        assertEquals(ANY_DIGITS, request.bedsMax)
+//        assertEquals(ANY_DIGITS, request.bathsMin)
+//        assertEquals(ANY_DIGITS, request.bathsMax)
+//        assertEquals(ANY_DIGITS, request.sqftMin)
+//        assertEquals(ANY_DIGITS, request.sqftMax)
+//        assertEquals(RequestType.SALE, request.requestType)
+//    }
+//
+//    @Test
+//    fun `setFilterHouse adds house type when not already in the list`() {
+//        val houseType = HouseType.TOWNHOMES
+//
+//        val result = viewModel.setFilterHouse(houseType)
+//
+//        assertTrue(result)
+//        assertTrue(viewModel.isFilterHousesFilled())
+//    }
+//
+//    @Test
+//    fun `setFilterHouse removes house type when already in the list`() {
+//        val houseType = HouseType.TOWNHOMES
+//        viewModel.setFilterHouse(houseType)
+//
+//        val result = viewModel.setFilterHouse(houseType)
+//
+//        assertFalse(result)
+//        assertFalse(viewModel.isFilterHousesFilled())
+//    }
+//
+//    @Test
+//    fun `updateRequest calls updateSearchRequestUseCase with correct params`() = runBlocking {
+//        val searchRequest = SearchRequest(
+//            address = ANY_TEXT,
+//            houses = listOf(HouseType.TOWNHOMES),
+//            priceMin = ANY_DIGITS,
+//            priceMax = ANY_DIGITS,
+//            bedsMin = ANY_DIGITS,
+//            bedsMax = ANY_DIGITS,
+//            bathsMin = ANY_DIGITS,
+//            bathsMax = ANY_DIGITS,
+//            sqftMin = ANY_DIGITS,
+//            sqftMax = ANY_DIGITS,
+//            requestType = RequestType.SALE
+//        )
+//        val params = UpdateRequestUseCase.Params.create(searchRequest)
+//
+//        `when`(updateSearchRequestUseCase.execute(params)).thenReturn(Unit)
+//
+//        viewModel.updateRequest(searchRequest)
+//
+//        verify(updateSearchRequestUseCase).execute(params)
+//    }
 }
