@@ -29,7 +29,6 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
 
     @Mock
@@ -83,7 +82,6 @@ class ProfileAgentsViewModelTest : BaseViewModelTest<ProfileAgentsViewModel>() {
         verify(removeAgentUseCase).execute(params)
     }
 
-    // TODO (check what is wrong with this code, problem with parallel work of coroutines)
     @Test
     fun `update agent favorite status`() = runTest(testDispatcher) {
         val agent = AgentTestUtils.getLocalAgent()
