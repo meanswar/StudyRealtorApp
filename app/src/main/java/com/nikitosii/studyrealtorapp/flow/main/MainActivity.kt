@@ -3,9 +3,9 @@ package com.nikitosii.studyrealtorapp.flow.main
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.view.Menu
 import android.view.WindowManager
+import android.widget.PopupMenu
 import com.nikitosii.studyrealtorapp.BuildConfig
 import com.nikitosii.studyrealtorapp.R
 import com.nikitosii.studyrealtorapp.databinding.ActivityMainBinding
@@ -16,7 +16,6 @@ import com.nikitosii.studyrealtorapp.util.ext.hide
 import com.nikitosii.studyrealtorapp.util.ext.requestNotificationPermission
 import com.nikitosii.studyrealtorapp.util.ext.show
 import com.nikitosii.studyrealtorapp.util.ext.start
-import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 @RequiresViewModel(MainViewModel::class)
 class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
@@ -27,52 +26,31 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-        // TODO checking permission has been disabled for the time of making ui tests
-//        checkNotificationPermission()
+        checkNotificationPermission()
 
-        if(BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
     private fun initViews() {
         with(binding) {
-            bottomNavigation.setMenuItems(getMenuItems())
-
             navController?.let {
-                bottomNavigation.setupWithNavController(it)
+                val popupMenu = PopupMenu(this@MainActivity, null)
+                popupMenu.inflate(R.menu.menu_main)
+
+                bottomNavigation.setupWithNavController(popupMenu.menu, it)
                 it.addOnDestinationChangedListener { _, destination, _ ->
                     val destinationId = destination.id
                     tryHideBottomBar(destinationId)
                 }
             }
-
-            bottomNavigation.setOnMenuItemClickListener { item, i ->
-                Handler(Looper.getMainLooper()).postDelayed({
-                    navController?.navigate(item.destinationId)
-                }, 250)
-            }
         }
     }
 
-    private fun getMenuItems(): Array<CbnMenuItem> {
-        return arrayOf(
-            CbnMenuItem(
-                R.drawable.avd_menu_property_not_active,
-                R.drawable.avd_menu_property_active,
-                R.id.dashboardFragment
-            ),
-            CbnMenuItem(
-                R.drawable.avd_menu_agent_not_active,
-                R.drawable.avd_menu_agent_active,
-                R.id.agentsFragment
-            ),
-            CbnMenuItem(
-                R.drawable.avd_menu_profile_not_active,
-                R.drawable.avd_menu_profile_active,
-                R.id.profileViewPagerFragment
-            ),
-        )
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
 
@@ -82,6 +60,7 @@ class MainActivity : InjectableActivity<ActivityMainBinding, MainViewModel>(
                 R.id.dashboardFragment,
                 R.id.profileViewPagerFragment,
                 R.id.agentsFragment -> bottomNavigation.show(true)
+
                 else -> bottomNavigation.hide()
             }
         }

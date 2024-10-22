@@ -50,16 +50,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
         with(binding) {
             toolbar.showEndButton()
             toolbar.initEndBtnAnimation(clFilters)
-            svProperty.setText(args.propertyRequest.address)
+            svProperty.setText(args.searchSettings.address)
 
             with(lFilters) {
                 grFilters.show()
                 rvFilterTypes.adapter = filtersAdapter
-                filtersAdapter.setSelectedList(args.propertyRequest.houses)
+                filtersAdapter.setSelectedList(args.searchSettings.houses)
                 filtersAdapter.submitList(Constants.housesList)
             }
         }
-        viewModel.setSearchRequest(args.propertyRequest)
+        viewModel.setSearchRequest(args.searchSettings)
         getPropertiesData()
     }
 
@@ -124,18 +124,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>({
     }
 
     private fun initRangeValues() {
-        with(binding.lFilters) {
-            rvRangePrice.initResult(args.propertyRequest.priceMin, args.propertyRequest.priceMax)
-            rvRangeBaths.initResult(args.propertyRequest.bathsMin, args.propertyRequest.bathsMax)
-            rvRangeBeds.initResult(args.propertyRequest.bedsMin, args.propertyRequest.bedsMax)
-            rvRangeSqft.initResult(args.propertyRequest.sqftMin, args.propertyRequest.sqftMax)
+        with(args.searchSettings) {
+            with(binding.lFilters) {
+                rvRangePrice.initResult(priceMin, priceMax)
+                rvRangeBaths.initResult(bathsMin, bathsMax)
+                rvRangeBeds.initResult(bedsMin, bedsMax)
+                rvRangeSqft.initResult(sqftMin, sqftMax)
+            }
         }
+
     }
 
     private fun getPropertiesData() {
         with(viewModel) {
             if (isDataAlreadyUploaded.value == false) {
-                if (args.localRequest) getLocalProperties(args.propertyRequest)
+                if (args.isLocalSearch) getLocalProperties(args.searchSettings)
                 else getPropertiesFromNetwork()
                 isDataAlreadyUploaded.postValue(true)
             }

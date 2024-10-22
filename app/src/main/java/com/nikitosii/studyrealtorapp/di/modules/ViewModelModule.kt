@@ -7,6 +7,7 @@ import com.nikitosii.studyrealtorapp.di.ViewModelProviderFactory
 import com.nikitosii.studyrealtorapp.flow.agent.details.AgentDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardViewModel
+import com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertySearchFilterViewModel
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchViewModel
 import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsViewModel
 import com.nikitosii.studyrealtorapp.flow.main.MainViewModel
@@ -78,4 +79,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(EditProfileViewModel::class)
     fun bindAgentEditProfileViewModel(viewModel: EditProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PropertySearchFilterViewModel::class)
+    fun bindPropertySearchFilterViewModel(viewModel: PropertySearchFilterViewModel): ViewModel
 }

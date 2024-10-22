@@ -222,8 +222,6 @@ dependencies {
 
     //Gson
     implementation("com.google.code.gson:gson:2.10.1")
-
-    implementation("com.viceboy.library:triangularshadeimageview:1.0.1")
     implementation("it.sephiroth.android.library.rangeseekbar:rangeseekbar:1.1.0")
 
     //Maps
@@ -234,15 +232,12 @@ dependencies {
     implementation("com.facebook.stetho:stetho:1.6.0")
     implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
 
-    //Pulse animation
+    //View
     implementation("pl.bclogic:pulsator4droid:1.0.3")
-
-    //ViewPager
     implementation("androidx.viewpager2:viewpager2:1.1.0")
-    //TabLayout
     implementation("com.github.Andy671:Dachshund-Tab-Layout:v0.3.3")
-    //GroupLayoutManager
     implementation("com.github.DingMouRen:LayoutManagerGroup:1e6f4f96eb")
+    implementation("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
 
     //Unit Tests Libraries
     testImplementation("junit:junit:4.13.2")

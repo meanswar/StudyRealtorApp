@@ -45,7 +45,7 @@
 
     <string name="screen_dashboard_welcome_title">Welcome user!</string>
     <string name="screen_dashboard_welcome_user">Welcome %s!</string>
-    <string name="screen_dashboard_description_title">Find Your\nDream Home</string>
+    <string name="screen_dashboard_description_title">Find Your\nPerfect Home</string>
     <string name="screen_dashboard_btn_buy_title">Buy</string>
     <string name="screen_dashboard_btn_rent_title">Rent</string>
     <string name="screen_dashboard_recent_sale_requests">Recent Sale Searches</string>
@@ -121,5 +121,8 @@
     <string name="tab_agent_rating">Rating</string>
     <string name="error_empty_location">You must put a location to search!</string>
     <string name="fragment_dashboard_empty_requests">Oops, looks like You haven`t made any property requests yet\ntry to find something that suits you well</string>
+    <string name="properties">properties</string>
+    <string name="agents">agents</string>
+    <string name="profile">profile</string>
 
 </resources>

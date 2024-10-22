@@ -3,6 +3,7 @@ package com.nikitosii.studyrealtorapp.di.modules
 import com.nikitosii.studyrealtorapp.flow.agent.details.AgentDetailsFragment
 import com.nikitosii.studyrealtorapp.flow.agent.homepage.AgentsFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.DashboardFragment
+import com.nikitosii.studyrealtorapp.flow.dashboard.filter.PropertySearchFilterFragment
 import com.nikitosii.studyrealtorapp.flow.dashboard.search.SearchFragment
 import com.nikitosii.studyrealtorapp.flow.details.PropertyDetailsFragment
 import com.nikitosii.studyrealtorapp.flow.profile.ProfileViewPagerFragment
@@ -48,4 +49,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeEditProfileFragment(): EditProfileFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePropertySearchFilterFragment(): PropertySearchFilterFragment
 }

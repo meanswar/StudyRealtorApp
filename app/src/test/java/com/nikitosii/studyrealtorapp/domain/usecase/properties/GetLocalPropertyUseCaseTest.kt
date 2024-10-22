@@ -18,11 +18,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.BlockJUnit4ClassRunner
+import org.junit.runners.JUnit4
 import org.mockito.junit.MockitoJUnitRunner
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(BlockJUnit4ClassRunner::class)
 class GetLocalPropertyUseCaseTest : BaseUseCaseTest<GetLocalPropertyUseCase>() {
 
     @get:Rule
@@ -47,7 +49,7 @@ class GetLocalPropertyUseCaseTest : BaseUseCaseTest<GetLocalPropertyUseCase>() {
 
     @Test
     fun `get local property valid test`() = runTest {
-        val expected = Property.from(PropertyTestUtils.getExpectedProperty())
+        val expected = Property.from(PropertyTestUtils.getExpectedProperty(ID_VALID_TEXT))
         val params = GetLocalPropertyUseCase.Params.create(ID_VALID_TEXT)
         val result = useCase.execute(params)
         assertEquals(expected, result)
